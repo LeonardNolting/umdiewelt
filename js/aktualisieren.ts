@@ -11,6 +11,7 @@ function fortschreiten(position: LatLngLiteral, folgen: boolean) {
 		restriction: restriction()
 	})
 	aktuell.bewegen(position)
+	mitwirken.bewegen(position)
 	progress.setPath(progressPath())
 	if (folgen && !ziehtGerade) karte.setCenter(position)
 }
