@@ -2,6 +2,7 @@ import Strecke from "../../../model/strecke";
 import {strecken} from "../../../firebase/lesen";
 import m from "../../../formatierung/einheit/m";
 import {fahrerNummer, fahrerRangBestenliste, streckenVonFahrer} from "../../../verschieden";
+import zahl from "../../../formatierung/zahl";
 
 type FormulierungGenerator = (laenge: number, strecke: string, fahrer: string) => string
 
@@ -46,7 +47,8 @@ export default function ({fahrer, laenge, zeitpunkt}: Strecke): string {
 	const formulierungen = gruppen.flat()
 	const zufaelligerIndex = Math.floor(zeitpunkt % 1000 / 1000 * formulierungen.length);
 
-	return formulierungen[zufaelligerIndex]!!(laenge, Object.values(m(laenge)).join(" "), fahrer)
+	const laengeFormatiert = m(laenge)
+	return formulierungen[zufaelligerIndex]!!(laenge, zahl(laengeFormatiert.wert, 0) + " " + laengeFormatiert.einheit, fahrer)
 }
 
 // Mit Link auf Name -> Map mit allen Strecken von Person

@@ -2,6 +2,7 @@ import Strecke from "../../model/strecke";
 import streckeFormulierung from "./strecke/strecke"
 import {prozent, vorStreckeGefahreneKilometer} from "../../verschieden";
 import m from "../../formatierung/einheit/m";
+import zahl from "../../formatierung/zahl";
 
 const liste = document.getElementById("feed-anzeige") as HTMLUListElement
 
@@ -29,6 +30,7 @@ export default (streckenNummer: string, strecke: Strecke) => {
 	const bisher = vorStreckeGefahreneKilometer(streckenNummer)
 	const jetzt = bisher + strecke.laenge
 	Object.entries(prozent).filter(([, punkt]) => punkt > bisher && punkt < jetzt).forEach(([faktor, punkt]) => {
-		element = neuesElementNach(`Wir haben ${parseInt(faktor) * 100}% geschafft! Das entspricht ${m(punkt)}.`, true, element)
+		const punktFormatiert = m(punkt)
+		neuesElementNach(`Wir haben ${faktor}% geschafft! Das entspricht etwa ${zahl(punktFormatiert.wert, 0)} ${punktFormatiert.einheit}.`, true, element)
 	})
 }
