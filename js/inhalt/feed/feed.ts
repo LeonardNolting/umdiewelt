@@ -1,8 +1,7 @@
 import Strecke from "../../model/strecke";
-import streckeFormulierung from "./strecke/strecke"
+import streckeFormulierung from "./strecke"
+import prozentFormulierung from "./prozent"
 import {prozent, vorStreckeGefahreneKilometer} from "../../verschieden";
-import m from "../../formatierung/einheit/m";
-import zahl from "../../formatierung/zahl";
 
 const liste = document.getElementById("feed-anzeige") as HTMLUListElement
 
@@ -17,20 +16,25 @@ const neuesElementEnde = (html: string, wichtig: boolean = false) => neuesElemen
 const neuesElementVor = (html: string, wichtig: boolean = false, vor: Node) => neuesElement(html, wichtig, vor)
 const neuesElementNach = (html: string, wichtig: boolean = false, nach: Node) => neuesElement(html, wichtig, nach.nextSibling)
 
-const meilensteine = { // TODO
-	// 10: "Die ersten 10 Kilometer haben wir ..."
-}
-
 export default (streckenNummer: string, strecke: Strecke) => {
-	// Formulierung wählen
-	// abhängig vom Timestamp -> nicht statisch in db, aber nicht beim neuladen völlig neu
-	let element = neuesElementAnfang(streckeFormulierung(strecke))
+	/**
+	 * entspricht im Format dem Rückgabewert von `Math.random()`
+	 *
+	 * abhängig vom Timestamp -> nicht statisch in db, aber nicht beim neuladen völlig neu
+	 */
+	const random = strecke.zeitpunkt % 1000 / 1000,
+		zufaelligerIndex = (length: number) => Math.floor(random * length)
 
+	// Formulierung für Eintrag von Strecke
+	const element = neuesElementAnfang(streckeFormulierung(strecke, zufaelligerIndex))
+
+	// Formulierung für Eintrag von Prozentmeldungen
 	// TODO z.B. 50 Prozent besonders anzeigen
-	const bisher = vorStreckeGefahreneKilometer(streckenNummer)
-	const jetzt = bisher + strecke.laenge
-	Object.entries(prozent).filter(([, punkt]) => punkt > bisher && punkt < jetzt).forEach(([faktor, punkt]) => {
-		const punktFormatiert = m(punkt)
-		neuesElementNach(`Wir haben ${faktor}% geschafft! Das entspricht etwa ${zahl(punktFormatiert.wert, 0)} ${punktFormatiert.einheit}.`, true, element)
+	const bisher = vorStreckeGefahreneKilometer(streckenNummer),
+		jetzt = bisher + strecke.laenge
+	Object.entries(prozent).filter(([, punkt]) => punkt > bisher && punkt < jetzt).forEach(([prozent, punkt]) => {
+		neuesElementNach(prozentFormulierung(prozent, punkt, zufaelligerIndex), true, element)
 	})
 }
+
+// TODO Funktion um von unten nachladen zu können
