@@ -57,7 +57,6 @@ const lesen = () =>
 			if (allesWurdeGelesen()) {
 				step("Alles Wichtige aus Datenbank gelesen")
 
-				console.log(strecken, fahrer)
 				if (strecken) Object.entries(strecken)
 					// letzte 10 Strecken
 					.slice(-10)
