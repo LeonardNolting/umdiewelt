@@ -5,16 +5,16 @@ import m from "../../formatierung/einheit/m";
 
 const liste = document.getElementById("feed-anzeige") as HTMLUListElement
 
-const neuesElement = (html: string, referenz: Node | null) => {
+const neuesElement = (html: string, wichtig: boolean = false, referenz: Node | null) => {
 	const listenElement = document.createElement("li")
 	listenElement.innerHTML = html
 	liste.insertBefore(listenElement, referenz)
 	return listenElement
 }
-const neuesElementAnfang = (html: string) => neuesElement(html, liste.firstChild)
-const neuesElementEnde = (html: string) => neuesElement(html, null)
-const neuesElementVor = (html: string, vor: Node) => neuesElement(html, vor)
-const neuesElementNach = (html: string, nach: Node) => neuesElement(html, nach.nextSibling)
+const neuesElementAnfang = (html: string, wichtig: boolean = false) => neuesElement(html, wichtig, liste.firstChild)
+const neuesElementEnde = (html: string, wichtig: boolean = false) => neuesElement(html, wichtig, null)
+const neuesElementVor = (html: string, wichtig: boolean = false, vor: Node) => neuesElement(html, wichtig, vor)
+const neuesElementNach = (html: string, wichtig: boolean = false, nach: Node) => neuesElement(html, wichtig, nach.nextSibling)
 
 const meilensteine = { // TODO
 	// 10: "Die ersten 10 Kilometer haben wir ..."
@@ -29,6 +29,6 @@ export default (streckenNummer: string, strecke: Strecke) => {
 	const bisher = vorStreckeGefahreneKilometer(streckenNummer)
 	const jetzt = bisher + strecke.laenge
 	Object.entries(prozent).filter(([, punkt]) => punkt > bisher && punkt < jetzt).forEach(([faktor, punkt]) => {
-		element = neuesElementNach(`Wir haben ${parseInt(faktor) * 100}% geschafft! Das entspricht ${m(punkt)}.`, element)
+		element = neuesElementNach(`Wir haben ${parseInt(faktor) * 100}% geschafft! Das entspricht ${m(punkt)}.`, true, element)
 	})
 }
