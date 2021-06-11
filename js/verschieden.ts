@@ -31,4 +31,4 @@ export const fahrerRangBestenliste = (fahrer: string) => bestenliste.indexOf(fah
 
 
 export const prozent: {[faktor: number]: number} = {}
-for (let i = 0; i < 1; i += 0.1) prozent[i] = umfang * i
+for (let i = 1; i < 100; i++) prozent[i] = umfang * i/100
