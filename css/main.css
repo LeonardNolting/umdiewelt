@@ -207,7 +207,7 @@ h2::after {
 	height: 60px;
 	background: linear-gradient(0deg, white, transparent);
 	left: 0;
-	transform: translateY(calc(-100% - var(--padding-nach-bild)));
+	transform: translateY(calc(-100% - var(--padding-nach-bild) + 1px));
 	z-index: 2;
 	pointer-events: none;
 }
