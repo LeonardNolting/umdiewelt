@@ -35,7 +35,7 @@ Several base styles are included that build upon `Normalize.css`. These styles:
 * tweak the default alignment of some elements (e.g.: `img`, `video`,
   `fieldset`, `textarea`)
 * style the prompt that is displayed to users using an outdated browser
-* and more...
+* and more
 
 These styles are included in
 [main.css](https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/main.css).

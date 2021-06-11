@@ -34,12 +34,15 @@ export const
 	sprache = "de",
 	region = "DE",
 
-	zoom = 3,
+	/**
+	 * Verschiedene Zoom-Level, welche beim Klicken auf das Fahrrad zirkulär wechseln
+	 */
+	level = [3, 6, 10],
 
 	/**
-	 * Längengrad, wie weit das Fahrrad gekommen ist
+	 * Erdumfang am Äquator in m
 	 */
-	fortschritt = 100,
+	umfang = 40_075_017,
 
 	/**
 	 * Breitengrad jeweils nach Nord und Süd von 0 aus, bei dem die Strecke beginnt und aufhört
@@ -60,4 +63,25 @@ export const
 		strasse: "#111111",
 		progress: "#90c53a",
 		mittelstreifen: "#DDDDDD"
-	};
+	},
+
+	/**
+	 * Wie viele Schritte bei Animationen gemacht werden, pro Sekunde
+	 */
+	animationFPS = 200,
+
+	/**
+	 * Zeit für Animationen in ms
+	 */
+	animationZeit = 400,
+
+	/**
+	 * Zeit, bis zu Fahrrad bewegt wird in ms
+	 */
+	verspaetungZuFahrrad = 1500,
+
+	/**
+	 * Wie lange die Bewegung zum Fahrrad braucht
+	 * @param lat wie weit das Fahrrad ist (0-360)
+	 */
+	zeitZuFahrrad = (lat: number) => lat * 5 + 200;

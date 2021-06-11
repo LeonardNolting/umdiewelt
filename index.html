@@ -24,15 +24,128 @@
 	<body>
 		<div id="karte"></div>
 
-		<div id="zuschreibungen">
-			Icons erstellt von <a href="https://www.freepik.com" title="Freepik">Freepik</a>
-			bereitgestellt auf <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+		<div id="inhalt">
+			<h1>Auf dem <span id="fahrradweg">Fahrradweg</span> zu mehr <span id="klimaschutz">Klimaschutz</span>.</h1>
+			<div class="container">
+				<h2>
+					<span>🚀 Eine Initiative der Schülerinnen und Schüler des <a href="https://gymnasium-hoechstadt.de">Gymnasium Höchstadt</a></span>
+				</h2>
+
+				<a href="#fakten" id="fakten"></a>
+				<table id="fakten-anzeige">
+					<tr data-bezeichnung="strecke" data-einheit="km">
+						<td>Zurückgelegte Strecke</td>
+					</tr>
+					<tr data-bezeichnung="gespart">
+						<td>Eingespartes CO<sub>2</sub></td>
+					</tr>
+					<tr data-bezeichnung="fahrer">
+						<td>Beteiligte Personen</td>
+					</tr>
+					<tr data-bezeichnung="durchschnitt">
+						<td>Durchschnittlich gefahrene Strecke</td>
+					</tr>
+				</table>
+
+				<h3><a id="feed" href="#feed">Feed:</a></h3>
+				<ul id="feed-anzeige"></ul>
+
+				<h3><a href="#tageszeit" id="tageszeit">Tageszeit:</a></h3>
+				<div id="tageszeit-anzeige"></div>
+
+				<table id="bestenliste-anzeige">
+					<caption><a href="#bestenliste" id="bestenliste">Bestenliste:</a></caption>
+					<tr>
+						<td>1. 🥇 Leonard Nolting</td>
+						<td>23 km</td>
+					</tr>
+					<tr>
+						<td>2. 🥈 Thomas Nolting</td>
+						<td>22 km</td>
+					</tr>
+					<tr>
+						<td>3. 🥉 Noch Jemand</td>
+						<td>11 km</td>
+					</tr>
+					<tr>
+						<td>4. 🏅 Oliver Welke</td>
+						<td>0.1km</td>
+					</tr>
+				</table>
+
+				<div><!-- Platzhalter --></div>
+			</div>
+			<div id="img-wrapper">
+				<!--suppress HtmlUnknownAttribute -->
+				<img loading="lazy"
+				     src="https://gymnasium-hoechstadt.de/images/Aktuelles/Abiturfeier_2020.jpg"
+				     alt="" />
+			</div>
+			<div class="container">
+				<h3><a href="#ansprache" id="ansprache">Sehr geehrte Leserinnen und Leser,</a></h3>
+				<p id="ansprache-anzeige">
+					Im Rahmen des P-Seminars ...
+					<br>
+					Danke an alle Beteiligten!
+				</p>
+			</div>
+			<a href="#fahrer" id="fahrer"></a>
+			<ul id="fahrer-anzeige" class="horizontal">
+				<li>Leonard Nolting</li>
+				<li>Thomas Nolting</li>
+				<li>Noch Jemand</li>
+				<li>Und Nochjemand</li>
+			</ul>
+			<div class="container">
+				<h3><a href="#mitmachen" id="mitmachen">Mitmachen:</a></h3>
+				<p id="mitmachen-anzeige">Bitte nehmen Sie
+					<a href="mailto:leonard.nolting@gymhoes.de?subject=Mitmachen">Kontakt</a> mit uns auf.</p>
+				<!--TODO-->
+
+				<!--				TODO-->
+				<h3><a>Wussten Sie schon...?</a></h3>
+				<p>Fahrradfahren ist gut.</p>
+
+				<h3><a href="#quellen" id="quellen">Quellen:</a></h3>
+				<ul id="quellen-anzeige"></ul>
+
+				<h3><a href="#bildquellen" id="bildquellen">Bildquellen:</a></h3>
+				<div id="bildquellen-anzeige">
+					Icons erstellt von
+					<a href="https://www.freepik.com" title="Freepik">Freepik</a> und
+					<a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> <!--TODO-->
+					bereitgestellt auf <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+				</div>
+
+				<hr />
+
+				<a href="#fusszeile" id="fusszeile"></a>
+				<div id="fusszeile-anzeige">
+					<p id="copyright">&copy; 2021 Leonard Nolting</p>
+					<ul id="links" class="horizontal">
+						<li id="fehler">
+							<a href="mailto:leonard.nolting@gymhoes.de?subject=Fehlermeldung">Fehler melden</a></li>
+						<li id="anregungen">
+							<a href="mailto:leonard.nolting@gymhoes.de?subject=Anregung">Anregungen</a>
+						</li>
+						<li id="kontakt"><a href="mailto:leonard.nolting@gymhoes.de">Kontakt</a></li> <!--TODO-->
+						<li id="github">
+							<a href="https://github.com/LeonardNolting/fahrrad-schule">GitHub</a>
+						</li>
+						<li id="datenschutzerklaerung">
+							<a href="datenschutzerklaerung.html">Datenschutzerklärung</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 
 		<script src="js/vendor/modernizr-3.11.2.min.js"></script>
 		<script src="js/plugins.js"></script>
+
 		<script src="js/main.ts"></script>
 
+		<!-- TODO -->
 		<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 		<script>
 			window.ga = function () { ga.q.push(arguments) };

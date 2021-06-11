@@ -16,7 +16,7 @@ That's cool.
 This file can be used to contain all your plugins, such as jQuery plugins and
 other 3rd party scripts for a simple site.
 
-One approach is to put jQuery plugins inside of a `(function($){ ...})(jQuery);`
+One approach is to put jQuery plugins inside of a `(function($){ })(jQuery);`
 closure to make sure they're in the jQuery namespace safety blanket. Read more
 about [jQuery plugin authoring](https://learn.jquery.com/plugins/).
 
