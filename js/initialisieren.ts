@@ -131,7 +131,7 @@ export default function initialisieren() {
 		submit.type = "submit"
 		submit.id = "passwort-submit"
 
-		fail.textContent = "Falsches Passwort. Bitte versuche es erneut."
+		fail.textContent = "Falsches Passwort. Bitte versuchen Sie es erneut."
 
 		frage.textContent = "Warum benötige ich ein Passwort?"
 		frage.href = "#mitmachen"
