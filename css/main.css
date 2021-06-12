@@ -1,6 +1,7 @@
 html, body {
 	height: 100%;
 	font-family: Georgia, sans-serif;
+	font-size: calc(100vmin * 0.08 / 10 + 8px);
 }
 
 body {
@@ -14,7 +15,9 @@ body {
 	--ueberschrift-groesse: 3.2rem;
 	--padding: 2rem;
 	/*--hoehe: calc(100% - var(--ueberschrift-groesse) - var(--padding) - 20px)*/
-	--hoehe: 60%;
+	--hoehe: 60vh;
+	--schrift-groesse: 1.4rem;
+	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
 }
 
 * {
@@ -39,7 +42,7 @@ body {
 	z-index: 10;
 	background-color: white;
 	padding: var(--padding) 0;
-	font-size: 1.4rem;
+	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
 	width: 100%;
 	box-shadow: 0 0 32px 12px #111, inset 0 12px 14px -5px grey;
@@ -77,7 +80,7 @@ h2 {
 
 h3 {
 	margin: 0;
-	font-size: 1.4rem;
+	font-size: var(--schrift-groesse);
 }
 
 h4 {
@@ -202,7 +205,7 @@ h2::after {
 }
 
 #feed-anzeige li.wichtig {
-	font-size: 1.4rem;
+	font-size: var(--schrift-groesse);
 }
 
 #feed-anzeige li:not(:first-child) {
@@ -414,7 +417,7 @@ ul.horizontal > li + li::before {
 
 #passwort a::before {
 	content: "🛈";
-	font-size: 1.4rem;
+	font-size: var(--schrift-groesse);
 	line-height: 1.1;
 
 	/* da sonst auch unterstrichen 🤷 */
@@ -447,7 +450,7 @@ ul.horizontal > li + li::before {
 
 html {
 	color: #222;
-	font-size: 1em;
+	/*font-size: 1em;*/
 	line-height: 1.4;
 }
 
