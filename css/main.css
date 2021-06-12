@@ -256,7 +256,7 @@ h2::after {
 	content: ":"
 }
 
-#fakten-anzeige tr td:last-child {
+#fakten-anzeige tr td:nth-child(2) {
 	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😱</text></svg>") 16 0, auto;
 }
 
@@ -398,6 +398,8 @@ ul.horizontal > li + li::before {
 	color: #777;
 	display: flex;
 	align-items: center;
+
+	/* für das before */
 	padding-left: 24px;
 }
 
@@ -405,6 +407,8 @@ ul.horizontal > li + li::before {
 	content: "🛈";
 	font-size: 1.4rem;
 	line-height: 1.1;
+
+	/* da sonst auch unterstrichen 🤷 */
 	position: absolute;
 	margin-left: -24px;
 }
