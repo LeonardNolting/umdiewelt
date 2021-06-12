@@ -71,6 +71,12 @@ h3 {
 	font-size: 1.4rem;
 }
 
+h4 {
+	margin-top: 1.2rem;
+	margin-bottom: .4rem;
+	color: #777;
+}
+
 h1, h2 {
 	text-align: center;
 	text-transform: uppercase;
@@ -147,6 +153,11 @@ h2::after {
 	align-items: center;
 	position: relative;
 	outline: none
+}
+
+#inhalt h4 a {
+	color: inherit;
+	text-decoration: inherit;
 }
 
 #inhalt table caption a::before, #inhalt h3 a::before {
@@ -269,6 +280,11 @@ h2::after {
 	line-height: .9;
 }
 
+#mitmachen-anzeige > a {
+	/*display: block;*/
+	/*margin-bottom: 1rem;*/
+}
+
 #links {
 	justify-content: flex-end;
 }
@@ -329,9 +345,6 @@ ul.horizontal > li + li::before {
 
 
 #passwort {
-	/*padding: 4px;
-	outline: none;
-	border: 1px solid dodgerblue;*/
 	font-size: 1.2rem;
 }
 
@@ -353,7 +366,6 @@ ul.horizontal > li + li::before {
 }
 
 #passwort-input::placeholder {
-	/*font-style: italic;*/
 	color: #999;
 }
 #passwort-input:invalid {
@@ -372,6 +384,11 @@ ul.horizontal > li + li::before {
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	padding: 0.4rem 0.6rem;
 	cursor: pointer;
+}
+
+#passwort-submit[disabled] {
+	background: #ccc;
+	cursor: progress;
 }
 
 #passwort a {
