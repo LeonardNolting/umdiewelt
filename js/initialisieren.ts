@@ -98,7 +98,7 @@ export default function initialisieren() {
 
 		const content = document.createElement("div"),
 			form = document.createElement("form"),
-			input = document.createElement("input"),
+			input = document.createElement("input") as HTMLInputElement,
 			submit = document.createElement("input"),
 			fail = document.createElement("p"),
 			frage = document.createElement("a");
@@ -107,14 +107,14 @@ export default function initialisieren() {
 
 		form.addEventListener("submit", event => {
 			event.preventDefault()
-			content.classList.add("ladend")
+			submit.disabled = true;
 			anmelden(input.value)
 				.then(user => {
 					passwortInputWindow.close()
 					console.log("angemeldet")
 				})
 				.catch(error => {
-					content.classList.remove("ladend")
+					submit.disabled = false;
 					content.classList.add("fehlgeschlagen")
 				})
 		})
