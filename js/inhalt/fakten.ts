@@ -10,7 +10,7 @@ interface HTMLTableRowElementFakt extends HTMLTableRowElement {
 		anzahlNachkommastellen: number,
 	}
 
-	sichtbar: boolean
+	gesehen: boolean
 }
 
 const tabelle = document.getElementById("fakten-anzeige") as HTMLTableElement
@@ -36,7 +36,7 @@ export default function fakten() {
 }
 
 function faktAnzeigen(zeile: HTMLTableRowElementFakt) {
-	zeile.sichtbar = true
+	zeile.gesehen = true
 	if (!zeile.wert) return
 
 	const zelle = zeile.wertZelle
@@ -74,5 +74,5 @@ export function fakt(bezeichnung: string, wertBerechnen: () => { wert: number, e
 		valide,
 		anzahlNachkommastellen
 	}
-	if (zeile.sichtbar) faktAnzeigen(zeile)
+	if (zeile.gesehen) faktAnzeigen(zeile)
 }
