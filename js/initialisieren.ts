@@ -134,7 +134,7 @@ export default function initialisieren() {
 		fail.textContent = "Falsches Passwort. Bitte versuchen Sie es erneut."
 
 		frage.textContent = "Warum benötige ich ein Passwort?"
-		frage.href = "#mitmachen"
+		frage.href = "#warum-brauche-ich-ein-passwort"
 
 		form.append(input, submit)
 		content.append(form, fail, frage)
