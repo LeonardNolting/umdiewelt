@@ -2,22 +2,50 @@ import zahl from "../formatierung/zahl";
 
 interface HTMLTableRowElementFakt extends HTMLTableRowElement {
 	interval: NodeJS.Timeout,
-	wertZelle: HTMLTableCellElement
+	wertZelle: HTMLTableCellElement,
+
+	wert?: {
+		wertBerechnen: () => { wert: number, einheit?: string },
+		valide: boolean,
+		anzahlNachkommastellen: number,
+	}
+
+	sichtbar: boolean
 }
 
 const tabelle = document.getElementById("fakten-anzeige") as HTMLTableElement
 
-export function fakt(bezeichnung: string, wertBerechnen: () => { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1) {
-	const zeile = Array.from(tabelle.rows).find(row => row.dataset["bezeichnung"] === bezeichnung) as HTMLTableRowElementFakt
-	const zelle = zeile.wertZelle || document.createElement("td")
-	zeile.wertZelle = zelle
-	zeile.appendChild(zelle)
+const observer = new IntersectionObserver((eintraege, observer) => {
+	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
+		const zeile = eintrag.target as HTMLTableRowElementFakt;
+		observer.unobserve(zeile)
+		faktAnzeigen(zeile)
+	})
+}, {
+	rootMargin: '0px',
+	threshold: 1.0
+})
 
-	if (!valide) return zelle.innerHTML = "N/A"
+export default function fakten() {
+	Array.from(tabelle.rows).forEach((zeile: HTMLTableRowElementFakt) => {
+		zeile.wertZelle = document.createElement("td")
+		zeile.appendChild(zeile.wertZelle)
 
-	const {wert, einheit = ""} = wertBerechnen(),
-		wertSetzen = (wert: number) => zelle.innerHTML = zahl(wert, anzahlNachkommastellen, 0) + " " + einheit,
-		zeit = 300,
+		observer.observe(zeile)
+	})
+}
+
+function faktAnzeigen(zeile: HTMLTableRowElementFakt) {
+	zeile.sichtbar = true
+	if (!zeile.wert) return
+
+	const zelle = zeile.wertZelle
+
+	if (!zeile.wert.valide) return zelle.innerHTML = "N/A"
+
+	const {wert, einheit = ""} = zeile.wert.wertBerechnen(),
+		wertSetzen = (wert: number) => zelle.innerHTML = zahl(wert, zeile.wert.anzahlNachkommastellen, 0) + " " + einheit,
+		zeit = 600,
 		fps = 50,
 		anzahlSchritte = Math.ceil(Math.min(wert * 2, zeit * fps / 1000));
 
@@ -36,4 +64,15 @@ export function fakt(bezeichnung: string, wertBerechnen: () => { wert: number, e
 		i--
 		if (i < 0) clearInterval(zeile.interval)
 	}, intervalTime)
+}
+
+export function fakt(bezeichnung: string, wertBerechnen: () => { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1) {
+	const zeile = Array.from(tabelle.rows).find(zeile => zeile.dataset["bezeichnung"] === bezeichnung) as HTMLTableRowElementFakt
+
+	zeile.wert = {
+		wertBerechnen,
+		valide,
+		anzahlNachkommastellen
+	}
+	if (zeile.sichtbar) faktAnzeigen(zeile)
 }

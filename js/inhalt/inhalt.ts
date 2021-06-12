@@ -1,3 +1,7 @@
 import quellen from "./quellen";
+import fakten from "./fakten";
 
-export default () => quellen()
+export default () => {
+	fakten()
+	quellen()
+}
