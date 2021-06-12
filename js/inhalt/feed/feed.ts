@@ -8,6 +8,7 @@ const liste = document.getElementById("feed-anzeige") as HTMLUListElement
 const neuesElement = (html: string, wichtig: boolean = false, referenz: Node | null) => {
 	const listenElement = document.createElement("li")
 	listenElement.innerHTML = html
+	if (wichtig) listenElement.classList.add("wichtig")
 	liste.insertBefore(listenElement, referenz)
 	return listenElement
 }
