@@ -4,6 +4,8 @@ import {Markierung} from "./markierung";
 import images from "../img/*.png";
 import optionen from "./optionen";
 import step from "./step";
+import InfoWindow = google.maps.InfoWindow;
+import anmelden from "./firebase/authentifizierung";
 
 export let initialisiert = false
 
@@ -18,6 +20,8 @@ export const
 	 */
 	berechneNeuesLevelIndex = () => level[aktuellesLevelIndex + 1] === undefined ? 0 : aktuellesLevelIndex + 1
 export let aktuellesLevelIndex = 0
+
+export let passwortInputWindow
 
 // Markierungen auf der Karte
 export const punkte: { [key: string]: Markierung } = {
@@ -49,6 +53,9 @@ export const punkte: { [key: string]: Markierung } = {
 		// input für passwort, unten: "Warum brauche ich ein Passwort?"
 		// antwort on hover
 		// nach passworteingabe großes popup für eingabe
+
+		(passwortInputWindow as google.maps.InfoWindow).open(karte, marker);
+		// (((passwortInputWindow as google.maps.InfoWindow).getContent() as HTMLElement).querySelector("#passwort-input") as HTMLElement).focus()
 	}, "pointer", () => ({
 		anchor: new google.maps.Point(-70, 90)
 		// anchor: new google.maps.Point(60 / 2, 60 / 2)
@@ -85,6 +92,58 @@ export default function initialisieren() {
 	initialisiert = true
 
 	karte = new google.maps.Map(document.getElementById("karte"), optionen());
+
+	{
+		// Spätestens jetzt bereue ich es, nicht Kotlin für diese Projekt gewählt zu haben ... oder wenigstens tsx..
+
+		const content = document.createElement("div"),
+			form = document.createElement("form"),
+			input = document.createElement("input"),
+			submit = document.createElement("input"),
+			fail = document.createElement("p"),
+			frage = document.createElement("a");
+
+		content.id = "passwort"
+
+		form.addEventListener("submit", event => {
+			event.preventDefault()
+			content.classList.add("ladend")
+			anmelden(input.value)
+				.then(user => {
+					passwortInputWindow.close()
+					console.log("angemeldet")
+				})
+				.catch(error => {
+					content.classList.remove("ladend")
+					content.classList.add("fehlgeschlagen")
+				})
+		})
+
+		input.type = "password"
+		input.id = "passwort-input"
+		input.placeholder = "Passwort..."
+		input.title = "Passwort eingeben"
+		input.required = true
+		input.minLength = 6
+
+		submit.value = "🔑"
+		submit.title = "Bestätigen"
+		submit.type = "submit"
+		submit.id = "passwort-submit"
+
+		fail.textContent = "Falsches Passwort. Bitte versuche es erneut."
+
+		frage.textContent = "Warum benötige ich ein Passwort?"
+		frage.href = "#mitmachen"
+
+		form.append(input, submit)
+		content.append(form, fail, frage)
+
+		passwortInputWindow = new google.maps.InfoWindow({content});
+
+		// autofocus input beim öffnen
+		(passwortInputWindow as InfoWindow).addListener("domready", () => input.focus())
+	}
 
 	pfad = new google.maps.Polyline({
 		path: Object.values(punkte).map(position => position.position),
