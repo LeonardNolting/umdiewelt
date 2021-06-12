@@ -1,14 +1,19 @@
 html, body {
-	height: 100%;
+	/*position: relative;*/
+	min-height: 100%;
 	font-family: Georgia, sans-serif;
 	font-size: calc(100vmin * 0.08 / 10 + 8px);
 }
 
 body {
+	/*display: flex;
+	flex-direction: column;
+	align-items: center;*/
+	overflow-x: hidden;
+	position: relative;
+
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	overflow-x: hidden;
 }
 
 :root {
@@ -31,8 +36,9 @@ body {
 }
 
 .container {
-	max-width: 70%;
-	min-width: 600px;
+	/*max-width: 70%;*/
+	/*min-width: 600px;*/
+	max-width: 1000px;
 	margin: 0 auto;
 	padding: 0 1rem;
 }
@@ -299,6 +305,7 @@ h2::after {
 
 #links {
 	justify-content: flex-end;
+	flex-wrap: wrap;
 }
 
 #links li {
@@ -344,7 +351,7 @@ ul.horizontal > li + li::before {
 }
 
 #quellen-anzeige li a {
-	display: inline-block;
+	display: block;
 }
 
 #fusszeile-anzeige {
@@ -353,6 +360,7 @@ ul.horizontal > li + li::before {
 	justify-content: space-between;
 	flex-direction: row;
 	font-size: 1rem;
+	flex-wrap: wrap;
 }
 
 
