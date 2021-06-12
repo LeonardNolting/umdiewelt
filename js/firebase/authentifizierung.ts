@@ -8,8 +8,9 @@ export default function anmelden(passwort: string) {
 	return signInWithEmailAndPassword(auth, email, passwort)
 		.then(({user}) => {
 			step("Angemeldet")
+			return user
 		})
-		.catch((error) => {
+		.catch(error => {
 			const errorCode = error.code;
 			const errorMessage = error.message;
 			step("Konnte nicht anmelden: " + errorCode + " " + errorMessage)
