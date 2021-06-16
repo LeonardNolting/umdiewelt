@@ -106,16 +106,29 @@ export default function initialisieren() {
 		content.id = "passwort"
 
 		form.addEventListener("submit", event => {
+			// Wir machen's dynamisch!
 			event.preventDefault()
+
+			// Verhindert versehentliches doppeltes Bestätigen
 			submit.disabled = true;
+
 			anmelden(input.value)
 				.then(user => {
 					passwortInputWindow.close()
-					console.log("angemeldet")
+
+					// Falls nachher nochmal anmelden: Nicht fehlgeschlagen
+					content.classList.remove("fehlgeschlagen")
+
+					// Eintragen-Popup öffnen
+					document.getElementById("popup-eintragen").classList.add("offen")
 				})
 				.catch(error => {
-					submit.disabled = false;
+					// Zeigt Benutzer Fehlernachricht an
 					content.classList.add("fehlgeschlagen")
+				})
+				.finally(() => {
+					// Offen für weitere Versuche
+					submit.disabled = false;
 				})
 		})
 
