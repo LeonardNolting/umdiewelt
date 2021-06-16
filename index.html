@@ -153,6 +153,45 @@
 			</div>
 		</div>
 
+		<div id="popups">
+			<div id="popup-eintragen">
+				<form id="eintragen-anzeige">
+					<div class="container">
+						<fieldset>
+							<legend>Neue Strecke eintragen</legend>
+							<input id="eintragen-name" type="text" placeholder="Dein Name" />
+							<input id="eintragen-km" type="number" min="5" max="100" />
+
+							<input type="submit" />
+						</fieldset>
+					</div>
+				</form>
+			</div>
+
+			<div id="popup-cookies">
+				<div class="container">
+					<h3>Cookies</h3>
+					<p>
+						Wir brauchen folgende Cookies, damit die Seite geladen werden kann ...
+					</p>
+					<p>
+						Detailliertere Beschreibung:
+					</p>
+					<p class="versteckt">
+						Tolle Beschreibung...
+					</p>
+					<button onclick="this.previousElementSibling.classList.remove('versteckt')">Weiterlesen ▼</button>
+				</div>
+				<div id="popup-cookies-buttons">
+					<button id="popup-cookies-notwendig" title="Die Seite wird funktionieren.">Notwendige akzeptieren</button>
+					<button id="popup-cookies-alle" title="Trägt zu voller Funktionalität bei.">Alle akzeptieren</button>
+					<button id="popup-cookies-keine" title="Wird die Seite schließen.">Ablehnen</button>
+				</div>
+			</div>
+
+			<div id="popup-hintergrund"></div>
+		</div>
+
 		<script src="js/vendor/modernizr-3.11.2.min.js"></script>
 		<script src="js/plugins.js"></script>
 

@@ -5,7 +5,7 @@ import images from "../img/*.png";
 import optionen from "./optionen";
 import step from "./step";
 import InfoWindow = google.maps.InfoWindow;
-import anmelden from "./firebase/authentifizierung";
+import anmelden, {angemeldet} from "./firebase/authentifizierung";
 
 export let initialisiert = false
 
@@ -49,13 +49,7 @@ export const punkte: { [key: string]: Markierung } = {
 		lat: latBeiLng(0),
 		lng: 0,
 	}, false, marker => {
-		// TODO
-		// input für passwort, unten: "Warum brauche ich ein Passwort?"
-		// antwort on hover
-		// nach passworteingabe großes popup für eingabe
-
-		(passwortInputWindow as google.maps.InfoWindow).open(karte, marker);
-		// (((passwortInputWindow as google.maps.InfoWindow).getContent() as HTMLElement).querySelector("#passwort-input") as HTMLElement).focus()
+		if (!angemeldet()) (passwortInputWindow as google.maps.InfoWindow).open(karte, marker);
 	}, "pointer", () => ({
 		anchor: new google.maps.Point(-70, 90)
 		// anchor: new google.maps.Point(60 / 2, 60 / 2)

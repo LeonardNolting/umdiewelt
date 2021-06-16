@@ -1,14 +1,11 @@
 html, body {
-	/*position: relative;*/
 	min-height: 100%;
 	font-family: Georgia, sans-serif;
-	font-size: calc(100vmin * 0.08 / 10 + 8px);
+	--grund-schrift-groesse: calc(100vmin * 0.08 / 10 + 8px);
+	font-size: var(--grund-schrift-groesse);
 }
 
 body {
-	/*display: flex;
-	flex-direction: column;
-	align-items: center;*/
 	overflow-x: hidden;
 	position: relative;
 
@@ -23,6 +20,7 @@ body {
 	--hoehe: 60vh;
 	--schrift-groesse: 1.4rem;
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
+	--link-farbe: dodgerblue;
 }
 
 * {
@@ -60,12 +58,13 @@ body {
 	opacity: 0.4;
 	transition: opacity 0.4s ease;
 }
+
 .verspaetet.gesehen {
 	opacity: initial;
 }
 
 a {
-	color: dodgerblue;
+	color: var(--link-farbe);
 }
 
 a[id]:hover::after {
@@ -191,7 +190,7 @@ h2::after {
 
 #inhalt h3 a:focus-visible::before, #inhalt table caption a:focus-visible::before,
 #inhalt h3 a:focus::before, #inhalt table caption a:focus::before {
-	color: dodgerblue;
+	color: var(--link-farbe);
 }
 
 #feed-anzeige {
@@ -388,6 +387,7 @@ ul.horizontal > li + li::before {
 #passwort-input::placeholder {
 	color: #999;
 }
+
 #passwort-input:invalid {
 	border-color: darkred;
 }
@@ -439,8 +439,105 @@ ul.horizontal > li + li::before {
 	color: darkred;
 	display: none
 }
+
 #passwort.fehlgeschlagen p {
 	display: initial;
+}
+
+#popups {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 20;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+#popup-hintergrund {
+	--farbe: rgba(0, 0, 0, 100);
+	--zeit: .2s;
+	--groesse: 150vmax;
+	position: absolute;
+	/*height: 100vmax;*/
+	/*width: 100vmax;*/
+	height: var(--groesse);
+	width: var(--groesse);
+	background-color: var(--farbe);
+	box-shadow: 0 0 32px 32px var(--farbe);
+	z-index: 20;
+
+	opacity: 0.2;
+	transform: scale(0);
+	border-radius: 50%;
+}
+
+#popups > *:not(#popup-hintergrund).offen ~ #popup-hintergrund {
+	transition: opacity calc(var(--zeit)) ease-in, transform var(--zeit) linear, border-radius var(--zeit) linear var(--zeit);
+	display: initial;
+	border-radius: 0;
+	transform: scale(1);
+	opacity: .4;
+}
+
+/* Jedes popup */
+#popups > *:not(#popup-hintergrund) {
+	position: absolute;
+	background-color: white;
+	box-shadow: 0 0 16px 4px #333;
+	border-radius: .8rem;
+	z-index: 30;
+	margin: 1rem;
+
+	opacity: 0;
+	display: none;
+	transition: opacity .2s ease-in-out;
+}
+#popups .container {
+	padding: 1rem;
+}
+#popups > *:not(#popup-hintergrund).offen {
+	display: initial;
+	opacity: 1;
+}
+
+/* Cookie Popup */
+#popup-cookies {
+	--erweitern-zeit: .2s;
+	font-size: calc(var(--grund-schrift-groesse) * 1.1);
+}
+#popup-cookies .versteckt, #popup-cookies p:not(.versteckt) + button {
+	display: none;
+}
+#popup-cookies p + button {
+	border: none;
+	outline: none;
+	padding: 0;
+	background: none;
+}
+#popup-cookies p {
+	margin: 0;
+}
+#popup-cookies p + p, #popup-cookies p + button {
+	margin-top: .8rem;
+}
+#popup-cookies h3 {
+	margin-bottom: 1rem;
+}
+#popup-cookies button {
+	cursor: pointer;
+	color: var(--link-farbe);
+}
+#popup-cookies-buttons {
+	display: flex;
+	flex-direction: row-reverse;
+	border-top: 1px solid #555;
+}
+#popup-cookies-buttons > button {
+	background: none;
+	padding: 1rem;
+	text-decoration: underline;
+	border: none;
 }
 
 /*! HTML5 Boilerplate v8.0.0 | MIT License | https://html5boilerplate.com/ */
