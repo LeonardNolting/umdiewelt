@@ -79,6 +79,9 @@ a[id]:hover::after {
 h1 {
 	margin: 0;
 	font-size: calc(var(--ueberschrift-groesse) * .8);
+	padding: 0 1rem;
+	/* Da besonders groß */
+	overflow-wrap: break-word;
 }
 
 h2 {
@@ -192,6 +195,12 @@ h2::after {
 	transform: rotate(-7deg) translateX(-100%) translateY(-6px);
 }
 
+@media (max-width: 1110px) {
+	#inhalt table caption a::before, #inhalt h3 a::before {
+		display: none;
+	}
+}
+
 #inhalt h3 a:focus-visible::before, #inhalt table caption a:focus-visible::before,
 #inhalt h3 a:focus::before, #inhalt table caption a:focus::before {
 	color: var(--link-farbe);
@@ -277,8 +286,9 @@ h2::after {
 	content: ":"
 }
 
-#fakten-anzeige tr td:nth-child(2) {
+#fakten-anzeige tr td:nth-child(2), #bestenliste-anzeige tr td:nth-child(2) {
 	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😱</text></svg>") 16 0, auto;
+	white-space: nowrap;
 }
 
 #fahrer-anzeige {
