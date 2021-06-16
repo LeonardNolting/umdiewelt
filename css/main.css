@@ -13,6 +13,10 @@ body {
 	flex-direction: column;
 }
 
+body.popup {
+	overflow-y: hidden;
+}
+
 :root {
 	--ueberschrift-groesse: 3.2rem;
 	--padding: 2rem;
@@ -453,6 +457,9 @@ ul.horizontal > li + li::before {
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+}
+body:not(.popup) #popups {
+	display: none;
 }
 #popup-hintergrund {
 	--farbe: rgba(0, 0, 0, 100);

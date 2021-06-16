@@ -6,6 +6,7 @@ import optionen from "./optionen";
 import step from "./step";
 import InfoWindow = google.maps.InfoWindow;
 import anmelden, {angemeldet} from "./firebase/authentifizierung";
+import Popup from "./popup";
 
 export let initialisiert = false
 
@@ -114,7 +115,7 @@ export default function initialisieren() {
 					content.classList.remove("fehlgeschlagen")
 
 					// Eintragen-Popup öffnen
-					document.getElementById("popup-eintragen").classList.add("offen")
+					Popup.oeffnen(document.getElementById("popup-eintragen"))
 				})
 				.catch(error => {
 					// Zeigt Benutzer Fehlernachricht an

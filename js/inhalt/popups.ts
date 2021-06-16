@@ -1,6 +1,7 @@
+import Popup from "../popup";
+
 export default () => {
-	document.getElementById("#popup-hintergrund").addEventListener("click", () => {
-		document.querySelectorAll("#popups > *:not(#popup-hintergrund)")
-			.forEach(element => element.classList.remove("offen"))
+	Popup.hintergrund.addEventListener("click", () => {
+		Popup.alleSchliessen()
 	})
 }

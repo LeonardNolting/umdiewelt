@@ -1,5 +1,6 @@
 import step from "./step";
 import Cookie from "./cookie";
+import Popup from "./popup";
 
 namespace Cookies {
 	const popup = document.getElementById("popup-cookies")
@@ -51,14 +52,13 @@ namespace Cookies {
 			onclick: (event: MouseEvent) => void = () => {
 			}
 		): HTMLButtonElement => {
-			const name = Einstellung[einstellung],
+			const name = einstellung.toString(),
 				element = document.getElementById("popup-cookies-" + name) as HTMLButtonElement
 			element.onclick = event => {
 				// Verhindere versehentliches doppeltes Klicken
 				element.disabled = true;
 
-				// Popup schließen
-				popup.classList.remove("offen")
+				Popup.schliessen(popup)
 
 				onclick(event)
 
@@ -74,7 +74,7 @@ namespace Cookies {
 		button(Einstellung.KEINE, false, window.close)
 
 		// Alles vorbereitet, jetzt öffnen ...
-		popup.classList.add("offen")
+		Popup.oeffnen(popup)
 	})
 
 	/**
