@@ -9,3 +9,7 @@
 [<img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-%3CCOLOR%3E?color=0077b6">](https://github.com/SamKirkland/FTP-Deploy-Action)
 
 #### [Besuchen Sie uns.](https://umdiewelt.gymnasium-hoechstadt.de "Gymnasium Höchstadt - Um Die Welt")
+
+#### [Mitmachen!](https://umdiewelt.gymnasium-hoechstadt.de#mitmachen)
+
+#### [Kontakt aufnehmen.](mailto:leonard.nolting@gymhoes.de?subject=)
