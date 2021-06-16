@@ -366,6 +366,27 @@ ul.horizontal > li + li::before {
 	flex-wrap: wrap;
 }
 
+@media (max-width: 620px) {
+	#fusszeile-anzeige {
+		flex-direction: column;
+		align-items: center;
+	}
+	#fusszeile-anzeige * + * {
+		margin-top: .4rem;
+	}
+}
+
+@media (max-width: 420px) {
+	#links {
+		flex-direction: column;
+		align-items: center;
+		margin-top: 1rem;
+	}
+	#links > li + li::before {
+		display: none;
+	}
+}
+
 
 #passwort {
 	font-size: 1.2rem;
