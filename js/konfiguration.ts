@@ -35,6 +35,11 @@ export const
 	region = "DE",
 
 	/**
+	 * E-Mail für Firebase Authentication-Konto
+	 */
+	email = "leonard.nolting@gymhoes.de",
+
+	/**
 	 * Verschiedene Zoom-Level, welche beim Klicken auf das Fahrrad zirkulär wechseln
 	 */
 	level = [3, 6, 10],
