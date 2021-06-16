@@ -1,12 +1,12 @@
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import step from "../step";
+import {email} from "../konfiguration";
 
 export let angemeldet = () => false
 
 export default function anmelden(passwort: string) {
 	const auth = getAuth()
 	angemeldet = () => auth.currentUser !== null
-	const email = "leonard.nolting@gymhoes.de"
 
 	return signInWithEmailAndPassword(auth, email, passwort)
 		.then(({user}) => {
