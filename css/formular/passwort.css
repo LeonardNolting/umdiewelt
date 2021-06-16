@@ -1,0 +1,80 @@
+#passwort {
+	font-size: 1.2rem;
+}
+
+#passwort form {
+	display: flex;
+	--border: 1px solid #999;
+	--border-radius: 6px;
+}
+
+#passwort form > * {
+	display: flex;
+}
+
+#passwort-input {
+	border: var(--border);
+	outline: none;
+	padding: 0.2rem 0.4rem;
+	border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+#passwort-input::placeholder {
+	color: #999;
+}
+
+#passwort-input:invalid {
+	border-color: darkred;
+}
+
+#passwort-input:focus, #passwort-input:valid {
+	border-color: dodgerblue;
+}
+
+#passwort-submit {
+	outline: none;
+	background: lightskyblue;
+	border: var(--border);
+	border-left: 0;
+	border-radius: 0 var(--border-radius) var(--border-radius) 0;
+	padding: 0.4rem 0.6rem;
+	cursor: pointer;
+}
+
+#passwort-submit[disabled] {
+	background: #ccc;
+	cursor: progress;
+}
+
+#passwort a {
+	margin-bottom: 0;
+	margin-top: 0.6rem;
+	font-size: 1rem;
+	color: #777;
+	display: flex;
+	align-items: center;
+
+	/* für das before */
+	padding-left: 24px;
+}
+
+#passwort a::before {
+	content: "🛈";
+	font-size: var(--schrift-groesse);
+	line-height: 1.1;
+
+	/* da sonst auch unterstrichen 🤷 */
+	position: absolute;
+	margin-left: -24px;
+}
+
+#passwort p {
+	font-size: .8rem;
+	margin: 0.2rem 0 0;
+	color: darkred;
+	display: none
+}
+
+#passwort.fehlgeschlagen p {
+	display: initial;
+}

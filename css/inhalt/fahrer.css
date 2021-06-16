@@ -1,0 +1,19 @@
+#fahrer-anzeige {
+	padding: 1.6rem 0;
+	width: 100%;
+	background-color: #f0f0f0f0;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	margin: 2.4rem 0;
+}
+
+#fahrer-anzeige li {
+	display: flex;
+}
+
+#fahrer-anzeige li + li::before {
+	width: 4.8rem;
+	font-size: 1.2rem;
+	color: #777;
+	line-height: .9;
+}

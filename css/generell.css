@@ -1,0 +1,51 @@
+html, body {
+	min-height: 100%;
+	font-family: Georgia, sans-serif;
+	--grund-schrift-groesse: calc(100vmin * 0.08 / 10 + 8px);
+	font-size: var(--grund-schrift-groesse);
+}
+
+body {
+	overflow-x: hidden;
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+}
+
+:root {
+	--ueberschrift-groesse: 3.2rem;
+	--padding: 2rem;
+	/*--hoehe: calc(100% - var(--ueberschrift-groesse) - var(--padding) - 20px)*/
+	--hoehe: 60vh;
+	--schrift-groesse: 1.4rem;
+	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
+	--link-farbe: dodgerblue;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#karte {
+	height: var(--hoehe);
+	width: 100%;
+	position: fixed !important;
+}
+
+.container {
+	/*max-width: 70%;*/
+	/*min-width: 600px;*/
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+a {
+	color: var(--link-farbe);
+}
+
+a[id]:hover::after {
+	content: "🔗";
+	padding-left: 8px;
+}

@@ -1,0 +1,121 @@
+@import "./feed.css";
+@import "./bild.css";
+@import "./fakten.css";
+@import "./fahrer.css";
+@import "./links.css";
+@import "./tageszeit.css";
+@import "./quellen.css";
+@import "./fusszeile.css";
+
+#inhalt {
+	position: relative;
+	z-index: 10;
+	background-color: white;
+	padding: var(--padding) 0;
+	font-size: var(--schrift-groesse);
+	top: var(--hoehe);
+	width: 100%;
+	box-shadow: 0 0 32px 12px #111, inset 0 12px 14px -5px grey;
+	/*min-height: calc(100vh - var(--hoehe));*/
+	overflow-x: hidden;
+}
+
+h1 span#fahrradweg {
+	color: #0d3349;
+}
+
+h1 span#klimaschutz {
+	color: green;
+}
+
+h2 {
+	display: flex;
+	align-items: center;
+}
+
+h2::before, h2::after {
+	content: "";
+	display: flex;
+	height: 1px;
+	background: #999;
+	flex-grow: 1;
+}
+
+h2::before {
+	border-right: 1rem solid white;
+}
+
+h2::after {
+	border-left: 1rem solid white;
+}
+
+#inhalt .container > *:not(hr):not(h3):not(a) + *:not(hr) {
+	margin-top: 3.2rem;
+}
+
+#inhalt a:empty {
+	display: block;
+}
+
+#inhalt table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#inhalt table tr:not(:first-child) {
+	border-top: 1px solid #999;
+}
+
+#inhalt table td:not(:first-child) {
+	text-align: right;
+}
+
+#inhalt table td {
+	padding: 1rem 0
+}
+
+#inhalt table caption, #inhalt h3 {
+	text-align: left;
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+#inhalt table caption a, #inhalt h3 a {
+	color: inherit;
+	text-decoration: inherit;
+	display: inline-flex;
+	align-items: center;
+	position: relative;
+	outline: none
+}
+
+#inhalt h4 a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+#inhalt table caption a::before, #inhalt h3 a::before {
+	content: "#";
+	position: absolute;
+	padding-right: 20px;
+	color: #e0e0e0e0;
+	font-size: 200%;
+	font-style: italic;
+	font-family: cursive;
+	transform: rotate(-7deg) translateX(-100%) translateY(-6px);
+}
+
+@media (max-width: 1110px) {
+	#inhalt table caption a::before, #inhalt h3 a::before {
+		display: none;
+	}
+}
+
+#inhalt h3 a:focus-visible::before, #inhalt table caption a:focus-visible::before,
+#inhalt h3 a:focus::before, #inhalt table caption a:focus::before {
+	color: var(--link-farbe);
+}
+
+#inhalt p {
+	margin: 0;
+}

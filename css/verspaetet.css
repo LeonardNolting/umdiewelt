@@ -1,0 +1,8 @@
+.verspaetet {
+	opacity: 0.4;
+	transition: opacity 0.4s ease;
+}
+
+.verspaetet.gesehen {
+	opacity: initial;
+}

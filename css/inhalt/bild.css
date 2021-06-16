@@ -1,0 +1,42 @@
+#img-wrapper + .container {
+	--padding-nach-bild: 1.6rem;
+	padding-top: var(--padding-nach-bild);
+}
+
+#img-wrapper + .container::before {
+	content: "";
+	width: 100%;
+	position: absolute;
+	height: 60px;
+	background: linear-gradient(0deg, white, transparent);
+	left: 0;
+	transform: translateY(calc(-100% - var(--padding-nach-bild) + 1px));
+	z-index: 2;
+	pointer-events: none;
+}
+
+#img-wrapper {
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+#img-wrapper img {
+	transition: transform .2s ease;
+	width: 100%;
+}
+
+#img-wrapper::before {
+	content: "";
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 20%, rgba(0, 0, 0, .4) 100%);
+	z-index: 1;
+}
+
+#img-wrapper:hover img {
+	transform: scale(1.05);
+}
