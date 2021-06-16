@@ -53,6 +53,8 @@ export const allesGelesen = () =>
 let allesGelesenPromise: Promise<void>
 const lesen = () =>
 	allesGelesenPromise = new Promise<void>(resolve => {
+		step("Liest aus Datenbank")
+
 		function ueberpruefen() {
 			if (allesWurdeGelesen()) {
 				step("Alles Wichtige aus Datenbank gelesen")

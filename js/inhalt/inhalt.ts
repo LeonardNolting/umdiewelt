@@ -1,5 +1,6 @@
 import quellen from "./quellen";
 import fakten from "./fakten";
+import step from "../step";
 
 const observer = new IntersectionObserver(((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
@@ -17,6 +18,8 @@ const observer = new IntersectionObserver(((eintraege, observer) => {
 })
 
 export default () => {
+	step("Lädt Inhalt")
+
 	document.querySelectorAll("#inhalt .verspaetet").forEach(element => observer.observe(element))
 
 	fakten()

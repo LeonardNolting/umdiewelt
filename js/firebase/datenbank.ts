@@ -1,5 +1,6 @@
 import {getAnalytics} from "firebase/analytics";
 import {getDatabase, ref, Reference} from "firebase/database";
+import step from "../step";
 
 export let refs: {
 	fahrer: Reference;
@@ -14,6 +15,8 @@ export let refs: {
 }
 
 export default function datenbank() {
+	step("Verbindet mit Datenbank")
+
 	const analytics = getAnalytics()
 	const datenbank = getDatabase()
 	refs = {
