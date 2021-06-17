@@ -3,6 +3,9 @@
 body.popup {
 	overflow-y: hidden;
 }
+body.popup.popup-wichtig #popup-hintergrund {
+	cursor: not-allowed;
+}
 
 #popups {
 	position: fixed;

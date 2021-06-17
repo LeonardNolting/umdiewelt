@@ -5,8 +5,11 @@ import lesen from "./firebase/lesen";
 import inhalt from "./inhalt/inhalt";
 import maps from "./maps";
 import Cookies from "./cookies";
+import popups from "./popups";
 
-Cookies.ueberpruefen().then(async () => {
+document.addEventListener("DOMContentLoaded", async () => {
+	popups()
+	await Cookies.ueberpruefen()
 	await maps()
 	inhalt()
 	initialisieren()
