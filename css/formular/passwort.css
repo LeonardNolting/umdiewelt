@@ -4,7 +4,8 @@
 
 #passwort form {
 	display: flex;
-	--border: 1px solid #999;
+	--border: 2px solid;
+	--border-color: #999;
 	--border-radius: 6px;
 }
 
@@ -14,31 +15,40 @@
 
 #passwort-input {
 	border: var(--border);
+	border-color: var(--border-color);
 	outline: none;
 	padding: 0.2rem 0.4rem;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
+	border-right: none;
 }
 
 #passwort-input::placeholder {
 	color: #999;
 }
 
-#passwort-input:invalid {
-	border-color: darkred;
+#passwort form:invalid {
+	--border-color: darkred;
 }
 
-#passwort-input:focus, #passwort-input:valid {
-	border-color: dodgerblue;
+#passwort form:valid {
+	--border-color: steelblue;
+}
+
+#passwort form:focus-within {
+	--border-color: dodgerblue;
 }
 
 #passwort-submit {
 	outline: none;
-	background: lightskyblue;
+	background: steelblue;
 	border: var(--border);
+	border-color: var(--border-color);
 	border-left: 0;
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	padding: 0.4rem 0.6rem;
 	cursor: pointer;
+	/* doofer spalt ... */
+	margin-left: -2px;
 }
 
 #passwort-submit[disabled] {
