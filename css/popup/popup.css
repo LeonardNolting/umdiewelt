@@ -1,7 +1,7 @@
 @import "./cookies.css";
 
 body.popup {
-	overflow-y: hidden;
+	overflow-y: scroll;
 }
 body.popup.popup-wichtig #popup-hintergrund {
 	cursor: not-allowed;
@@ -60,6 +60,10 @@ body:not(.popup) #popups {
 	opacity: 0;
 	display: none;
 	transition: opacity .2s ease-in-out;
+}
+
+#popups h3 {
+	margin-bottom: 1rem;
 }
 
 #popups .container {
