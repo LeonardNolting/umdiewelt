@@ -9,6 +9,7 @@ import feed from "../inhalt/feed/feed";
 import Strecken from "../model/strecken";
 import Fahrer from "../model/fahrer";
 import Routen from "../model/routen";
+import fahrerInhalt from "../inhalt/fahrer";
 
 /**
  * Wie viele Meter schon gefahren wurden
@@ -89,6 +90,8 @@ const lesen = () =>
 		onValue(refs.fahrer, snapshot => {
 			fahrer = snapshot.val()
 			ueberpruefen()
+
+			fahrerInhalt()
 
 			fakt("fahrer", () => ({wert: fahrer ? Object.keys(fahrer).length : 0}))
 		})

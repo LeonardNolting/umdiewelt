@@ -7,6 +7,7 @@ import step from "./step";
 import InfoWindow = google.maps.InfoWindow;
 import anmelden, {angemeldet} from "./firebase/authentifizierung";
 import Popup from "./popup";
+import  eintragen from "./eintragen";
 
 export let initialisiert = false
 
@@ -51,6 +52,7 @@ export const punkte: { [key: string]: Markierung } = {
 		lng: 0,
 	}, false, marker => {
 		if (!angemeldet()) (passwortInputWindow as google.maps.InfoWindow).open(karte, marker);
+		else Popup.oeffnen(document.getElementById("popup-eintragen"))
 	}, "pointer", () => ({
 		anchor: new google.maps.Point(-70, 90)
 		// anchor: new google.maps.Point(60 / 2, 60 / 2)
@@ -100,6 +102,7 @@ export default function initialisieren() {
 
 		content.id = "passwort"
 
+		form.classList.add("input-button")
 		form.addEventListener("submit", event => {
 			// Wir machen's dynamisch!
 			event.preventDefault()
@@ -113,6 +116,9 @@ export default function initialisieren() {
 
 					// Falls nachher nochmal anmelden: Nicht fehlgeschlagen
 					content.classList.remove("fehlgeschlagen")
+
+					// Eintragen können
+					eintragen()
 
 					// Eintragen-Popup öffnen
 					Popup.oeffnen(document.getElementById("popup-eintragen"))

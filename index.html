@@ -158,13 +158,93 @@
 			<div id="popup-eintragen">
 				<form id="eintragen-anzeige">
 					<div class="container">
-						<fieldset>
-							<legend>Neue Strecke eintragen</legend>
-							<input id="eintragen-name" type="text" placeholder="Dein Name" />
-							<input id="eintragen-km" type="number" min="5" max="100" />
+						<h3>Strecke eintragen</h3>
+						<input id="eintragen-name"
+						       type="text"
+						       placeholder="Vor- und Nachname"
+						       list="eintragen-fahrer"
+						       required
+						       pattern="^[a-zA-Z ,.'-]+$" />
+						<datalist id="eintragen-fahrer"></datalist>
 
-							<input type="submit" />
-						</fieldset>
+						<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
+
+						<div id="eintragen-optionen">
+							<fieldset id="eintragen-mit-karte">
+								<legend>Länge berechnen</legend>
+								<div class="eintragen-suche input-button">
+									<input id="eintragen-a" type="text" placeholder="Startpunkt" />
+									<button>Mein Standort</button>
+								</div>
+								<div class="eintragen-suche input-button">
+									<input id="eintragen-b" type="text" placeholder="Ankunftspunkt" />
+									<button>Mein Standort</button>
+								</div>
+
+								<input id="eintragen-suche-speichern" type="checkbox" checked="checked" />
+								<label for="eintragen-suche-speichern">
+									Merken und nächstes Mal automatisch vorschlagen. Daten sind öffentlich sichtbar. <a
+									href="#eintragen-datenschutz">Mehr Informationen</a>
+								</label>
+
+								<details id="eintragen-karte-knopf">
+									<summary>Karte anzeigen</summary>
+									<div id="eintragen-karte"></div>
+								</details>
+							</fieldset>
+
+							<fieldset id="eintragen-mit-km">
+								<legend>Direkt eingeben</legend>
+								<label for="eintragen-km">Länge in <var>km</var>:</label>
+								<input id="eintragen-km" type="number" min="5" max="100" placeholder="z.B. 20" />
+							</fieldset>
+						</div>
+
+						<div id="eintragen-datenschutz-anzeige">
+							<h4><a id="eintragen-datenschutz">Datenschutz</a></h4>
+							<em>
+								Bei einer Veröffentlichung im Internet können die personenbezogenen Daten
+								(einschließlich Fotos) weltweit von beliebigen Personen abgerufen und gespeichert
+								werden. Die Daten können damit etwa auch über so genannte "Suchmaschinen" aufgefunden
+								werden. Dabei kann nicht ausgeschlossen werden, dass andere Personen oder Unternehmen
+								die Daten mit weiteren im Internet verfügbaren personenbezogenen Daten verknüpfen und
+								damit ein Persönlichkeitsprofil erstellen, die Daten verändern, zu anderen Zwecken
+								verwenden oder an andere Personen weitergeben.
+							</em>
+							<p>Konkret werden folgende Daten für alle öffentlich sichtbar gespeichert:</p>
+							<ul id="eintragen-datenschutz-daten">
+								<li>Name
+									<a href="#eintragen-datenschutz-fussnoten-1">[1]</a>
+									<a href="#eintragen-datenschutz-fussnoten-2">[2]</a>
+								</li>
+								<li>Strecken:
+									<ul>
+										<li>Zeitpunkt der Eintragung
+											<a href="#eintragen-datenschutz-fussnoten-1">[1]</a>
+										</li>
+										<li>Länge
+											<a href="#eintragen-datenschutz-fussnoten-1">[1]</a>
+										</li>
+										<li>falls gewünscht: Start- und Ankunftspunkt
+											<a href="#eintragen-datenschutz-fussnoten-1">[1]</a>
+											<a href="#eintragen-datenschutz-fussnoten-2">[2]</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul id="eintragen-datenschutz-fussnoten">
+								<li><a id="eintragen-datenschutz-fussnoten-1">[1] Diese Information dient zur Anzeige
+									auf der Website.</a></li>
+								<li><a id="eintragen-datenschutz-fussnoten-2">[2] Diese Information wird für eine
+									bessere Benutzererfahrung gespeichert, z.B. zur Bereitstellung von
+									Autovervollständigung.</a></li>
+							</ul>
+							<input id="eintragen-datenschutz-checkbox" type="checkbox" required />
+							<label for="eintragen-datenschutz-checkbox">Ich bin mit der Speicherung und Verarbeitung
+								meiner Daten einverstanden.</label>
+						</div>
+
+						<input type="submit" />
 					</div>
 				</form>
 			</div>

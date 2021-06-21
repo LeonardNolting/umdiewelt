@@ -1,0 +1,69 @@
+@import "./eintragen.css";
+@import "./passwort.css";
+
+form {
+	display: flex;
+	--border-width: 2px;
+	--border: var(--border-width) solid;
+	--border-radius: 6px;
+}
+
+form input {
+	--border-color: gray;
+	border: var(--border);
+	border-color: var(--border-color);
+	outline: none;
+	/*padding: 0.2rem 0.4rem;*/
+	padding: 0.4rem 0.6rem;
+	border-radius: var(--border-radius);
+}
+
+form input::placeholder {
+	color: #999;
+}
+
+form input:invalid {
+	--border-color: darkred;
+}
+
+/*form input:valid {
+	--border-color: steelblue;
+}*/
+
+form input:focus {
+	--border-color: dodgerblue;
+}
+
+form input[type=button], form input[type=submit], form button {
+	outline: none;
+	background: steelblue;
+	border-color: transparent;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	color: white;
+}
+
+form input[type=button]:hover, form input[type=submit]:hover, form button:hover {
+	background: dodgerblue;
+}
+
+form input[type=button]:disabled, form input[type=submit]:disabled, form button:disabled {
+	background: #ccc;
+	cursor: progress;
+}
+
+.input-button {
+	display: flex;
+}
+
+.input-button > input {
+	border-radius: var(--border-radius) 0 0 var(--border-radius);
+	border-right: none;
+}
+
+.input-button > input[type=button], .input-button > button, .input-button > input[type=submit] {
+	border-left: none;
+	border-radius: 0 var(--border-radius) var(--border-radius) 0;
+	/* doofer spalt ... */
+	margin-left: -1px;
+}
