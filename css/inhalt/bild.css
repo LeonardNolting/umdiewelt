@@ -1,9 +1,9 @@
-#img-wrapper + .container {
+figure + .container {
 	--padding-nach-bild: 1.6rem;
 	padding-top: var(--padding-nach-bild);
 }
 
-#img-wrapper + .container::before {
+figure + .container::before {
 	content: "";
 	width: 100%;
 	position: absolute;
@@ -15,20 +15,21 @@
 	pointer-events: none;
 }
 
-#img-wrapper {
+figure {
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	margin: 0;
 }
 
-#img-wrapper img {
+figure img {
 	transition: transform .2s ease;
 	width: 100%;
 }
 
-#img-wrapper::before {
+figure::before {
 	content: "";
 	height: 100%;
 	width: 100%;
@@ -37,6 +38,6 @@
 	z-index: 1;
 }
 
-#img-wrapper:hover img {
+figure:hover img {
 	transform: scale(1.05);
 }
