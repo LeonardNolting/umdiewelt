@@ -89,4 +89,8 @@ export const
 	 * Wie lange die Bewegung zum Fahrrad braucht
 	 * @param lat wie weit das Fahrrad ist (0-360)
 	 */
-	zeitZuFahrrad = (lat: number) => lat * 5 + 200;
+	zeitZuFahrrad = (lat: number) => lat * 5 + 200,
+
+	koordinaten = {
+		hoechstadt: {lat: 49.709576321528836, lng: 10.81265000522466},
+	};
