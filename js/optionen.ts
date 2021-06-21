@@ -14,6 +14,8 @@ const optionen = (): google.maps.MapOptions => ({
 
 	// Satellitenkarte anzeigen
 	mapTypeId: 'satellite',
+
+	keyboardShortcuts: false,
 })
 
 export default optionen
