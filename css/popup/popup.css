@@ -1,7 +1,7 @@
 @import "./cookies.css";
 
 body.popup {
-	overflow-y: scroll;
+	overflow-y: hidden;
 }
 body.popup.popup-wichtig #popup-hintergrund {
 	cursor: not-allowed;
