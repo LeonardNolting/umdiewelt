@@ -40,3 +40,16 @@
 	content: "📍";
 	margin-right: 6px;
 }
+
+#eintragen-datenschutz-fussnoten {
+	list-style: none;
+	padding: 0;
+}
+
+#eintragen-datenschutz-anzeige a {
+	color: #777;
+}
+
+#eintragen-datenschutz-anzeige a:not(:hover) {
+	text-decoration: none;
+}
