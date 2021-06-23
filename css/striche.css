@@ -1,0 +1,25 @@
+.striche {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.striche::before, .striche::after {
+	content: "";
+	display: flex;
+	height: 1px;
+	background-color: currentColor;
+	flex-grow: 1;
+}
+
+.striche-kurz::before, .striche-kurz::after {
+	flex-grow: .2;
+}
+
+.striche::before {
+	border-right: 1rem solid white;
+}
+
+.striche::after {
+	border-left: 1rem solid white;
+}

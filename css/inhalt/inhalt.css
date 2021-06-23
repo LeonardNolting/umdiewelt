@@ -28,27 +28,6 @@ h1 span#klimaschutz {
 	color: green;
 }
 
-h2 {
-	display: flex;
-	align-items: center;
-}
-
-h2::before, h2::after {
-	content: "";
-	display: flex;
-	height: 1px;
-	background: #999;
-	flex-grow: 1;
-}
-
-h2::before {
-	border-right: 1rem solid white;
-}
-
-h2::after {
-	border-left: 1rem solid white;
-}
-
 #inhalt .container > *:not(hr):not(h3):not(a) + *:not(hr) {
 	margin-top: 3.2rem;
 }
