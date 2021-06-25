@@ -67,3 +67,35 @@ form input[type=button]:disabled, form input[type=submit]:disabled, form button:
 	/* doofer spalt ... */
 	margin-left: -1px;
 }
+
+.buttons {
+	display: flex;
+	flex-direction: row;
+	border-top: 1px solid #555;
+	padding: .6rem;
+	justify-content: flex-end;
+}
+
+.buttons .links {
+	margin-right: auto;
+}
+
+.buttons input + input, .buttons button + button {
+	margin-left: .4rem;
+}
+
+input[type=checkbox] + label {
+	padding-left: .4rem;
+}
+
+input[type=checkbox] {
+	cursor: pointer;
+}
+
+label {
+	cursor: pointer;
+}
+
+label:focus-within > input[type=checkbox] {
+	color: #0d3349;
+}
