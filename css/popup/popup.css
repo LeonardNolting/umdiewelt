@@ -24,7 +24,7 @@ body:not(.popup) #popups {
 
 #popup-hintergrund {
 	--farbe: rgba(0, 0, 0, 100);
-	--zeit: .2s;
+	--zeit: .3s;
 	--groesse: 150vmax;
 	position: absolute;
 	/*height: 100vmax;*/
