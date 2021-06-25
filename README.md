@@ -9,8 +9,8 @@
 [![deployed with FTP Deploy Action](https://img.shields.io/badge/Deployed%20With-FTP%20DEPLOY%20ACTION-%3CCOLOR%3E?color=0077b6)](https://github.com/SamKirkland/FTP-Deploy-Action)
 [![bauen und auf server hochladen status](https://github.com/LeonardNolting/umdiewelt/actions/workflows/hochladen.yml/badge.svg)](https://github.com/LeonardNolting/umdiewelt/actions)
 
-#### [Besuchen Sie uns.](https://umdiewelt.gymnasium-hoechstadt.de "Gymnasium Höchstadt - Um Die Welt")
+#### [Besuchen Sie uns.](http://umdiewelt.gymnasium-hoechstadt.de "Gymnasium Höchstadt - Um Die Welt")
 
-#### [Mitmachen!](https://umdiewelt.gymnasium-hoechstadt.de#mitmachen)
+#### [Mitmachen!](http://umdiewelt.gymnasium-hoechstadt.de#mitmachen)
 
 #### [Kontakt aufnehmen.](mailto:leonard.nolting@gymhoes.de?subject=)
