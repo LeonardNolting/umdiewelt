@@ -23,6 +23,6 @@ jobs:
                     server: ${{ secrets.SERVER }}
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
-                    protocol: ${{ secrets.PORT }}
+                    port: ${{ secrets.PORT }}
                     local-dir: './dist'
                     dangerous-clean-slate: true
