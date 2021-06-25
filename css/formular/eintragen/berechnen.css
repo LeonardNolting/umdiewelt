@@ -1,0 +1,32 @@
+#popup-eintragen-berechnen #eintragen-karte {
+	/*min-width: 70vw;*/
+	min-height: 40vh;
+	width: 100%;
+}
+
+#popup-eintragen-berechnen .eintragen-suche button::before {
+	content: "📍";
+	margin-right: 6px;
+}
+
+#popup-eintragen-berechnen .container {
+	display: block;
+}
+
+#eintragen-berechnen-route {
+	display: flex;
+	margin-bottom: 1rem;
+}
+#eintragen-berechnen-route .eintragen-suche + .eintragen-suche {
+	margin-left: 1rem;
+}
+#eintragen-berechnen-route .eintragen-suche {
+	flex-grow: 1;
+	display: flex;
+}
+
+#eintragen-berechnen-route .eintragen-suche input {
+	width: 0;
+	flex-grow: 1;
+	min-width: 100px;
+}

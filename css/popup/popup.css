@@ -63,11 +63,28 @@ body:not(.popup) #popups {
 }
 
 #popups h3 {
-	margin-bottom: 1rem;
+	--margin-bottom: 1.4rem;
+	margin-bottom: var(--margin-bottom);
+	position: relative;
+	margin-right: auto;
+}
+
+#popups h3::after {
+	content: '';
+	position: absolute;
+	height: 4px;
+	display: block;
+	background: steelblue;
+	width: 60%;
+	margin-top: calc((var(--margin-bottom) - 0.2rem) / 2);
+	transform: translateY(-50%);
+	border-radius: 500px; /* hoher Wert für maximale Rundung */
 }
 
 #popups .container {
 	padding: 1rem;
+	display: flex;
+	flex-direction: column;
 }
 
 #popups > *:not(#popup-hintergrund).offen {

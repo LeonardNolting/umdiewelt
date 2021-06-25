@@ -31,15 +31,8 @@
 	color: var(--link-farbe);
 }
 
-#popup-cookies-buttons {
-	display: flex;
-	flex-direction: row-reverse;
-	border-top: 1px solid #555;
-}
-
 #popup-cookies-buttons > button {
-	background: none;
-	padding: 1rem;
-	text-decoration: underline;
-	border: none;
+	display: flex;
+	flex-grow: 1;
+	justify-content: center;
 }

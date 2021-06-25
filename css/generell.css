@@ -45,9 +45,14 @@ a {
 	color: var(--link-farbe);
 }
 
-a[id]:hover::after {
+a[id]::after {
 	content: "🔗";
 	padding-left: 8px;
+
+	visibility: hidden;
+}
+a[id]:hover::after {
+	visibility: initial;
 }
 
 details {

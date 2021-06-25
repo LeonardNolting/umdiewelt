@@ -1,0 +1,20 @@
+@import "./datenschutz.css";
+@import "./berechnen.css";
+@import "./name.css";
+
+/* Schritt-Anzeige ... */
+[id^="popup-eintragen-"][data-schritt]::before {
+	content: "Schritt " attr(data-schritt) " von 4";
+	font-size: 90%;
+	position: absolute;
+	color: darkslategrey;
+	padding: 0.6rem 1rem 1rem;
+}
+
+[id^="popup-eintragen-"][data-schritt] > :first-child {
+	margin-top: 1.2rem;
+}
+
+[id^="popup-eintragen-"] .container {
+	max-width: 700px;
+}

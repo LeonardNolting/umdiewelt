@@ -1,0 +1,38 @@
+#popup-eintragen-datenschutz-fussnoten {
+	list-style: none;
+	padding: 0;
+}
+
+#popup-eintragen-datenschutz sup, #eintragen-datenschutz-fussnoten li {
+	color: #777;
+}
+
+#popup-eintragen-datenschutz ul {
+	margin: 0;
+	padding: 0 0 0 2rem;
+}
+
+#popup-eintragen-datenschutz #eintragen-datenschutz-fussnoten {
+	list-style: none;
+	padding: 0;
+	margin: 1rem 0;
+	font-size: 90%;
+}
+
+#eintragen-datenschutz-erklaerung {
+	box-shadow: inset 0 -12px 12px -12px black;
+	border: 1px solid #999;
+	padding: .4rem;
+	border-radius: 4px;
+	overflow-x: hidden;
+	max-height: 10rem;
+	overflow-y: auto;
+}
+
+[for=eintragen-datenschutz-zustimmung-checkbox] {
+	font-weight: bold;
+	letter-spacing: -0.1px;
+}
+#eintragen-datenschutz-zustimmung {
+	margin-top: 1rem;
+}

@@ -69,7 +69,7 @@
 					</tr>
 					<tr>
 						<td>4. 🏅 Oliver Welke</td>
-						<td>0.1km</td>
+						<td>0,1 km</td>
 					</tr>
 				</table>
 
@@ -155,98 +155,144 @@
 		</div>
 
 		<div id="popups">
-			<div id="popup-eintragen">
-				<form id="eintragen-anzeige">
-					<div class="container">
-						<h3>Strecke eintragen</h3>
-						<input id="eintragen-name"
-						       type="text"
-						       placeholder="Vor- und Nachname"
-						       list="eintragen-fahrer"
-						       required
-						       pattern="^[a-zA-Z ,.'-]+$" />
-						<datalist id="eintragen-fahrer"></datalist>
+			<!--* Eintragen Popups -->
+			<form id="popup-eintragen-name" data-schritt="1">
+				<div class="container">
+					<input name="name"
+					       type="text"
+					       placeholder="Vor- und Nachname"
+					       list="eintragen-fahrer"
+					       required
+					       pattern="^[a-zA-Z ,.'-]+$"
+					       autofocus
+					       autocomplete="name" />
+					<datalist id="eintragen-fahrer"></datalist>
 
-						<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
+					<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
+				</div>
+				<fieldset id="eintragen-optionen" class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
 
-						<div id="eintragen-optionen">
-							<fieldset id="eintragen-mit-karte">
-								<legend>Länge berechnen</legend>
-								<div class="eintragen-suche input-button">
-									<input id="eintragen-a" type="text" placeholder="Startpunkt" />
-									<button>Mein Standort</button>
-								</div>
-								<div class="eintragen-suche input-button">
-									<input id="eintragen-b" type="text" placeholder="Ankunftspunkt" />
-									<button>Mein Standort</button>
-								</div>
+					<input type="button" id="eintragen-direkt" name="direkt" value="🔢 Direkt eingeben">
+					<input type="submit" id="eintragen-berechnen" name="berechnen" value="📐 Berechnen">
+				</fieldset>
+			</form>
 
-								<input id="eintragen-suche-speichern" type="checkbox" checked="checked" />
-								<label for="eintragen-suche-speichern">
-									Merken und nächstes Mal automatisch vorschlagen. <a href="#eintragen-datenschutz" class="info">Daten sind öffentlich sichtbar.</a>
-								</label>
-
-								<details id="eintragen-karte-knopf">
-									<summary>Karte anzeigen</summary>
-									<div id="eintragen-karte"></div>
-								</details>
-							</fieldset>
-
-							<fieldset id="eintragen-mit-km">
-								<legend>Direkt eingeben</legend>
-								<label for="eintragen-km">Länge in <var>km</var>:</label>
-								<input id="eintragen-km" type="number" min="5" max="100" placeholder="z.B. 20" />
-							</fieldset>
+			<form id="popup-eintragen-berechnen" data-schritt="2">
+				<div class="container">
+					<div id="eintragen-berechnen-route">
+						<div class="eintragen-suche input-button">
+							<input name="a" type="text" placeholder="Startpunkt" autofocus autocomplete="street-address" />
+							<button tabindex="-1">Mein Standort</button>
 						</div>
-
-						<div id="eintragen-datenschutz-anzeige">
-							<h4><a id="eintragen-datenschutz">Datenschutz</a></h4>
-							<em>
-								Bei einer Veröffentlichung im Internet können die personenbezogenen Daten
-								(einschließlich Fotos) weltweit von beliebigen Personen abgerufen und gespeichert
-								werden. Die Daten können damit etwa auch über so genannte "Suchmaschinen" aufgefunden
-								werden. Dabei kann nicht ausgeschlossen werden, dass andere Personen oder Unternehmen
-								die Daten mit weiteren im Internet verfügbaren personenbezogenen Daten verknüpfen und
-								damit ein Persönlichkeitsprofil erstellen, die Daten verändern, zu anderen Zwecken
-								verwenden oder an andere Personen weitergeben.
-							</em>
-							<p>Konkret werden folgende Daten für alle öffentlich sichtbar gespeichert:</p>
-							<ul id="eintragen-datenschutz-daten">
-								<li>Name
-									<a href="#eintragen-datenschutz-fussnoten-1">[1]</a>
-									<a href="#eintragen-datenschutz-fussnoten-2">[2]</a>
-								</li>
-								<li>Strecken:
-									<ul>
-										<li>Zeitpunkt der Eintragung
-											<a href="#eintragen-datenschutz-fussnoten-1">[1]</a>
-										</li>
-										<li>Länge
-											<a href="#eintragen-datenschutz-fussnoten-1">[1]</a>
-										</li>
-										<li>falls gewünscht: Start- und Ankunftspunkt
-											<a href="#eintragen-datenschutz-fussnoten-1">[1]</a>
-											<a href="#eintragen-datenschutz-fussnoten-2">[2]</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<ul id="eintragen-datenschutz-fussnoten">
-								<li><a id="eintragen-datenschutz-fussnoten-1">[1] Diese Information dient zur Anzeige
-									auf der Website.</a></li>
-								<li><a id="eintragen-datenschutz-fussnoten-2">[2] Diese Information wird für eine
-									bessere Benutzererfahrung gespeichert, z.B. zur Bereitstellung von
-									Autovervollständigung.</a></li>
-							</ul>
-							<input id="eintragen-datenschutz-checkbox" type="checkbox" required />
-							<label for="eintragen-datenschutz-checkbox">Ich bin mit der Speicherung und Verarbeitung
-								meiner Daten einverstanden.</label>
+						<div class="eintragen-suche input-button">
+							<input name="b" type="text" placeholder="Ankunftspunkt" autocomplete="street-address" />
+							<button tabindex="-1">Mein Standort</button>
 						</div>
-
-						<input type="submit" />
 					</div>
-				</form>
-			</div>
+
+					<input id="eintragen-suche-merken" name="speichern" type="checkbox" checked="checked" tabindex="-1" />
+					<label for="eintragen-suche-merken">
+						Merken und nächstes Mal automatisch vorschlagen.
+						<i>Daten sind öffentlich sichtbar. Mehr Informationen im nächsten Schritt.</i>
+					</label>
+
+					<!--<details id="eintragen-karte-knopf">
+						<summary tabindex="-1">Karte anzeigen</summary>
+						<div id="eintragen-karte"></div>
+					</details>-->
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+
+					<input type="button" value="Zurück" name="zurueck" class="leer" />
+					<input type="submit" value="Weiter" name="weiter" />
+				</fieldset>
+			</form>
+
+			<form id="popup-eintragen-direkt" data-schritt="2">
+				<div class="container">
+					<label for="eintragen-km">Länge in <var>km</var>:</label>
+					<input id="eintragen-km" type="number" min="2" max="100" placeholder="z.B. 20" autofocus />
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+
+					<input type="button" value="Zurück" name="zurueck" class="leer" />
+					<input type="submit" value="Weiter" name="weiter" />
+				</fieldset>
+			</form>
+
+			<form id="popup-eintragen-datenschutz" data-schritt="3">
+				<div class="container">
+					<h3>Datenschutz</h3>
+					<div id="eintragen-datenschutz-erklaerung">
+						<em>
+							Bei einer Veröffentlichung im Internet können die personenbezogenen Daten
+							(einschließlich Fotos) weltweit von beliebigen Personen abgerufen und gespeichert
+							werden. Die Daten können damit etwa auch über so genannte "Suchmaschinen" aufgefunden
+							werden. Dabei kann nicht ausgeschlossen werden, dass andere Personen oder Unternehmen
+							die Daten mit weiteren im Internet verfügbaren personenbezogenen Daten verknüpfen und
+							damit ein Persönlichkeitsprofil erstellen, die Daten verändern, zu anderen Zwecken
+							verwenden oder an andere Personen weitergeben.
+						</em>
+						<p>Konkret werden folgende Daten für alle öffentlich sichtbar gespeichert:</p>
+						<ul id="eintragen-datenschutz-daten">
+							<li>Name <sup>1</sup> <sup>2</sup>
+							</li>
+							<li>Strecken:
+								<ul>
+									<li>Zeitpunkt der Eintragung <sup>1</sup>
+									</li>
+									<li>Länge <sup>1</sup>
+									</li>
+									<li>falls gewünscht: Start- und Ankunftspunkt <sup>1</sup> <sup>2</sup>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<ul id="eintragen-datenschutz-fussnoten">
+							<li><sup>1</sup> Diese Information dient zur Anzeige
+								auf der Website.
+							</li>
+							<li><sup>2</sup> Diese Information wird für eine
+								bessere Benutzererfahrung gespeichert, z.B. zur Bereitstellung von
+								Autovervollständigung.
+							</li>
+						</ul>
+					</div>
+
+					<div id="eintragen-datenschutz-zustimmung">
+						<input id="eintragen-datenschutz-zustimmung-checkbox" type="checkbox" required autofocus />
+						<label for="eintragen-datenschutz-zustimmung-checkbox">
+							Ich bin mit der Speicherung und Verarbeitung meiner Daten einverstanden.
+						</label>
+					</div>
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+
+					<input type="button" value="Zurück" name="zurueck" class="leer" />
+					<input type="submit" value="Speichern" name="weiter" />
+				</fieldset>
+			</form>
+
+			<form id="popup-eintragen-fertig">
+				<div class="container">
+					<h3>Vielen Dank für Ihren Beitrag!</h3>
+					<p>Mit Ihrer Strecke von x Kilometern habe Sie y viel CO<sub>2</sub> gespart und uns geholfen, ein
+						Stück
+						näher an unser Ziel zu kommen!</p>
+					<p>Falls ... Mögliches weiteres Interesse des Lesers etwas nutzen ... Wie weiter helfen? Spenden?
+						Teilen (Twitter/Facebook...)? Mehr Leute einladen können? ...</p>
+				</div>
+				<fieldset class="buttons">
+					<input type="submit" value="Zurückkehren" name="schliessen" autofocus />
+				</fieldset>
+			</form>
 
 			<div id="popup-cookies" class="wichtig">
 				<div class="container">
@@ -260,14 +306,18 @@
 					<p class="versteckt">
 						Tolle Beschreibung...
 					</p>
-					<button class="striche striche-kurz" onclick="this.previousElementSibling.classList.remove('versteckt')">Weiterlesen ▼</button>
+					<button class="striche striche-kurz"
+					        onclick="this.previousElementSibling.classList.remove('versteckt')">Weiterlesen ▼
+					</button>
 				</div>
-				<div id="popup-cookies-buttons">
+				<div id="popup-cookies-buttons" class="buttons">
+					<button id="popup-cookies-keine" title="Wird die Seite schließen." class="links leer">Ablehnen
+					</button>
 					<button id="popup-cookies-notwendig" title="Die Seite wird funktionieren.">Notwendige akzeptieren
 					</button>
-					<button id="popup-cookies-alle" title="Trägt zu voller Funktionalität bei.">Alle akzeptieren
+					<button id="popup-cookies-alle" title="Trägt zu voller Funktionalität bei." autofocus>Alle
+						akzeptieren
 					</button>
-					<button id="popup-cookies-keine" title="Wird die Seite schließen.">Ablehnen</button>
 				</div>
 			</div>
 

@@ -8,14 +8,16 @@ namespace Popup {
 
 	export function oeffnen(popup: HTMLElement) {
 		document.body.classList.add("popup")
-		if (popup.classList.contains("wichtig")) document.body.classList.add("popup-wichtig")
-		popup.classList.add("offen")
+		if (popup.classList.contains("wichtig")) document.body.classList.add("popup-wichtig");
+		popup.classList.add("offen");
+		(popup.querySelector("[autofocus]") as HTMLInputElement | HTMLButtonElement | HTMLSelectElement | HTMLTextAreaElement).focus()
 	}
 
 	export function schliessen(popup: HTMLElement) {
+		popup.dispatchEvent(new Event("close"))
+		popup.classList.remove("offen")
 		if (alleGeschlossen()) document.body.classList.remove("popup")
 		document.body.classList.remove("popup-wichtig")
-		popup.classList.remove("offen")
 	}
 
 	export function alle() {
@@ -27,7 +29,7 @@ namespace Popup {
 	}
 
 	export function alleGeschlossen() {
-		return popups.some(popup => popup.classList.contains("offen"))
+		return !popups.some(popup => popup.classList.contains("offen"))
 	}
 
 	export function offenes() {
