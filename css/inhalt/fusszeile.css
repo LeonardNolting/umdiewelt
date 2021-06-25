@@ -1,10 +1,15 @@
 #fusszeile-anzeige {
-	color: #999;
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
 	font-size: 1rem;
 	flex-wrap: wrap;
+}
+#fusszeile-anzeige, #fusszeile-anzeige li, #fusszeile-anzeige a {
+	color: #999;
+}
+#fusszeile-anzeige a:not(:hover) {
+	text-decoration: none;
 }
 
 @media (max-width: 620px) {
