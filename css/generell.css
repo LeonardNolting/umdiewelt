@@ -55,6 +55,10 @@ a[id]:hover::after {
 	visibility: initial;
 }
 
+a[id]:empty::after {
+	display: none;
+}
+
 details {
 	cursor: pointer;
 }
