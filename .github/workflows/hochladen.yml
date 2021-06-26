@@ -25,4 +25,4 @@ jobs:
                     url: ${{ secrets.URL }}
                     user: ${{ secrets.USER }}
                     syncroot: './dist'
-                    options: '--passwd $PASSWORD --auto-init'
+                    options: '--passwd "$PASSWORD" --auto-init'
