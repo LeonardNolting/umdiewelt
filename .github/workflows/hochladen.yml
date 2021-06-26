@@ -18,11 +18,9 @@ jobs:
                 run: npm run build --if-present
 
             -   name: Hochladen
-                uses: SamKirkland/FTP-Deploy-Action@4.0.0
+                uses: hrsetyono/git-sftp-action@v4
                 with:
-                    server: ${{ secrets.SERVER }}
-                    username: ${{ secrets.USER }}
+                    url: ${{ secrets.URL }}
+                    user: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
-                    port: ${{ secrets.PORT }}
-                    local-dir: './dist/'
-                    dangerous-clean-slate: true
+                    syncroot: './dist'
