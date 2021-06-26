@@ -1,6 +1,7 @@
 @import "./datenschutz.css";
 @import "./berechnen.css";
 @import "./name.css";
+@import "./fertig.css";
 
 /* Schritt-Anzeige ... */
 [id^="popup-eintragen-"][data-schritt]::before {
