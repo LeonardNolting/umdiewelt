@@ -31,8 +31,25 @@
 	color: var(--link-farbe);
 }
 
-#popup-cookies-buttons > button {
+#popup-cookies .buttons > button {
 	display: flex;
-	flex-grow: 1;
 	justify-content: center;
+}
+
+#popup-cookies.wichtig .buttons > button#popup-cookies-abbrechen {
+	display: none;
+}
+
+#popup-cookies.wichtig .buttons > button#popup-cookies-abbrechen + button {
+	margin-left: 0
+}
+
+#popup-cookies .hinweis {
+	margin-top: 0;
+	font-size: 90%;
+	margin-bottom: 1rem;
+	color: orange;
+}
+#popup-cookies:not(.wird-resetten) .hinweis {
+	display: none
 }

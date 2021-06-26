@@ -1,6 +1,7 @@
 import quellen from "./quellen";
 import fakten from "./fakten";
 import step from "../step";
+import cookies from "./cookies";
 
 const observer = new IntersectionObserver(((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
@@ -22,6 +23,7 @@ export default () => {
 
 	document.querySelectorAll("#inhalt .verspaetet").forEach(element => observer.observe(element))
 
+	cookies()
 	fakten()
 	quellen()
 }

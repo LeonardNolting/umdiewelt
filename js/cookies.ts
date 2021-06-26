@@ -19,7 +19,12 @@ namespace Cookies {
 	export let optional = () => einstellung === Einstellung.ALLE
 	export let notwendig = () => einstellung === Einstellung.ALLE || einstellung === Einstellung.NOTWENDIG
 
+	/**
+	 *
+	 * @param einstellung Null: Nichts ändern
+	 */
 	const setzen = (einstellung: Einstellung) => {
+		if (einstellung === null) return
 		Cookies.einstellung = einstellung
 		if (notwendig()) Cookie.set("cookies", einstellung)
 		step("Cookie-Einstellung gesetzt: " + einstellung)
@@ -45,7 +50,7 @@ namespace Cookies {
 	/**
 	 * Öffnet immer ein Popup um Einstellung evtl. zu überdenken
 	 */
-	export const fragen = () => new Promise<Einstellung>(resolve => {
+	export const fragen = (abbrechenMoeglich: boolean = false) => new Promise<Einstellung>(resolve => {
 		step("Fragt nach Cookie-Einwilligung")
 
 		const button = (
@@ -53,20 +58,26 @@ namespace Cookies {
 			onclick: (event: MouseEvent) => void = () => {
 			}
 		) => {
-			const element = document.getElementById("popup-cookies-" + einstellung) as HTMLButtonElement
+			const element = document.getElementById("popup-cookies-" + (einstellung || "abbrechen")) as HTMLButtonElement
 			element.onclick = event => {
 				// Verhindere versehentliches doppeltes Klicken
 				element.disabled = true
 				Popup.schliessen(popup)
+				popup.classList.remove("wichtig", "wird-resetten")
 				onclick(event)
 				element.disabled = false
+				if (einstellung !== null) Cookie.killAll()
 				resolve(setzen(einstellung))
 			}
 		}
 
+		if (abbrechenMoeglich) button(null)
 		button(Einstellung.ALLE)
 		button(Einstellung.NOTWENDIG)
 		button(Einstellung.KEINE, window.close)
+
+		if (!abbrechenMoeglich) popup.classList.add("wichtig")
+		if (Cookie.get("cookies")) popup.classList.add("wird-resetten")
 
 		// Alles vorbereitet, jetzt öffnen ...
 		Popup.oeffnen(popup)
