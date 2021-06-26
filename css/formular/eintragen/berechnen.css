@@ -15,10 +15,10 @@
 
 #eintragen-berechnen-route {
 	display: flex;
-	margin-bottom: 1rem;
+	flex-direction: column;
 }
 #eintragen-berechnen-route .eintragen-suche + .eintragen-suche {
-	margin-left: 1rem;
+	margin-top: .4rem;
 }
 #eintragen-berechnen-route .eintragen-suche {
 	flex-grow: 1;
@@ -29,4 +29,22 @@
 	width: 0;
 	flex-grow: 1;
 	min-width: 100px;
+}
+
+[for=eintragen-suche-merken-checkbox] {
+	line-height: 1.1;
+}
+
+#eintragen-suche-merken {
+	margin: 1rem 0 0;
+	display: flex;
+	align-items: center;
+}
+
+#eintragen-suche-merken label {
+	padding-left: .8rem;
+}
+
+#popup-eintragen-berechnen .container {
+	max-width: 440px;
 }

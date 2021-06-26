@@ -183,20 +183,49 @@
 				<div class="container">
 					<div id="eintragen-berechnen-route">
 						<div class="eintragen-suche input-button">
-							<input name="a" type="text" placeholder="Startpunkt" autofocus autocomplete="street-address" />
+							<input name="a"
+							       id="eintragen-suche-a"
+							       type="text"
+							       placeholder="Startpunkt"
+							       autofocus
+							       autocomplete="street-address" />
 							<button tabindex="-1">Mein Standort</button>
 						</div>
 						<div class="eintragen-suche input-button">
-							<input name="b" type="text" placeholder="Ankunftspunkt" autocomplete="street-address" />
+							<input name="b"
+							       id="eintragen-suche-b"
+							       type="text"
+							       placeholder="Ankunftspunkt"
+							       value="Gymnasium Höchstadt a. d. Aisch"
+							       autocomplete="street-address" />
 							<button tabindex="-1">Mein Standort</button>
 						</div>
 					</div>
 
-					<input id="eintragen-suche-merken" name="speichern" type="checkbox" checked="checked" tabindex="-1" />
-					<label for="eintragen-suche-merken">
-						Merken und nächstes Mal automatisch vorschlagen.
-						<i>Daten sind öffentlich sichtbar. Mehr Informationen im nächsten Schritt.</i>
-					</label>
+					<div id="eintragen-suche-merken">
+						<input id="eintragen-suche-merken-checkbox"
+						       name="speichern"
+						       type="checkbox"
+						       checked="checked"
+						       tabindex="-1" />
+						<label for="eintragen-suche-merken-checkbox">
+							Merken und nächstes Mal automatisch vorschlagen.
+							<i>Daten sind öffentlich sichtbar. Mehr Informationen im nächsten Schritt.</i>
+						</label>
+					</div>
+
+					<!--<div id="eintragen-berechnen-output">
+						<div>
+							<label for="eintragen-berechnen-strecke">Berechnete Strecke:</label>
+							<output id="eintragen-berechnen-strecke" for="eintragen-suche-a eintragen-suche-b">0m
+							</output>
+						</div>
+						<div>
+							<label for="eintragen-berechnen-gespart">Gespartes CO<sub>2</sub>:</label>
+							<output id="eintragen-berechnen-gespart" for="eintragen-suche-a eintragen-suche-b">0g
+							</output>
+						</div>
+					</div>-->
 
 					<!--<details id="eintragen-karte-knopf">
 						<summary tabindex="-1">Karte anzeigen</summary>
@@ -215,7 +244,15 @@
 			<form id="popup-eintragen-direkt" data-schritt="2">
 				<div class="container">
 					<label for="eintragen-km">Länge in <var>km</var>:</label>
-					<input id="eintragen-km" type="number" min="2" max="100" placeholder="z.B. 20" autofocus />
+					<input name="kilometer"
+					       step="1"
+					       id="eintragen-km"
+					       type="number"
+					       min="2"
+					       max="100"
+					       placeholder="z.B. 20"
+					       autofocus
+					       required />
 				</div>
 
 				<fieldset class="buttons">
@@ -284,9 +321,13 @@
 			<form id="popup-eintragen-fertig">
 				<div class="container">
 					<h3>Vielen Dank für Ihren Beitrag!</h3>
-					<p>Mit Ihrer Strecke von x Kilometern habe Sie y viel CO<sub>2</sub> gespart und uns geholfen, ein
-						Stück
-						näher an unser Ziel zu kommen!</p>
+					<p>Mit Ihrer Strecke von
+						<output id="eintragen-berechnen-strecke" for="eintragen-suche-a eintragen-suche-b">0m</output>
+						haben Sie
+						<output id="eintragen-berechnen-gespart" for="eintragen-suche-a eintragen-suche-b">0g</output>
+						CO<sub>2</sub> gespart und uns geholfen, ein Stück näher an unser Ziel zu kommen!
+					</p>
+					<h4>Helfen Sie uns weiter!</h4>
 					<p>Falls ... Mögliches weiteres Interesse des Lesers etwas nutzen ... Wie weiter helfen? Spenden?
 						Teilen (Twitter/Facebook...)? Mehr Leute einladen können? ...</p>
 				</div>
@@ -298,7 +339,8 @@
 			<div id="popup-cookies">
 				<div class="container">
 					<h3>Cookies</h3>
-					<h4 class="hinweis">Achtung! Das Ändern der Cookie-Einstellungen führt zur Löschung aller bestehenden Cookies.</h4>
+					<h4 class="hinweis">Achtung! Das Ändern der Cookie-Einstellungen führt zur Löschung aller
+						bestehenden Cookies.</h4>
 					<p>
 						Wir brauchen folgende Cookies, damit die Seite geladen werden kann ...
 					</p>

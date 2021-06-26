@@ -44,7 +44,7 @@ const popups = {
 	}),
 	berechnen: popup("berechnen", {
 		zurueck: eintragung => eintragung.optionUndNameSetzen(undefined, undefined),
-		weiter: eintragung => eintragung.meterSetzen(1000) // TODO berechnete meter benutzen
+		weiter: (eintragung, element) => eintragung.meterSetzen(1000) // TODO berechnete meter benutzen
 	}, () => {
 		/*(document.getElementById("eintragen-karte-knopf") as HTMLDetailsElement)
 			.addEventListener("toggle", () => new google.maps.Map(document.getElementById("eintragen-karte"), {
@@ -60,7 +60,8 @@ const popups = {
 	}),
 	direkt: popup("direkt", {
 		zurueck: eintragung => eintragung.optionUndNameSetzen(undefined, undefined),
-		weiter: eintragung => eintragung.meterSetzen(1000) // TODO eingegebene meter benutzen
+		weiter: (eintragung, element) =>
+			eintragung.meterSetzen(parseInt((element["kilometer"] as HTMLInputElement).value) * 1000)
 	}),
 	datenschutz: popup("datenschutz", {
 		zurueck: eintragung => eintragung.meterSetzen(undefined),
@@ -147,5 +148,8 @@ export class Eintragung {
 	}
 
 	static eintragungen: Eintragung[] = []
-	static get offen (): Eintragung | null { return Eintragung.eintragungen.find(eintragung => eintragung.offen) }
+
+	static get offen(): Eintragung | null {
+		return Eintragung.eintragungen.find(eintragung => eintragung.offen)
+	}
 }
