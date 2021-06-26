@@ -17,12 +17,10 @@ jobs:
             -   name: Bauen
                 run: npm run build --if-present
 
-            -   name: Hochladen
-                uses: hrsetyono/git-sftp-action@4.0.1
-                env:
-                    PASSWORD: ${{ secrets.PASSWORD }}
-                with:
-                    url: ${{ secrets.URL }}
-                    user: ${{ secrets.USER }}
-                    syncroot: './dist'
-                    options: '--passwd "$PASSWORD" --auto-init'
+            - name: Hochladen
+              uses: SamKirkland/FTP-Deploy-Action@3.1.1
+              with:
+                  ftp-server: ${{ secrets.SERVER }}
+                  ftp-username: ${{ secrets.USER }}
+                  ftp-password: ${{ secrets.FTPS_PASSWORD }}
+                  local-dir: './dist/'
