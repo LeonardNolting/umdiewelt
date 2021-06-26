@@ -8,8 +8,6 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v2
-                with:
-                    fetch-depth: 2
             -   name: Node.js
                 uses: actions/setup-node@v1
                 with:
@@ -20,10 +18,11 @@ jobs:
                 run: npm run build --if-present
 
             -   name: Hochladen
-                uses: SamKirkland/FTP-Deploy-Action@3.1.1
+                uses: wangyucode/sftp-upload-action@v1.1
                 with:
-                    ftp-server: ${{ secrets.SERVER }}
-                    ftp-username: ${{ secrets.USER }}
-                    ftp-password: ${{ secrets.PASSWORD }}
-                    local-dir: './dist/'
-                    git-ftp-args: '-a --insecure'
+                    host: ${{ secrets.HOST }}
+                    port: ${{ secrets.PORT }}
+                    username: ${{ secrets.USER }}
+                    password: ${{ secrets.PASSWORD }}
+                    localDir: 'dist'
+                    remoteDir: ''
