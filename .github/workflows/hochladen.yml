@@ -19,8 +19,10 @@ jobs:
 
             -   name: Hochladen
                 uses: hrsetyono/git-sftp-action@4.0.1
+                env:
+                    PASSWORD: ${{ secrets.PASSWORD }}
                 with:
                     url: ${{ secrets.URL }}
                     user: ${{ secrets.USER }}
-                    password: ${{ secrets.PASSWORD }}
                     syncroot: './dist'
+                    options: '--passwd $PASSWORD --auto-init'
