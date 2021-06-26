@@ -11,7 +11,7 @@
 	position: relative;
 	z-index: 10;
 	background-color: white;
-	padding: var(--padding) 0;
+	padding: var(--padding) 0 0;
 	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
 	width: 100%;
@@ -97,4 +97,8 @@ h1 span#klimaschutz {
 
 #inhalt p {
 	margin: 0;
+}
+
+#inhalt hr {
+	margin: 1rem 0;
 }
