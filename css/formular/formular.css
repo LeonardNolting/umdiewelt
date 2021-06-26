@@ -78,11 +78,14 @@ input[type=button].leer, input[type=submit].leer, button.leer {
 	flex-direction: row;
 	border-top: 1px solid #555;
 	padding: .6rem;
-	justify-content: flex-end;
+	/*justify-content: flex-end;*/
+	justify-content: flex-start;
 }
-
-.buttons .links {
-	margin-right: auto;
+.buttons .links + :not(.links), .buttons :first-child:not(.links) {
+	margin-left: auto
+}
+.buttons .links:first-child {
+	margin-left: 0;
 }
 
 .buttons input + input, .buttons button + button {
