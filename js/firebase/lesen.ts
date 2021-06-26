@@ -10,6 +10,7 @@ import Strecken from "../model/strecken";
 import Fahrer from "../model/fahrer";
 import Routen from "../model/routen";
 import fahrerInhalt from "../inhalt/fahrer";
+import co2 from "../co2";
 
 /**
  * Wie viele Meter schon gefahren wurden
@@ -78,7 +79,7 @@ const lesen = () =>
 			await aktualisieren(strecke || 0)
 
 			fakt("strecke", () => m(strecke || 5))
-			fakt("gespart", () => kg((strecke || 0) / 1000 * 0.18), true, 3)
+			fakt("gespart", () => kg(co2(strecke)), true, 3)
 
 			//! Infinite loop
 			/*console.log(strecke, typeof strecke)
