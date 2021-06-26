@@ -4,7 +4,7 @@
 
 /* Schritt-Anzeige ... */
 [id^="popup-eintragen-"][data-schritt]::before {
-	content: "Schritt " attr(data-schritt) " von 4";
+	content: "Schritt " attr(data-schritt) " von 3";
 	font-size: 90%;
 	position: absolute;
 	color: darkslategrey;
