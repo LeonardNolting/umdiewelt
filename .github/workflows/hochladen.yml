@@ -22,5 +22,5 @@ jobs:
               with:
                   ftp-server: ${{ secrets.SERVER }}
                   ftp-username: ${{ secrets.USER }}
-                  ftp-password: ${{ secrets.FTPS_PASSWORD }}
+                  ftp-password: ${{ secrets.PASSWORD }}
                   local-dir: './dist/'
