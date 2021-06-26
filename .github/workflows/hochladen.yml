@@ -26,4 +26,4 @@ jobs:
                     ftp-username: ${{ secrets.USER }}
                     ftp-password: ${{ secrets.PASSWORD }}
                     local-dir: './dist/'
-                    git-ftp-args: '--all --insecure'
+                    git-ftp-args: '-a --insecure'
