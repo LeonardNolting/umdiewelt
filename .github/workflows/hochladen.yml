@@ -17,10 +17,11 @@ jobs:
             -   name: Bauen
                 run: npm run build --if-present
 
-            - name: Hochladen
-              uses: SamKirkland/FTP-Deploy-Action@3.1.1
-              with:
-                  ftp-server: ${{ secrets.SERVER }}
-                  ftp-username: ${{ secrets.USER }}
-                  ftp-password: ${{ secrets.PASSWORD }}
-                  local-dir: './dist/'
+            -   name: Hochladen
+                uses: SamKirkland/FTP-Deploy-Action@3.1.1
+                with:
+                    ftp-server: ${{ secrets.SERVER }}
+                    ftp-username: ${{ secrets.USER }}
+                    ftp-password: ${{ secrets.PASSWORD }}
+                    local-dir: './dist/'
+                    git-ftp-args: --insecure
