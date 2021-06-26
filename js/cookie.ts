@@ -1,3 +1,5 @@
+import step from "./step";
+
 namespace Cookie {
 	/**
 	 * Gibt Wert eines Cookies zurück
@@ -30,6 +32,30 @@ namespace Cookie {
 	 */
 	export function kill(name) {
 		document.cookie = `${name}=; expires=Sun, 24 Dec 0000 18:42:00 GMT`;
+		step("Cookie '" + name + "' gelöscht")
+	}
+
+	/**
+	 * Löscht alle Cookies
+	 */
+	export function killAll() {
+		const cookies = document.cookie.split(";");
+
+		for (let i = 0; i < cookies.length; i++) {
+			const cookie = cookies[i],
+				eqPos = cookie.indexOf("="),
+				name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+			kill(name);
+		}
+
+		step(cookies.length + " Cookies gelöscht")
+	}
+
+	/**
+	 * Gibt zurück, ob min. ein Cookie existiert
+	 */
+	export function empty(): boolean {
+		return document.cookie.length == 0
 	}
 }
 
