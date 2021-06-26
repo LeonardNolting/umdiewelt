@@ -1,0 +1,29 @@
+name: Bauen und komplett auf Server hochladen
+
+on: workflow_dispatch
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   uses: actions/checkout@v2
+                with:
+                    fetch-depth: 2
+            -   name: Node.js
+                uses: actions/setup-node@v1
+                with:
+                    node-version: '15.x'
+            -   name: Abhängigkeiten installieren
+                run: npm ci
+            -   name: Bauen
+                run: npm run build --if-present
+
+            -   name: Hochladen
+                uses: SamKirkland/FTP-Deploy-Action@3.1.1
+                with:
+                    ftp-server: ${{ secrets.SERVER }}
+                    ftp-username: ${{ secrets.USER }}
+                    ftp-password: ${{ secrets.PASSWORD }}
+                    local-dir: './dist/'
+                    git-ftp-args: --insecure --all
