@@ -3,7 +3,7 @@ import Cookie from "./cookie";
 import Popup from "./popup";
 
 namespace Cookies {
-	const popup = document.getElementById("popup-cookies")
+	const popup = document.getElementById("popup-cookies");
 
 	enum Einstellung {
 		// "as any" erlaubt index access operator (CookieEinstellung[...])
@@ -16,10 +16,12 @@ namespace Cookies {
 	}
 
 	export let einstellung: Einstellung = Einstellung.UNDEFINED
+	export let optional = () => einstellung === Einstellung.ALLE
+	export let notwendig = () => einstellung === Einstellung.ALLE || einstellung === Einstellung.NOTWENDIG
 
-	const setzen = (einstellung: Einstellung, speichern: boolean) => {
+	const setzen = (einstellung: Einstellung) => {
 		Cookies.einstellung = einstellung
-		if (speichern) Cookie.set("cookies", einstellung)
+		if (notwendig()) Cookie.set("cookies", einstellung)
 		step("Cookie-Einstellung gesetzt: " + einstellung)
 		return einstellung
 	}
@@ -37,7 +39,7 @@ namespace Cookies {
 			fragen() :
 			// setzen() wird schon bei fragen() ausgeführt, deswegen dort nicht
 			// nicht speichern, da ja schon gespeichert
-			setzen(gespeichert, false);
+			setzen(gespeichert);
 	}
 
 	/**
@@ -48,30 +50,23 @@ namespace Cookies {
 
 		const button = (
 			einstellung: Einstellung,
-			speichern: boolean,
 			onclick: (event: MouseEvent) => void = () => {
 			}
-		): HTMLButtonElement => {
-			const name = einstellung.toString(),
-				element = document.getElementById("popup-cookies-" + name) as HTMLButtonElement
+		) => {
+			const element = document.getElementById("popup-cookies-" + einstellung) as HTMLButtonElement
 			element.onclick = event => {
 				// Verhindere versehentliches doppeltes Klicken
-				element.disabled = true;
-
+				element.disabled = true
 				Popup.schliessen(popup)
-
 				onclick(event)
-
-				element.disabled = false;
-
-				resolve(setzen(einstellung, speichern))
+				element.disabled = false
+				resolve(setzen(einstellung))
 			}
-			return element
 		}
 
-		button(Einstellung.ALLE, true)
-		button(Einstellung.NOTWENDIG, true)
-		button(Einstellung.KEINE, false, window.close)
+		button(Einstellung.ALLE)
+		button(Einstellung.NOTWENDIG)
+		button(Einstellung.KEINE, window.close)
 
 		// Alles vorbereitet, jetzt öffnen ...
 		Popup.oeffnen(popup)
