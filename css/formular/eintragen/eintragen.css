@@ -14,7 +14,3 @@
 [id^="popup-eintragen-"][data-schritt] > :first-child {
 	margin-top: 1.2rem;
 }
-
-[id^="popup-eintragen-"] .container {
-	max-width: 700px;
-}
