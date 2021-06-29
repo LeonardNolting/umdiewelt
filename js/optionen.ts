@@ -3,7 +3,10 @@ import {aktuell, aktuellesLevelIndex, punkte} from "./initialisieren";
 
 const optionen = (): google.maps.MapOptions => ({
 	center: punkte["0"].position,
+
 	zoom: level[aktuellesLevelIndex],
+	...minMaxZoom(),
+
 	restriction: restriction(),
 	// Zoom-, Kartentyp-, StreetView- usw. Knöpfe ausblenden
 	disableDefaultUI: true,
@@ -19,6 +22,11 @@ const optionen = (): google.maps.MapOptions => ({
 })
 
 export default optionen
+
+export const minMaxZoom = () => ({
+	maxZoom: level[aktuellesLevelIndex],
+	minZoom: level[aktuellesLevelIndex],
+})
 
 export const restriction = () => ({
 	latLngBounds: {
