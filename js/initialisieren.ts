@@ -2,7 +2,7 @@ import {farben, level, spread} from "./konfiguration";
 import {Markierung} from "./markierung";
 // @ts-ignore
 import images from "../img/*.png";
-import optionen, {minMaxZoom} from "./optionen";
+import optionen from "./optionen";
 import step from "./step";
 import InfoWindow = google.maps.InfoWindow;
 import anmelden, {angemeldet} from "./firebase/authentifizierung";
@@ -41,7 +41,6 @@ export const punkte: { [key: string]: Markierung } = {
 		const neuesLevelIndex = berechneNeuesLevelIndex()
 		const neuesLevel = level[neuesLevelIndex]
 		aktuellesLevelIndex = neuesLevelIndex
-		karte.setOptions(minMaxZoom())
 		karte.setZoom(neuesLevel);
 		karte.setCenter(marker.getPosition());
 
