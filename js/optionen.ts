@@ -16,6 +16,8 @@ const optionen = (): google.maps.MapOptions => ({
 	mapTypeId: 'satellite',
 
 	keyboardShortcuts: false,
+
+	gestureHandling: "greedy",
 })
 
 export default optionen
