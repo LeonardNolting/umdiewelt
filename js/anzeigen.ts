@@ -35,11 +35,6 @@ export default function anzeigen() {
 		mittelstreifen.set("icons", icons);
 	}, timeout);
 
-	// TODO Ziehen/Zoomen mit 2 Fingern verbieten
-	(karte.getDiv() as HTMLBodyElement).addEventListener("touchmove", event => {
-		if (event.targetTouches.length > 1) event.stopPropagation()
-	});
-
 	// Von Anfang zu aktueller Position wechseln
 	setTimeout(() => bewegen(aktuell.position, zeitZuFahrrad(aktuell.position.lat), 100), verspaetungZuFahrrad)
 
