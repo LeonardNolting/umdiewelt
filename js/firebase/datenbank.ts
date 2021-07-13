@@ -10,8 +10,7 @@ export let refs: {
 		strecken: (nummer: number) => Reference;
 		routen: (nummer: number) => Reference
 	};
-	strecke: Reference,
-	bestenliste: Reference
+	strecke: Reference
 }
 
 export default function datenbank() {
@@ -23,7 +22,6 @@ export default function datenbank() {
 		strecke: ref(datenbank, "strecke"),
 		fahrer: ref(datenbank, "fahrer"),
 		strecken: ref(datenbank, "strecken"),
-		bestenliste: ref(datenbank, "bestenliste"),
 
 		bestimmt: {
 			fahrer: (name: string) => ref(datenbank, "fahrer/" + name),

@@ -10,7 +10,9 @@ import Strecken from "../model/strecken";
 import Fahrer from "../model/fahrer";
 import Routen from "../model/routen";
 import fahrerInhalt from "../inhalt/fahrer";
+import bestenlisteInhalt from "../inhalt/bestenliste";
 import co2 from "../co2";
+import bestenliste from "../inhalt/bestenliste";
 
 /**
  * Wie viele Meter schon gefahren wurden
@@ -40,12 +42,6 @@ export let strecken: Strecken
  * Null falls noch nie gesetzt
  */
 export let routen: Routen
-
-// Bestenliste
-/**
- * Beste zuerst
- */
-export let bestenliste: string[]
 
 const allesWurdeGelesen = () => strecke !== undefined && fahrer !== undefined && strecken !== undefined
 
@@ -93,6 +89,7 @@ const lesen = () =>
 			ueberpruefen()
 
 			fahrerInhalt()
+			bestenlisteInhalt()
 
 			fakt("fahrer", () => ({wert: fahrer ? Object.keys(fahrer).length : 0}))
 		})
@@ -103,12 +100,6 @@ const lesen = () =>
 			ueberpruefen()
 
 			fakt("durchschnitt", () => m(Object.values(strecken).reduce((acc, cur) => acc + cur.laenge, 0) / Object.keys(strecken).length), !!strecken)
-		})
-
-		onValue(refs.bestenliste, snapshot => {
-			bestenliste = snapshot.val()
-
-			// TODO inhalt/bestenliste
 		})
 	});
 
