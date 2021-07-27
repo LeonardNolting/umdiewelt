@@ -1,0 +1,7 @@
+#bestenliste-anzeige .versteckt {
+	display: none;
+}
+
+#bestenliste-anzeige table:empty::before {
+	content: "Noch keiner da!";
+}

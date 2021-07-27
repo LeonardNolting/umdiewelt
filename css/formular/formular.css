@@ -57,6 +57,11 @@ input[type=button].leer, input[type=submit].leer, button.leer {
 	text-decoration: underline;
 }
 
+input[type=button].allein, input[type=submit].allein, button.allein {
+	font-size: smaller;
+	padding: 0
+}
+
 .input-button {
 	display: flex;
 }

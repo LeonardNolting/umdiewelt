@@ -52,16 +52,18 @@
 					<div class="versteckt">
 						<div id="tageszeit-anzeige" class="verspaetet"></div>
 					</div>
-					<button class="leer" onclick="this.previousElementSibling.classList.remove('versteckt')">Weitere Statistiken ▼
+					<button class="leer allein" onclick="this.previousElementSibling.classList.remove('versteckt')">Weitere Statistiken ▼
 					</button>
 				</div>
 
 				<h3><a id="feed" href="#feed">Feed:</a></h3>
 				<ul id="feed-anzeige" class="verspaetet"></ul>
 
-				<table id="bestenliste-anzeige" class="verspaetet">
-					<caption><a href="#bestenliste" id="bestenliste">Bestenliste:</a></caption>
-				</table>
+				<h3><a href="#bestenliste" id="bestenliste">Bestenliste:</a></h3>
+				<div id="bestenliste-anzeige" class="verspaetet">
+					<table></table>
+					<button class="leer allein versteckt">Mehr laden ▼</button>
+					</div>
 
 				<div><!-- Platzhalter --></div>
 			</div>
