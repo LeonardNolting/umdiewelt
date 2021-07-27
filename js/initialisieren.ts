@@ -5,7 +5,7 @@ import images from "../img/*.png";
 import optionen from "./optionen";
 import step from "./step";
 import InfoWindow = google.maps.InfoWindow;
-import anmelden, {angemeldet} from "./firebase/authentifizierung";
+import authentifizieren, {authentifiziert} from "./firebase/authentifizierung";
 import Popup from "./popup";
 import {Eintragung} from "./eintragen";
 
@@ -51,7 +51,7 @@ export const punkte: { [key: string]: Markierung } = {
 		lat: latBeiLng(0),
 		lng: 0,
 	}, false, marker => {
-		if (!angemeldet()) (passwortInputWindow as google.maps.InfoWindow).open(karte, marker);
+		if (!authentifiziert()) (passwortInputWindow as google.maps.InfoWindow).open(karte, marker);
 		else new Eintragung().oeffnen()
 	}, "pointer", () => ({
 		anchor: new google.maps.Point(-70, 90)
@@ -110,11 +110,11 @@ export default function initialisieren() {
 			// Verhindert versehentliches doppeltes Bestätigen
 			submit.disabled = true;
 
-			anmelden(input.value)
+			authentifizieren(input.value)
 				.then(user => {
 					passwortInputWindow.close()
 
-					// Falls nachher nochmal anmelden: Nicht fehlgeschlagen
+					// Falls nachher nochmal authentifizieren: Nicht fehlgeschlagen
 					content.classList.remove("fehlgeschlagen")
 
 					// Eintragen-Popup öffnen
