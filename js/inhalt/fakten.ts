@@ -13,7 +13,7 @@ interface HTMLTableRowElementFakt extends HTMLTableRowElement {
 	gesehen: boolean
 }
 
-const tabelle = document.getElementById("fakten-anzeige") as HTMLTableElement
+const tabelle = document.getElementById("fakten-anzeige").querySelector("table") as HTMLTableElement
 
 const observer = new IntersectionObserver((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {

@@ -32,26 +32,30 @@
 				</h2>
 
 				<a href="#fakten" id="fakten"></a>
-				<table id="fakten-anzeige" class="verspaetet">
-					<tr data-bezeichnung="strecke" data-einheit="km">
-						<td>Zurückgelegte Strecke</td>
-					</tr>
-					<tr data-bezeichnung="gespart">
-						<td>Eingespartes CO<sub>2</sub></td>
-					</tr>
-					<tr data-bezeichnung="fahrer">
-						<td>Beteiligte Personen</td>
-					</tr>
-					<tr data-bezeichnung="durchschnitt">
-						<td>Durchschnittlich gefahrene Strecke</td>
-					</tr>
-				</table>
+				<div id="fakten-anzeige" class="verspaetet">
+					<table>
+						<tr data-bezeichnung="strecke" data-einheit="km">
+							<td>Zurückgelegte Strecke</td>
+						</tr>
+						<tr data-bezeichnung="gespart">
+							<td>Eingespartes CO<sub>2</sub></td>
+						</tr>
+						<tr data-bezeichnung="fahrer">
+							<td>Beteiligte Personen</td>
+						</tr>
+						<tr data-bezeichnung="durchschnitt">
+							<td>Durchschnittlich gefahrene Strecke</td>
+						</tr>
+					</table>
+					<div class="versteckt">
+						<div id="tageszeit-anzeige" class="verspaetet"></div>
+					</div>
+					<button class="leer" onclick="this.previousElementSibling.classList.remove('versteckt')">Weitere Statistiken ▼
+					</button>
+				</div>
 
 				<h3><a id="feed" href="#feed">Feed:</a></h3>
 				<ul id="feed-anzeige" class="verspaetet"></ul>
-
-				<h3><a href="#tageszeit" id="tageszeit">Tageszeit:</a></h3>
-				<div id="tageszeit-anzeige" class="verspaetet"></div>
 
 				<table id="bestenliste-anzeige" class="verspaetet">
 					<caption><a href="#bestenliste" id="bestenliste">Bestenliste:</a></caption>

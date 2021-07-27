@@ -1,3 +1,13 @@
+#fakten-anzeige > .versteckt, #fakten-anzeige > button {
+	display: none;
+}
+
+#fakten-anzeige > .versteckt + button {
+	display: initial;
+	font-size: smaller;
+	padding: 0;
+}
+
 #fakten-anzeige tr td:first-child::after {
 	content: ":"
 }
