@@ -16,7 +16,7 @@
 	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
 	width: 100%;
-	box-shadow: 0 0 32px 12px #111, inset 0 12px 14px -5px grey;
+	box-shadow: 0 0 24px 2px #111, inset 0 12px 14px -5px grey;
 	/*min-height: calc(100vh - var(--hoehe));*/
 	/*overflow-x: hidden;*/
 }
