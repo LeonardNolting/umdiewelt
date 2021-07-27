@@ -1,0 +1,33 @@
+#inhalt #runde {
+	position: absolute;
+	-webkit-text-stroke: 2px #ccc;
+	color: transparent;
+	text-shadow: 4px 4px #111, 0 0 #26475a;
+	font-weight: 700;
+	font-style: italic;
+	font-size: 4rem;
+	top: 0;
+	transform: translateX(-100%) translateY(-100%);
+	margin-left: -1rem;
+	margin-top: -2rem;
+	pointer-events: none;
+}
+
+#inhalt #runde[data-wert][data-max] {
+	animation: 0.4s ease-out 4s forwards einfliegen;
+}
+
+@keyframes einfliegen {
+	0% {
+		transform: translateX(-100%) translateY(-100%);
+		margin-left: 0;
+	}
+	100% {
+		transform: translateY(-100%);
+		margin-left: 4rem;
+	}
+}
+
+#inhalt #runde::after {
+	content: attr(data-wert) "/" attr(data-max)
+}

@@ -1,3 +1,4 @@
+@import "./runde.css";
 @import "./feed.css";
 @import "./bild.css";
 @import "./fakten.css";
@@ -17,7 +18,7 @@
 	width: 100%;
 	box-shadow: 0 0 32px 12px #111, inset 0 12px 14px -5px grey;
 	/*min-height: calc(100vh - var(--hoehe));*/
-	overflow-x: hidden;
+	/*overflow-x: hidden;*/
 }
 
 h1 span#fahrradweg {
