@@ -152,4 +152,10 @@ export class Eintragung {
 	static get offen(): Eintragung | null {
 		return Eintragung.eintragungen.find(eintragung => eintragung.offen)
 	}
+
+	static eintragen(): Eintragung {
+		const eintragung = new Eintragung()
+		eintragung.oeffnen()
+		return eintragung
+	}
 }
