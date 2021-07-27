@@ -12,4 +12,5 @@
 
 #### [Mitmachen!](http://umdiewelt.gymnasium-hoechstadt.de#mitmachen)
 
-#### [Kontakt aufnehmen.](mailto:leonard.nolting@gymhoes.de?subject=)
+#### Kontakt aufnehmen.
+[Koordinator](mailto:hip@gy-ho.de?subject=Um%20Die%20Welt:%20) / [Entwickler](mailto:leonard.nolting@gymhoes.de?subject=Um%20Die%20Welt:%20)
