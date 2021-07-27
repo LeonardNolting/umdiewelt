@@ -28,9 +28,9 @@ export let passwortInputWindow
 // Markierungen auf der Karte
 export const punkte: { [key: string]: Markierung } = {
 		0: new Markierung(undefined, 0, {lat: spread, lng: 0}),
-		25: new Markierung(images["bullseye"], 30, {lat: spread / 2, lng: 90}),
-		50: new Markierung(images["bullseye"], 45, {lat: 0, lng: 180}),
-		75: new Markierung(images["bullseye"], 30, {lat: -spread / 2, lng: 270}),
+		25: new Markierung(undefined, 0, {lat: spread / 2, lng: 90}),
+		50: new Markierung(images["half"], 60, {lat: 0, lng: 180}),
+		75: new Markierung(undefined, 0, {lat: -spread / 2, lng: 270}),
 		100: new Markierung(images["checkered-flag"], 80, {lat: -spread, lng: 360}, false),
 	},
 	schule = new Markierung(images["school"], 60, {lat: 49.71118441038904, lng: 10.80865905572955}),
