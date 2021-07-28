@@ -14,3 +14,5 @@
 
 #### Kontakt aufnehmen.
 [Koordinator](mailto:hip@gy-ho.de?subject=Um%20Die%20Welt:%20) / [Entwickler](mailto:leonard.nolting@gymhoes.de?subject=Um%20Die%20Welt:%20)
+
+#### [Wiki](https://github.com/LeonardNolting/umdiewelt/wiki)
