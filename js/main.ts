@@ -1,7 +1,6 @@
 import initialisieren from "./initialisieren";
 import firebase from "./firebase/firebase";
-import datenbank from "./firebase/datenbank";
-import lesen from "./firebase/lesen";
+import {Datenbank} from "./firebase/datenbank/datenbank";
 import inhalt from "./inhalt/inhalt";
 import maps from "./maps";
 import Cookies from "./cookies";
@@ -14,6 +13,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 	inhalt()
 	initialisieren()
 	firebase()
-	datenbank()
-	await lesen()
+	Datenbank.initialisieren()
 })

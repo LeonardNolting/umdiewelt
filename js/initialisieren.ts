@@ -4,10 +4,8 @@ import {Markierung} from "./markierung";
 import images from "../img/*.png";
 import optionen from "./optionen";
 import step from "./step";
-import InfoWindow = google.maps.InfoWindow;
-import authentifizieren, {authentifiziert} from "./firebase/authentifizierung";
-import Popup from "./popup";
 import {Eintragung} from "./eintragen";
+import FahrerAuthentifizierung from "./firebase/authentifizierung/fahrerAuthentifizierung";
 
 export let initialisiert = false
 
@@ -50,9 +48,8 @@ export const punkte: { [key: string]: Markierung } = {
 	mitwirken = new Markierung(images["right-arrow"], 60, {
 		lat: latBeiLng(0),
 		lng: 0,
-	}, false, marker => {
-		if (!authentifiziert()) (passwortInputWindow as google.maps.InfoWindow).open(karte, marker);
-		else new Eintragung().oeffnen()
+	}, false, async marker => {
+		FahrerAuthentifizierung.anmelden().then(() => Eintragung.eintragen())
 	}, "pointer", () => ({
 		anchor: new google.maps.Point(-70, 90)
 		// anchor: new google.maps.Point(60 / 2, 60 / 2)
@@ -88,74 +85,7 @@ export default function initialisieren() {
 	if (initialisiert) throw new Error("Karte wurde schon initialisiert.")
 	initialisiert = true
 
-	karte = new google.maps.Map(document.getElementById("karte"), optionen());
-
-	{
-		// Spätestens jetzt bereue ich es, nicht Kotlin für diese Projekt gewählt zu haben ... oder wenigstens tsx..
-
-		const content = document.createElement("div"),
-			form = document.createElement("form"),
-			input = document.createElement("input") as HTMLInputElement,
-			submit = document.createElement("input"),
-			fail = document.createElement("p"),
-			frage = document.createElement("a");
-
-		content.id = "passwort"
-
-		form.classList.add("input-button")
-		form.addEventListener("submit", event => {
-			// Wir machen's dynamisch!
-			event.preventDefault()
-
-			// Verhindert versehentliches doppeltes Bestätigen
-			submit.disabled = true;
-
-			authentifizieren(input.value)
-				.then(user => {
-					passwortInputWindow.close()
-
-					// Falls nachher nochmal authentifizieren: Nicht fehlgeschlagen
-					content.classList.remove("fehlgeschlagen")
-
-					// Eintragen-Popup öffnen
-					new Eintragung().oeffnen()
-					// Popup.oeffnen(document.getElementById("popup-eintragen"))
-				})
-				.catch(error => {
-					// Zeigt Benutzer Fehlernachricht an
-					content.classList.add("fehlgeschlagen")
-				})
-				.finally(() => {
-					// Offen für weitere Versuche
-					submit.disabled = false;
-				})
-		})
-
-		input.type = "password"
-		input.id = "passwort-input"
-		input.placeholder = "Passwort..."
-		input.title = "Passwort eingeben"
-		input.required = true
-		input.minLength = 6
-
-		submit.value = "🔑"
-		submit.title = "Bestätigen"
-		submit.type = "submit"
-		submit.id = "passwort-submit"
-
-		fail.textContent = "Falsches Passwort. Bitte versuchen Sie es erneut."
-
-		frage.textContent = "Warum benötige ich ein Passwort?"
-		frage.href = "#warum-brauche-ich-ein-passwort"
-
-		form.append(input, submit)
-		content.append(form, fail, frage)
-
-		passwortInputWindow = new google.maps.InfoWindow({content});
-
-		// autofocus input beim öffnen
-		(passwortInputWindow as InfoWindow).addListener("domready", () => input.focus())
-	}
+	karte = new google.maps.Map(document.getElementById("karte"), optionen())
 
 	pfad = new google.maps.Polyline({
 		path: Object.values(punkte).map(position => position.position),
