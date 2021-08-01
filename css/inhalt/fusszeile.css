@@ -1,6 +1,7 @@
 #fusszeile-anzeige {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	flex-direction: row;
 	font-size: 1rem;
 	flex-wrap: wrap;
