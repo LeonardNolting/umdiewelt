@@ -6,6 +6,10 @@ import maps from "./maps";
 import Cookies from "./cookies";
 import popups from "./popups";
 
+import '@fortawesome/fontawesome-free/css/solid.min.css'
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css'
+import 'awesome-notifications/dist/style.css'
+
 document.addEventListener("DOMContentLoaded", async () => {
 	popups()
 	await Cookies.ueberpruefen()

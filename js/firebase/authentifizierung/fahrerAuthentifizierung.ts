@@ -55,7 +55,7 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 
 		// TODO Testen, ob eingetragen werden kann
 		if (tabellen.schulen.elemente.length === 0 || tabellen.klassen.elemente.length === 0) {
-			// TODO benachrichtigung
+			benachrichtigungen.tip("Es sind aktuell keine Schulen angemeldet.")
 			return Promise.reject()
 		}
 
