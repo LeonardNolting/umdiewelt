@@ -5,14 +5,18 @@ figure + .container {
 
 figure + .container::before {
 	content: "";
-	width: 100%;
 	position: absolute;
-	height: 60px;
-	background: linear-gradient(0deg, white, transparent);
 	left: 0;
-	transform: translateY(calc(-100% - var(--padding-nach-bild) + 1px));
+	transform: translateY(calc(-100% - var(--padding-nach-bild) + 2px));
 	z-index: 2;
 	pointer-events: none;
+	width: 40vw;
+	min-width: 3rem;
+	height: calc(40vw / 3);
+	min-height: 1rem;
+	background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 48 16" xmlns="http://www.w3.org/2000/svg"><path d="m 0,0 v 16 h 48 c -23,0 -48,0 -48,-16 z" style="stroke:none;fill:white;" /></svg>');
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 figure {
