@@ -150,6 +150,28 @@
 		</div>
 
 		<div id="popups">
+			<!-- Anmelden -->
+			<form id="popup-anmelden" class="container">
+				<select name="schule" required></select>
+				<select name="klasse" required></select>
+
+				<div class="inputbutton">
+					<input autofocus
+					       name="passwort"
+					       type="password"
+					       minlength=6
+					       title="Passwort eingeben"
+					       placeholder="Passwort..."
+					       required />
+
+					<input type="submit" value="Bestätigen 🔑" name="submit" />
+				</div>
+
+				<p id="anmelden-passwort-fehlgeschlagen">Falsches Passwort. Bitte versuchen Sie es erneut.</p>
+
+				<a href="#warum-brauche-ich-ein-passwort">Warum benötige ich ein Passwort?</a>
+			</form>
+
 			<!--* Eintragen Popups -->
 			<form id="popup-eintragen-name" data-schritt="1">
 				<div class="container">

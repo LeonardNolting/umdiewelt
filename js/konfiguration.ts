@@ -35,9 +35,9 @@ export const
 	region = "DE",
 
 	/**
-	 * E-Mail für Firebase Authentication-Konto
+	 * E-Mail für Firebase Authentication Admin-Konto
 	 */
-	email = "leonard.nolting@gymhoes.de",
+	adminEmail = "hip@gy-ho.de",
 
 	/**
 	 * Verschiedene Zoom-Level, welche beim Klicken auf das Fahrrad zirkulär wechseln
