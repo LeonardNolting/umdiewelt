@@ -1,4 +1,3 @@
-import {fahrer} from "../firebase/lesen";
 import zahl from "../formatierung/zahl";
 import m from "../formatierung/einheit/m";
 import {bestenlisteChunkGroesse} from "../konfiguration";
@@ -24,7 +23,7 @@ function ladeChunk(chunk: number) {
 }
 
 export default () => {
-	Object.entries(fahrer).forEach(([name, strecke], index) => {
+	/*Object.entries(fahrer).forEach(([name, strecke], index) => {
 		const rang = index + 1,
 			zeile = tabelle.insertRow(),
 			emoji = emojis[Math.min(index, emojis.length - 1)],
@@ -42,5 +41,5 @@ export default () => {
 	mehrLaden.addEventListener("click", () => {
 		ladeChunk(naechsterChunk)
 		naechsterChunk++
-	})
+	})*/
 }

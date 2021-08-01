@@ -1,7 +1,6 @@
 import Strecke from "../../model/strecke";
 import streckeFormulierung from "./strecke"
 import prozentFormulierung from "./prozent"
-import {prozent, vorStreckeGefahreneKilometer} from "../../verschieden";
 
 const liste = document.getElementById("feed-anzeige") as HTMLUListElement
 
@@ -31,11 +30,11 @@ export default (streckenNummer: string, strecke: Strecke) => {
 
 	// Formulierung für Eintrag von Prozentmeldungen
 	// TODO z.B. 50 Prozent besonders anzeigen
-	const bisher = vorStreckeGefahreneKilometer(streckenNummer),
+	/*const bisher = vorStreckeGefahreneKilometer(streckenNummer),
 		jetzt = bisher + strecke.laenge
 	Object.entries(prozent).filter(([, punkt]) => punkt > bisher && punkt < jetzt).forEach(([prozent, punkt]) => {
 		neuesElementNach(prozentFormulierung(prozent, punkt, zufaelligerIndex), true, element)
-	})
+	})*/
 }
 
 // TODO Funktion um von unten nachladen zu können
