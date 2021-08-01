@@ -10,6 +10,8 @@
 
 #fahrer-anzeige li {
 	display: flex;
+	align-items: center;
+	text-align: center;
 }
 
 #fahrer-anzeige li + li::before {
