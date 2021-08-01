@@ -3,7 +3,8 @@ import {Authentifizierung} from "./authentifizierung";
 import Popup from "../../popup";
 import {Datenbank} from "../datenbank/datenbank";
 import tabellen = Datenbank.tabellen;
-import benachrichtigungen from "../../benachrichtigungen";
+import benachrichtigungen from "../../benachrichtigungen/benachrichtigungen";
+import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
 
 export default class FahrerAuthentifizierung extends Authentifizierung {
 	private constructor(user: User, readonly klasse: string) {
@@ -55,7 +56,7 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 
 		// TODO Testen, ob eingetragen werden kann
 		if (tabellen.schulen.elemente.length === 0 || tabellen.klassen.elemente.length === 0) {
-			benachrichtigungen.tip("Es sind aktuell keine Schulen angemeldet.")
+			benachrichtigung("Es sind aktuell keine Schulen angemeldet.")
 			return Promise.reject()
 		}
 
