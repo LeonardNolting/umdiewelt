@@ -5,7 +5,7 @@ import inhalt from "./inhalt/inhalt";
 import maps from "./maps";
 import Cookies from "./cookies";
 import popups from "./popups";
-import browserAktualisierung from "./browserUpdate";
+import browserAktualisierung from "./browserAktualisierung";
 
 import '@fortawesome/fontawesome-free/css/solid.min.css'
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css'

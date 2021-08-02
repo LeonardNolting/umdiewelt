@@ -1,8 +1,6 @@
 // noinspection TypeScriptCheckImport
 import browserUpdate from 'browser-update/update.npm.js';
 
-const browserAktualisierung = () => browserUpdate({
+export default () => browserUpdate({
 	l: "de"
 })
-
-export default browserAktualisierung
