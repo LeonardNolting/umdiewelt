@@ -61,6 +61,8 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 		}
 
 		return new Promise<void>((resolve, reject) => {
+			// TODO falls AdminAuthentifizierung abmelden und dann weiter
+			// falls FahrerAuthentifizierung return
 			if (this.authentifiziert) return resolve()
 
 			const submit = this.popup["submit"]

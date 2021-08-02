@@ -1,4 +1,5 @@
 @import "./cookies.css";
+@import "./anmelden-admin.css";
 
 body.popup {
 	overflow-y: hidden;

@@ -3,8 +3,11 @@ import step from "../../step";
 import FahrerAuthentifizierung from "./fahrerAuthentifizierung";
 import load from "../../load";
 import {Datenbank} from "../datenbank/datenbank";
-import tabellen = Datenbank.tabellen;
 import {adminEmail} from "../../konfiguration";
+import Popup from "../../popup";
+import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
+import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
+import tabellen = Datenbank.tabellen;
 
 export abstract class Authentifizierung {
 	protected constructor(readonly user: User) {
@@ -81,13 +84,52 @@ export class AdminAuthentifizierung extends Authentifizierung {
 	}
 
 	static vorbereiten() {
-
+		document.getElementById("admin").addEventListener("click", () => AdminAuthentifizierung.anmelden())
 	}
+
+	private static popup = document.getElementById("popup-anmelden-admin") as HTMLFormElement
 
 	static async anmelden() {
 		await this.warteVorbereitet()
 
+		// TODO falls FahrerAuthentifizierung: ABMELDEN, dann weiter machen
 
+		if (this.authentifizierung instanceof AdminAuthentifizierung) return
+
+		return new Promise<void>((resolve, reject) => {
+			if (this.authentifiziert) return resolve()
+
+			const submit = this.popup["submit"]
+
+			// TODO popup onclose reject
+
+			this.popup.onsubmit = event => {
+				// Wir machen's dynamisch!
+				event.preventDefault()
+
+				// Verhindert versehentliches doppeltes Bestätigen
+				submit.disabled = true;
+
+				const passwort = this.popup["passwort"].value
+
+				this.authentifizieren(passwort)
+					.then(user => {
+						Popup.schliessen(this.popup)
+						resolve()
+						// TODO Admin-Kontrollen anzeigen, Admin-Button verstecken
+					})
+					.catch(error => {
+						// Zeigt Benutzer Fehlernachricht an
+						benachrichtigung("Falsches Passwort. Bitte versuchen Sie es erneut.", BenachrichtigungsLevel.WARNUNG)
+					})
+					.finally(() => {
+						// Offen für weitere Versuche
+						submit.disabled = false;
+					})
+			}
+
+			Popup.oeffnen(this.popup)
+		})
 	}
 
 	kannEintragen = false

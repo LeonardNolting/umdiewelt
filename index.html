@@ -150,7 +150,19 @@
 		</div>
 
 		<div id="popups">
-			<!-- Anmelden -->
+			<!-- Admin-Anmeldung -->
+			<form id="popup-anmelden-admin" class="input-button">
+				<input autofocus
+				       name="passwort"
+				       type="password"
+				       minlength=6
+				       title="Passwort eingeben"
+				       placeholder="Passwort..."
+				       required />
+				<input type="submit" value="Bestätigen 🔑" name="submit" />
+			</form>
+
+			<!-- Anmeldung -->
 			<form id="popup-anmelden" class="container">
 				<select name="schule" required></select>
 				<select name="klasse" required></select>
