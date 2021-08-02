@@ -1,5 +1,5 @@
 // noinspection TypeScriptCheckImport
-import browserUpdate from 'browser-update';
+import browserUpdate from 'browser-update/update.npm.js';
 
 const browserAktualisierung = () => browserUpdate({
 	l: "de"
