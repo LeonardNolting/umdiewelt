@@ -8,7 +8,7 @@ import {adminEmail} from "../../konfiguration";
 
 export abstract class Authentifizierung {
 	protected constructor(readonly user: User) {
-		step("Authentifiziert")
+		step("Authentifiziert (" + this.constructor.name + ")")
 	}
 
 	abstract kannEintragen: Boolean
