@@ -13,13 +13,16 @@
 	position: relative;
 	z-index: 10;
 	background-color: white;
-	padding: var(--padding) 0 0;
 	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
 	width: 100%;
 	box-shadow: 0 0 24px 2px #111, inset 0 12px 14px -5px grey;
 	/*min-height: calc(100vh - var(--hoehe));*/
 	/*overflow-x: hidden;*/
+}
+
+#inhalt > h1:first-of-type {
+	margin-top: var(--padding);
 }
 
 h1 span#fahrradweg {

@@ -1,0 +1,32 @@
+#buorg {
+	position: relative;
+	animation: none;
+	background: #ffffff;
+	border: 4px solid #cc3300;
+	z-index: initial;
+	font: unset;
+	font-size: 1.2rem;
+}
+
+#buorg::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.2);
+	z-index: -1;
+}
+
+#buorg .buorg-pad {
+	z-index: 0;
+}
+
+#buorg .buorg-moremsg {
+	display: block;
+}
+
+#buorg a::after {
+	display: none !important;
+}
