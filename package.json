@@ -11,6 +11,9 @@
 		"start": "npm run build && npm run dev",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"dependencies": {
+		"browser-update": "^3.3.30"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.14.3",
 		"@fortawesome/fontawesome-free": "^5.15.3",

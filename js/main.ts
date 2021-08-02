@@ -5,12 +5,14 @@ import inhalt from "./inhalt/inhalt";
 import maps from "./maps";
 import Cookies from "./cookies";
 import popups from "./popups";
+import browserAktualisierung from "./browserUpdate";
 
 import '@fortawesome/fontawesome-free/css/solid.min.css'
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css'
 import 'awesome-notifications/dist/style.css'
 
 document.addEventListener("DOMContentLoaded", async () => {
+	browserAktualisierung()
 	popups()
 	await Cookies.ueberpruefen()
 	await maps()
