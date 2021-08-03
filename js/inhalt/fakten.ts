@@ -1,25 +1,27 @@
 import zahl from "../formatierung/zahl";
 
-interface HTMLTableRowElementFakt extends HTMLTableRowElement {
-	interval: NodeJS.Timeout,
-	wertZelle: HTMLTableCellElement,
-
+interface HTMLDataElementFakt extends HTMLDataElement {
+	interval: number
 	wert?: {
-		wertBerechnen: () => { wert: number, einheit?: string },
-		valide: boolean,
-		anzahlNachkommastellen: number,
+		wertBerechnen: () => { wert: number, einheit?: string }
+		valide: boolean
+		anzahlNachkommastellen: number
 	}
-
 	gesehen: boolean
+	dataset: {
+		bezeichnung: string
+		einheit: string
+	}
 }
 
-const tabelle = document.getElementById("fakten-anzeige").querySelector("table") as HTMLTableElement
+const parent = document.getElementById("fakten-anzeige").querySelector("section")
+const children = parent.querySelectorAll("data") as NodeListOf<HTMLDataElementFakt>
 
 const observer = new IntersectionObserver((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
-		const zeile = eintrag.target as HTMLTableRowElementFakt;
-		observer.unobserve(zeile)
-		faktAnzeigen(zeile)
+		const li = eintrag.target as HTMLDataElementFakt;
+		observer.unobserve(li)
+		faktAnzeigen(li)
 	})
 }, {
 	rootMargin: '0px',
@@ -27,31 +29,30 @@ const observer = new IntersectionObserver((eintraege, observer) => {
 })
 
 export default function fakten() {
-	Array.from(tabelle.rows).forEach((zeile: HTMLTableRowElementFakt) => {
-		zeile.wertZelle = document.createElement("td")
-		zeile.appendChild(zeile.wertZelle)
-
-		observer.observe(zeile)
-	})
+	children.forEach(li => observer.observe(li))
 }
 
-function faktAnzeigen(zeile: HTMLTableRowElementFakt) {
-	zeile.gesehen = true
-	if (!zeile.wert) return
+function faktAnzeigen(data: HTMLDataElementFakt) {
+	data.gesehen = true
+	if (!data.wert) return
 
-	const zelle = zeile.wertZelle
+	const set = (value: string, einheit: string = "") => {
+		data.value = value
+		data.dataset.einheit = einheit
+	}
 
-	if (!zeile.wert.valide) return zelle.innerHTML = "N/A"
+	if (!data.wert.valide) return set("N/A")
 
-	const {wert, einheit = ""} = zeile.wert.wertBerechnen(),
-		wertSetzen = (wert: number) => zelle.innerHTML = zahl(wert, zeile.wert.anzahlNachkommastellen, 0) + " " + einheit,
+	const {wert, einheit = ""} = data.wert.wertBerechnen(),
+		setWert = (wert: number) =>
+			set(zahl(wert, data.wert.anzahlNachkommastellen, 0).toString(), einheit),
 		zeit = 600,
 		fps = 50,
 		anzahlSchritte = Math.ceil(Math.min(wert * 2, zeit * fps / 1000));
 
 	if (anzahlSchritte < 1) {
-		clearInterval(zeile.interval)
-		wertSetzen(wert)
+		clearInterval(data.interval)
+		setWert(wert)
 		return
 	}
 
@@ -59,16 +60,15 @@ function faktAnzeigen(zeile: HTMLTableRowElementFakt) {
 		intervalTime = zeit / anzahlSchritte;
 
 	let i = anzahlSchritte - 1
-	zeile.interval = setInterval(() => {
-		zelle.innerHTML = wertSetzen(wert - schritt * i)
+	data.interval = setInterval(() => {
+		setWert(wert - schritt * i)
 		i--
-		if (i < 0) clearInterval(zeile.interval)
+		if (i < 0) clearInterval(data.interval)
 	}, intervalTime)
 }
 
 export function fakt(bezeichnung: string, wertBerechnen: () => { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1) {
-	const zeile = Array.from(tabelle.rows).find(zeile => zeile.dataset["bezeichnung"] === bezeichnung) as HTMLTableRowElementFakt
-
+	const zeile = Array.from(children).find(data => data.dataset.bezeichnung === bezeichnung)
 	zeile.wert = {
 		wertBerechnen,
 		valide,

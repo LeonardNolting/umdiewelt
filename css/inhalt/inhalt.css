@@ -16,7 +16,7 @@
 	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
 	width: 100%;
-	box-shadow: 0 0 24px 2px #111, inset 0 12px 14px -5px grey;
+	box-shadow: 0 0 24px 2px #111, inset 0 12px 12px -8px grey;
 	/*min-height: calc(100vh - var(--hoehe));*/
 	/*overflow-x: hidden;*/
 	overflow-x: hidden;
@@ -26,12 +26,35 @@
 	margin-top: var(--padding);
 }
 
+/*#inhalt > h1:first-of-type::after {
+	position: absolute;
+	width: 120%;
+	height: 12vh;
+	z-index: 10;
+	content: "";
+	left: 0;
+	border: 4px solid #0a3050;
+	!*border: 4px dashed #0a3050;*!
+	display: flex;
+	border-radius: 0 0 100% 100%;
+	border-top: none;
+	transform: translateX(-10%) translateY(-100%);
+	margin-top: 2.2rem;
+	!*box-shadow: 0 -4px 6px -4px #333 inset;*!
+
+	display: none
+}*/
+
 h1 span#fahrradweg {
 	color: #0d3349;
 }
 
 h1 span#klimaschutz {
 	color: green;
+}
+
+#inhalt h2:first-of-type {
+	margin-top: 0
 }
 
 #inhalt .container > *:not(hr):not(h3):not(a) + *:not(hr) {

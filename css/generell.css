@@ -1,6 +1,7 @@
 html, body {
 	min-height: 100%;
-	font-family: Georgia, sans-serif;
+	--font-family: Georgia, serif;
+	font-family: var(--font-family);
 	--grund-schrift-groesse: calc(100vmin * 0.08 / 10 + 8px);
 	font-size: var(--grund-schrift-groesse);
 }
