@@ -1,3 +1,27 @@
+#quellen-anzeige {
+	position: relative;
+}
+
+#quellen-anzeige::after {
+	content: "";
+    position: absolute;
+    right: -8vh;
+    bottom: -4vh;
+    height: 30vh;
+    width: 30vh;
+
+	/* https://codepen.io/FlyC/pen/oLpJWJ */
+	background: linear-gradient(90deg, white 8px, rgba(0, 0, 0, 0) 1%) 95px 100px, linear-gradient(white 8px, rgba(0, 0, 0, 0) 1%), #ccc;
+	background-size: 10px 10px;
+	pointer-events: none;
+}
+
+#quellen-anzeige li {
+	position: relative;
+	z-index: 1;
+	text-shadow: 2px 2px white, -2px 2px white, -2px -2px white, 2px -2px white;
+}
+
 #quellen-anzeige li a {
 	display: block;
 }
