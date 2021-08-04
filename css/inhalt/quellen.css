@@ -19,9 +19,15 @@
 #quellen-anzeige li {
 	position: relative;
 	z-index: 1;
-	text-shadow: 2px 2px white, -2px 2px white, -2px -2px white, 2px -2px white;
 }
 
-#quellen-anzeige li a {
-	display: block;
+#quellen-anzeige li > * {
+	background-color: white;
+}
+
+/* Elemente müssen inline sein, damit background nur hinter Text ist; aber: inline bricht nicht, deswegen Fix s. u. */
+#quellen-anzeige li span::after {
+	/* https://coderwall.com/p/zvz52g/adding-a-line-break-between-two-inline-elements */
+	content: '\A';
+	white-space: pre;
 }
