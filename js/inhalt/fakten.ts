@@ -17,11 +17,16 @@ interface HTMLDataElementFakt extends HTMLDataElement {
 const parent = document.getElementById("fakten-anzeige").querySelector("section")
 const children = parent.querySelectorAll("data") as NodeListOf<HTMLDataElementFakt>
 
+const laden = (li: HTMLDataElementFakt) => {
+	observer.unobserve(li)
+	faktAnzeigen(li)
+}
+
 const observer = new IntersectionObserver((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
 		const li = eintrag.target as HTMLDataElementFakt;
-		observer.unobserve(li)
-		faktAnzeigen(li)
+		if (window.scrollY === 0) addEventListener("scroll", () => laden(li), {once: true})
+		else laden(li)
 	})
 }, {
 	rootMargin: '0px',
