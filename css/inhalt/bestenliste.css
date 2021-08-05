@@ -1,20 +1,21 @@
 #bestenliste-anzeige {
 	display: flex;
 	flex-direction: column;
-	/*flex-direction: column-reverse;*/
-	/*align-items: flex-end;*/
-	--gap-vertical: 0rem;
-	--gap-horizontal: 4rem;
+	--gap-vertical: 1rem;
+	--gap-track-inhalt-max: 2.6rem;
+	--gap-track-inhalt: 2.4rem;
+	--gap-fahrrad-inhalt: 0.6rem;
 	--height: 4rem;
 	--anzahl: 0;
-	--strecke-breite: 4rem;
-	--rang-breite: calc(var(--height) * 2/3);
+	--strecke-breite: 2.8rem;
+	--track-hoehe: calc(var(--height) * 3 / 7);
+	--rang-breite-max: calc(var(--height) * 2 / 3);
+	--rang-breite: calc(var(--height) / 2);
 	--padding: var(--container-padding);
-	--general-margin-left: calc(var(--gap-horizontal) * 2 + var(--strecke-breite) + var(--padding) + var(--rang-breite));
+	--general-margin-left: calc(var(--gap-track-inhalt-max) * 2 + var(--strecke-breite) + var(--padding) + var(--rang-breite-max));
 
 	height: calc(var(--anzahl) * (var(--gap-vertical) + var(--height)) - var(--gap-vertical));
 
-	/*margin: calc(-1/2 * var(--gap)) 0;*/
 	margin: calc(var(--height) / 2) 0;
 	margin-left: var(--general-margin-left);
 	padding: 0;
@@ -42,8 +43,8 @@
 	margin-top: var(--top);
 	/*padding-left: var(--general-margin-left);*/
 
-	--background: #444;
-	--background-lighter: #545454;
+	--background: #555;
+	--background-lighter: #656565;
 	--background-darker: #242424;
 }
 
@@ -54,14 +55,14 @@
 
 	position: absolute;
 	/*top: calc(var(--top) + ((var(--height) - var(--rang-breite)) / 4));*/
-	top: calc((var(--height) - var(--rang-breite)) / 4);
+	top: calc(var(--height) / 2);
 	left: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	z-index: 1;
-	transform: translateX(-100%);
-	margin-left: calc(-2 * var(--gap-horizontal) - var(--strecke-breite) - var(--padding));
+	transform: translateX(-50%) translateY(-50%);
+	margin-left: calc(-2 * var(--gap-track-inhalt-max) - var(--strecke-breite) - var(--padding) - var(--rang-breite-max) / 2);
 	width: var(--rang-breite);
 	height: var(--rang-breite);
 	background: white;
@@ -69,13 +70,14 @@
 	border: 4px solid var(--background-darker);
 	font-family: monospace;
 	background: var(--background-lighter);
-	color: white;
+	color: var(--background-darker);
+	font-weight: bold;
 	font-size: calc(var(--rang-breite) / 2);
 	/*transition: transform .2s ease-in-out;*/
 }
 
 #bestenliste-anzeige li:hover::before {
-	transform: translateX(-100%) scale(1.1);
+	transform: translateX(-50%) translateY(-50%) scale(1.1);
 }
 
 #bestenliste-anzeige li .inhalt {
@@ -99,7 +101,7 @@
 }
 
 #bestenliste-anzeige li .inhalt::before {
-	content: "🚴‍♀️";
+	content: "";
 	position: absolute;
 	align-content: center;
 	align-items: center;
@@ -108,24 +110,43 @@
 
 	transform: translateX(-50%);
 
-	margin-left: calc(-1 * var(--gap-horizontal));
+	margin-left: calc(-1 * var(--gap-track-inhalt));
 
 	z-index: 1;
 
-	height: 90%;
-	width: calc((var(--gap-horizontal) - 1rem) * 2);
-	background: rgba(255, 0, 0, .5);
+	height: 100%; /* kann benutzt werden, damit Fahrräder sich nicht berühren bei --gap-vertical: 0 */
+	width: calc((var(--gap-track-inhalt) - var(--gap-fahrrad-inhalt)) * 2);
+	/*background: rgba(255, 0, 0, .5);*/
+	background-image: var(--url);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#bestenliste-anzeige li.gold, #bestenliste-anzeige li.silber, #bestenliste-anzeige li.bronze {
+	--track-hoehe: calc(var(--height) / 2);
+	--rang-breite: var(--rang-breite-max);
+	--gap-track-inhalt: var(--gap-track-inhalt-max);
+}
+
+#bestenliste-anzeige li.gold .inhalt, #bestenliste-anzeige li.silber .inhalt, #bestenliste-anzeige li.bronze .inhalt {
+	font-size: 1.3rem;
+}
+
+#bestenliste-anzeige li.gold .inhalt::after, #bestenliste-anzeige li.silber .inhalt::after, #bestenliste-anzeige li.bronze .inhalt::after {
+	font-size: 1.2rem;
 }
 
 #bestenliste-anzeige li .inhalt::after {
-	content: "2.135 m";
+	content: attr(data-strecke);
+	font-size: .95rem;
 	color: white;
-	padding-right: var(--gap-horizontal);
+	padding-right: var(--gap-track-inhalt);
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 
-	height: calc(var(--height) / 2);
+	height: var(--track-hoehe);
 	left: 0;
 	background-color: #999;
 	position: absolute;
@@ -134,7 +155,7 @@
 	/*transform: translateX(calc(var(--prozent) * -1%));*/
 	width: 100vw;
 	transform: translateX(-100%);
-	margin-left: calc(-1 * var(--gap-horizontal));
+	margin-left: calc(-1 * var(--gap-track-inhalt));
 
 	background-image: linear-gradient(135deg, var(--background) 48%, var(--background-lighter), var(--background) 52%);
 	background-size: 200% 100%;
