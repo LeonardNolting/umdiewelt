@@ -1,7 +1,7 @@
 #bestenliste-anzeige {
 	display: flex;
 	flex-direction: column;
-	--gap-vertical: 1rem;
+	--gap-vertical: .2rem;
 	--gap-track-inhalt-max: 2.6rem;
 	--gap-track-inhalt: 2.4rem;
 	--gap-fahrrad-inhalt: 0.6rem;
