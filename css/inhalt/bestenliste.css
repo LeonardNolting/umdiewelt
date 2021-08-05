@@ -24,6 +24,10 @@
 	cursor: default;
 }
 
+#bestenliste-anzeige:empty {
+	display: none;
+}
+
 #bestenliste-anzeige li {
 	--left: calc(var(--prozent) * 1%);
 	--top: calc((var(--gap-vertical) + var(--height)) * (var(--rang) - 1));
@@ -217,11 +221,3 @@ Unauffällig Bewegung reinbringen
 #bestenliste-anzeige li .schule {
 	font-style: italic;
 }
-
-/*#bestenliste-anzeige .versteckt {
-	display: none;
-}
-
-#bestenliste-anzeige table:empty::before {
-	content: "Noch keiner da!";
-}*/
