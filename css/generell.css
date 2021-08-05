@@ -58,9 +58,10 @@ body[data-wait] [data-wait-immune] [onclick], body[data-wait] [data-wait-immune]
 .container {
 	/*max-width: 70%;*/
 	/*min-width: 600px;*/
+	--container-padding: 1rem;
 	max-width: 1000px;
 	margin: 0 auto;
-	padding: 0 1rem;
+	padding: 0 var(--container-padding);
 }
 
 a {

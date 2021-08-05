@@ -1,7 +1,188 @@
-#bestenliste-anzeige .versteckt {
+#bestenliste-anzeige {
+	display: flex;
+	flex-direction: column;
+	/*flex-direction: column-reverse;*/
+	/*align-items: flex-end;*/
+	--gap-vertical: 0rem;
+	--gap-horizontal: 4rem;
+	--height: 4rem;
+	--anzahl: 0;
+	--strecke-breite: 4rem;
+	--rang-breite: calc(var(--height) * 2/3);
+	--padding: var(--container-padding);
+	--general-margin-left: calc(var(--gap-horizontal) * 2 + var(--strecke-breite) + var(--padding) + var(--rang-breite));
+
+	height: calc(var(--anzahl) * (var(--gap-vertical) + var(--height)) - var(--gap-vertical));
+
+	/*margin: calc(-1/2 * var(--gap)) 0;*/
+	margin: calc(var(--height) / 2) 0;
+	margin-left: var(--general-margin-left);
+	padding: 0;
+	position: relative;
+	user-select: none;
+	cursor: default;
+}
+
+#bestenliste-anzeige li {
+	--left: calc(var(--prozent) * 1%);
+	--top: calc((var(--gap-vertical) + var(--height)) * (var(--rang) - 1));
+	--translate-x: calc(-1% * var(--prozent));
+
+	list-style: none;
+	height: var(--height);
+	min-height: var(--height);
+	width: 100%;
+	--prozent: 0;
+	--rang: 0;
+	order: var(--prozent);
+
+	display: flex;
+	align-items: center;
+	position: absolute;
+	margin-top: var(--top);
+	/*padding-left: var(--general-margin-left);*/
+
+	--background: #444;
+	--background-lighter: #545454;
+	--background-darker: #242424;
+}
+
+#bestenliste-anzeige li::before {
+	/* https://stackoverflow.com/questions/40164169/css-variables-custom-properties-in-pseudo-element-content-property */
+	counter-reset: rang var(--rang);
+	content: counter(rang);
+
+	position: absolute;
+	/*top: calc(var(--top) + ((var(--height) - var(--rang-breite)) / 4));*/
+	top: calc((var(--height) - var(--rang-breite)) / 4);
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+	transform: translateX(-100%);
+	margin-left: calc(-2 * var(--gap-horizontal) - var(--strecke-breite) - var(--padding));
+	width: var(--rang-breite);
+	height: var(--rang-breite);
+	background: white;
+	border-radius: 50%;
+	border: 4px solid var(--background-darker);
+	font-family: monospace;
+	background: var(--background-lighter);
+	color: white;
+	font-size: calc(var(--rang-breite) / 2);
+	/*transition: transform .2s ease-in-out;*/
+}
+
+#bestenliste-anzeige li:hover::before {
+	transform: translateX(-100%) scale(1.1);
+}
+
+#bestenliste-anzeige li .inhalt {
+	position: absolute;
+	height: var(--height);
+	min-height: var(--height);
+	/*margin: calc(var(--gap) / 2) 0;*/
+	/*margin: 0;*/
+	left: var(--left);
+	/*top: var(--top);*/
+	transform: translateX(var(--translate-x));
+
+	white-space: nowrap;
+
+	font-size: 1.2rem;
+
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	align-content: center;
+}
+
+#bestenliste-anzeige li .inhalt::before {
+	content: "🚴‍♀️";
+	position: absolute;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
+
+	transform: translateX(-50%);
+
+	margin-left: calc(-1 * var(--gap-horizontal));
+
+	z-index: 1;
+
+	height: 90%;
+	width: calc((var(--gap-horizontal) - 1rem) * 2);
+	background: rgba(255, 0, 0, .5);
+}
+
+#bestenliste-anzeige li .inhalt::after {
+	content: "2.135 m";
+	color: white;
+	padding-right: var(--gap-horizontal);
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	height: calc(var(--height) / 2);
+	left: 0;
+	background-color: #999;
+	position: absolute;
+	border-radius: 100px;
+	/*width: calc(var(--prozent) * 1%);*/
+	/*transform: translateX(calc(var(--prozent) * -1%));*/
+	width: 100vw;
+	transform: translateX(-100%);
+	margin-left: calc(-1 * var(--gap-horizontal));
+
+	background-image: linear-gradient(135deg, var(--background) 48%, var(--background-lighter), var(--background) 52%);
+	background-size: 200% 100%;
+
+	animation: shine 6s linear infinite;
+	animation-delay: calc(.5s * var(--rang));
+}
+
+@keyframes shine {
+	from {
+		background-position: 100%;
+	}
+	to {
+		background-position: 0;
+	}
+}
+
+#bestenliste-anzeige li.gold {
+	--background: #ffd700;
+	--background-lighter: #ffea83;
+	--background-darker: #ac9100;
+}
+
+#bestenliste-anzeige li.silber {
+	--background: #999;
+	--background-lighter: #a9a9a9;
+	--background-darker: #797979;
+}
+
+#bestenliste-anzeige li.bronze {
+	--background: #bf8970;
+	--background-lighter: #b89e90;
+	--background-darker: #926c56;
+}
+
+#bestenliste-anzeige li .name {
+	font-weight: bold;
+	margin-right: .4rem;
+}
+
+#bestenliste-anzeige li .schule {
+	font-style: italic;
+}
+
+/*#bestenliste-anzeige .versteckt {
 	display: none;
 }
 
 #bestenliste-anzeige table:empty::before {
 	content: "Noch keiner da!";
-}
+}*/

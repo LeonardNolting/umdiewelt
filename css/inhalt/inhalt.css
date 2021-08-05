@@ -58,7 +58,7 @@ h1 span#klimaschutz {
 	margin-top: 0
 }
 
-#inhalt .container > *:not(hr):not(h3):not(a) + *:not(hr) {
+#inhalt .container > *:not(hr):not(h3):not(a):not(li) + *:not(hr) {
 	margin-top: 3.2rem;
 }
 
