@@ -35,26 +35,28 @@
 	width: 100%;
 	--prozent: 0;
 	--rang: 0;
-	order: var(--prozent);
+	order: var(--prozent); /* Reihenfolge unabhängig vom DOM beeinflussen */
 
 	display: flex;
 	align-items: center;
 	position: absolute;
 	margin-top: var(--top);
-	/*padding-left: var(--general-margin-left);*/
 
 	--background: #555;
 	--background-lighter: #656565;
 	--background-darker: #242424;
 }
 
+/*
+Eingekreiste Zahl (Rang)
+*/
 #bestenliste-anzeige li::before {
+	/* Kann nicht var(...) in content benutzen, aber counter(...) */
 	/* https://stackoverflow.com/questions/40164169/css-variables-custom-properties-in-pseudo-element-content-property */
 	counter-reset: rang var(--rang);
 	content: counter(rang);
 
 	position: absolute;
-	/*top: calc(var(--top) + ((var(--height) - var(--rang-breite)) / 4));*/
 	top: calc(var(--height) / 2);
 	left: 0;
 	display: flex;
@@ -76,10 +78,16 @@
 	/*transition: transform .2s ease-in-out;*/
 }
 
+/**
+Eingekreiste Zahl onhover vergrößern
+ */
 #bestenliste-anzeige li:hover::before {
 	transform: translateX(-50%) translateY(-50%) scale(1.1);
 }
 
+/**
+Name und Schule
+ */
 #bestenliste-anzeige li .inhalt {
 	position: absolute;
 	height: var(--height);
@@ -100,6 +108,9 @@
 	align-content: center;
 }
 
+/**
+Fahrrad-Icon
+ */
 #bestenliste-anzeige li .inhalt::before {
 	content: "";
 	position: absolute;
@@ -116,13 +127,16 @@
 
 	height: 100%; /* kann benutzt werden, damit Fahrräder sich nicht berühren bei --gap-vertical: 0 */
 	width: calc((var(--gap-track-inhalt) - var(--gap-fahrrad-inhalt)) * 2);
-	/*background: rgba(255, 0, 0, .5);*/
+
 	background-image: var(--url);
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
 }
 
+/*
+Erste 3 Einträge: größer
+*/
 #bestenliste-anzeige li.gold, #bestenliste-anzeige li.silber, #bestenliste-anzeige li.bronze {
 	--track-hoehe: calc(var(--height) / 2);
 	--rang-breite: var(--rang-breite-max);
@@ -137,6 +151,9 @@
 	font-size: 1.2rem;
 }
 
+/**
+Track (Balken) und Streckenanzeige
+ */
 #bestenliste-anzeige li .inhalt::after {
 	content: attr(data-strecke);
 	font-size: .95rem;
@@ -151,8 +168,6 @@
 	background-color: #999;
 	position: absolute;
 	border-radius: 100px;
-	/*width: calc(var(--prozent) * 1%);*/
-	/*transform: translateX(calc(var(--prozent) * -1%));*/
 	width: 100vw;
 	transform: translateX(-100%);
 	margin-left: calc(-1 * var(--gap-track-inhalt));
@@ -164,6 +179,9 @@
 	animation-delay: calc(.5s * var(--rang));
 }
 
+/*
+Unauffällig Bewegung reinbringen
+*/
 @keyframes shine {
 	from {
 		background-position: 100%;
