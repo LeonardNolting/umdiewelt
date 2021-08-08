@@ -26,6 +26,7 @@ export default async function aktualisieren(
 	meter: number
 ) {
 	step("Aktualisiert: " + meter + " Meter")
+	// TODO Runden
 	const fortschritt = 360 * Math.min(1, meter / umfang),
 		neuePosition = {
 			lng: fortschritt,
