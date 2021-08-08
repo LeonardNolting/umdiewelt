@@ -5,12 +5,14 @@
 	--width: 4.4rem;
 	--height: 2.4rem;
 	--gap: 1.2rem;
-	--offset: 0;
+	--offset: -1;
 	--time: .2s;
 	margin-bottom: var(--padding);
+	user-select: none;
 }
 
-#saison-auswahl .auswahl {
+#saison-auswahl .jahre::before {
+	content: "";
 	display: flex;
 	width: var(--width);
 	height: var(--height);
@@ -18,16 +20,19 @@
 	background-color: rgba(255, 255, 255, .5);
 	border-radius: 8px;
 	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 #saison-auswahl .jahre {
 	display: flex;
 	width: var(--width);
-	flex-direction: row-reverse;
+	height: var(--height);
+	flex-direction: row;
+	align-items: center;
 	padding: 0;
-	margin: 0 calc(-2 * var(--offset) * (var(--gap) + var(--width))) 0 0;
+	margin: 0 calc(2 * var(--offset) * (var(--gap) + var(--width))) 0 0;
 	transition: margin-right var(--time) ease-in-out;
-	position: relative;
 	z-index: 1;
 }
 
@@ -37,7 +42,7 @@
 	min-width: var(--width);
 	height: var(--height);
 	min-height: var(--height);
-	margin-left: var(--gap);
+	margin-right: var(--gap);
 	padding: 0;
 	display: flex;
 	justify-content: center;

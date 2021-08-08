@@ -1,4 +1,4 @@
-import {onChildAdded, onChildChanged, onChildRemoved, onValue, push, DatabaseReference} from "firebase/database";
+import {child, query, ref, equalTo, DataSnapshot, onChildAdded, onChildChanged, onChildRemoved, onValue, push, DatabaseReference} from "firebase/database";
 import {Tabelle} from "./tabelle";
 import {Zeile} from "./zeile";
 
@@ -32,7 +32,7 @@ export default class Liste<V> implements Tabelle {
 		return this._ref
 	}
 
-	private laden(onLoad: (elemente: Zeile<V>[]) => void) {
+	laden(onLoad: (elemente: Zeile<V>[]) => void) {
 		// Liste leeren https://stackoverflow.com/a/1232046/11485145
 		this.elemente.length = 0
 
@@ -47,8 +47,12 @@ export default class Liste<V> implements Tabelle {
 		})
 	}
 
-	eintragen(wert: V) {
-		return push(this.ref, wert)
+	ladeZeile(key: string, callback: (snapshot: DataSnapshot) => void) {
+		onValue(child(this.ref, key), callback)
+	}
+
+	eintragen(value: V) {
+		return push(this.ref, value)
 	}
 
 	get(id: string) {
