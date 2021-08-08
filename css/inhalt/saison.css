@@ -74,7 +74,7 @@
 	border-radius: 4px;
 }
 
-#saison-anzeige {
+#saisons-anzeige {
 	margin-top: 1.6rem;
 	--padding: 2rem;
 	padding: var(--padding);
@@ -101,12 +101,12 @@
 	box-shadow: 0 0 4px 4px black;
 }*/
 
-#saison-anzeige #schulen-anzeige {
+#saisons-anzeige #schulen-anzeige {
 	display: flex;
 	justify-content: space-evenly;
 }
 
-#saison-anzeige .schule {
+#saisons-anzeige .schule {
 	max-width: 1000px;
 	flex-basis: 0;
 	flex-grow: .5;
@@ -124,7 +124,7 @@
 	transition: transform .1s ease-in-out;
 }
 
-#saison-anzeige .schule:hover {
+#saisons-anzeige .schule:hover {
 	transform: scale(1.02);
 }
 
@@ -144,7 +144,7 @@
 	padding-left: 1rem;
 }
 
-#saison-anzeige .angefeuert {
+#saisons-anzeige .angefeuert {
 	/*font-style: italic;*/
 }
 
