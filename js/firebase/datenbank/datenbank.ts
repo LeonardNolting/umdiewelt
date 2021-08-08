@@ -8,7 +8,8 @@ import {
 	onValue,
 	orderByKey,
 	query,
-	ref
+	ref,
+	get
 } from "firebase/database";
 import step from "../../step";
 import Liste from "./liste";
@@ -143,14 +144,14 @@ export namespace Datenbank {
 			})
 
 			const saisonAuswahlGeladenPromise = new Promise(resolve => {
-				onValue(query(saisonsRef, orderByKey()), snap => {
+				get(query(saisonsRef, orderByKey())).then(snap => {
 					anzahlSaisons = snap.size
 					faktFahrer()
 
 					snap.forEach(childSnap => bieteSaisonZurAuswahlAn(childSnap.key))
 
 					resolve()
-				}, {onlyOnce: true})
+				})
 			})
 
 			// * Aktuelle Saison
