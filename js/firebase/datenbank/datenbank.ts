@@ -143,16 +143,13 @@ export namespace Datenbank {
 				faktFahrer()
 			})
 
-			const saisonAuswahlGeladenPromise = new Promise(resolve => {
+			const saisonAuswahlGeladenPromise =
 				get(query(saisonsRef, orderByKey())).then(snap => {
 					anzahlSaisons = snap.size
 					faktFahrer()
 
 					snap.forEach(childSnap => bieteSaisonZurAuswahlAn(childSnap.key))
-
-					resolve()
 				})
-			})
 
 			// * Aktuelle Saison
 			let letzteSaison;
