@@ -1,17 +1,25 @@
 #saison-auswahl {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	--width: 4.4rem;
 	--height: 2.4rem;
 	--gap: 1.2rem;
 	--offset: -1;
 	--time: .2s;
-	margin-bottom: var(--padding);
+	width: var(--width);
+	height: var(--height);
+	padding: 0;
+	margin: 0 calc(2 * var(--offset) * (var(--gap) + var(--width))) var(--padding) 0;
+	/*margin: 0;*/
+	/*margin-bottom: var(--padding);*/
+	/*margin-right: calc(2 * var(--offset) * (var(--gap) + var(--width)));*/
+	left: 50%;
+	transition: margin-right var(--time) ease-in-out;
+	z-index: 1;
 	user-select: none;
 }
 
-#saison-auswahl .jahre::before {
+#saison-auswahl::before {
 	content: "";
 	display: flex;
 	width: var(--width);
@@ -24,19 +32,7 @@
 	transform: translateX(-50%);
 }
 
-#saison-auswahl .jahre {
-	display: flex;
-	width: var(--width);
-	height: var(--height);
-	flex-direction: row;
-	align-items: center;
-	padding: 0;
-	margin: 0 calc(2 * var(--offset) * (var(--gap) + var(--width))) 0 0;
-	transition: margin-right var(--time) ease-in-out;
-	z-index: 1;
-}
-
-#saison-auswahl .jahre li {
+#saison-auswahl li {
 	list-style: none;
 	width: var(--width);
 	min-width: var(--width);
@@ -53,13 +49,13 @@
 	transition: color var(--time) ease-in-out;
 }
 
-#saison-auswahl .jahre li.ausgewaehlt {
+#saison-auswahl li.ausgewaehlt {
 	pointer-events: none;
 	cursor: default;
 	color: #eee;
 }
 
-#saison-auswahl .jahre li.neu::before {
+#saison-auswahl li.neu::before {
 	content: "Neu!";
 	text-transform: uppercase;
 	position: absolute;
@@ -75,6 +71,9 @@
 }
 
 #saisons-anzeige {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	margin-top: 1.6rem;
 	--padding: 2rem;
 	padding: var(--padding);
