@@ -148,7 +148,7 @@
 	/*font-style: italic;*/
 }
 
-#saison-anzeige #schulen-anzeige .schule[data-schule="Gymnasium Höchstadt"] {
+#saisons-anzeige #schulen-anzeige .schule[data-schule="Gymnasium Höchstadt"] {
 	/*background-image: url("../../img/gymnasium-hoechstadt.png");*/
 	background-position: bottom;
 	background-repeat: no-repeat;
