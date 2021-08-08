@@ -121,60 +121,70 @@ export namespace Datenbank {
 	export async function lesen() {
 		step("Lese Datenbank")
 
-		/*tabellen.saisons.ladeZeile(new Date().getFullYear().toString(), snap => {
-			const key = snap.key
-			const value = snap.val()
-		})
-
-		onChildAdded(tabellen.test.ref, data => console.log({key: data.key, value: data.val()}))
-		// tabellen.test.laden(it => console.log("add ", it))*/
-
-		onValue(ref(datenbank, "strecke"), async snap => {
-			const strecke = snap.val() || 0
-
-			fakt("strecke", () => m(strecke))
-			fakt("gespart", () => kg(co2(strecke)), true, 3)
-		})
-
-		let anzahlFahrer = undefined,
-			anzahlSaisons = undefined
-
-		/**
-		 * Überprüfe, ob der Fakt "fahrer" gesetzt werden kann
-		 */
-		const faktFahrer = () => {
-			if (anzahlFahrer === undefined || anzahlSaisons === undefined) return
-			const wert = anzahlSaisons === 0 ? 0 : anzahlFahrer / anzahlSaisons
-			fakt("fahrer", () => ({wert}), anzahlSaisons !== 0, 0)
-		}
-
-		onValue(ref(datenbank, "anzahlFahrer"), snap => {
-			anzahlFahrer = snap.val() || 0
-			faktFahrer()
-		})
-
 		const saisonsRef = ref(datenbank, "saisons")
 
-		onValue(query(saisonsRef, orderByKey()), snap => {
-			anzahlSaisons = snap.size
-			faktFahrer()
+		{
+			// * Fahrer & Saisonanzeige
+			let anzahlFahrer = undefined,
+				anzahlSaisons = undefined
 
-			snap.forEach(childSnap => bieteSaisonZurAuswahlAn(childSnap.key))
+			/**
+			 * Überprüfe, ob der Fakt "fahrer" gesetzt werden kann
+			 */
+			const faktFahrer = () => {
+				if (anzahlFahrer === undefined || anzahlSaisons === undefined) return
+				const wert = anzahlSaisons === 0 ? 0 : anzahlFahrer / anzahlSaisons
+				fakt("fahrer", () => ({wert}), anzahlSaisons !== 0, 0)
+			}
 
+			onValue(ref(datenbank, "anzahlFahrer"), snap => {
+				anzahlFahrer = snap.val() || 0
+				faktFahrer()
+			})
+
+			const saisonAuswahlGeladenPromise = new Promise(resolve => {
+				onValue(query(saisonsRef, orderByKey()), snap => {
+					anzahlSaisons = snap.size
+					faktFahrer()
+
+					snap.forEach(childSnap => bieteSaisonZurAuswahlAn(childSnap.key))
+
+					resolve()
+				}, {onlyOnce: true})
+			})
+
+			// * Aktuelle Saison
 			let letzteSaison;
 
 			// Letzte Saison gesondert bekommen und auswählen, s. Protokoll
 			onChildAdded(query(saisonsRef, endAt(null), limitToLast(1)), snap => {
 				const neu = snap.key
 				const ausgewaehlt = ausgewaehlteSaison()
-				bieteSaisonZurAuswahlAn(neu)
 
-				// Nur automatisch wechseln, wenn die aktuelle Saison ausgewählt wurde (wenn man sich alte Saisons anschaut möchte man evtl. nicht gestört werden)
-				if (ausgewaehlt === letzteSaison) waehleSaisonAus(neu)
+				saisonAuswahlGeladenPromise.then(() => {
+					bieteSaisonZurAuswahlAn(neu)
+
+					// Nur automatisch wechseln, wenn die aktuelle Saison ausgewählt wurde (wenn man sich alte Saisons anschaut möchte man evtl. nicht gestört werden)
+					if (letzteSaison === ausgewaehlt || letzteSaison === neu) waehleSaisonAus(neu)
+				})
 
 				letzteSaison = neu
 			})
-		}, { onlyOnce: true })
+		}
+
+		{
+			// * Globale Strecke
+			onValue(ref(datenbank, "strecke"), async snap => {
+				const strecke = snap.val() || 0
+
+				fakt("strecke", () => m(strecke))
+				fakt("gespart", () => kg(co2(strecke)), true, 3)
+			})
+		}
+
+		{
+
+		}
 
 		/*/!*onValue(saisonRef, snap => console.log("Saison:", snap.val()))
 		onChildChanged(saisonRef, snap => console.log("Saison geändert:", snap.val()))*!/
