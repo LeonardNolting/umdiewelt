@@ -1,6 +1,7 @@
 import {child, onValue, ref} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import aktualisieren from "../aktualisieren";
+import m from "../formatierung/einheit/m";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
 const lis = () => Array.from(saisonAuswahl.children) as HTMLLIElement[];
@@ -58,35 +59,138 @@ const ladeSaison = (saison: string) => {
 		// TODO Anzeige der Saison auf Karte https://github.com/LeonardNolting/umdiewelt/projects/1#card-66445855
 	})
 
+	const saisonsContainer = document.getElementById("saisons")
+
 	onValue(child(saisonRef, "zeit"), snap => {
+		Array.from(saisonsContainer.children).find((child: HTMLElement) => child.dataset.saison === saison)?.remove()
+
 		const jetzt = Date.now()
-		const {start, ende}: {start: number | undefined, ende: number | undefined} = snap.val()
+		const {start, ende}: { start: number | undefined, ende: number | undefined } = snap.val()
 
+		const startGegeben = !!start
 		const endeGegeben = !!ende
-		const endeInZukunft = ende > jetzt
-		const startInZukunft = start > jetzt
+		const endeInZukunft = endeGegeben && ende > jetzt
+		const startInZukunft = startGegeben && start > jetzt
+		const historisch = endeGegeben && !endeInZukunft
 
-		if (start) {
-			// Baldige/jetzige/alte Saison
+		const saisonContainer = document.createElement("div")
+		saisonContainer.classList.add("saison")
+		saisonContainer.dataset.saison = saison
+		saisonContainer.style.setProperty("--saison", saison)
 
-			if (!endeGegeben || endeInZukunft) {
-				// 2., 3., 4.
-				// Aktuelle Saison
+		// "Wird bald starten..."
+		if (!startGegeben) {
+
+		}
+
+		// Fakten...
+		if (startGegeben) {
+			const div = document.createElement("div")
+			div.classList.add("fakten")
+
+			const fakt = (
+				name: string,
+				html: string,
+				berechnen: (wert: number) => {
+					wert: number,
+					einheit?: string
+				} = (wert) => ({wert})
+			) => {
+				const data = document.createElement("data")
+				data.innerHTML = html
+
+				onValue(child(saisonRef, name), snap => {
+					const berechnet = berechnen(snap.val() || 0)
+					data.value = berechnet.wert.toString()
+					data.dataset.einheit = berechnet.einheit
+				}, {onlyOnce: historisch})
+
+				return data
+			}
+
+			div.append(
+				fakt("strecke", "Zurückgelegte Strecke", wert => m(wert)),
+				fakt("anzahlStrecken", "Eingetragene Strecken"),
+				fakt("anzahlFahrer", "Teilnehmer")
+			)
+
+			saisonContainer.appendChild(div)
+		}
+
+		// Countdowns...
+		if (startInZukunft) {
+
+		}
+		if (endeInZukunft) {
+
+		}
+
+		// Schulen...
+		{
+			const schulenContainer = document.createElement("div")
+			schulenContainer.classList.add("schulen")
+
+			// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
+			onValue(child(saisonRef, "schulen"), snap => {
+				snap.forEach(childSnap => {
+					const name = childSnap.key
+					const schuleContainer = document.createElement("div")
+					schuleContainer.classList.add("schule")
+					schuleContainer.dataset.schule = name
+					// TODO setze background
+					// TODO Saisons der Schule
+
+					// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
+
+					// TODO anfeuern
+
+					// TODO Klassen
+				})
+			}, {onlyOnce: true})
+		}
+
+		if (startGegeben) {
+			// * Baldige/jetzige/alte Saison
+
+			if (!historisch) {
+				// * 2., 3., 4.
+				// * Aktuelle Saison
 
 				if (startInZukunft) {
-					// 3.
+					// * 3.
 					// Countdown zu Start
 				} else if (endeInZukunft) {
-					// 4.
+					// * 4.
 					// Countdown zu Ende
 				}
 			} else {
-				// 1.
-				// Historische Saison
+				// * 1.
+				// * Historische Saison
 			}
 		} else {
-			// 5.
-			// Zukünftige Saison
+			// * 5.
+			// * Zukünftige Saison
 		}
+
+		// Wie teilnehmen
+		if (!historisch) {
+			const div = document.createElement("div")
+			div.classList.add("mitmachen")
+
+			div.append(...Object.entries({
+				erklaerung:
+					"Du willst mit deiner Klasse auch teilnehmen?<wbr>" +
+					"Bitte fragt euren Klassenlehrer/eure Klassenlehrerin, ob er/sie mit Herrn Hipp Kontakt aufnehmen kann.",
+				hinweis:
+					"In dieser Saison können nur Klassen der oben gezeigten Schulen teilnehmen. <a href='#mitmachen'>Mehr Informationen</a>"
+			}).map(([name, html]) => {
+				const p = document.createElement("p")
+				p.classList.add(name)
+				p.innerHTML = html
+				return p
+			}))
+		}
+
+		saisonsContainer.appendChild(saisonContainer)
 	})
 }
