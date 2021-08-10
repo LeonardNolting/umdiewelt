@@ -123,12 +123,12 @@ const ladeSaison = async (saison: string) => {
 				}
 
 				div.append(
-					fakt("strecke", "Zurückgelegte Strecke", wert => m(wert), async wert => {
+					fakt("strecke", "Zu&shy;rück&shy;ge&shy;legte Strecke", wert => m(wert), async wert => {
 						await aktualisieren(wert)
 						// TODO Anzeige der Saison auf Karte https://github.com/LeonardNolting/umdiewelt/projects/1#card-66445855
 					}),
-					fakt("anzahlStrecken", "Eingetragene Strecken"),
-					fakt("anzahlFahrer", "Teilnehmer")
+					fakt("anzahlFahrer", "Teil&shy;nehmer"),
+					fakt("anzahlStrecken", "Ein&shy;ge&shy;tragene Strecken")
 				)
 
 				saisonContainer.appendChild(div)
