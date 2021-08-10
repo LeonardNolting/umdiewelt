@@ -9,36 +9,38 @@ interface HTMLDataElementFakt extends HTMLDataElement {
 	}
 	gesehen: boolean
 	dataset: {
-		bezeichnung: string
+		bezeichnung?: string
 		einheit: string
 	}
 }
 
-const parent = document.getElementById("fakten-anzeige").querySelector("section")
-const children = parent.querySelectorAll("data") as NodeListOf<HTMLDataElementFakt>
-
-const laden = (li: HTMLDataElementFakt) => {
-	observer.unobserve(li)
-	faktAnzeigen(li)
-}
-
 const observer = new IntersectionObserver((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
-		const li = eintrag.target as HTMLDataElementFakt;
-		if (window.scrollY === 0) addEventListener("scroll", () => laden(li), {once: true})
-		else laden(li)
+		const data = eintrag.target as HTMLDataElementFakt;
+		if (window.scrollY === 0) addEventListener("scroll", () => faktAnzeigen(data), {once: true})
+		else faktAnzeigen(data)
 	})
 }, {
 	rootMargin: '0px',
 	threshold: 1.0
 })
 
-export default function fakten() {
-	children.forEach(li => observer.observe(li))
-}
+/**
+ * Bereitet das Anzeigen eines Fakts vor
+ * @param fakt
+ */
+export const faktVorbereiten = (fakt: HTMLDataElement) => observer.observe(fakt);
+
+/**
+ * Bereitet das Anzeigen von Fakten vor
+ * @param fakten
+ */
+export default (...fakten: HTMLDataElement[]) => fakten.forEach(faktVorbereiten)
 
 function faktAnzeigen(data: HTMLDataElementFakt) {
 	data.gesehen = true
+	observer.unobserve(data)
+
 	if (!data.wert) return
 
 	const set = (value: string, einheit: string = "") => {
@@ -72,12 +74,39 @@ function faktAnzeigen(data: HTMLDataElementFakt) {
 	}, intervalTime)
 }
 
-export function fakt(bezeichnung: string, wertBerechnen: () => { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1) {
-	const zeile = Array.from(children).find(data => data.dataset.bezeichnung === bezeichnung)
-	zeile.wert = {
+/**
+ * Zeigt einen Fakt an
+ * @param data
+ * @param wertBerechnen
+ * @param valide
+ * @param anzahlNachkommastellen
+ */
+export function fakt(data: HTMLDataElementFakt, wertBerechnen: () => { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1)
+
+/**
+ * Zeigt einen Fakt an
+ * @param bezeichnung
+ * @param wertBerechnen
+ * @param valide
+ * @param anzahlNachkommastellen
+ */
+export function fakt(bezeichnung: string, wertBerechnen: () => { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1)
+
+/**
+ * Zeigt einen Fakt an
+ * @param bezeichnung
+ * @param wertBerechnen
+ * @param valide
+ * @param anzahlNachkommastellen
+ */
+export function fakt(bezeichnung: string | HTMLDataElementFakt, wertBerechnen: () => { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1) {
+	const data = typeof bezeichnung === "string" ?
+		document.querySelector("[data-bezeichnung='" + bezeichnung + "']") as HTMLDataElementFakt :
+		bezeichnung
+	data.wert = {
 		wertBerechnen,
 		valide,
 		anzahlNachkommastellen
 	}
-	if (zeile.gesehen) faktAnzeigen(zeile)
+	if (data.gesehen) faktAnzeigen(data)
 }
