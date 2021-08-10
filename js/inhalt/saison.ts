@@ -1,4 +1,4 @@
-import {child, onValue, ref, update, increment} from "firebase/database";
+import {child, onValue, ref, update, increment, onChildAdded, get} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import aktualisieren from "../aktualisieren";
 import m from "../formatierung/einheit/m";
@@ -149,7 +149,7 @@ const ladeSaison = async (saison: string) => {
 				schulenContainer.classList.add("schulen")
 
 				// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
-				onValue(child(saisonRef, "schulen"), snap => {
+				get(child(saisonRef, "schulen")).then(snap => {
 					snap.forEach(childSnap => {
 						const name = childSnap.key
 						const schuleRef = child(saisonRef, "schulen/" + name)
@@ -207,7 +207,7 @@ const ladeSaison = async (saison: string) => {
 
 						schulenContainer.append(schuleContainer)
 					})
-				}, {onlyOnce: true})
+				})
 
 				saisonContainer.append(schulenContainer)
 			}
