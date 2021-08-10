@@ -9,7 +9,8 @@ import {
 	orderByKey,
 	query,
 	ref,
-	get
+	get,
+	enableLogging
 } from "firebase/database";
 import step from "../../step";
 import Liste from "./liste";
@@ -111,6 +112,8 @@ export namespace Datenbank {
 		const analytics = getAnalytics()
 		datenbank = getDatabase();
 
+		// enableLogging(true)
+
 		Object.entries(tabellen).forEach(([name, tabelle]) => {
 			tabelle.name = name
 			tabelle.ref = ref(datenbank, name)
@@ -179,29 +182,6 @@ export namespace Datenbank {
 				ladeFakt("gespart", kg(co2(strecke)), true, 3)
 			})
 		}
-
-		{
-
-		}
-
-		/*/!*onValue(saisonRef, snap => console.log("Saison:", snap.val()))
-		onChildChanged(saisonRef, snap => console.log("Saison geändert:", snap.val()))*!/
-		onValue(child(saisonRef, "start"), snap => console.log("Saisonstart gesetzt:", snap.val()))
-
-		// Start und Ende
-		onValue(child(saisonRef, "start"), snap => console.log("Saisonstart gesetzt:", snap.val()))
-		onValue(child(saisonRef, "ende"), snap => console.log("Saisonende gesetzt:", snap.val()))
-		onChildChanged(child(saisonRef, "start"), snap => console.log("Saisonstart verschoben:", snap.val()))
-		onChildChanged(child(saisonRef, "ende"), snap => console.log("Saisonende verschoben:", snap.val()))
-
-		// Fakten
-		onValue(child(saisonRef, "strecke"), snap => console.log("Strecke gesetzt:", snap.val()))
-		onValue(child(saisonRef, "strecke"), snap => console.log("Strecke verändert:", snap.val()))
-		// selbes für strecken, fahrer ...
-
-		// Schulen
-		onValue(child(saisonRef, "schulen"), snap => console.log("Schule hinzugefügt:", snap.val()))
-		onChildChanged(child(saisonRef, "schulen"), snap => console.log("Schule verändert:", snap.val()))*/
 	}
 }
 
