@@ -52,13 +52,6 @@ export const markiereSaisonAlsNeu = (saison: string) => {
  */
 const ladeSaison = (saison: string) => {
 	const saisonRef = ref(Datenbank.datenbank, "saisons/" + saison)
-
-	onValue(child(saisonRef, "strecke"), async snap => {
-		const strecke = snap.val() || 0
-		await aktualisieren(strecke)
-		// TODO Anzeige der Saison auf Karte https://github.com/LeonardNolting/umdiewelt/projects/1#card-66445855
-	})
-
 	const saisonsContainer = document.getElementById("saisons")
 
 	onValue(child(saisonRef, "zeit"), snap => {
@@ -94,22 +87,32 @@ const ladeSaison = (saison: string) => {
 				berechnen: (wert: number) => {
 					wert: number,
 					einheit?: string
-				} = (wert) => ({wert})
+				} = (wert) => ({wert}),
+				callback: (wert: number, berechnet: {
+					wert: number,
+					einheit?: string
+				}) => void = () => {
+				}
 			) => {
 				const data = document.createElement("data")
 				data.innerHTML = html
 
 				onValue(child(saisonRef, name), snap => {
-					const berechnet = berechnen(snap.val() || 0)
+					const wert = snap.val() || 0;
+					const berechnet = berechnen(wert)
 					data.value = berechnet.wert.toString()
 					data.dataset.einheit = berechnet.einheit
+					callback(wert, berechnet)
 				}, {onlyOnce: historisch})
 
 				return data
 			}
 
 			div.append(
-				fakt("strecke", "Zurückgelegte Strecke", wert => m(wert)),
+				fakt("strecke", "Zurückgelegte Strecke", wert => m(wert), async wert => {
+					await aktualisieren(wert)
+					// TODO Anzeige der Saison auf Karte https://github.com/LeonardNolting/umdiewelt/projects/1#card-66445855
+				}),
 				fakt("anzahlStrecken", "Eingetragene Strecken"),
 				fakt("anzahlFahrer", "Teilnehmer")
 			)
