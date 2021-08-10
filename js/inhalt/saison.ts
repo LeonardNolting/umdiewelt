@@ -1,4 +1,4 @@
-import {child, onValue, ref, update, increment, onChildAdded, get} from "firebase/database";
+import {child, onValue, ref, update, increment, onChildAdded, get, DatabaseReference} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import aktualisieren from "../aktualisieren";
 import m from "../formatierung/einheit/m";
@@ -66,196 +66,8 @@ const ladeSaison = async (saison: string) => {
 	} else {
 		// Initialisieren
 		saisonContainer = document.createElement("div")
-		saisonContainer.classList.add("saison")
-		saisonContainer.dataset.saison = saison
-		saisonContainer.style.setProperty("--saison", saison)
 
-		// Listener hinzufügen
-		await onValue(child(saisonRef, "zeit"), snap => {
-			saisonContainer?.innerHTML = ""
-
-			const jetzt = Date.now()
-			const {start, ende}: { start: number | undefined, ende: number | undefined } = snap.val() || {}
-
-			const startGegeben = !!start
-			const endeGegeben = !!ende
-			const endeInZukunft = endeGegeben && ende > jetzt
-			const startInZukunft = startGegeben && start > jetzt
-			const historisch = endeGegeben && !endeInZukunft
-			const laufend = startGegeben && !startInZukunft && !historisch
-
-			// "Wird bald starten..."
-			if (!startGegeben) {
-
-			}
-
-			// Fakten...
-			if (startGegeben) {
-				const div = document.createElement("div")
-				div.classList.add("fakten")
-
-				const fakt = (
-					name: string,
-					html: string,
-					berechnen: (wert: number) => {
-						wert: number,
-						einheit?: string
-					} = (wert) => ({wert}),
-					callback: (wert: number, berechnet: {
-						wert: number,
-						einheit?: string
-					}) => void = () => {
-					}
-				) => {
-					const data = document.createElement("data") as HTMLDataElementFakt
-					data.innerHTML = html
-					data.classList.add("fakt")
-
-					faktVorbereiten(data)
-
-					onValue(child(saisonRef, name), snap => {
-						const wert = snap.val() || 0;
-						const berechnet = berechnen(wert);
-						ladeFakt(data, berechnet)
-						callback(wert, berechnet)
-					}, {onlyOnce: historisch})
-
-					return data
-				}
-
-				div.append(
-					fakt("strecke", "Zu&shy;rück&shy;ge&shy;legte Strecke", wert => m(wert), async wert => {
-						await aktualisieren(wert)
-						// TODO Anzeige der Saison auf Karte https://github.com/LeonardNolting/umdiewelt/projects/1#card-66445855
-					}),
-					fakt("anzahlFahrer", "Teil&shy;nehmer"),
-					fakt("anzahlStrecken", "Ein&shy;ge&shy;tragene Strecken")
-				)
-
-				saisonContainer.appendChild(div)
-			}
-
-			// Countdowns...
-			if (startInZukunft) {
-
-			}
-			if (endeInZukunft) {
-
-			}
-
-			// Schulen...
-			{
-				const schulenContainer = document.createElement("div")
-				schulenContainer.classList.add("schulen")
-
-				// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
-				get(child(saisonRef, "schulen")).then(snap => {
-					snap.forEach(childSnap => {
-						const name = childSnap.key
-						const schuleRef = child(saisonRef, "schulen/" + name)
-						const schuleContainer = document.createElement("div")
-						schuleContainer.classList.add("schule")
-						schuleContainer.dataset.schule = name
-
-						{
-							const ueberschrift = document.createElement("h3")
-							ueberschrift.textContent = name
-							schuleContainer.append(ueberschrift)
-						}
-
-						// TODO setze background
-
-						{
-							const ul = document.createElement("ul")
-							ul.classList.add("jahre")
-							onChildAdded(ref(Datenbank.datenbank, "schulen/" + name + "/saisons"), snap => {
-								const li = document.createElement("li")
-								li.textContent = snap.key
-								ul.append(li)
-							})
-							schuleContainer.append(ul)
-						}
-
-						// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
-
-						{
-							if (laufend) {
-								const button = document.createElement("button")
-								button.classList.add("anfeuern")
-								button.textContent = "🔥 Anfeuern"
-								button.onclick = () => {
-									update(schuleRef, {
-										"angefeuert": increment(1)
-									})
-								}
-								schuleContainer.append(button)
-							}
-
-							const em = document.createElement("em")
-							em.classList.add("angefeuert")
-							const output = document.createElement("output")
-							em.append(output, "x angefeuert")
-
-							onValue(child(schuleRef, "angefeuert"), snap => {
-								output.textContent = snap.val() || 0
-							})
-
-							schuleContainer.append(em)
-						}
-
-						// TODO Klassen
-
-						schulenContainer.append(schuleContainer)
-					})
-				})
-
-				saisonContainer.append(schulenContainer)
-			}
-
-			if (startGegeben) {
-				// * Baldige/jetzige/alte Saison
-
-				if (!historisch) {
-					// * 2., 3., 4.
-					// * Aktuelle Saison
-
-					if (startInZukunft) {
-						// * 3.
-						// Countdown zu Start
-					} else if (endeInZukunft) {
-						// * 4.
-						// Countdown zu Ende
-					}
-				} else {
-					// * 1.
-					// * Historische Saison
-				}
-			} else {
-				// * 5.
-				// * Zukünftige Saison
-			}
-
-			// Wie teilnehmen
-			if (!historisch) {
-				const div = document.createElement("div")
-				div.classList.add("mitmachen")
-
-				div.append(...Object.entries({
-					erklaerung:
-						"Du willst mit deiner Klasse auch teilnehmen?<wbr>" +
-						"Bitte fragt euren Klassenlehrer/eure Klassenlehrerin, ob er/sie mit Herrn Hipp Kontakt aufnehmen kann.",
-					hinweis:
-						"In dieser Saison können nur Klassen der oben gezeigten Schulen teilnehmen. <a href='#mitmachen'>Mehr Informationen</a>"
-				}).map(([name, html]) => {
-					const p = document.createElement("p")
-					p.classList.add(name)
-					p.innerHTML = html
-					return p
-				}))
-
-				saisonContainer.append(div)
-			}
-		})
+		await maleSaison(saison, saisonRef, saisonContainer)
 
 		saisonsContainer.append(saisonContainer)
 	}
@@ -265,4 +77,198 @@ const ladeSaison = async (saison: string) => {
 		Array.from(saisonsContainer.children).find(child => child.classList.contains("ausgewaehlt"))?.classList?.remove("ausgewaehlt")
 		saisonContainer.classList.add("ausgewaehlt")
 	}, 0)
+}
+
+const maleSaison = async (name: string, ref: DatabaseReference, container: HTMLDivElement) => {
+	container.classList.add("saison")
+	container.dataset.saison = name
+	container.style.setProperty("--saison", name)
+
+	// Listener hinzufügen
+	await onValue(child(ref, "zeit"), snap => {
+		const jetzt = Date.now()
+		const {start, ende}: { start: number | undefined, ende: number | undefined } = snap.val() || {}
+
+		const startGegeben = !!start
+		const endeGegeben = !!ende
+		const endeInZukunft = endeGegeben && ende > jetzt
+		const startInZukunft = startGegeben && start > jetzt
+		const historisch = endeGegeben && !endeInZukunft
+		const laufend = startGegeben && !startInZukunft && !historisch
+
+		// Container leeren
+		container?.innerHTML = ""
+
+		// "Wird bald starten..."
+		if (!startGegeben) {
+
+		}
+
+		// Fakten...
+		if (startGegeben) {
+			const div = document.createElement("div")
+			div.classList.add("fakten")
+
+			const fakt = (
+				name: string,
+				html: string,
+				berechnen: (wert: number) => {
+					wert: number,
+					einheit?: string
+				} = (wert) => ({wert}),
+				callback: (wert: number, berechnet: {
+					wert: number,
+					einheit?: string
+				}) => void = () => {
+				}
+			) => {
+				const data = document.createElement("data") as HTMLDataElementFakt
+				data.innerHTML = html
+				data.classList.add("fakt")
+
+				faktVorbereiten(data)
+
+				onValue(child(ref, name), snap => {
+					const wert = snap.val() || 0;
+					const berechnet = berechnen(wert);
+					ladeFakt(data, berechnet)
+					callback(wert, berechnet)
+				}, {onlyOnce: historisch})
+
+				return data
+			}
+
+			div.append(
+				fakt("strecke", "Zu&shy;rück&shy;ge&shy;legte Strecke", wert => m(wert), async wert => {
+					await aktualisieren(wert)
+					// TODO Anzeige der Saison auf Karte https://github.com/LeonardNolting/umdiewelt/projects/1#card-66445855
+				}),
+				fakt("anzahlFahrer", "Teil&shy;nehmer"),
+				fakt("anzahlStrecken", "Ein&shy;ge&shy;tragene Strecken")
+			)
+
+			container.appendChild(div)
+		}
+
+		// Countdowns...
+		if (startInZukunft) {
+
+		}
+		if (endeInZukunft) {
+
+		}
+
+		// Schulen...
+		{
+			const schulenContainer = document.createElement("div")
+			schulenContainer.classList.add("schulen")
+
+			// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
+			get(child(ref, "schulen")).then(snap => {
+				snap.forEach(childSnap => {
+					const name = childSnap.key
+					const schuleRef = child(ref, "schulen/" + name)
+					const schuleContainer = document.createElement("div")
+					schuleContainer.classList.add("schule")
+					schuleContainer.dataset.schule = name
+
+					{
+						const ueberschrift = document.createElement("h3")
+						ueberschrift.textContent = name
+						schuleContainer.append(ueberschrift)
+					}
+
+					// TODO setze background
+
+					{
+						const ul = document.createElement("ul")
+						ul.classList.add("jahre")
+						onChildAdded(ref(Datenbank.datenbank, "schulen/" + name + "/saisons"), snap => {
+							const li = document.createElement("li")
+							li.textContent = snap.key
+							ul.append(li)
+						})
+						schuleContainer.append(ul)
+					}
+
+					// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
+
+					{
+						if (laufend) {
+							const button = document.createElement("button")
+							button.classList.add("anfeuern")
+							button.textContent = "🔥 Anfeuern"
+							button.onclick = () => {
+								update(schuleRef, {
+									"angefeuert": increment(1)
+								})
+							}
+							schuleContainer.append(button)
+						}
+
+						const em = document.createElement("em")
+						em.classList.add("angefeuert")
+						const output = document.createElement("output")
+						em.append(output, "x angefeuert")
+
+						onValue(child(schuleRef, "angefeuert"), snap => {
+							output.textContent = snap.val() || 0
+						})
+
+						schuleContainer.append(em)
+					}
+
+					// TODO Klassen
+
+					schulenContainer.append(schuleContainer)
+				})
+			})
+
+			container.append(schulenContainer)
+		}
+
+		if (startGegeben) {
+			// * Baldige/jetzige/alte Saison
+
+			if (!historisch) {
+				// * 2., 3., 4.
+				// * Aktuelle Saison
+
+				if (startInZukunft) {
+					// * 3.
+					// Countdown zu Start
+				} else if (endeInZukunft) {
+					// * 4.
+					// Countdown zu Ende
+				}
+			} else {
+				// * 1.
+				// * Historische Saison
+			}
+		} else {
+			// * 5.
+			// * Zukünftige Saison
+		}
+
+		// Wie teilnehmen
+		if (!historisch) {
+			const div = document.createElement("div")
+			div.classList.add("mitmachen")
+
+			div.append(...Object.entries({
+				erklaerung:
+					"Du willst mit deiner Klasse auch teilnehmen?<wbr>" +
+					"Bitte fragt euren Klassenlehrer/eure Klassenlehrerin, ob er/sie mit Herrn Hipp Kontakt aufnehmen kann.",
+				hinweis:
+					"In dieser Saison können nur Klassen der oben gezeigten Schulen teilnehmen. <a href='#mitmachen'>Mehr Informationen</a>"
+			}).map(([name, html]) => {
+				const p = document.createElement("p")
+				p.classList.add(name)
+				p.innerHTML = html
+				return p
+			}))
+
+			container.append(div)
+		}
+	})
 }
