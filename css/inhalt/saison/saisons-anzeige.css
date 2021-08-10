@@ -1,0 +1,84 @@
+@import "./saison-auswahl.css";
+@import "./saison.css";
+@import "./saisons.css";
+
+#saisons-anzeige {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1.6rem;
+	--padding: 2rem;
+	padding: var(--padding);
+	background: #0a3050;
+	color: #eee;
+	box-shadow: 0 32px 32px -32px black inset, 0 -32px 32px -32px black inset, 0 0 12px 4px #777;
+	--dreieck-hoehe: 2vh;
+	min-height: var(--dreieck-hoehe)
+}
+
+/*#saison-anzeige::after {
+	content: "";
+	position: absolute;
+	!* bottom: -25px; *!
+	left: 0;
+	width: 0;
+	height: 0;
+	border-left: 50vw solid transparent;
+	border-right: 50vw solid transparent;
+	border-top: 2vh solid #037CA9;
+	!* top: 0; *!
+	transform: translateY(100%);
+	bottom: 0;
+	box-shadow: 0 0 4px 4px black;
+}*/
+
+#saisons-anzeige #schulen-anzeige {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+#saisons-anzeige .schule {
+	max-width: 1000px;
+	flex-basis: 0;
+	flex-grow: .5;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding: 2rem;
+	margin: 1.2rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 32px 8px black;
+	border: 2px solid #2e91fb;
+	background-color: #082e52;
+
+	transition: transform .1s ease-in-out;
+}
+
+#saisons-anzeige .schule:hover {
+	transform: scale(1.02);
+}
+
+#schulen-anzeige .schule .jahre {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+}
+
+#schulen-anzeige .schule .jahre li {
+	list-style: none;
+	display: flex;
+}
+
+#schulen-anzeige .schule .jahre li + li {
+	padding-left: 1rem;
+}
+
+#saisons-anzeige #schulen-anzeige .schule[data-schule="Gymnasium Höchstadt"] {
+	/*background-image: url("../../../img/gymnasium-hoechstadt.png");*/
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-blend-mode: soft-light;
+	background-size: auto;
+}
