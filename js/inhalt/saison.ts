@@ -82,6 +82,7 @@ const ladeSaison = async (saison: string) => {
 			const endeInZukunft = endeGegeben && ende > jetzt
 			const startInZukunft = startGegeben && start > jetzt
 			const historisch = endeGegeben && !endeInZukunft
+			const laufend = startGegeben && !startInZukunft && !historisch
 
 			// "Wird bald starten..."
 			if (!startGegeben) {
@@ -168,13 +169,16 @@ const ladeSaison = async (saison: string) => {
 						// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
 
 						{
-							const button = document.createElement("button")
-							button.classList.add("anfeuern")
-							button.textContent = "🔥 Anfeuern"
-							button.onclick = () => {
-								update(schuleRef, {
-									"angefeuert": increment(1)
-								})
+							if (laufend) {
+								const button = document.createElement("button")
+								button.classList.add("anfeuern")
+								button.textContent = "🔥 Anfeuern"
+								button.onclick = () => {
+									update(schuleRef, {
+										"angefeuert": increment(1)
+									})
+								}
+								schuleContainer.append(button)
 							}
 
 							const em = document.createElement("em")
@@ -186,7 +190,7 @@ const ladeSaison = async (saison: string) => {
 								output.textContent = snap.val() || 0
 							})
 
-							schuleContainer.append(button, em)
+							schuleContainer.append(em)
 						}
 
 						// TODO Klassen
