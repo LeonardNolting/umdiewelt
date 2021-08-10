@@ -75,7 +75,7 @@ const ladeSaison = async (saison: string) => {
 			saisonContainer?.innerHTML = ""
 
 			const jetzt = Date.now()
-			const {start, ende}: { start: number | undefined, ende: number | undefined } = snap.val()
+			const {start, ende}: { start: number | undefined, ende: number | undefined } = snap.val() || {}
 
 			const startGegeben = !!start
 			const endeGegeben = !!ende
