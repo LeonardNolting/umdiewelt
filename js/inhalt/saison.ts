@@ -1,4 +1,14 @@
-import {child, onValue, ref, update, increment, onChildAdded, get, DatabaseReference} from "firebase/database";
+import {
+	child,
+	onValue,
+	ref,
+	update,
+	increment,
+	onChildAdded,
+	get,
+	DatabaseReference,
+	DataSnapshot
+} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import aktualisieren from "../aktualisieren";
 import m from "../formatierung/einheit/m";
@@ -79,13 +89,13 @@ const ladeSaison = async (saison: string) => {
 	}, 0)
 }
 
-const maleSaison = async (name: string, ref: DatabaseReference, container: HTMLDivElement) => {
+const maleSaison = async (name: string, saisonRef: DatabaseReference, container: HTMLDivElement) => {
 	container.classList.add("saison")
 	container.dataset.saison = name
 	container.style.setProperty("--saison", name)
 
 	// Listener hinzufügen
-	await onValue(child(ref, "zeit"), snap => {
+	await onValue(child(saisonRef, "zeit"), snap => {
 		const jetzt = Date.now()
 		const {start, ende}: { start: number | undefined, ende: number | undefined } = snap.val() || {}
 
@@ -128,12 +138,15 @@ const maleSaison = async (name: string, ref: DatabaseReference, container: HTMLD
 
 				faktVorbereiten(data)
 
-				onValue(child(ref, name), snap => {
+				const ladeFaktUndCallback = (snap: DataSnapshot) => {
 					const wert = snap.val() || 0;
 					const berechnet = berechnen(wert);
 					ladeFakt(data, berechnet)
 					callback(wert, berechnet)
-				}, {onlyOnce: historisch})
+				}
+				const faktRef = child(saisonRef, name)
+				if (historisch) get(faktRef).then(ladeFaktUndCallback)
+				else onValue(faktRef, ladeFaktUndCallback)
 
 				return data
 			}
@@ -164,10 +177,10 @@ const maleSaison = async (name: string, ref: DatabaseReference, container: HTMLD
 			schulenContainer.classList.add("schulen")
 
 			// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
-			get(child(ref, "schulen")).then(snap => {
+			get(child(saisonRef, "schulen")).then(snap => {
 				snap.forEach(childSnap => {
 					const name = childSnap.key
-					const schuleRef = child(ref, "schulen/" + name)
+					const schuleRef = child(saisonRef, "schulen/" + name)
 					const schuleContainer = document.createElement("div")
 					schuleContainer.classList.add("schule")
 					schuleContainer.dataset.schule = name
