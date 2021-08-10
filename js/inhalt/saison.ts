@@ -164,7 +164,17 @@ const ladeSaison = async (saison: string) => {
 						}
 
 						// TODO setze background
-						// TODO Saisons der Schule
+
+						{
+							const ul = document.createElement("ul")
+							ul.classList.add("jahre")
+							onChildAdded(ref(Datenbank.datenbank, "schulen/" + name + "/saisons"), snap => {
+								const li = document.createElement("li")
+								li.textContent = snap.key
+								ul.append(li)
+							})
+							schuleContainer.append(ul)
+						}
 
 						// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
 
