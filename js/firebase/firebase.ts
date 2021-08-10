@@ -1,10 +1,10 @@
 import {initializeApp} from "firebase/app";
 import step from "../step";
 
-// noinspection SpellCheckingInspection
-const firebase = () => {
+export default () => {
 	step("Initialisiert Firebase")
 
+	// noinspection SpellCheckingInspection
 	initializeApp({
 		apiKey: "AIzaSyB2ibUVgYItdBY0Lpmyo6dQMHy5N4wiwJw",
 		authDomain: "fahrrad-schule.firebaseapp.com",
@@ -16,5 +16,3 @@ const firebase = () => {
 		measurementId: "G-FSF7RJDSE7"
 	});
 }
-
-export default firebase
