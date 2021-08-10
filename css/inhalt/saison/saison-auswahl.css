@@ -9,7 +9,7 @@
 	width: var(--width);
 	height: var(--height);
 	padding: 0;
-	margin: 0 calc(2 * var(--offset) * (var(--gap) + var(--width))) var(--padding) 0;
+	margin: 0 calc(2 * var(--offset) * (var(--gap) + var(--width))) 0 0;
 	/*margin: 0;*/
 	/*margin-bottom: var(--padding);*/
 	/*margin-right: calc(2 * var(--offset) * (var(--gap) + var(--width)));*/

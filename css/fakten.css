@@ -1,0 +1,38 @@
+.fakten {
+	display: flex;
+	padding: 1.6rem 0;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.fakten > .fakt {
+	font-size: .9rem;
+	padding: 1rem;
+	text-transform: uppercase;
+	text-align: center;
+	flex-basis: 0;
+	flex-grow: 1;
+}
+
+.fakten > .fakt::before {
+	content: attr(value) " " attr(data-einheit);
+	display: flex;
+	font-size: 2rem;
+	font-weight: bold;
+	text-transform: initial;
+	justify-content: center;
+	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😱</text></svg>") 16 0, auto;
+	white-space: nowrap;
+}
+
+.fakten > .fakt.bigger {
+	font-size: 1.2rem;
+}
+
+.fakten > .fakt.bigger::before {
+	font-size: 2.4rem;
+}
+
+.fakten > .fakt::before {
+	margin-bottom: 4px;
+}
