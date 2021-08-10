@@ -1,4 +1,4 @@
-import {child, onValue, ref} from "firebase/database";
+import {child, onValue, ref, update, increment} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import aktualisieren from "../aktualisieren";
 import m from "../formatierung/einheit/m";
@@ -148,19 +148,51 @@ const ladeSaison = async (saison: string) => {
 				onValue(child(saisonRef, "schulen"), snap => {
 					snap.forEach(childSnap => {
 						const name = childSnap.key
+						const schuleRef = child(saisonRef, "schulen/" + name)
 						const schuleContainer = document.createElement("div")
 						schuleContainer.classList.add("schule")
 						schuleContainer.dataset.schule = name
+
+						{
+							const ueberschrift = document.createElement("h3")
+							ueberschrift.textContent = name
+							schuleContainer.append(ueberschrift)
+						}
+
 						// TODO setze background
 						// TODO Saisons der Schule
 
 						// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
 
-						// TODO anfeuern
+						{
+							const button = document.createElement("button")
+							button.classList.add("anfeuern")
+							button.textContent = "🔥 Anfeuern"
+							button.onclick = () => {
+								update(schuleRef, {
+									"angefeuert": increment(1)
+								})
+							}
+
+							const em = document.createElement("em")
+							em.classList.add("angefeuert")
+							const output = document.createElement("output")
+							em.append(output, "x angefeuert")
+
+							onValue(child(schuleRef, "angefeuert"), snap => {
+								output.textContent = snap.val() || 0
+							})
+
+							schuleContainer.append(button, em)
+						}
 
 						// TODO Klassen
+
+						schulenContainer.append(schuleContainer)
 					})
 				}, {onlyOnce: true})
+
+				saisonContainer.append(schulenContainer)
 			}
 
 			if (startGegeben) {
@@ -203,6 +235,8 @@ const ladeSaison = async (saison: string) => {
 					p.innerHTML = html
 					return p
 				}))
+
+				saisonContainer.append(div)
 			}
 		})
 
