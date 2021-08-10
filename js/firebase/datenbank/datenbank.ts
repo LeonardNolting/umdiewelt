@@ -14,7 +14,7 @@ import {
 import step from "../../step";
 import Liste from "./liste";
 import {ausgewaehlteSaison, bieteSaisonZurAuswahlAn, waehleSaisonAus} from "../../inhalt/saison";
-import {fakt} from "../../inhalt/fakten";
+import {ladeFakt} from "../../inhalt/fakten";
 import m from "../../formatierung/einheit/m";
 import kg from "../../formatierung/einheit/kg";
 import co2 from "../../co2";
@@ -135,7 +135,7 @@ export namespace Datenbank {
 			const faktFahrer = () => {
 				if (anzahlFahrer === undefined || anzahlSaisons === undefined) return
 				const wert = anzahlSaisons === 0 ? 0 : anzahlFahrer / anzahlSaisons
-				fakt("fahrer", () => ({wert}), anzahlSaisons !== 0, 0)
+				ladeFakt("fahrer", ({wert}), anzahlSaisons !== 0, 0)
 			}
 
 			onValue(ref(datenbank, "anzahlFahrer"), snap => {
@@ -175,8 +175,8 @@ export namespace Datenbank {
 			onValue(ref(datenbank, "strecke"), async snap => {
 				const strecke = snap.val() || 0
 
-				fakt("strecke", () => m(strecke))
-				fakt("gespart", () => kg(co2(strecke)), true, 3)
+				ladeFakt("strecke", m(strecke))
+				ladeFakt("gespart", kg(co2(strecke)), true, 3)
 			})
 		}
 

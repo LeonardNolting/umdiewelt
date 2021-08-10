@@ -1,5 +1,5 @@
 import quellen from "./quellen";
-import faktenVorbereiten from "./fakten";
+import {faktenVorbereiten as fakten} from "./fakten";
 import step from "../step";
 import cookies from "./cookies";
 
@@ -24,6 +24,6 @@ export default () => {
 	document.querySelectorAll("#inhalt .verspaetet").forEach(element => observer.observe(element))
 
 	cookies()
-	faktenVorbereiten(...document.getElementById("fakten-anzeige").querySelector("section").querySelectorAll("data"))
+	fakten(...document.getElementById("fakten-anzeige").querySelector("section").querySelectorAll("data"))
 	quellen()
 }

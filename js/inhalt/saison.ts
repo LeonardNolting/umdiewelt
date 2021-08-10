@@ -2,6 +2,7 @@ import {child, onValue, ref, update, increment} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import aktualisieren from "../aktualisieren";
 import m from "../formatierung/einheit/m";
+import {faktVorbereiten, HTMLDataElementFakt, ladeFakt} from "./fakten";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
 const lis = () => Array.from(saisonAuswahl.children) as HTMLLIElement[];
@@ -105,14 +106,16 @@ const ladeSaison = async (saison: string) => {
 					}) => void = () => {
 					}
 				) => {
-					const data = document.createElement("data")
+					const data = document.createElement("data") as HTMLDataElementFakt
 					data.innerHTML = html
+					data.classList.add("fakt")
+
+					faktVorbereiten(data)
 
 					onValue(child(saisonRef, name), snap => {
 						const wert = snap.val() || 0;
-						const berechnet = berechnen(wert)
-						data.value = berechnet.wert.toString()
-						data.dataset.einheit = berechnet.einheit
+						const berechnet = berechnen(wert);
+						ladeFakt(data, berechnet)
 						callback(wert, berechnet)
 					}, {onlyOnce: historisch})
 
