@@ -90,7 +90,6 @@ h1 span#klimaschutz {
 }
 
 #inhalt table caption a, #inhalt h3 a {
-	color: inherit;
 	text-decoration: inherit;
 	display: inline-flex;
 	align-items: center;
@@ -99,11 +98,14 @@ h1 span#klimaschutz {
 }
 
 #inhalt h4 a {
-	color: inherit;
 	text-decoration: inherit;
 }
 
-#inhalt table caption a::before, #inhalt h3 a::before {
+#inhalt table caption a:not(.sternchen), #inhalt h3 a:not(.sternchen), #inhalt h4 a:not(.sternchen) {
+	color: inherit;
+}
+
+#inhalt table caption a:first-of-type::before, #inhalt h3 a:first-of-type::before {
 	content: "#";
 	position: absolute;
 	padding-right: 20px;
