@@ -52,6 +52,9 @@
 #saison-auswahl li.ausgewaehlt {
 	pointer-events: none;
 	cursor: default;
+}
+
+#saison-auswahl li.ausgewaehlt, #saison-auswahl li:hover {
 	color: #eee;
 }
 
