@@ -7,7 +7,7 @@ import {
 	onChildAdded,
 	get,
 	DatabaseReference,
-	DataSnapshot
+	DataSnapshot, onChildRemoved
 } from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import aktualisieren from "../aktualisieren";
@@ -115,6 +115,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 		}
 
 		// Fakten...
+		// TODO bei zukünftiger Saison aktualisieren(0)
 		if (startGegeben) {
 			const div = document.createElement("div")
 			div.classList.add("fakten")
@@ -232,6 +233,32 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 					}
 
 					// TODO Klassen
+					if (laufend) {
+						const table = document.createElement("table")
+						table.classList.add("klassen")
+						onChildAdded(ref(Datenbank.datenbank, "klassen/" + name), ({key: klasse}) => {
+							const tr = table.insertRow()
+							tr.dataset.klasse = klasse
+							{
+								const td = tr.insertCell()
+								td.textContent = klasse
+							}
+							onValue(ref(Datenbank.datenbank, "klassenDetails/" + name + "/" + klasse + "/strecke"), snap => {
+								const wert = snap.val() || 0
+								const td = tr.insertCell()
+								td.textContent = wert
+							})
+							onValue(ref(Datenbank.datenbank, "klassenDetails/" + name + "/" + klasse + "/anzahlStrecken"), snap => {
+								const wert = snap.val() || 0
+								const td = tr.insertCell()
+								td.textContent = wert
+							})
+						})
+						onChildRemoved(ref(Datenbank.datenbank, "klassen/" + name), ({key: klasse}) =>
+							Array.from(table.rows).find(row => row.dataset.klasse === klasse).remove())
+
+						schuleContainer.append(table)
+					}
 
 					schulenContainer.append(schuleContainer)
 				})
