@@ -17,8 +17,8 @@ export interface HTMLDataElementFakt extends HTMLDataElement {
 const observer = new IntersectionObserver((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
 		const data = eintrag.target as HTMLDataElementFakt;
-		if (window.scrollY === 0) addEventListener("scroll", () => faktAnzeigen(data), {once: true})
-		else faktAnzeigen(data)
+		if (window.scrollY === 0) addEventListener("scroll", () => zeigeFaktAn(data), {once: true})
+		else zeigeFaktAn(data)
 	})
 }, {
 	rootMargin: '0px',
@@ -29,15 +29,15 @@ const observer = new IntersectionObserver((eintraege, observer) => {
  * Bereitet das Anzeigen eines Fakts vor
  * @param fakt
  */
-export const faktVorbereiten = (fakt: HTMLDataElement) => observer.observe(fakt);
+export const bereiteFaktVor = (fakt: HTMLDataElement) => observer.observe(fakt);
 
 /**
  * Bereitet das Anzeigen von Fakten vor
  * @param fakten
  */
-export const faktenVorbereiten = (...fakten: HTMLDataElement[]) => fakten.forEach(faktVorbereiten)
+export const bereiteFaktenVor = (...fakten: HTMLDataElement[]) => fakten.forEach(bereiteFaktVor)
 
-function faktAnzeigen(data: HTMLDataElementFakt) {
+function zeigeFaktAn(data: HTMLDataElementFakt) {
 	data.gesehen = true
 	observer.unobserve(data)
 
@@ -108,5 +108,5 @@ export function ladeFakt(bezeichnung: string | HTMLDataElementFakt, berechnet: {
 		valide,
 		anzahlNachkommastellen
 	}
-	if (data.gesehen) faktAnzeigen(data)
+	if (data.gesehen) zeigeFaktAn(data)
 }

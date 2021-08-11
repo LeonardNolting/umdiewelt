@@ -1,5 +1,5 @@
 import quellen from "./quellen";
-import {faktenVorbereiten as fakten} from "./fakten";
+import {bereiteFaktenVor as fakten} from "./fakten";
 import step from "../step";
 import cookies from "./cookies";
 
