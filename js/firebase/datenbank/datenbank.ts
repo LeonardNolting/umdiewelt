@@ -122,64 +122,82 @@ export namespace Datenbank {
 		return datenbank
 	}
 
-	export async function lesen() {
-		step("Lese Datenbank")
+	export namespace Lesen {
+		export function lesen() {
+			step("Lese Datenbank");
 
-		const saisonsRef = ref(datenbank, "saisons")
-
-		{
-			// * Fahrer & Saisonanzeige
-			let anzahlFahrer = undefined,
-				anzahlSaisons = undefined
-
-			/**
-			 * Überprüfe, ob der Fakt "fahrer" gesetzt werden kann
-			 */
-			const faktFahrer = () => {
-				if (anzahlFahrer === undefined || anzahlSaisons === undefined) return
-				const wert = anzahlSaisons === 0 ? 0 : anzahlFahrer / anzahlSaisons
-				ladeFakt("fahrer", ({wert}), anzahlSaisons !== 0, 0)
-			}
-
-			onValue(ref(datenbank, "anzahlFahrer"), snap => {
-				anzahlFahrer = snap.val() || 0
-				faktFahrer()
-			})
-
-			const saisonAuswahlGeladenPromise =
-				get(query(saisonsRef, orderByKey())).then(snap => {
-					anzahlSaisons = snap.size
-					faktFahrer()
-
-					snap.forEach(childSnap => bieteSaisonZurAuswahlAn(childSnap.key))
-				})
-
-			// * Aktuelle Saison
-			let letzteSaison;
-
-			// Letzte Saison gesondert bekommen und auswählen, s. Protokoll
-			onChildAdded(query(saisonsRef, endAt(null), limitToLast(1)), snap => {
-				const neu = snap.key
-				const ausgewaehlt = ausgewaehlteSaison()
-
-				saisonAuswahlGeladenPromise.then(() => {
-					bieteSaisonZurAuswahlAn(neu)
-
-					// Nur automatisch wechseln, wenn die aktuelle Saison ausgewählt wurde (wenn man sich alte Saisons anschaut möchte man evtl. nicht gestört werden)
-					if (letzteSaison === ausgewaehlt || letzteSaison === neu) waehleSaisonAus(neu)
-				})
-
-				letzteSaison = neu
-			})
+			globaleStrecke()
+			beteiligteJaehrlich()
+			saisonAuswahl()
 		}
 
-		{
-			// * Globale Strecke
-			onValue(ref(datenbank, "strecke"), async snap => {
+		async function globaleStrecke() {
+			onValue(ref(datenbank, "global/strecke"), async snap => {
 				const strecke = snap.val() || 0
 
 				ladeFakt("strecke", m(strecke))
 				ladeFakt("gespart", kg(co2(strecke)), true, 3)
+			})
+		}
+
+		async function beteiligteJaehrlich() {
+			let anzahlFahrer = undefined,
+				anzahlHistorischeSaisons = undefined
+
+			const probieren = () => {
+				// Schon fertig geladen?
+				if (anzahlFahrer === undefined || anzahlHistorischeSaisons === undefined) return
+
+				const wert = anzahlFahrer / anzahlHistorischeSaisons
+				const valide = anzahlHistorischeSaisons !== 0;
+				ladeFakt("fahrer", {wert}, valide, 0)
+			}
+
+			onValue(ref(datenbank, "anzahlFahrer"), snap => {
+				anzahlFahrer = snap.val() || 0
+				probieren()
+			})
+
+			onValue(ref(datenbank, "saisons/anzahlHistorisch"), snap => {
+				anzahlHistorischeSaisons = snap.val() || 0
+				probieren()
+			})
+		}
+
+		async function saisonAuswahl() {
+			const geladene = []
+			let aktiv = undefined,
+				zuletztAktiv = undefined,
+				/**
+				 * Erst wenn die aktive Saison bekannt ist *und geladen wurde* aktive Saison zur Auswahl anbieten, sodass sie vorher schon *in der richtigen Reihenfolge* zur Auswahl angeboten wurde und nicht vorher irgendwo undefiniert landet.
+				 */
+				fertig = () => aktiv !== undefined && geladene.includes(aktiv)
+
+			const probieren = () => {
+				// Schon fertig geladen?
+				if (!fertig()) return
+
+				bieteSaisonZurAuswahlAn(aktiv)
+
+				const ausgewaehlt = ausgewaehlteSaison()
+				if (
+					// Nur automatisch wechseln, wenn die aktuelle Saison ausgewählt wurde (wenn man sich alte Saisons anschaut möchte man evtl. nicht gestört werden)
+					zuletztAktiv === ausgewaehlt ||
+					// evtl. wurde Saisonauswahl noch nicht geladen -> zuletztAktiv schon auf aktiv gesetzt (ohne Saisonauswahl wird Nutzer aber auch nicht gestört, da er sich keine alten Saisons hat anschauen können...)
+					zuletztAktiv === aktiv
+				) waehleSaisonAus(aktiv)
+			}
+
+			onChildAdded(ref(datenbank, "saisons/liste"), snap => {
+				bieteSaisonZurAuswahlAn(snap.key)
+				geladene.push(snap.key)
+				probieren()
+			})
+
+			onValue(ref(datenbank, "saisons/aktiv"), snap => {
+				aktiv = snap.key
+				probieren()
+				zuletztAktiv = aktiv
 			})
 		}
 	}

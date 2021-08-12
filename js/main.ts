@@ -20,5 +20,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 	initialisieren()
 	firebase()
 	Datenbank.initialisieren()
-	Datenbank.lesen()
+	Datenbank.Lesen.lesen()
 })
