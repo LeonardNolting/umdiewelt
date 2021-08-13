@@ -1,0 +1,3 @@
+body:not(.admin) .admin-exklusive {
+	display: none !important;
+}

@@ -9,6 +9,7 @@
 @import "./tageszeit.css";
 @import "./quellen.css";
 @import "./fusszeile.css";
+@import "./admin.css";
 
 #inhalt {
 	position: relative;

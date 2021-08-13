@@ -48,7 +48,7 @@ input[type=button]:focus, input[type=submit]:focus, button:focus {
 
 input[type=button]:disabled, input[type=submit]:disabled, button:disabled {
 	--color-primary: #ccc;
-	cursor: progress;
+	cursor: default;
 }
 
 input[type=button].leer, input[type=submit].leer, button.leer {
