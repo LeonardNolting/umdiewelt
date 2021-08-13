@@ -20,6 +20,7 @@ import m from "../../formatierung/einheit/m";
 import kg from "../../formatierung/einheit/kg";
 import co2 from "../../co2";
 import LatLngLiteral = google.maps.LatLngLiteral;
+import aktualisieren from "../../aktualisieren";
 
 export interface Saison {
 	start: number
@@ -126,9 +127,23 @@ export namespace Datenbank {
 		export function lesen() {
 			step("Liest Datenbank");
 
+			fortschritt()
 			globaleStrecke()
 			beteiligteJaehrlich()
 			saisonAuswahl()
+		}
+
+		function fortschritt() {
+			onValue(ref(datenbank, "saisons/aktiv"), async snap => {
+				const saison = snap.val()
+				const wert: number = saison === 0 ? 0 : await new Promise(resolve => {
+					onValue(
+						ref(datenbank, "saisons/details/" + saison + "/strecke"),
+						snap => resolve(snap.val() || 0)
+					)
+				})
+				aktualisieren(wert)
+			})
 		}
 
 		async function globaleStrecke() {

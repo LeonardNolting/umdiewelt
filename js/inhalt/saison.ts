@@ -10,7 +10,6 @@ import {
 	DataSnapshot, onChildRemoved
 } from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
-import aktualisieren from "../aktualisieren";
 import m from "../formatierung/einheit/m";
 import {bereiteFaktVor, HTMLDataElementFakt, ladeFakt} from "./fakten";
 
@@ -115,7 +114,6 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 		}
 
 		// Fakten...
-		// TODO bei zukünftiger Saison aktualisieren(0)
 		if (startGegeben) {
 			const div = document.createElement("div")
 			div.classList.add("fakten")
@@ -153,10 +151,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 			}
 
 			div.append(
-				fakt("strecke", "Zu&shy;rück&shy;ge&shy;legte Strecke", wert => m(wert), async wert => {
-					await aktualisieren(wert)
-					// TODO Anzeige der Saison auf Karte https://github.com/LeonardNolting/umdiewelt/projects/1#card-66445855
-				}),
+				fakt("strecke", "Zu&shy;rück&shy;ge&shy;legte Strecke", wert => m(wert)),
 				fakt("anzahlFahrer", "Teil&shy;nehmer"),
 				fakt("anzahlStrecken", "Ein&shy;ge&shy;tragene Strecken")
 			)
@@ -234,7 +229,6 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 					const table = document.createElement("table")
 					table.classList.add("klassen")
 
-					// TODO an neue Datenbankstruktur adaptieren
 					onChildAdded(ref(Datenbank.datenbank, "aktuell/klassen/liste/" + name), ({key: klasse}) => {
 						const tr = table.insertRow()
 						tr.dataset.klasse = klasse
