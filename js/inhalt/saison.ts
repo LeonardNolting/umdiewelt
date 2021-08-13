@@ -63,7 +63,7 @@ export const markiereSaisonAlsNeu = (saison: string) => {
  */
 const ladeSaison = async (saison: string) => {
 	// TODO document.body.progress = true
-	const saisonRef = ref(Datenbank.datenbank, "saisons/" + saison)
+	const saisonRef = ref(Datenbank.datenbank, "saisons/details/" + saison)
 	const saisonsContainer = document.getElementById("saisons")
 
 	let saisonContainer
@@ -177,92 +177,95 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 			const schulenContainer = document.createElement("div")
 			schulenContainer.classList.add("schulen")
 
-			// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
-			get(child(saisonRef, "schulen")).then(snap => {
-				snap.forEach(childSnap => {
-					const name = childSnap.key
-					const schuleRef = child(saisonRef, "schulen/" + name)
-					const schuleContainer = document.createElement("div")
-					schuleContainer.classList.add("schule")
-					schuleContainer.dataset.schule = name
+			const maleSchule = (name: string) => {
+				const schuleRef = child(saisonRef, "schulen/details/" + name)
+				const schuleContainer = document.createElement("div")
+				schuleContainer.classList.add("schule")
+				schuleContainer.dataset.schule = name
 
-					{
-						const ueberschrift = document.createElement("h3")
-						ueberschrift.textContent = name
-						schuleContainer.append(ueberschrift)
-					}
+				{
+					const ueberschrift = document.createElement("h3")
+					ueberschrift.textContent = name
+					schuleContainer.append(ueberschrift)
+				}
 
-					// TODO setze background
+				// TODO setze background
 
-					{
-						const ul = document.createElement("ul")
-						ul.classList.add("jahre")
-						onChildAdded(ref(Datenbank.datenbank, "schulen/" + name + "/saisons"), snap => {
-							const li = document.createElement("li")
-							li.textContent = snap.key
-							ul.append(li)
-						})
-						schuleContainer.append(ul)
-					}
+				{
+					const ul = document.createElement("ul")
+					ul.classList.add("jahre")
+					onChildAdded(ref(Datenbank.datenbank, "schulen/details/" + name + "/saisons/liste"), snap => {
+						const li = document.createElement("li")
+						li.textContent = snap.key
+						ul.append(li)
+					})
+					schuleContainer.append(ul)
+				}
 
-					// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
+				// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
 
-					{
-						if (laufend) {
-							const button = document.createElement("button")
-							button.classList.add("anfeuern")
-							button.textContent = "🔥 Anfeuern"
-							button.onclick = () => {
-								update(schuleRef, {
-									"angefeuert": increment(1)
-								})
-							}
-							schuleContainer.append(button)
-						}
-
-						const em = document.createElement("em")
-						em.classList.add("angefeuert")
-						const output = document.createElement("output")
-						em.append(output, "x angefeuert")
-
-						onValue(child(schuleRef, "angefeuert"), snap => {
-							output.textContent = snap.val() || 0
-						})
-
-						schuleContainer.append(em)
-					}
-
-					// TODO Klassen
+				{
 					if (laufend) {
-						const table = document.createElement("table")
-						table.classList.add("klassen")
-						onChildAdded(ref(Datenbank.datenbank, "klassen/" + name), ({key: klasse}) => {
-							const tr = table.insertRow()
-							tr.dataset.klasse = klasse
-							{
-								const td = tr.insertCell()
-								td.textContent = klasse
-							}
-							onValue(ref(Datenbank.datenbank, "klassenDetails/" + name + "/" + klasse + "/strecke"), snap => {
-								const wert = snap.val() || 0
-								const td = tr.insertCell()
-								td.textContent = wert
+						const button = document.createElement("button")
+						button.classList.add("anfeuern")
+						button.textContent = "🔥 Anfeuern"
+						button.onclick = () => {
+							update(schuleRef, {
+								"angefeuert": increment(1)
 							})
-							onValue(ref(Datenbank.datenbank, "klassenDetails/" + name + "/" + klasse + "/anzahlStrecken"), snap => {
-								const wert = snap.val() || 0
-								const td = tr.insertCell()
-								td.textContent = wert
-							})
-						})
-						onChildRemoved(ref(Datenbank.datenbank, "klassen/" + name), ({key: klasse}) =>
-							Array.from(table.rows).find(row => row.dataset.klasse === klasse).remove())
-
-						schuleContainer.append(table)
+						}
+						schuleContainer.append(button)
 					}
 
-					schulenContainer.append(schuleContainer)
-				})
-			})
+					const em = document.createElement("em")
+					em.classList.add("angefeuert")
+					const output = document.createElement("output")
+					em.append(output, "x angefeuert")
+
+					onValue(child(schuleRef, "angefeuert"), snap => {
+						output.textContent = snap.val() || 0
+					})
+
+					schuleContainer.append(em)
+				}
+
+				// TODO Klassen
+				if (laufend) {
+					const table = document.createElement("table")
+					table.classList.add("klassen")
+
+					// TODO an neue Datenbankstruktur adaptieren
+					onChildAdded(ref(Datenbank.datenbank, "aktuell/klassen/liste/" + name), ({key: klasse}) => {
+						const tr = table.insertRow()
+						tr.dataset.klasse = klasse
+						{
+							const td = tr.insertCell()
+							td.textContent = klasse
+						}
+						onValue(ref(Datenbank.datenbank, "aktuell/klassen/details/" + name + "/" + klasse + "/strecke"), snap => {
+							const wert = snap.val() || 0
+							const td = tr.insertCell()
+							td.textContent = wert
+						})
+						onValue(ref(Datenbank.datenbank, "aktuell/klassen/details/" + name + "/" + klasse + "/anzahlStrecken"), snap => {
+							const wert = snap.val() || 0
+							const td = tr.insertCell()
+							td.textContent = wert
+						})
+					})
+					onChildRemoved(ref(Datenbank.datenbank, "aktuell/klassen/liste/" + name), ({key: klasse}) =>
+						Array.from(table.rows).find(row => row.dataset.klasse === klasse).remove())
+
+					schuleContainer.append(table)
+				}
+
+				schulenContainer.append(schuleContainer)
+			}
+
+			// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
+			// zusätzlich: get -> einmal abfragen, dann offline (schnell)
+			get(child(saisonRef, "schulen/liste")).then(snap =>
+				snap.forEach(childSnap => maleSchule(childSnap.key)))
 
 			container.append(schulenContainer)
 		}
