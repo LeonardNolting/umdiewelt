@@ -124,7 +124,7 @@ export namespace Datenbank {
 
 	export namespace Lesen {
 		export function lesen() {
-			step("Lese Datenbank");
+			step("Liest Datenbank");
 
 			globaleStrecke()
 			beteiligteJaehrlich()
