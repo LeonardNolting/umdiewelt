@@ -1,12 +1,15 @@
 #admin-anzeige {
 	--gap: .4rem;
+}
+
+#admin-anzeige > fieldset {
 	display: flex;
 	flex-wrap: wrap;
 	margin: calc(-1 * var(--gap));
 	justify-content: space-between;
 }
 
-#admin-anzeige > button {
+#admin-anzeige > fieldset > button {
 	margin: var(--gap);
 	flex-basis: 0;
 	flex-grow: 1;
