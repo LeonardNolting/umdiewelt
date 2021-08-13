@@ -8,6 +8,7 @@
 	margin: var(--margin) 0;
 	margin-top: calc(var(--margin) + 1.4rem); /* s. ::before height **/
 	position: relative;
+	overflow: hidden;
 }
 
 #fahrer-anzeige::before {

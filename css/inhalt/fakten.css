@@ -1,5 +1,7 @@
 #fakten-anzeige {
 	margin-top: 0.8rem;
+	position: relative;
+	overflow: hidden;
 }
 
 #fakten-anzeige::before {
