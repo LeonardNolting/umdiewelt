@@ -186,7 +186,7 @@ export namespace Datenbank {
 				/**
 				 * Erst wenn die aktive Saison bekannt ist *und geladen wurde* aktive Saison zur Auswahl anbieten, sodass sie vorher schon *in der richtigen Reihenfolge* zur Auswahl angeboten wurde und nicht vorher irgendwo undefiniert landet.
 				 */
-				fertig = () => aktiv !== undefined && geladene.includes(aktiv)
+				fertig = () => aktiv !== undefined && aktiv !== null && geladene.includes(aktiv)
 
 			const probieren = () => {
 				// Schon fertig geladen?
@@ -198,9 +198,10 @@ export namespace Datenbank {
 				if (
 					// Nur automatisch wechseln, wenn die aktuelle Saison ausgewählt wurde (wenn man sich alte Saisons anschaut möchte man evtl. nicht gestört werden)
 					zuletztAktiv === ausgewaehlt ||
-					// evtl. wurde Saisonauswahl noch nicht geladen -> zuletztAktiv schon auf aktiv gesetzt (ohne Saisonauswahl wird Nutzer aber auch nicht gestört, da er sich keine alten Saisons hat anschauen können...)
-					zuletztAktiv === aktiv
+					// oder es wurde tatsächlich keine Saison ausgewählt, weil vorher noch keine da waren...
+					ausgewaehlt === undefined
 				) waehleSaisonAus(aktiv)
+				zuletztAktiv = aktiv
 			}
 
 			onChildAdded(ref(datenbank, "saisons/liste"), snap => {
@@ -210,9 +211,8 @@ export namespace Datenbank {
 			})
 
 			onValue(ref(datenbank, "saisons/aktiv"), snap => {
-				aktiv = snap.key
+				aktiv = snap.val()?.toString() || null
 				probieren()
-				zuletztAktiv = aktiv
 			})
 		}
 	}
