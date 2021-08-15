@@ -6,6 +6,7 @@ import {adminEmail} from "../../konfiguration";
 import Popup from "../../popup";
 import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
+import admin from "../../inhalt/admin";
 
 export abstract class Authentifizierung {
 	protected constructor(readonly user: User) {
@@ -113,6 +114,7 @@ export class AdminAuthentifizierung extends Authentifizierung {
 					.then(user => {
 						Popup.schliessen(this.popup)
 						document.body.classList.add("admin")
+						admin()
 						resolve()
 					})
 					.catch(error => {
