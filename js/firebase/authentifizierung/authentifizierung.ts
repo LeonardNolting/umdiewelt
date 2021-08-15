@@ -2,19 +2,17 @@ import {getAuth, signInWithEmailAndPassword, User} from "firebase/auth";
 import step from "../../step";
 import FahrerAuthentifizierung from "./fahrerAuthentifizierung";
 import load from "../../load";
-import {Datenbank} from "../datenbank/datenbank";
 import {adminEmail} from "../../konfiguration";
 import Popup from "../../popup";
 import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
-import tabellen = Datenbank.tabellen;
 
 export abstract class Authentifizierung {
 	protected constructor(readonly user: User) {
 		step("Authentifiziert (" + this.constructor.name + ")")
 	}
 
-	abstract kannEintragen: Boolean
+	abstract autorisiertEinzutragen: Boolean
 
 	private static _authentifizierung: Authentifizierung | null = null
 	static get authentifizierung() {
@@ -31,7 +29,6 @@ export abstract class Authentifizierung {
 
 	static vorbereiten() {
 		if (this.vorbereitet) return
-		if (!tabellen.schulen.geladen || !tabellen.klassen.geladen) return
 
 		FahrerAuthentifizierung.vorbereiten()
 		AdminAuthentifizierung.vorbereiten()
@@ -132,5 +129,5 @@ export class AdminAuthentifizierung extends Authentifizierung {
 		})
 	}
 
-	kannEintragen = false
+	autorisiertEinzutragen = false
 }

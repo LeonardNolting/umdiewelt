@@ -2,16 +2,15 @@ import {User} from "firebase/auth";
 import {Authentifizierung} from "./authentifizierung";
 import Popup from "../../popup";
 import {Datenbank} from "../datenbank/datenbank";
-import tabellen = Datenbank.tabellen;
-import benachrichtigungen from "../../benachrichtigungen/benachrichtigungen";
 import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
+import {Unsubscribe, onChildAdded, onValue, ref} from "firebase/database";
 
 export default class FahrerAuthentifizierung extends Authentifizierung {
 	private constructor(user: User, readonly klasse: string) {
 		super(user)
 	}
 
-	kannEintragen = true
+	autorisiertEinzutragen = true
 
 	// TODO klären was für E-Mail-Adressen benutzt werden
 	private static email(klasse: string) {
@@ -30,23 +29,60 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 
 	private static popup = document.getElementById("popup-anmelden")
 	private static schuleSelect = FahrerAuthentifizierung.popup["schule"] as HTMLSelectElement
-	private static klasseSelect = FahrerAuthentifizierung.popup["klasse"] as HTMLSelectElement
+	private static klasseSelect = FahrerAuthentifizierung.popup["klasse"] as HTMLSelectElement & { listener: Unsubscribe }
 	private static passwortInput = FahrerAuthentifizierung.popup["passwort"] as HTMLInputElement
 	private static fehlgeschlagen = document.getElementById("anmelden-passwort-fehlgeschlagen")
 
+	private static kannEintragen = true
+	private static kannEintragenNachricht = null
+
 	static vorbereiten() {
-		const klasseSelectFuellen = (schule: string) => {
-			this.klasseSelect.innerHTML = ""
-			console.log(this.klasseSelect.value, "sollte leer sein (vor allem nach Auswählen einer anderen Schule)")
-			const klassen = tabellen.klassen.elemente.filter(({value: klasse}) => klasse.schule === schule)
-			klassen.forEach(({key, value: klasse}) => this.klasseSelect.add(new Option(klasse.name, key)))
+		// Überhaupt möglich?
+		let leer = undefined,
+			laufend = undefined
+
+		const probieren = () => {
+			if (laufend === null) {
+				this.kannEintragen = false
+				this.kannEintragenNachricht = "Es können aktuell keine Eintragungen vorgenommen werden."
+			}
+
+			if (leer !== false) {
+				this.kannEintragen = false
+				this.kannEintragenNachricht = "Es wurden noch keine Klassen für die laufende Saison eingetragen." // TODO "bitte s. #mitmachen ...
+			}
 		}
 
-		tabellen.schulen.elemente.forEach(({key: id, value: schule}, index) => {
+		onValue(ref(Datenbank.datenbank, "saisons/laufend"), snap => {
+			laufend = snap.val()
+			probieren()
+		})
+		onValue(ref(Datenbank.datenbank, "aktuell/klassen/leer"), snap => {
+			leer = snap.val() === null ? true : snap.val()
+			probieren()
+		})
+
+		// dann Schulen und Klassen eintragen
+		const klasseSelectFuellen = (schule: string) => {
+			this.klasseSelect.innerHTML = ""
+			this.klasseSelect.listener()
+			this.klasseSelect.listener = onChildAdded(ref(Datenbank.datenbank, "aktuell/klassen/liste/" + schule), snap => {
+				this.klasseSelect.add(new Option(snap.val(), snap.val()))
+			})
+		}
+
+		onValue(ref(Datenbank.datenbank, "saisons/laufend"), snap => {
+			const laufend = snap.val()
+			onChildAdded(ref(Datenbank.datenbank, "saisons/details/" + laufend + "/schulen/liste"), snap => {
+				// TODO standard?
+				this.schuleSelect.add(new Option(snap.val(), snap.val()))
+			})
+		})
+		/*tabellen.schulen.elemente.forEach(({key: id, value: schule}, index) => {
 			const standard = index == 0
 			this.schuleSelect.add(new Option(schule.name, id, standard, standard))
 			if (standard) klasseSelectFuellen(id)
-		})
+		})*/
 
 		this.schuleSelect.addEventListener("change", () => klasseSelectFuellen(this.schuleSelect.value))
 	}
@@ -54,9 +90,8 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 	static async anmelden() {
 		await this.warteVorbereitet()
 
-		// TODO Testen, ob eingetragen werden kann
-		if (tabellen.schulen.elemente.length === 0 || tabellen.klassen.elemente.length === 0) {
-			benachrichtigung("Es sind aktuell keine Schulen angemeldet.")
+		if (!this.kannEintragen) {
+			if (this.kannEintragenNachricht) benachrichtigung(this.kannEintragenNachricht)
 			return Promise.reject()
 		}
 

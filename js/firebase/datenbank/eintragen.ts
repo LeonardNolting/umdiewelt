@@ -13,7 +13,7 @@ export async function eintragen(
 	name: string,
 	route?: { von: LatLngLiteral, nach: LatLngLiteral } | undefined
 ) {
-	if (!Authentifizierung.authentifizierung.kannEintragen)
+	if (!Authentifizierung.authentifizierung.autorisiertEinzutragen)
 		throw new Error("Authentifizierung ist nicht ausreichend.")
 
 	/* * Schritte:
