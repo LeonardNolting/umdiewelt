@@ -112,8 +112,8 @@ export class AdminAuthentifizierung extends Authentifizierung {
 				this.authentifizieren(passwort)
 					.then(user => {
 						Popup.schliessen(this.popup)
+						document.body.classList.add("admin")
 						resolve()
-						// TODO Admin-Kontrollen anzeigen, Admin-Button verstecken
 					})
 					.catch(error => {
 						// Zeigt Benutzer Fehlernachricht an
