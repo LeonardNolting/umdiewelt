@@ -8,6 +8,8 @@ export default async () => {
 	const fieldset = form.querySelector("fieldset") as HTMLFieldSetElement
 	const button = (name: string) => form[name] as HTMLButtonElement
 
+	form.onsubmit = event => event.preventDefault()
+
 	await new Promise(resolve => {
 		const knopf = button("neue-saison")
 		knopf.disabled = true
