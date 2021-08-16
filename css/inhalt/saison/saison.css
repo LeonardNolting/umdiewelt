@@ -7,4 +7,5 @@
 	position: absolute;
 	opacity: 0;
 	transition: none;
+	z-index: -1;
 }
