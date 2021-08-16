@@ -42,12 +42,12 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 			laufend = undefined
 
 		const probieren = () => {
+			if (leer === undefined || laufend === undefined) return
+
 			if (laufend === null) {
 				this.kannEintragen = false
 				this.kannEintragenNachricht = "Es können aktuell keine Eintragungen vorgenommen werden."
-			}
-
-			if (leer !== false) {
+			} else if (leer !== false) {
 				this.kannEintragen = false
 				this.kannEintragenNachricht = "Es wurden noch keine Klassen für die laufende Saison eingetragen." // TODO "bitte s. #mitmachen ...
 			}
