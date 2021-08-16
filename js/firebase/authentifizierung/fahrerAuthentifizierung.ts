@@ -33,8 +33,8 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 	private static passwortInput = FahrerAuthentifizierung.popup["passwort"] as HTMLInputElement
 	private static fehlgeschlagen = document.getElementById("anmelden-passwort-fehlgeschlagen")
 
-	private static kannEintragen = true
-	private static kannEintragenNachricht = null
+	private static kannEintragen = undefined
+	private static kannEintragenNachricht = undefined
 
 	static vorbereiten() {
 		// Überhaupt möglich?
@@ -44,6 +44,8 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 		const probieren = () => {
 			if (leer === undefined || laufend === undefined) return
 
+			this.kannEintragen = true
+			this.kannEintragenNachricht = null
 			if (laufend === null) {
 				this.kannEintragen = false
 				this.kannEintragenNachricht = "Es können aktuell keine Eintragungen vorgenommen werden."
