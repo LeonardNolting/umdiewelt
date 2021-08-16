@@ -69,7 +69,7 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 			this.klasseSelect.innerHTML = ""
 			this.klasseSelect.listener()
 			this.klasseSelect.listener = onChildAdded(ref(Datenbank.datenbank, "aktuell/klassen/liste/" + schule), snap => {
-				this.klasseSelect.add(new Option(snap.val(), snap.val()))
+				this.klasseSelect.add(new Option(snap.key, snap.key))
 			})
 		}
 
