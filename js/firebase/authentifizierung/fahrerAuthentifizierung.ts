@@ -4,6 +4,7 @@ import Popup from "../../popup";
 import {Datenbank} from "../datenbank/datenbank";
 import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
 import {Unsubscribe, onChildAdded, onValue, ref} from "firebase/database";
+import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
 
 export default class FahrerAuthentifizierung extends Authentifizierung {
 	private constructor(user: User, readonly klasse: string) {
@@ -31,7 +32,6 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 	private static schuleSelect = FahrerAuthentifizierung.popup["schule"] as HTMLSelectElement
 	private static klasseSelect = FahrerAuthentifizierung.popup["klasse"] as HTMLSelectElement & { listener: Unsubscribe }
 	private static passwortInput = FahrerAuthentifizierung.popup["passwort"] as HTMLInputElement
-	private static fehlgeschlagen = document.getElementById("anmelden-passwort-fehlgeschlagen")
 
 	private static kannEintragen = undefined
 	private static kannEintragenNachricht = undefined
@@ -120,15 +120,11 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 				this.authentifizieren(passwort, klasse)
 					.then(user => {
 						Popup.schliessen(this.popup)
-
-						// Falls nachher nochmal authentifizieren: Nicht fehlgeschlagen
-						this.fehlgeschlagen.classList.remove("sichtbar")
-
 						resolve()
 					})
 					.catch(error => {
 						// Zeigt Benutzer Fehlernachricht an
-						this.fehlgeschlagen.classList.add("sichtbar")
+						benachrichtigung("Falsches Passwort. Bitte versuchen Sie es erneut.", BenachrichtigungsLevel.WARNUNG)
 					})
 					.finally(() => {
 						// Offen für weitere Versuche
