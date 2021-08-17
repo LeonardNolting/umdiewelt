@@ -3,7 +3,7 @@ import {Authentifizierung} from "./authentifizierung";
 import Popup from "../../popup";
 import {Datenbank} from "../datenbank/datenbank";
 import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
-import {Unsubscribe, onChildAdded, onValue, ref} from "firebase/database";
+import {Unsubscribe, onChildAdded, onValue, ref, get} from "firebase/database";
 import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
 
 export default class FahrerAuthentifizierung extends Authentifizierung {
@@ -75,19 +75,18 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 
 		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
 			const laufend = snap.val()
-			let erste = true
-			onChildAdded(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/schulen/liste"), snap => {
-				const standard = erste
-				erste = false
-				this.schuleSelect.add(new Option(snap.key, snap.key, standard, standard))
-				if (standard) klasseSelectFuellen(snap.key)
+			this.schuleSelect.innerHTML = ""
+			get(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/schulen/liste")).then(snap => {
+				let erste = true
+				snap.forEach(childSnap => {
+					const schule = childSnap.key
+					const standard = erste
+					erste = false
+					this.schuleSelect.add(new Option(schule, schule, standard, standard))
+					if (standard) klasseSelectFuellen(schule)
+				})
 			})
 		})
-		/*tabellen.schulen.elemente.forEach(({key: id, value: schule}, index) => {
-			const standard = index == 0
-			this.schuleSelect.add(new Option(schule.name, id, standard, standard))
-			if (standard) klasseSelectFuellen(id)
-		})*/
 
 		this.schuleSelect.addEventListener("change", () => klasseSelectFuellen(this.schuleSelect.value))
 	}
