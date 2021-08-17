@@ -7,24 +7,24 @@ import {Unsubscribe, onChildAdded, onValue, ref, get} from "firebase/database";
 import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
 
 export default class FahrerAuthentifizierung extends Authentifizierung {
-	private constructor(user: User, readonly klasse: string) {
+	private constructor(user: User, readonly schule: string, readonly klasse: string) {
 		super(user)
 	}
 
 	autorisiertEinzutragen = true
 
-	// TODO klären was für E-Mail-Adressen benutzt werden
-	private static email(klasse: string) {
-		// const klasse = tabellen.fahrer.get(fahrer)
-		// const email = tabellen.klassen.get(klasse).email
-		return ""
+	private static email(schule: string, klasse: string) {
+		return new Promise<string>(resolve =>
+			onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "email"), snap => {
+				resolve(snap.val())
+			}, {onlyOnce: true}))
 	}
 
-	protected static authentifizieren(passwort: string, klasse: string) {
-		return this.auth(
-			this.email(klasse),
+	protected static async authentifizieren(passwort: string, schule: string, klasse: string) {
+		return await this.auth(
+			await this.email(schule, klasse),
 			passwort,
-			user => new FahrerAuthentifizierung(user, klasse)
+			user => new FahrerAuthentifizierung(user, schule, klasse)
 		)
 	}
 
@@ -119,7 +119,7 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 					klasse = this.klasseSelect.value,
 					passwort = this.passwortInput.value
 
-				this.authentifizieren(passwort, klasse)
+				this.authentifizieren(passwort, schule, klasse)
 					.then(user => {
 						Popup.schliessen(this.popup)
 						resolve()
