@@ -55,11 +55,11 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 			}
 		}
 
-		onValue(ref(Datenbank.datenbank, "saisons/laufend"), snap => {
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
 			laufend = snap.val()
 			probieren()
 		})
-		onValue(ref(Datenbank.datenbank, "aktuell/klassen/leer"), snap => {
+		onValue(ref(Datenbank.datenbank, "spezifisch/klassen/leer"), snap => {
 			leer = snap.val() === null ? true : snap.val()
 			probieren()
 		})
@@ -67,17 +67,20 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 		// dann Schulen und Klassen eintragen
 		const klasseSelectFuellen = (schule: string) => {
 			this.klasseSelect.innerHTML = ""
-			this.klasseSelect.listener()
-			this.klasseSelect.listener = onChildAdded(ref(Datenbank.datenbank, "aktuell/klassen/liste/" + schule), snap => {
+			this.klasseSelect.listener?.()
+			this.klasseSelect.listener = onChildAdded(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), snap => {
 				this.klasseSelect.add(new Option(snap.key, snap.key))
 			})
 		}
 
-		onValue(ref(Datenbank.datenbank, "saisons/laufend"), snap => {
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
 			const laufend = snap.val()
-			onChildAdded(ref(Datenbank.datenbank, "saisons/details/" + laufend + "/schulen/liste"), snap => {
-				// TODO standard?
-				this.schuleSelect.add(new Option(snap.key, snap.key))
+			let erste = true
+			onChildAdded(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/schulen/liste"), snap => {
+				const standard = erste
+				erste = false
+				this.schuleSelect.add(new Option(snap.key, snap.key, standard, standard))
+				if (standard) klasseSelectFuellen(snap.key)
 			})
 		})
 		/*tabellen.schulen.elemente.forEach(({key: id, value: schule}, index) => {

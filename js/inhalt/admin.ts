@@ -12,72 +12,77 @@ export default async () => {
 
 	await new Promise(resolve => {
 		const knopf = button("neue-saison")
-		knopf.disabled = true
-		// * Neue Saison: nur wenn keine laufende Saison existiert
-		onValue(ref(Datenbank.datenbank, "saisons/laufend"), snap => {
-			if (snap.val() === null) knopf.disabled = false
+		// * Neue Saison: nur wenn nicht schon eine aktuelle Saison existiert
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktuell"), snap => {
+			knopf.disabled = snap.val() !== null;
 			resolve()
 		})
+
+		// Neue Saison: allgemein/saisons/aktuell setzen, aktuell leeren
 	})
 
 	await new Promise(resolve => {
 		const knopf = button("neue-klasse")
-		knopf.disabled = true
 		// * Klasse eintragen: nur wenn eine laufende Saison existiert
-		onValue(ref(Datenbank.datenbank, "saisons/laufend"), async snap => {
-			if (snap.val() !== null) knopf.disabled = false
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), async snap => {
+			knopf.disabled = snap.val() === null;
 			resolve()
 		})
 	})
 
 	await new Promise(resolve => {
 		const knopf = button("saisonstart")
-		knopf.disabled = true
 		// * Saisonstart festlegen/verändern: nur wenn noch keiner gegeben oder dieser noch verändert werden kann (nicht schon passiert ist)
-		onValue(ref(Datenbank.datenbank, "saisons/laufend"), snap => {
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
+			knopf.disabled = true
 			const laufend = snap.val();
 			if (laufend !== null) {
-				onValue(ref(Datenbank.datenbank, "saisons/details/" + laufend + "/zeit/start"), snap => {
+				onValue(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/zeit/start"), snap => {
 					const start = snap.val();
 					if (start === null || start > Date.now()) knopf.disabled = false
 					resolve()
 				})
 			} else resolve()
 		})
+
+		// Saisonstart gesetzt: allgemein/saisons/aktiv setzen
+		// Saisonstart passiert: allgemein/saisons/laufend setzen
 	})
 
 	await new Promise(resolve => {
 		const knopf = button("saisonende")
-		knopf.disabled = true
 		// * Saisonende festlegen/verändern: nur wenn noch keines gegeben oder dieses noch verändert werden kann (nicht schon passiert ist)
-		onValue(ref(Datenbank.datenbank, "saisons/laufend"), snap => {
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
+			knopf.disabled = true
 			const laufend = snap.val();
 			if (laufend !== null) {
-				onValue(ref(Datenbank.datenbank, "saisons/details/" + laufend + "/zeit/ende"), snap => {
+				onValue(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/zeit/ende"), snap => {
 					const ende = snap.val();
 					if (ende === null || ende > Date.now()) knopf.disabled = false
 					resolve()
 				})
 			} else resolve()
 		})
+
+		// Saisonende passiert: allgemein/saisons/laufend entfernen, allgemein/saisons/aktuell entfernen
 	})
 
 	await new Promise(resolve => {
 		const knopf = button("saison-loeschen")
-		knopf.disabled = true
-		// * Saison löschen: nur wenn eine laufende Saison existiert
-		onValue(ref(Datenbank.datenbank, "saisons/laufend"), async snap => {
-			if (snap.val() !== null) knopf.disabled = false
+		// * Saison löschen: nur wenn eine aktuelle Saison existiert
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktuell"), async snap => {
+			knopf.disabled = snap.val() === null;
 			resolve()
 			// TODO Neuladen empfehlen (nach Löschen einer Saison, da keine listener auf Saison onChildRemoved)
 		})
+
+		// Saison gelöscht: allgemein/saisons/aktuell entfernen, allgemein/saisons/laufend entfernen
 	})
 
 	await new Promise(resolve => {
 		const knopf = button("strecke-loeschen")
-		knopf.disabled = true
-		onValue(ref(Datenbank.datenbank, "saisons/aktiv"), snap => {
-			if (snap.val() !== null) knopf.disabled = false
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktiv"), snap => {
+			knopf.disabled = snap.val() === null;
 			resolve()
 		})
 	})

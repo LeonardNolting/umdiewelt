@@ -45,11 +45,11 @@ export namespace Datenbank {
 		}
 
 		function fortschritt() {
-			onValue(ref(datenbank, "saisons/aktiv"), async snap => {
+			onValue(ref(datenbank, "allgemein/saisons/aktiv"), async snap => {
 				const saison = snap.val()
 				const wert: number = saison === 0 ? 0 : await new Promise(resolve => {
 					onValue(
-						ref(datenbank, "saisons/details/" + saison + "/strecke"),
+						ref(datenbank, "allgemein/saisons/details/" + saison + "/strecke"),
 						snap => resolve(snap.val() || 0)
 					)
 				})
@@ -58,7 +58,7 @@ export namespace Datenbank {
 		}
 
 		async function globaleStrecke() {
-			onValue(ref(datenbank, "global/strecke"), async snap => {
+			onValue(ref(datenbank, "allgemein/strecke"), async snap => {
 				const strecke = snap.val() || 0
 
 				ladeFakt("strecke", m(strecke))
@@ -84,7 +84,7 @@ export namespace Datenbank {
 				probieren()
 			})
 
-			onValue(ref(datenbank, "saisons/anzahlHistorisch"), snap => {
+			onValue(ref(datenbank, "allgemein/saisons/anzahlHistorisch"), snap => {
 				anzahlHistorischeSaisons = snap.val() || 0
 				probieren()
 			})
@@ -115,13 +115,13 @@ export namespace Datenbank {
 				zuletztAktiv = aktiv
 			}
 
-			onChildAdded(ref(datenbank, "saisons/liste"), snap => {
+			onChildAdded(ref(datenbank, "allgemein/saisons/liste"), snap => {
 				bieteSaisonZurAuswahlAn(snap.key)
 				geladene.push(snap.key)
 				probieren()
 			})
 
-			onValue(ref(datenbank, "saisons/aktiv"), snap => {
+			onValue(ref(datenbank, "allgemein/saisons/aktiv"), snap => {
 				aktiv = snap.val()?.toString() || null
 				probieren()
 			})

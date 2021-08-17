@@ -62,7 +62,7 @@ export const markiereSaisonAlsNeu = (saison: string) => {
  */
 const ladeSaison = async (saison: string) => {
 	// TODO document.body.progress = true
-	const saisonRef = ref(Datenbank.datenbank, "saisons/details/" + saison)
+	const saisonRef = ref(Datenbank.datenbank, "allgemein/saisons/details/" + saison)
 	const saisonsContainer = document.getElementById("saisons")
 
 	let saisonContainer
@@ -88,33 +88,44 @@ const ladeSaison = async (saison: string) => {
 	}, 0)
 }
 
+const berechneStatus = (saison: string, laufende: string, aktive: string, aktuelle: string) => {
+	const laufend = laufende === saison
+	const aktiv = aktive === saison
+	const aktuell = aktuelle === saison
+	const historisch = !aktuell
+	const zukuenftig = aktuell && !aktiv
+	// const
+	return {laufend, aktiv, aktuell, historisch, zukuenftig}
+}
+
 const maleSaison = async (name: string, saisonRef: DatabaseReference, container: HTMLDivElement) => {
 	container.classList.add("saison")
 	container.dataset.saison = name
 	container.style.setProperty("--saison", name)
 
-	// Listener hinzufügen
-	await onValue(child(saisonRef, "zeit"), snap => {
-		const jetzt = Date.now()
-		const {start, ende}: { start: number | undefined, ende: number | undefined } = snap.val() || {}
+	const jetzt = Date.now()
+	let zeit: { start: number | undefined, ende: number | undefined } | undefined = undefined,
+		laufende: string | undefined | null = undefined,
+		aktive: string | undefined | null = undefined,
+		aktuelle: string | undefined | null = undefined,
+		fertig = () => zeit !== undefined && laufende !== undefined && aktive !== undefined && aktuelle !== undefined
 
-		const startGegeben = !!start
-		const endeGegeben = !!ende
-		const endeInZukunft = endeGegeben && ende > jetzt
-		const startInZukunft = startGegeben && start > jetzt
-		const historisch = endeGegeben && !endeInZukunft
-		const laufend = startGegeben && !startInZukunft && !historisch
+	const probieren = () => {
+		if (!fertig()) return
+
+		// Status der Saison steht fest ...
+		const status = berechneStatus(name, laufende, aktive, aktuelle)
 
 		// Container leeren
 		container?.innerHTML = ""
 
 		// "Wird bald starten..."
-		if (!startGegeben) {
+		if (status.zukuenftig) {
 
 		}
 
 		// Fakten...
-		if (startGegeben) {
+		if (!status.zukuenftig) {
 			const div = document.createElement("div")
 			div.classList.add("fakten")
 
@@ -144,7 +155,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 					callback(wert, berechnet)
 				}
 				const faktRef = child(saisonRef, name)
-				if (historisch) get(faktRef).then(ladeFaktUndCallback)
+				if (status.historisch) get(faktRef).then(ladeFaktUndCallback)
 				else onValue(faktRef, ladeFaktUndCallback)
 
 				return data
@@ -160,11 +171,11 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 		}
 
 		// Countdowns...
-		if (startInZukunft) {
-
+		if (zeit.start && zeit.start > jetzt) {
+			// TODO
 		}
-		if (endeInZukunft) {
-
+		if (zeit.ende && zeit.ende > jetzt) {
+			// TODO
 		}
 
 		// Schulen...
@@ -173,7 +184,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 			schulenContainer.classList.add("schulen")
 
 			const maleSchule = (name: string) => {
-				const schuleRef = child(saisonRef, "schulen/details/" + name)
+				const schuleRef = child(saisonRef, "allgemein/schulen/details/" + name)
 				const schuleContainer = document.createElement("div")
 				schuleContainer.classList.add("schule")
 				schuleContainer.dataset.schule = name
@@ -189,7 +200,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 				{
 					const ul = document.createElement("ul")
 					ul.classList.add("jahre")
-					onChildAdded(ref(Datenbank.datenbank, "schulen/details/" + name + "/saisons/liste"), snap => {
+					onChildAdded(ref(Datenbank.datenbank, "allgemein/schulen/details/" + name + "/saisons/liste"), snap => {
 						const li = document.createElement("li")
 						li.textContent = snap.key
 						ul.append(li)
@@ -200,7 +211,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 				// TODO Fakten (inkl. Beteiligung in % (bei potFahrern))
 
 				{
-					if (laufend) {
+					if (status.laufend) {
 						const button = document.createElement("button")
 						button.classList.add("anfeuern")
 						button.textContent = "🔥 Anfeuern"
@@ -225,29 +236,29 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 				}
 
 				// TODO Klassen
-				if (laufend) {
+				if (status.aktuell) {
 					const table = document.createElement("table")
 					table.classList.add("klassen")
 
-					onChildAdded(ref(Datenbank.datenbank, "aktuell/klassen/liste/" + name), ({key: klasse}) => {
+					onChildAdded(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + name), ({key: klasse}) => {
 						const tr = table.insertRow()
 						tr.dataset.klasse = klasse
 						{
 							const td = tr.insertCell()
 							td.textContent = klasse
 						}
-						onValue(ref(Datenbank.datenbank, "aktuell/klassen/details/" + name + "/" + klasse + "/strecke"), snap => {
+						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + name + "/" + klasse + "/strecke"), snap => {
 							const wert = snap.val() || 0
 							const td = tr.insertCell()
 							td.textContent = wert
 						})
-						onValue(ref(Datenbank.datenbank, "aktuell/klassen/details/" + name + "/" + klasse + "/anzahlStrecken"), snap => {
+						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + name + "/" + klasse + "/anzahlStrecken"), snap => {
 							const wert = snap.val() || 0
 							const td = tr.insertCell()
 							td.textContent = wert
 						})
 					})
-					onChildRemoved(ref(Datenbank.datenbank, "aktuell/klassen/liste/" + name), ({key: klasse}) =>
+					onChildRemoved(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + name), ({key: klasse}) =>
 						Array.from(table.rows).find(row => row.dataset.klasse === klasse).remove())
 
 					schuleContainer.append(table)
@@ -258,37 +269,13 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 
 			// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
 			// zusätzlich: get -> einmal abfragen, dann offline (schnell)
-			get(child(saisonRef, "schulen/liste")).then(snap =>
+			get(ref(Datenbank.datenbank, "allgemein/schulen/liste")).then(snap =>
 				snap.forEach(childSnap => maleSchule(childSnap.key)))
 
 			container.append(schulenContainer)
 		}
 
-		if (startGegeben) {
-			// * Baldige/jetzige/alte Saison
-
-			if (!historisch) {
-				// * 2., 3., 4.
-				// * Aktuelle Saison
-
-				if (startInZukunft) {
-					// * 3.
-					// Countdown zu Start
-				} else if (endeInZukunft) {
-					// * 4.
-					// Countdown zu Ende
-				}
-			} else {
-				// * 1.
-				// * Historische Saison
-			}
-		} else {
-			// * 5.
-			// * Zukünftige Saison
-		}
-
-		// Wie teilnehmen
-		if (!historisch) {
+		if (!status.historisch) {
 			const div = document.createElement("div")
 			div.classList.add("mitmachen")
 
@@ -307,5 +294,31 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 
 			container.append(div)
 		}
+	}
+
+	onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
+		if (laufende !== snap.val()) {
+			laufende = snap.val()
+			probieren()
+		}
+	})
+
+	onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktiv"), snap => {
+		if (aktive !== snap.val()) {
+			aktive = snap.val()
+			probieren()
+		}
+	})
+
+	onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktuell"), snap => {
+		if (aktuelle !== snap.val()) {
+			aktuelle = snap.val()
+			probieren()
+		}
+	})
+
+	onValue(child(saisonRef, "zeit"), snap => {
+		zeit = snap.val() || {}
+		probieren()
 	})
 }
