@@ -5,10 +5,11 @@ admin.initializeApp()
 const datenbank = admin.database()
 
 async function passeFaktenAn(data: { strecke: number, fahrer: string }, negativ: boolean = false) {
-	const delta = data.strecke * (negativ ? -1 : 1)
+	const delta = data.strecke
 	const fahrer = data.fahrer
-	const streckeIncrement = admin.database.ServerValue.increment(delta)
-	const anzahlStreckenIncrement = admin.database.ServerValue.increment(1)
+	const richtung = negativ ? -1 : 1
+	const streckeIncrement = admin.database.ServerValue.increment(delta * richtung)
+	const anzahlStreckenIncrement = admin.database.ServerValue.increment(1 * richtung)
 	const laufend = (await datenbank.ref("allgemein/saisons/laufend").get()).val()
 	const {schule, klasse} = (await datenbank.ref("spezifisch/fahrer/" + fahrer).get()).val()
 	const updates: { [ref: string]: any } = {}
