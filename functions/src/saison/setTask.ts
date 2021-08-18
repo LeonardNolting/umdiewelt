@@ -12,7 +12,7 @@ export const setTask = async ({before, after}: Change<DataSnapshot>, functionNam
 	const queuePath = tasksClient.queuePath(project, region, queueName)
 
 	// Bestehenden Task entfernen
-	if (before.exists()) await tasksClient.listTasks({parent: queuePath}).then(([tasks, _, __]) => {
+	if (before.exists() && before.val() > Date.now()) await tasksClient.listTasks({parent: queuePath}).then(([tasks, _, __]) => {
 		const task = tasks.find(task => task.scheduleTime?.seconds === seconds(after.val()));
 		if (task === undefined) throw new Error("Konnte zu entfernendes Task nicht finden.")
 		tasksClient.deleteTask({name: task.name})
