@@ -83,7 +83,7 @@ export default async () => {
 
 	await new Promise(resolve => {
 		const knopf = button("strecke-loeschen")
-		onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktiv"), snap => {
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
 			knopf.disabled = snap.val() === null;
 			resolve()
 		})
