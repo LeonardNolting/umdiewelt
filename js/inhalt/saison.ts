@@ -171,6 +171,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 		}
 
 		// Countdowns...
+		// TODO neue Zeitenstruktur
 		if (zeit.start && zeit.start > jetzt) {
 			// TODO
 		}

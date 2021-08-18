@@ -1,6 +1,6 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
-import {datenbank} from "./init";
+import {datenbank, region} from "./init";
 
 async function passeStreckeUndAnzahlStreckenAn(data: { strecke: number, fahrer: string }, negativ: boolean = false) {
 	const delta = data.strecke
@@ -24,6 +24,6 @@ async function passeStreckeUndAnzahlStreckenAn(data: { strecke: number, fahrer: 
 	await datenbank.ref().update(updates)
 }
 
-const passeStreckeUndAnzahlStreckenAnRef = functions.region("europe-west1").database.ref("/spezifisch/strecken/{strecke}")
+const passeStreckeUndAnzahlStreckenAnRef = functions.region(region).database.ref("/spezifisch/strecken/{strecke}")
 export const increment = passeStreckeUndAnzahlStreckenAnRef.onCreate(snap => passeStreckeUndAnzahlStreckenAn(snap.val()))
 export const decrement = passeStreckeUndAnzahlStreckenAnRef.onDelete(snap => passeStreckeUndAnzahlStreckenAn(snap.val(), true))

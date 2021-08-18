@@ -32,6 +32,7 @@ export default async () => {
 
 	await new Promise(resolve => {
 		const knopf = button("saisonstart")
+		// TODO neue Zeitenstruktur
 		// * Saisonstart festlegen/verändern: nur wenn noch keiner gegeben oder dieser noch verändert werden kann (nicht schon passiert ist)
 		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
 			knopf.disabled = true
@@ -51,6 +52,7 @@ export default async () => {
 
 	await new Promise(resolve => {
 		const knopf = button("saisonende")
+		// TODO neue Zeitenstruktur
 		// * Saisonende festlegen/verändern: nur wenn noch keines gegeben oder dieses noch verändert werden kann (nicht schon passiert ist)
 		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
 			knopf.disabled = true
@@ -76,7 +78,7 @@ export default async () => {
 			// TODO Neuladen empfehlen (nach Löschen einer Saison, da keine listener auf Saison onChildRemoved)
 		})
 
-		// Saison gelöscht: allgemein/saisons/aktuell entfernen, allgemein/saisons/laufend entfernen
+		// Saison gelöscht: allgemein/saisons/aktuell entfernen, allgemein/saisons/laufend entfernen, spezifisch löschen?
 	})
 
 	await new Promise(resolve => {

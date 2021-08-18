@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import {datenbank} from "./init";
+import {datenbank, region} from "./init";
 
 async function passeAnzahlFahrerAn(data: { schule: string, klasse: string }, negativ: boolean = false) {
 	const increment = admin.database.ServerValue.increment(negativ ? -1 : 1)
@@ -13,6 +13,6 @@ async function passeAnzahlFahrerAn(data: { schule: string, klasse: string }, neg
 	await datenbank.ref().update(updates)
 }
 
-const passeAnzahlFahrerAnRef = functions.region("europe-west1").database.ref("/spezifisch/fahrer/{fahrer}")
+const passeAnzahlFahrerAnRef = functions.region(region).database.ref("/spezifisch/fahrer/{fahrer}")
 export const increment = passeAnzahlFahrerAnRef.onCreate(snap => passeAnzahlFahrerAn(snap.val()))
 export const decrement = passeAnzahlFahrerAnRef.onDelete(snap => passeAnzahlFahrerAn(snap.val(), true))
