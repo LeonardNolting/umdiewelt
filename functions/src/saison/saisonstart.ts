@@ -14,7 +14,7 @@ export const starteSaison = functions.region(region).https.onRequest(async (requ
 	// Countdown entfernen
 	updates["allgemein/saisons/countdowns/start"] = null
 	// Start einfügen
-	updates["allgemein/saisons/" + aktuell + "/zeit/start"] = start
+	updates["allgemein/saisons/details/" + aktuell + "/zeit/start"] = start
 	await datenbank.ref().update(updates)
 
 	response.sendStatus(200).end()

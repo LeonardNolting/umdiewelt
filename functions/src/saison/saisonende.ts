@@ -15,7 +15,7 @@ export const beendeSaison = functions.region(region).https.onRequest(async (requ
 	// Countdown entfernen
 	updates["allgemein/saisons/countdowns/ende"] = null
 	// Ende einfügen
-	updates["allgemein/saisons/" + laufend + "/zeit/ende"] = ende
+	updates["allgemein/saisons/details/" + laufend + "/zeit/ende"] = ende
 	await datenbank.ref().update(updates)
 
 	response.sendStatus(200).end()
