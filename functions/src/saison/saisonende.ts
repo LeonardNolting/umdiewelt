@@ -21,9 +21,10 @@ export const erstelleTaskZumBeendenDerSaison = functions.region(region).database
 	.onWrite(async ({before, after}) => {
 		const tasksClient = new CloudTasksClient()
 		const taskName = "saisonende"
+		const taskPath = tasksClient.taskPath(project, region, queueName, taskName)
 
 		// Bestehenden Task entfernen
-		if (before.exists()) await tasksClient.deleteTask({name: taskName})
+		if (before.exists()) await tasksClient.deleteTask({name: taskPath})
 
 		// Neuen Task erstellen
 		if (after.exists()) {
@@ -33,7 +34,7 @@ export const erstelleTaskZumBeendenDerSaison = functions.region(region).database
 				task: {
 					httpRequest: {url: url("saisonende-beendeSaison")},
 					scheduleTime: {seconds: seconds(after.val())},
-					name: taskName
+					name: taskPath
 				}
 			})
 		}
