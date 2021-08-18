@@ -6,19 +6,24 @@ const {CloudTasksClient} = require('@google-cloud/tasks')
 
 export const beendeSaison = functions.region(region).https.onRequest(async (request, response) => {
 	// Testen, ob wirklich beendet werden kann (da Function öffentlich ist)
-	const ende = (await datenbank.ref("/allgemein/saisons/zeit/ende").get()).val()
+	const ende = (await datenbank.ref("/allgemein/saisons/countdowns/ende").get()).val()
 	if (ende === null || ende > Date.now()) return response.sendStatus(409).end()
 
-	await datenbank.ref("/allgemein/saisons").update({
-		"aktuell": null,
-		"laufend": null
-	})
-	response.sendStatus(200).end()
+	const laufend = (await datenbank.ref("/allgemein/saisons/laufend").get()).val()
+	const updates: { [ref: string]: any } = {}
+	// Saison ist nicht mehr aktuell und läuft nicht mehr
+	updates["allgemein/saisons/aktuell"] = null
+	updates["allgemein/saisons/laufend"] = null
+	// Countdown entfernen
+	updates["allgemein/saisons/countdowns/ende"] = null
+	// Ende einfügen
+	updates["allgemein/saisons/" + laufend + "/zeit/ende"] = ende
+	await datenbank.ref().update(updates)
 
-	// TODO allgemein/saisons/zeit löschen?
+	response.sendStatus(200).end()
 })
 
-export const erstelleTaskZumBeendenDerSaison = functions.region(region).database.ref("/allgemein/saisons/zeit/ende")
+export const erstelleTaskZumBeendenDerSaison = functions.region(region).database.ref("/allgemein/saisons/countdowns/ende")
 	.onWrite(async ({before, after}) => {
 		const tasksClient = new CloudTasksClient()
 		const taskName = "saisonende"

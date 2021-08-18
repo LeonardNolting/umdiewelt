@@ -6,17 +6,23 @@ const {CloudTasksClient} = require('@google-cloud/tasks')
 
 export const starteSaison = functions.region(region).https.onRequest(async (request, response) => {
 	// Testen, ob wirklich gestartet werden kann (da Function öffentlich ist)
-	const start = (await datenbank.ref("/allgemein/saisons/zeit/start").get()).val()
+	const start = (await datenbank.ref("/allgemein/saisons/countdowns/start").get()).val()
 	if (start === null || start > Date.now()) return response.sendStatus(409).end()
 
+	const aktuell = (await datenbank.ref("/allgemein/saisons/aktuell").get()).val()
+	const updates: { [ref: string]: any } = {}
 	// Laufende Saison auf aktuelle Saison setzen
-	await datenbank.ref("/allgemein/saisons/laufend").set((await datenbank.ref("/allgemein/saisons/aktuell").get()).val());
-	response.sendStatus(200).end()
+	updates["allgemein/saisons/laufend"] = aktuell
+	// Countdown entfernen
+	updates["allgemein/saisons/countdowns/start"] = null
+	// Start einfügen
+	updates["allgemein/saisons/" + aktuell + "/zeit/start"] = start
+	await datenbank.ref().update(updates)
 
-	// TODO allgemein/saisons/zeit löschen?
+	response.sendStatus(200).end()
 })
 
-export const erstelleTaskZumStartenDerSaison = functions.region(region).database.ref("/allgemein/saisons/zeit/start")
+export const erstelleTaskZumStartenDerSaison = functions.region(region).database.ref("/allgemein/saisons/countdowns/start")
 	.onWrite(async ({before, after}) => {
 		// Aktive Saison auf aktuelle Saison setzen
 		await datenbank.ref("/allgemein/saisons/aktiv").set((await datenbank.ref("/allgemein/saisons/aktuell").get()).val());
