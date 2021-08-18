@@ -6,7 +6,8 @@ const {CloudTasksClient} = require('@google-cloud/tasks')
 
 export const beendeSaison = functions.region(region).https.onRequest(async (request, response) => {
 	// Testen, ob wirklich beendet werden kann (da Function öffentlich ist)
-	if ((await datenbank.ref("/allgemein/saisons/zeit/ende").get()).val() > Date.now()) return response.sendStatus(409).end()
+	const ende = (await datenbank.ref("/allgemein/saisons/zeit/ende").get()).val()
+	if (ende === null || ende > Date.now()) return response.sendStatus(409).end()
 
 	await datenbank.ref("/allgemein/saisons").update({
 		"aktuell": null,

@@ -6,7 +6,8 @@ const {CloudTasksClient} = require('@google-cloud/tasks')
 
 export const starteSaison = functions.region(region).https.onRequest(async (request, response) => {
 	// Testen, ob wirklich gestartet werden kann (da Function öffentlich ist)
-	if ((await datenbank.ref("/allgemein/saisons/zeit/start").get()).val() > Date.now()) return response.sendStatus(409).end()
+	const start = (await datenbank.ref("/allgemein/saisons/zeit/start").get()).val()
+	if (start === null || start > Date.now()) return response.sendStatus(409).end()
 
 	// Laufende Saison auf aktuelle Saison setzen
 	await datenbank.ref("/allgemein/saisons/laufend").set((await datenbank.ref("/allgemein/saisons/aktuell").get()).val());
