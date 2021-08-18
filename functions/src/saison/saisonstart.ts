@@ -1,8 +1,6 @@
 import * as functions from "firebase-functions";
 import {datenbank, region} from "../init";
-import {project, queueName, seconds, url} from "./utils";
-
-const {CloudTasksClient} = require('@google-cloud/tasks')
+import {setTask} from "./setTask";
 
 export const starteSaison = functions.region(region).https.onRequest(async (request, response) => {
 	// Testen, ob wirklich gestartet werden kann (da Function öffentlich ist)
@@ -23,27 +21,9 @@ export const starteSaison = functions.region(region).https.onRequest(async (requ
 })
 
 export const erstelleTaskZumStartenDerSaison = functions.region(region).database.ref("/allgemein/saisons/countdowns/start")
-	.onWrite(async ({before, after}) => {
+	.onWrite(async (change) => {
 		// Aktive Saison auf aktuelle Saison setzen
 		await datenbank.ref("/allgemein/saisons/aktiv").set((await datenbank.ref("/allgemein/saisons/aktuell").get()).val());
 
-		const tasksClient = new CloudTasksClient()
-		const taskName = "saisonstart"
-		const taskPath = tasksClient.taskPath(project, region, queueName, taskName)
-
-		// Bestehenden Task entfernen
-		if (before.exists()) await tasksClient.deleteTask({name: taskPath})
-
-		// Neuen Task erstellen
-		if (after.exists()) {
-			const queuePath = tasksClient.queuePath(project, region, queueName)
-			await tasksClient.createTask({
-				parent: queuePath,
-				task: {
-					httpRequest: {url: url("saisonstart-starteSaison")},
-					scheduleTime: {seconds: seconds(after.val())},
-					name: taskPath
-				}
-			})
-		}
+		await setTask(change, "saisonstart-starteSaison")
 	})
