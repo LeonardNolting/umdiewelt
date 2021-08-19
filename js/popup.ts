@@ -10,7 +10,7 @@ namespace Popup {
 		document.body.classList.add("popup")
 		if (popup.classList.contains("wichtig")) document.body.classList.add("popup-wichtig");
 		popup.classList.add("offen");
-		(popup.querySelector("[autofocus]") as HTMLInputElement | HTMLButtonElement | HTMLSelectElement | HTMLTextAreaElement).focus()
+		(popup.querySelector("[autofocus]") as HTMLInputElement | HTMLButtonElement | HTMLSelectElement | HTMLTextAreaElement)?.focus()
 	}
 
 	export function schliessen(popup: HTMLElement) {
