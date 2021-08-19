@@ -3,6 +3,7 @@ import {Datenbank} from "../firebase/datenbank/datenbank";
 import Popup from "../popup";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
+import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 
 interface NeueSaisonSchuleLi extends HTMLLIElement {
 	checkbox: HTMLInputElement
@@ -10,6 +11,54 @@ interface NeueSaisonSchuleLi extends HTMLLIElement {
 }
 
 export namespace Admin {
+	export async function neueKlasse() {
+		const popup = document.getElementById("popup-admin-neue-klasse")
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktuell"), snap => {
+			const aktuell = snap.val()
+
+			popup["schule"].innerHTML = ""
+			onChildAdded(
+				ref(Datenbank.datenbank, "allgemein/saisons/details/" + aktuell + "/schulen/liste"),
+				snap => popup["schule"].append(new Option(snap.key, snap.key))
+			)
+
+			popup.onsubmit = async event => {
+				event.preventDefault()
+				try {
+					const email = popup["email"].value;
+					const password = popup["password"].value;
+					const schule = popup["schule"].value;
+					const klasse = popup["name"].value;
+
+					const auth = getAuth();
+					const admin = auth.currentUser
+
+					// Neues Konto erstellen
+					const {user} = await createUserWithEmailAndPassword(auth, email, password)
+					// UID merken
+					const {uid} = user
+					// Zurück zum Admin-Konto wechseln
+					await auth.updateCurrentUser(admin)
+
+					const updates = {}
+					updates["spezifisch/klassen/details/" + schule + "/" + klasse] = {email, uid}
+					updates["spezifisch/klassen/liste/" + schule + "/" + klasse] = true
+					await update(ref(Datenbank.datenbank), updates)
+						// Wenn was nicht funktioniert, vorherigen Status wiederherstellen
+						.catch(reason => user.delete().then(() => Promise.reject(reason)))
+
+					benachrichtigung("Neue Klasse erstellt 👍")
+					Popup.schliessen(popup)
+				} catch (error) {
+					console.error(error)
+					benachrichtigung("Konnte keinen Account für die Klasse einrichten: " + error, BenachrichtigungsLevel.ALARM)
+				}
+			}
+			popup["abbrechen"].onclick = () => Popup.schliessen(popup)
+			Popup.oeffnen(popup)
+		}, {onlyOnce: true})
+	}
+
 	export async function neueSaison() {
 		const popup = document.getElementById("popup-admin-neue-saison")
 
@@ -91,9 +140,7 @@ export namespace Admin {
 					benachrichtigung("Beim Erstellen der Saison ist ein Fehler aufgetreten: " + reason, BenachrichtigungsLevel.ALARM)
 				})
 		}
-		popup["abbrechen"].onclick = () => {
-			Popup.schliessen(popup)
-		}
+		popup["abbrechen"].onclick = () => Popup.schliessen(popup)
 		Popup.oeffnen(popup)
 	}
 }
@@ -126,6 +173,8 @@ export default async () => {
 			knopf.disabled = snap.val() === null;
 			resolve()
 		})
+
+		knopf.onclick = () => Admin.neueKlasse()
 	})
 
 	await new Promise(resolve => {

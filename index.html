@@ -314,6 +314,27 @@
 
 		<div id="popups">
 			<!-- Admin -->
+			<!-- Neue Klasse -->
+			<form id="popup-admin-neue-klasse" autocomplete="off">
+				<div class="container">
+					<h3>Neue Klasse eintragen</h3>
+					<select name="schule" required></select>
+					<input type="text" name="name" required placeholder="Name der Klasse" />
+					<input type="email" name="email" required placeholder="E-Mail für das Konto" />
+					<input type="password"
+					       name="password"
+					       minlength="6"
+					       required
+					       placeholder="Passwort für das Konto"
+					       autocomplete="new-password" />
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+					<input type="submit" value="Eintragen" name="submit" />
+				</fieldset>
+			</form>
+
 			<!-- Neue Saison -->
 			<form id="popup-admin-neue-saison">
 				<div class="container">
