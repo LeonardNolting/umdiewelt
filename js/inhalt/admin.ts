@@ -45,7 +45,6 @@ export namespace Admin {
 			const potAnzahlFahrerInput = document.createElement("input")
 			potAnzahlFahrerInput.type = "number"
 			potAnzahlFahrerInput.step = "10"
-			potAnzahlFahrerInput.value = "1000"
 			const potAnzahlFahrerInputId = "admin-neue-saison-schule-" + schule + "-pot-anzahl-fahrer"
 			checkbox.addEventListener("change", () => potAnzahlFahrerInput.required = checkbox.checked)
 			const potAnzahlFahrerLabel = document.createElement("label")
