@@ -34,6 +34,10 @@
 	margin-left: 2rem;
 }
 
+#popup-admin-neue-saison .schulen > li > div.pot-anzahl-fahrer:not(.sichtbar) {
+	visibility: hidden;
+}
+
 #popup-admin-neue-saison .schulen > li > div.pot-anzahl-fahrer label {
 	margin-right: 6px;
 }
