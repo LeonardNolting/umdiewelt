@@ -79,6 +79,7 @@ export namespace Admin {
 			teilnehmendeSchulen.forEach(({name: schule, potAnzahlFahrer}) => {
 				updates["allgemein/saisons/details/" + name + "/schulen/liste/" + schule] = true
 				updates["allgemein/saisons/details/" + name + "/schulen/details/" + schule + "/potAnzahlFahrer"] = potAnzahlFahrer
+				updates["allgemein/saisons/details/" + name + "/runden"] = popup["runden"].value
 			})
 			await update(ref(Datenbank.datenbank), updates)
 				.then(() => {
