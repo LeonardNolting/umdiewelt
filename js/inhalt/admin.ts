@@ -120,8 +120,8 @@ export default async () => {
 
 	await new Promise(resolve => {
 		const knopf = button("neue-klasse")
-		// * Klasse eintragen: nur wenn eine laufende Saison existiert
-		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), async snap => {
+		// * Klasse eintragen: nur wenn eine aktuelle Saison existiert
+		onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktuell"), async snap => {
 			knopf.disabled = snap.val() === null;
 			resolve()
 		})
