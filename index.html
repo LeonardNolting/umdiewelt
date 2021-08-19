@@ -313,6 +313,55 @@
 		</div>
 
 		<div id="popups">
+			<!-- Admin -->
+			<!-- Neue Saison -->
+			<form id="popup-admin-neue-saison">
+				<input name="name" type="text" disabled required />
+				<fieldset name="schulen">
+					<legend>Teilnehmende Schulen</legend>
+					<p class="hinweis">Kann später nicht mehr verändert werden.</p>
+				</fieldset>
+				<div class="runden">
+					<input name="runden" id="admin-neue-saison-runden" type="number" min="1" value="1" required />
+					<label for="admin-neue-saison-runden">Anzahl Runden</label>
+				</div>
+				<div class="hinweis">
+					<details>
+						<summary>Dies löscht alle "aktuellen" Daten:</summary>
+						<ul>
+							<li>einzelne Klassen</li>
+							<li>einzelne Teilnehmer</li>
+							<li>einzelne Eintragungen</li>
+							<li>wenige Metadaten</li>
+						</ul>
+					</details>
+					<details>
+						<summary>Nicht gelöscht werden:</summary>
+						<ul>
+							<li>Allgemeine Daten</li>
+							<li>alte Saisons (inkl. der <em>noch</em> Aktuellen) mitsamt des Zeitraums, der Statistiken
+								und der teilnehmenden Schulen
+							</li>
+							<li>Schulen</li>
+						</ul>
+					</details>
+				</div>
+
+				<div class="zustimmung">
+					<input name="zustimmung"
+					       id="admin-neue-saison-zustimmung-checkbox"
+					       type="checkbox"
+					       required
+					       autofocus />
+					<label for="admin-neue-saison-zustimmung-checkbox">Habe ich verstanden.</label>
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+					<input type="submit" value="Eintragen" name="submit" />
+				</fieldset>
+			</form>
+
 			<!-- Admin-Anmeldung -->
 			<form id="popup-anmelden-admin" class="input-button">
 				<input autofocus
