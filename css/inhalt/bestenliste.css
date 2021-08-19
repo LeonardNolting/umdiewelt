@@ -104,7 +104,7 @@ Eingekreiste Zahl (Rang)
 	background: var(--background-lighter);
 	color: var(--background-darker);
 	box-shadow: 0 0 6px -4px #222 inset, 0 0 8px -4px #000;
-	text-shadow: 0 0px 2px #222;
+	text-shadow: 0 0 2px #22222299;
 	font-weight: bold;
 	font-size: calc(var(--rang-breite) / 2);
 	/*transition: transform .2s ease-in-out;*/
