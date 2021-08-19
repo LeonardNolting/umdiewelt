@@ -1,4 +1,4 @@
-import {get, onChildAdded, onValue, ref, update} from "firebase/database";
+import {get, onChildAdded, onValue, ref, set, update} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import Popup from "../popup";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
@@ -11,6 +11,27 @@ interface NeueSaisonSchuleLi extends HTMLLIElement {
 }
 
 export namespace Admin {
+	export async function neueSchule() {
+		const popup = document.getElementById("popup-admin-neue-schule")
+
+		popup.onsubmit = async event => {
+			event.preventDefault()
+
+			const name = popup["name"].value;
+			await set(ref(Datenbank.datenbank, "allgemein/schulen/liste/" + name), true)
+				.then(() => {
+					benachrichtigung("Neue Schule erstellt 👍", BenachrichtigungsLevel.ERFOLG)
+					Popup.schliessen(popup)
+				})
+				.catch(reason => {
+					console.error(reason)
+					benachrichtigung("Konnte keinen Account für die Klasse einrichten: " + reason, BenachrichtigungsLevel.ALARM)
+				})
+		}
+		popup["abbrechen"].onclick = () => Popup.schliessen(popup)
+		Popup.oeffnen(popup)
+	}
+
 	export async function neueKlasse() {
 		const popup = document.getElementById("popup-admin-neue-klasse")
 		onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktuell"), snap => {
@@ -47,7 +68,7 @@ export namespace Admin {
 						// Wenn was nicht funktioniert, vorherigen Status wiederherstellen
 						.catch(reason => user.delete().then(() => Promise.reject(reason)))
 
-					benachrichtigung("Neue Klasse erstellt 👍")
+					benachrichtigung("Neue Klasse erstellt 👍", BenachrichtigungsLevel.ERFOLG)
 					Popup.schliessen(popup)
 				} catch (error) {
 					console.error(error)
@@ -243,7 +264,7 @@ export default async () => {
 
 	await new Promise(resolve => {
 		const knopf = button("neue-schule")
-		knopf.disabled = true
+		knopf.onclick = () => Admin.neueSchule()
 		resolve()
 	})
 

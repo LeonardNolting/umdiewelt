@@ -281,7 +281,7 @@
 						<button name="saison-loeschen" disabled>Aktuelle Saison löschen</button>
 						<button name="strecke-loeschen" disabled>Eine Strecke löschen</button>
 						<button name="testnachricht">Testnachricht senden</button>
-						<button name="neue-schule" disabled>Schule hinzufügen</button>
+						<button name="neue-schule">Schule hinzufügen</button>
 					</fieldset>
 				</form>
 
@@ -314,6 +314,25 @@
 
 		<div id="popups">
 			<!-- Admin -->
+			<!-- Neue Schule -->
+			<form id="popup-admin-neue-schule">
+				<div class="container">
+					<h3>Neue Schule eintragen</h3>
+					<input type="text"
+					       name="name"
+					       required
+					       placeholder="Name der Schule"
+					       autocapitalize="words"
+					       autocomplete="organization"
+					       autofocus />
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+					<input type="submit" value="Eintragen" name="submit" />
+				</fieldset>
+			</form>
+
 			<!-- Neue Klasse -->
 			<form id="popup-admin-neue-klasse" autocomplete="off">
 				<div class="container">
