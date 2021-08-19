@@ -5,6 +5,10 @@ import {datenbank, region} from "./init";
 async function passeAnzahlFahrerAn(data: { schule: string, klasse: string }, negativ: boolean = false) {
 	const increment = admin.database.ServerValue.increment(negativ ? -1 : 1)
 	const laufend = (await datenbank.ref("allgemein/saisons/laufend").get()).val()
+
+	// Eintragen neuer Saison löscht allerhand Fahrer - aber soll nicht Statistiken wieder runterzählen
+	if (laufend === null) return
+
 	const updates: { [ref: string]: any } = {}
 	updates["spezifisch/klassen/details/" + data.schule + "/" + data.klasse + "/anzahlFahrer"] = increment
 	updates["allgemein/saisons/details/" + laufend + "/anzahlFahrer"] = increment
