@@ -16,12 +16,38 @@
 
 	height: calc(var(--anzahl) * (var(--gap-vertical) + var(--height)) - var(--gap-vertical));
 
-	margin: calc(var(--height) / 2) 0;
+	--margin: calc(var(--height) / 2);
+	margin: var(--margin) 0;
 	margin-left: var(--general-margin-left);
 	padding: 0;
 	position: relative;
 	user-select: none;
 	cursor: default;
+}
+
+#bestenliste-anzeige::before, #bestenliste-anzeige::after {
+	content: "";
+	position: absolute;
+	height: calc(100% + 2 * var(--margin));
+	width: 100vw;
+	left: 0;
+	margin-left: calc(-1 * var(--general-margin-left) + var(--rang-breite-max) * 1.4);
+	margin-top: calc(-1 * var(--margin));
+	transform: translateX(-100%);
+	background: #c2cdd8;
+	box-shadow: 0 0 20px -1px #1b1e20bd;
+}
+
+#bestenliste-anzeige::after {
+	--einschnitt: calc(var(--margin) * 1.9);
+	height: calc(100% - 2 * var(--einschnitt));
+	margin-top: var(--einschnitt);
+	margin-right: 0;
+	background: #a1b1c1;
+	z-index: -1;
+	width: 100%;
+	margin-left: 24%;
+	opacity: 1;
 }
 
 #bestenliste-anzeige:empty {
@@ -217,6 +243,11 @@ Unauffällig Bewegung reinbringen
 	--background: #bf8970;
 	--background-lighter: #b89e90;
 	--background-darker: #926c56;
+}
+
+#bestenliste-anzeige li .name, #bestenliste-anzeige li .schule {
+	color: #000;
+	text-shadow: 0 0 16px #aaa;
 }
 
 #bestenliste-anzeige li .name {
