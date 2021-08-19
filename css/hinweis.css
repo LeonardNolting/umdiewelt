@@ -1,0 +1,27 @@
+.hinweis {
+	--gap: 24px;
+	padding-left: var(--gap);
+	font-size: 1rem;
+	color: #777;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.hinweis-gross {
+	--gap: 2.4rem;
+}
+
+.hinweis::before {
+	content: "🛈";
+	font-size: var(--schrift-groesse);
+	line-height: 1.1;
+
+	/* da sonst auch unterstrichen 🤷 */
+	position: absolute;
+	margin-left: calc(-1 * var(--gap));
+}
+
+.hinweis-gross::before {
+	font-size: calc(1.2 * var(--schrift-groesse));
+}

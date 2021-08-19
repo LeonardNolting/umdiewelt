@@ -1,0 +1,58 @@
+#popup-admin-neue-saison > .container {
+	max-width: 800px;
+}
+
+#popup-admin-neue-saison .schulen-hinweis {
+	margin: 0.6rem 0 0;
+}
+
+#popup-admin-neue-saison .schulen {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	margin: 0.4rem 0;
+}
+
+#popup-admin-neue-saison .schulen > li {
+	padding: 0.6rem;
+	list-style: none;
+	border: 2px solid #999;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	margin: .4rem 0;
+	justify-content: space-between;
+}
+
+#popup-admin-neue-saison .schulen > li > div:first-child {
+	font-size: 1.2rem;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+#popup-admin-neue-saison .schulen > li > div.pot-anzahl-fahrer {
+	margin-left: 2rem;
+}
+
+#popup-admin-neue-saison .schulen > li > div.pot-anzahl-fahrer label {
+	margin-right: 6px;
+}
+
+#popup-admin-neue-saison .daten-hinweis {
+	margin: .8rem 0;
+}
+
+#popup-admin-neue-saison .daten-hinweis > div {
+	display: flex;
+}
+
+#popup-admin-neue-saison .daten-hinweis > div details {
+	margin-left: 6px;
+	flex-basis: 0;
+	flex-grow: 1;
+}
+
+#popup-admin-neue-saison .daten-hinweis > div details ul {
+	margin: 0;
+	padding: 0 0 0 1.2rem;
+}

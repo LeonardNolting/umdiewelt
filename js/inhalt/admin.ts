@@ -19,12 +19,9 @@ export namespace Admin {
 		while ((await get(ref(Datenbank.datenbank, "allgemein/saisons/liste/" + jahr))).exists()) jahr++
 		nameInput.value = jahr.toString()
 
-		const schulenFieldset = popup["schulen"];
-		schulenFieldset.innerHTML = ""
-		const schulenUl = document.createElement("ul")
-		schulenFieldset.append(schulenUl)
+		const schulenUl = popup.querySelector(".schulen")
+		schulenUl.innerHTML = ""
 
-		// const schulenCheckboxen: HTMLInputElement[] = []
 		const schulenListener = onChildAdded(ref(Datenbank.datenbank, "allgemein/schulen/liste"), snap => {
 			const schule = snap.key
 
@@ -44,6 +41,7 @@ export namespace Admin {
 			li.checkbox = checkbox
 
 			const potAnzahlFahrerDiv = document.createElement("div")
+			potAnzahlFahrerDiv.classList.add("pot-anzahl-fahrer")
 			const potAnzahlFahrerInput = document.createElement("input")
 			potAnzahlFahrerInput.type = "number"
 			potAnzahlFahrerInput.step = "10"
@@ -52,7 +50,7 @@ export namespace Admin {
 			checkbox.addEventListener("change", () => potAnzahlFahrerInput.required = checkbox.checked)
 			const potAnzahlFahrerLabel = document.createElement("label")
 			potAnzahlFahrerLabel.htmlFor = potAnzahlFahrerInputId
-			potAnzahlFahrerLabel.textContent = "Potenzielle Anzahl Teilnehmer"
+			potAnzahlFahrerLabel.textContent = "pot. Anzahl Teilnehmer:"
 			potAnzahlFahrerDiv.append(potAnzahlFahrerLabel, potAnzahlFahrerInput)
 			li.potAnzahlFahrerInput = potAnzahlFahrerInput
 
