@@ -5,11 +5,6 @@ import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
 import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 
-interface NeueSaisonSchuleLi extends HTMLLIElement {
-	checkbox: HTMLInputElement
-	potAnzahlFahrerInput: HTMLInputElement
-}
-
 abstract class Kontrolle {
 	_erlaubt: boolean = false
 	set erlaubt(value: boolean) {
@@ -132,7 +127,7 @@ class NeueSaisonKontrolle extends Kontrolle {
 		this.schulenListener = onChildAdded(ref(Datenbank.datenbank, "allgemein/schulen/liste"), snap => {
 			const schule = snap.key
 
-			const li = document.createElement("li") as NeueSaisonSchuleLi
+			const li = document.createElement("li") as NeueSaisonKontrolle.SchuleLi
 			li.classList.add("schule")
 
 			const div = document.createElement("div")
@@ -169,7 +164,7 @@ class NeueSaisonKontrolle extends Kontrolle {
 	}
 
 	protected async submit() {
-		const teilnehmendeSchulen = (Array.from(this.schulenUl.children) as NeueSaisonSchuleLi[])
+		const teilnehmendeSchulen = (Array.from(this.schulenUl.children) as NeueSaisonKontrolle.SchuleLi[])
 			.filter(li => li.checkbox.checked)
 			.map(li => ({
 				name: li.checkbox.value,
@@ -192,6 +187,13 @@ class NeueSaisonKontrolle extends Kontrolle {
 
 		return update(ref(Datenbank.datenbank), updates)
 			.then(() => "Saison erstellt 😎")
+	}
+}
+
+namespace NeueSaisonKontrolle {
+	export interface SchuleLi extends HTMLLIElement {
+		checkbox: HTMLInputElement
+		potAnzahlFahrerInput: HTMLInputElement
 	}
 }
 
