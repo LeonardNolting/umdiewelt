@@ -9,7 +9,7 @@ abstract class Kontrolle {
 	_erlaubt: boolean = false
 	set erlaubt(value: boolean) {
 		this._erlaubt = value
-		this.knopf.disabled = !value
+		this.knopf.classList[value ? "add" : "remove"]("erlaubt")
 		if (!value && this.popup.classList.contains("offen")) {
 			benachrichtigung("Die aktuelle Aktion ist nicht länger möglich, da sich Daten in der Datenbank geändert haben.")
 			Popup.schliessen(this.popup)
@@ -266,7 +266,7 @@ class NeueSchuleKontrolle extends Kontrolle {
 	}
 
 	protected async init(): Promise<void> {
-
+		this.erlaubt = true
 	}
 
 	protected async submit(): Promise<string> {
