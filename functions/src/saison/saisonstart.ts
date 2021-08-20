@@ -3,6 +3,8 @@ import {datenbank, region} from "../init";
 import {setTask} from "./setTask";
 
 export const starteSaison = functions.region(region).https.onRequest(async (request, response) => {
+	await datenbank.ref("allgemein/saisons/countdowns/startTask").remove()
+
 	// Testen, ob wirklich gestartet werden kann (da Function öffentlich ist)
 	const start = (await datenbank.ref("/allgemein/saisons/countdowns/start").get()).val()
 	if (start === null || start > Date.now()) return response.sendStatus(409).end()

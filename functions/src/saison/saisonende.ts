@@ -3,6 +3,8 @@ import {datenbank, region} from "../init";
 import {setTask} from "./setTask";
 
 export const beendeSaison = functions.region(region).https.onRequest(async (request, response) => {
+	await datenbank.ref("allgemein/saisons/countdowns/endeTask").remove()
+
 	// Testen, ob wirklich beendet werden kann (da Function öffentlich ist)
 	const ende = (await datenbank.ref("/allgemein/saisons/countdowns/ende").get()).val()
 	if (ende === null || ende > Date.now()) return response.sendStatus(409).end()
