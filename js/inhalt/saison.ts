@@ -98,10 +98,10 @@ const berechneStatus = (saison: string, laufende: string, aktive: string, aktuel
 	return {laufend, aktiv, aktuell, historisch, zukuenftig}
 }
 
-const maleSaison = async (name: string, saisonRef: DatabaseReference, container: HTMLDivElement) => {
+const maleSaison = async (saison: string, saisonRef: DatabaseReference, container: HTMLDivElement) => {
 	container.classList.add("saison")
-	container.dataset.saison = name
-	container.style.setProperty("--saison", name)
+	container.dataset.saison = saison
+	container.style.setProperty("--saison", saison)
 
 	const jetzt = Date.now()
 	let zeit: { start: number | undefined, ende: number | undefined } | undefined = undefined,
@@ -114,7 +114,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 		if (!fertig()) return
 
 		// Status der Saison steht fest ...
-		const status = berechneStatus(name, laufende, aktive, aktuelle)
+		const status = berechneStatus(saison, laufende, aktive, aktuelle)
 
 		// Container leeren
 		container?.innerHTML = ""
@@ -184,15 +184,15 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 			const schulenContainer = document.createElement("div")
 			schulenContainer.classList.add("schulen")
 
-			const maleSchule = (name: string) => {
-				const schuleRef = child(saisonRef, "allgemein/schulen/details/" + name)
+			const maleSchule = (schule: string) => {
+				const schuleRef = child(saisonRef, "schulen/details/" + schule)
 				const schuleContainer = document.createElement("div")
 				schuleContainer.classList.add("schule")
-				schuleContainer.dataset.schule = name
+				schuleContainer.dataset.schule = schule
 
 				{
 					const ueberschrift = document.createElement("h3")
-					ueberschrift.textContent = name
+					ueberschrift.textContent = schule
 					schuleContainer.append(ueberschrift)
 				}
 
@@ -201,7 +201,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 				{
 					const ul = document.createElement("ul")
 					ul.classList.add("jahre")
-					onChildAdded(ref(Datenbank.datenbank, "allgemein/schulen/details/" + name + "/saisons/liste"), snap => {
+					onChildAdded(ref(Datenbank.datenbank, "allgemein/schulen/details/" + schule + "/saisons/liste"), snap => {
 						const li = document.createElement("li")
 						li.textContent = snap.key
 						ul.append(li)
@@ -241,25 +241,25 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 					const table = document.createElement("table")
 					table.classList.add("klassen")
 
-					onChildAdded(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + name), ({key: klasse}) => {
+					onChildAdded(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), ({key: klasse}) => {
 						const tr = table.insertRow()
 						tr.dataset.klasse = klasse
 						{
 							const td = tr.insertCell()
 							td.textContent = klasse
 						}
-						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + name + "/" + klasse + "/strecke"), snap => {
+						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/strecke"), snap => {
 							const wert = snap.val() || 0
 							const td = tr.insertCell()
 							td.textContent = wert
 						})
-						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + name + "/" + klasse + "/anzahlStrecken"), snap => {
+						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/anzahlStrecken"), snap => {
 							const wert = snap.val() || 0
 							const td = tr.insertCell()
 							td.textContent = wert
 						})
 					})
-					onChildRemoved(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + name), ({key: klasse}) =>
+					onChildRemoved(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), ({key: klasse}) =>
 						Array.from(table.rows).find(row => row.dataset.klasse === klasse).remove())
 
 					schuleContainer.append(table)
@@ -270,7 +270,7 @@ const maleSaison = async (name: string, saisonRef: DatabaseReference, container:
 
 			// nicht onChildAdded, da live-Funktionalität nicht benötigt (und onChildAdded immer weiter listenen würde)
 			// zusätzlich: get -> einmal abfragen, dann offline (schnell)
-			get(ref(Datenbank.datenbank, "allgemein/schulen/liste")).then(snap =>
+			get(child(saisonRef, "schulen/liste")).then(snap =>
 				snap.forEach(childSnap => maleSchule(childSnap.key)))
 
 			container.append(schulenContainer)
