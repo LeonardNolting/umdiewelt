@@ -445,6 +445,7 @@ class SaisonLoeschenKontrolle extends Kontrolle {
 	}
 
 	protected async submit(): Promise<string> {
+		// TODO Neuladen empfehlen (da keine listener auf Saison onChildRemoved)
 		return remove(ref(Datenbank.datenbank, "allgemein/saisons/liste/" + this.aktuell))
 			.then(() => "Saison gelöscht")
 	}
@@ -509,30 +510,4 @@ export default async () => {
 	await Promise.all(kontrollen.map(kontrolle => kontrolle.initialisieren()))
 
 	Kontrolle.fieldset.disabled = false
-
-	/*
-	await new Promise(resolve => {
-		const knopf = button("saison-loeschen")
-		// * Saison löschen: nur wenn eine aktuelle Saison existiert
-		onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktuell"), async snap => {
-			knopf.disabled = snap.val() === null;
-			resolve()
-			// TODO Neuladen empfehlen (nach Löschen einer Saison, da keine listener auf Saison onChildRemoved)
-		})
-
-		// Saison gelöscht: allgemein/saisons/aktuell entfernen, allgemein/saisons/laufend entfernen, allgemein/saisons/aktiv ggf. ändern, spezifisch löschen?
-	})
-
-	await new Promise(resolve => {
-		const knopf = button("strecke-loeschen")
-		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
-			knopf.disabled = snap.val() === null;
-			resolve()
-		})
-	})
-
-	await new Promise(resolve => {
-		const knopf = button("testnachricht")
-		resolve()
-	})*/
 }
