@@ -36,7 +36,7 @@ abstract class Kontrolle {
 		return this.popup[name]
 	}
 
-	private constructor(
+	protected constructor(
 		readonly name: string,
 		readonly voraussetzungen?: string
 	) {
@@ -277,17 +277,79 @@ class NeueSchuleKontrolle extends Kontrolle {
 	}
 }
 
-class SaisonstartKontrolle extends Kontrolle {
-	constructor() {
-		super("saisonstart", "Der Saisonstart kann nur verändert werden, wenn eine aktuelle Saison existiert und diese noch nicht begonnen hat. Veränderungen müssen mindestens eine Stunde vor dem geplanten Saisonstart stattfinden.");
+abstract class ZeitKontrolle extends Kontrolle {
+	protected constructor(
+		protected readonly zeit: string,
+		voraussetzungen?: string
+	) {
+		super("saison" + zeit, voraussetzungen);
 	}
 
-	private input = this.element("start") as HTMLInputElement
+	protected input = this.element("zeit") as HTMLInputElement
+
+	protected set inputValue(number: number | null) {
+		let wert: string
+		if (number === null) wert = ""
+		else {
+			const date = new Date(number)
+			// *** Zeitzonen 😅
+			wert = new Date(
+				date.toDateString() + " " +
+				// Zeitzone entfernen und behaupten es sei UTC
+				date.toTimeString().slice(0, 8) + "Z"
+			).toISOString()
+				// datetime-local-kompatibel machen ("Z" entfernen)
+				.slice(0, -1)
+		}
+
+		this.input.value = wert
+	}
+
+	protected get inputValue() {
+		return new Date(this.input.value).getTime()
+	}
+
+	private _countdown: number | null | undefined = undefined
+	protected set countdown(value: number | null) {
+		this._countdown = value
+		if (value && this.input.value === "") this.inputValue = value
+	}
+
+	protected get countdown() {
+		return this._countdown
+	}
+
+	private min = new Date(Date.now() + 3600 * 1000)
+	private max = new Date(Date.now() + 3600 * 1000 * 24 * 29)
+
+	protected async vorbereiten() {
+		this.input.step = "1800" // halbe Stunde
+		this.input.min = this.min.toISOString() // min eine Stunde später
+		this.input.max = this.max.toISOString() // höchstens 29 Tage in der Zukunft
+	}
+
+	protected async submit(): Promise<string> {
+		const inputValue = this.inputValue
+
+		if (inputValue < this.min.getTime())
+			throw new Error("Datum muss mindestens eine Stunde in der Zukunft liegen.")
+		if (inputValue > this.max.getTime())
+			throw new Error("Datum darf nicht mehr als 29 Tage in der Zukunft liegen.")
+
+		await set(ref(Datenbank.datenbank, "allgemein/saisons/countdowns/" + this.zeit + ""), this.inputValue)
+			.then(() => "Saison" + this.zeit + " gesetzt 🥳")
+	}
+}
+
+class SaisonstartKontrolle extends ZeitKontrolle {
+	constructor() {
+		super("start", "Der Saisonstart kann nur verändert werden, wenn eine aktuelle Saison existiert und diese noch nicht begonnen hat. Veränderungen müssen mindestens eine Stunde vor dem geplanten Saisonstart stattfinden.");
+	}
+
 	private aktuellListener: Unsubscribe
 	private zeitListener: Unsubscribe
 	private countdownListener: Unsubscribe
 	private aktuell: string | undefined = undefined
-	private start: number | null | undefined = undefined
 
 	protected init() {
 		return new Promise<void>(resolve =>
@@ -303,8 +365,8 @@ class SaisonstartKontrolle extends Kontrolle {
 					if (snap.val() === null) {
 						if (!this.countdownListener) this.countdownListener =
 							onValue(ref(Datenbank.datenbank, "allgemein/saisons/countdowns/start"), snap => {
-								this.start = snap.val();
-								this.erlaubt = this.start === null || this.start > new Date(Date.now() + 3600 * 1000).getTime()
+								this.countdown = snap.val();
+								this.erlaubt = this.countdown === null || this.countdown > new Date(Date.now() + 3600 * 1000).getTime()
 								resolve()
 							})
 					} else {
@@ -321,40 +383,16 @@ class SaisonstartKontrolle extends Kontrolle {
 		this.zeitListener?.()
 		this.countdownListener?.()
 	}
-
-	protected async submit(): Promise<string> {
-		await set(ref(Datenbank.datenbank, "allgemein/saisons/countdowns/start"), new Date(this.input.value).getTime())
-			.then(() => "Saisonstart gesetzt 🥳")
-	}
-
-	protected async vorbereiten() {
-		const date = new Date(this.start)
-		if (this.start && this.input.value === "")
-			// *** Zeitzonen 😅
-			this.input.value = new Date(
-				date.toDateString() + " " +
-				// Zeitzone entfernen und behaupten es sei UTC
-				date.toTimeString().slice(0, 8) + "Z"
-			).toISOString()
-				// datetime-local-kompatibel machen ("Z" entfernen)
-				.slice(0, -1)
-
-		this.input.step = "3600"
-		this.input.min = new Date(Date.now() + 3600 * 1000).toISOString()
-		this.input.max = new Date(Date.now() + 3600 * 1000 * 24 * 29).toISOString()
-	}
 }
 
-/*class SaisonendeKontrolle extends Kontrolle {
+class SaisonendeKontrolle extends ZeitKontrolle {
 	constructor() {
-		super("saisonende", "Das Saisonende kann nur verändert werden, wenn eine laufende Saison existiert. Veränderungen müssen mindestens eine Stunde vor dem geplanten Saisonende stattfinden.");
+		super("ende", "Das Saisonende kann nur verändert werden, wenn eine laufende Saison existiert. Veränderungen müssen mindestens eine Stunde vor dem geplanten Saisonende stattfinden.");
 	}
 
-	private input = this.element("ende") as HTMLInputElement
 	private laufendListener: Unsubscribe
 	private countdownListener: Unsubscribe
 	private laufend: string | undefined = undefined
-	private ende: number | null | undefined = undefined
 
 	protected init() {
 		return new Promise<void>(resolve =>
@@ -367,43 +405,19 @@ class SaisonstartKontrolle extends Kontrolle {
 					resolve()
 				} else if (!this.countdownListener) this.countdownListener =
 					onValue(ref(Datenbank.datenbank, "allgemein/saisons/countdowns/ende"), snap => {
-						this.ende = snap.val();
-						this.erlaubt = this.ende === null || this.ende > new Date(Date.now() + 3600 * 1000).getTime()
+						this.countdown = snap.val();
+						this.erlaubt = this.countdown === null || this.countdown > new Date(Date.now() + 3600 * 1000).getTime()
 						resolve()
 					})
-				})
 			})
 		)
 	}
 
 	async destroy() {
 		this.laufendListener?.()
-		this.zeitListener?.()
 		this.countdownListener?.()
 	}
-
-	protected async submit(): Promise<string> {
-		await set(ref(Datenbank.datenbank, "allgemein/saisons/countdowns/ende"), new Date(this.input.value).getTime())
-			.then(() => "Saisonende gesetzt 🥳")
-	}
-
-	protected async vorbereiten() {
-		const date = new Date(this.ende)
-		if (this.ende && this.input.value === "")
-			// *** Zeitzonen 😅
-			this.input.value = new Date(
-				date.toDateString() + " " +
-				// Zeitzone entfernen und behaupten es sei UTC
-				date.toTimeString().slice(0, 8) + "Z"
-			).toISOString()
-				// datetime-local-kompatibel machen ("Z" entfernen)
-				.slice(0, -1)
-
-		this.input.step = "3600"
-		this.input.min = new Date(Date.now() + 3600 * 1000).toISOString()
-		this.input.max = new Date(Date.now() + 3600 * 1000 * 24 * 29).toISOString()
-	}
-}*/
+}
 
 export default async () => {
 	document.body.classList.add("admin")
@@ -414,7 +428,7 @@ export default async () => {
 		new NeueKlasseKontrolle(),
 		new NeueSchuleKontrolle(),
 		new SaisonstartKontrolle(),
-		// new SaisonendeKontrolle(),
+		new SaisonendeKontrolle(),
 	]
 
 	await Promise.all(kontrollen.map(kontrolle => kontrolle.initialisieren()))
