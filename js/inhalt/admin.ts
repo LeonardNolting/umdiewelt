@@ -190,6 +190,7 @@ class NeueSaisonKontrolle extends Kontrolle {
 	}
 }
 
+// https://stackoverflow.com/a/54065283/11485145
 namespace NeueSaisonKontrolle {
 	export interface SchuleLi extends HTMLLIElement {
 		checkbox: HTMLInputElement
