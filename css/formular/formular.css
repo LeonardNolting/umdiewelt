@@ -51,6 +51,11 @@ input[type=button]:disabled, input[type=submit]:disabled, button:disabled {
 	cursor: default;
 }
 
+input[type=button].danger, input[type=submit].danger, button.danger {
+	--color-primary: #c40000;
+	font-weight: bold;
+}
+
 input[type=button].leer, input[type=submit].leer, button.leer {
 	background: transparent;
 	color: var(--color-primary);
