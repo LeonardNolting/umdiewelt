@@ -239,7 +239,7 @@ class NeueKlasseKontrolle extends Kontrolle {
 		const updates = {}
 		updates["spezifisch/klassen/details/" + schule + "/" + klasse] = {email, uid}
 		updates["spezifisch/klassen/liste/" + schule + "/" + klasse] = true
-		await update(ref(Datenbank.datenbank), updates)
+		return update(ref(Datenbank.datenbank), updates)
 			.then(() => "Neue Klasse erstellt 👍")
 			// Wenn was nicht funktioniert, vorherigen Status wiederherstellen
 			.catch(reason => user.delete().then(() => Promise.reject(reason)))
@@ -272,7 +272,7 @@ class NeueSchuleKontrolle extends Kontrolle {
 
 	protected async submit(): Promise<string> {
 		const name = this.element("name").value;
-		await set(ref(Datenbank.datenbank, "allgemein/schulen/liste/" + name), true)
+		return set(ref(Datenbank.datenbank, "allgemein/schulen/liste/" + name), true)
 			.then(() => "Neue Schule erstellt 👍")
 	}
 
@@ -339,7 +339,7 @@ abstract class ZeitKontrolle extends Kontrolle {
 		if (inputValue > this.max.getTime())
 			throw new Error("Datum darf nicht mehr als 29 Tage in der Zukunft liegen.")
 
-		await set(ref(Datenbank.datenbank, "allgemein/saisons/countdowns/" + this.zeit + ""), this.inputValue)
+		return set(ref(Datenbank.datenbank, "allgemein/saisons/countdowns/" + this.zeit + ""), this.inputValue)
 			.then(() => "Saison" + this.zeit + " gesetzt 🥳")
 	}
 }
