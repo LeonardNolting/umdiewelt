@@ -422,6 +422,48 @@ class SaisonendeKontrolle extends ZeitKontrolle {
 	}
 }
 
+class SaisonLoeschenKontrolle extends Kontrolle {
+	constructor() {
+		super("saison-loeschen", "Es muss eine aktuelle Saison vorhanden sein, um diese löschen zu können.");
+	}
+
+	private aktuellListener: Unsubscribe
+	private aktuell: string | undefined = undefined
+
+	protected init() {
+		return new Promise<void>(resolve =>
+			this.aktuellListener = onValue(ref(Datenbank.datenbank, "allgemein/saisons/aktuell"), snap => {
+				this.aktuell = snap.val();
+				this.erlaubt = this.aktuell !== null
+				resolve()
+			})
+		)
+	}
+
+	async destroy() {
+		this.aktuellListener?.()
+	}
+
+	protected async submit(): Promise<string> {
+		const updates = {}
+		// updates["spezifisch/klassen/details/" + schule + "/" + klasse] = {email, uid}
+		// updates["spezifisch/klassen/liste/" + schule + "/" + klasse] = true
+
+		updates["allgemein/saisons/liste/" + name] = true
+		teilnehmendeSchulen.forEach(({name: schule, potAnzahlFahrer}) => {
+			updates["allgemein/saisons/details/" + name + "/schulen/liste/" + schule] = true
+			updates["allgemein/saisons/details/" + name + "/schulen/details/" + schule + "/potAnzahlFahrer"] = potAnzahlFahrer
+			updates["allgemein/saisons/details/" + name + "/runden"] = parseInt(this.element("runden").value)
+		})
+
+		return update(ref(Datenbank.datenbank), updates)
+			.then(() => "Saison gelöscht")
+	}
+
+	protected async vorbereiten() {
+	}
+}
+
 export default async () => {
 	document.body.classList.add("admin")
 	Kontrolle.form.onsubmit = event => event.preventDefault()
@@ -432,31 +474,14 @@ export default async () => {
 		new NeueSchuleKontrolle(),
 		new SaisonstartKontrolle(),
 		new SaisonendeKontrolle(),
+		new SaisonLoeschenKontrolle(),
 	]
 
 	await Promise.all(kontrollen.map(kontrolle => kontrolle.initialisieren()))
 
 	Kontrolle.fieldset.disabled = false
 
-	/*await new Promise(resolve => {
-		const knopf = button("saisonende")
-		// TODO neue Zeitenstruktur
-		// * Saisonende festlegen/verändern: nur wenn noch keines gegeben oder dieses noch verändert werden kann (nicht schon passiert ist)
-		onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
-			knopf.disabled = true
-			const laufend = snap.val();
-			if (laufend !== null) {
-				onValue(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/zeit/ende"), snap => {
-					const ende = snap.val();
-					if (ende === null || ende > Date.now()) knopf.disabled = false
-					resolve()
-				})
-			} else resolve()
-		})
-
-		// Saisonende passiert: allgemein/saisons/laufend entfernen, allgemein/saisons/aktuell entfernen
-	})
-
+	/*
 	await new Promise(resolve => {
 		const knopf = button("saison-loeschen")
 		// * Saison löschen: nur wenn eine aktuelle Saison existiert
@@ -480,13 +505,5 @@ export default async () => {
 	await new Promise(resolve => {
 		const knopf = button("testnachricht")
 		resolve()
-	})
-
-	await new Promise(resolve => {
-		const knopf = button("neue-schule")
-		knopf.onclick = () => Admin.neueSchule()
-		resolve()
-	})
-
-	fieldset.disabled = false*/
+	})*/
 }

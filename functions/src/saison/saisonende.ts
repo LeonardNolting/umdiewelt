@@ -1,4 +1,5 @@
 import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
 import {datenbank, region} from "../init";
 import {setTask} from "./setTask";
 
@@ -18,6 +19,8 @@ export const beendeSaison = functions.region(region).https.onRequest(async (requ
 	updates["allgemein/saisons/countdowns/ende"] = null
 	// Ende einfügen
 	updates["allgemein/saisons/details/" + laufend + "/zeit/ende"] = ende
+	// Anzahl historisch erhöhen
+	updates["allgemein/saisons/anzahlHistorisch"] = admin.database.ServerValue.increment(1)
 	await datenbank.ref().update(updates)
 
 	response.sendStatus(200).end()
