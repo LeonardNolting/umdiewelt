@@ -314,6 +314,24 @@
 
 		<div id="popups">
 			<!-- Admin -->
+			<!-- Saisonstart -->
+			<form id="popup-admin-saisonstart">
+				<div class="container">
+					<h3>Saisonstart festlegen</h3>
+					<input type="datetime-local"
+					       name="start"
+					       required
+					       autofocus />
+					<p class="hinweis">Der Saisonstart darf frühestens in einer Stunde stattfinden und darf nicht weiter
+						als 29 Tage in der Zukunft liegen.</p>
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+					<input type="submit" value="Eintragen" name="submit" />
+				</fieldset>
+			</form>
+
 			<!-- Neue Schule -->
 			<form id="popup-admin-neue-schule">
 				<div class="container">

@@ -77,6 +77,7 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 			const laufend = snap.val()
 			this.schuleSelect.innerHTML = ""
 			get(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/schulen/liste")).then(snap => {
+				// TODO erste entfernen, nicht nötig (ist standard)
 				let erste = true
 				snap.forEach(childSnap => {
 					const schule = childSnap.key
