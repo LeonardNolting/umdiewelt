@@ -314,6 +314,37 @@
 
 		<div id="popups">
 			<!-- Admin -->
+			<!-- Strecke löschen -->
+			<form id="popup-admin-strecke-loeschen">
+				<div class="container">
+					<h3>Strecke löschen</h3>
+
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+					<input type="submit" value="Strecke löschen" name="submit" class="danger" />
+				</fieldset>
+			</form>
+
+			<!-- Testnachricht -->
+			<form id="popup-admin-testnachricht">
+				<div class="container">
+					<h3>Testnachricht senden</h3>
+					<input type="text"
+					       autofocus
+					       placeholder="Inhalt"
+					       required
+					       value="Dies ist eine Textnachricht."
+					       name="nachricht" />
+				</div>
+
+				<fieldset class="buttons">
+					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+					<input type="submit" value="Senden" name="submit" />
+				</fieldset>
+			</form>
+
 			<!-- Saison löschen -->
 			<form id="popup-admin-saison-loeschen">
 				<div class="container">

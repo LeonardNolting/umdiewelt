@@ -1,4 +1,4 @@
-import {get, onChildAdded, onValue, ref, set, Unsubscribe, update} from "firebase/database";
+import {get, onChildAdded, onValue, ref, set, Unsubscribe, update, remove} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import Popup from "../popup";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
@@ -445,22 +445,49 @@ class SaisonLoeschenKontrolle extends Kontrolle {
 	}
 
 	protected async submit(): Promise<string> {
-		const updates = {}
-		// updates["spezifisch/klassen/details/" + schule + "/" + klasse] = {email, uid}
-		// updates["spezifisch/klassen/liste/" + schule + "/" + klasse] = true
-
-		updates["allgemein/saisons/liste/" + name] = true
-		teilnehmendeSchulen.forEach(({name: schule, potAnzahlFahrer}) => {
-			updates["allgemein/saisons/details/" + name + "/schulen/liste/" + schule] = true
-			updates["allgemein/saisons/details/" + name + "/schulen/details/" + schule + "/potAnzahlFahrer"] = potAnzahlFahrer
-			updates["allgemein/saisons/details/" + name + "/runden"] = parseInt(this.element("runden").value)
-		})
-
-		return update(ref(Datenbank.datenbank), updates)
+		return remove(ref(Datenbank.datenbank, "allgemein/saisons/liste/" + this.aktuell))
 			.then(() => "Saison gelöscht")
 	}
 
 	protected async vorbereiten() {
+	}
+}
+
+class TestnachrichtKontrolle extends Kontrolle {
+	constructor() {
+		super("testnachricht", "Diese Funktion wurde noch nicht implementiert.")
+	}
+
+	async destroy(): Promise<void> {
+	}
+
+	protected async init(): Promise<void> {
+		this.erlaubt = false
+	}
+
+	protected async submit(): Promise<string> {
+	}
+
+	protected async vorbereiten(): Promise<void> {
+	}
+}
+
+class StreckeLoeschenKontrolle extends Kontrolle {
+	constructor() {
+		super("strecke-loeschen", "Diese Funktion wurde noch nicht implementiert.")
+	}
+
+	async destroy(): Promise<void> {
+	}
+
+	protected async init(): Promise<void> {
+		this.erlaubt = false
+	}
+
+	protected async submit(): Promise<string> {
+	}
+
+	protected async vorbereiten(): Promise<void> {
 	}
 }
 
@@ -475,6 +502,8 @@ export default async () => {
 		new SaisonstartKontrolle(),
 		new SaisonendeKontrolle(),
 		new SaisonLoeschenKontrolle(),
+		new TestnachrichtKontrolle(),
+		new StreckeLoeschenKontrolle()
 	]
 
 	await Promise.all(kontrollen.map(kontrolle => kontrolle.initialisieren()))
