@@ -15,7 +15,7 @@ export default class FahrerAuthentifizierung extends Authentifizierung {
 
 	private static email(schule: string, klasse: string) {
 		return new Promise<string>(resolve =>
-			onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "email"), snap => {
+			onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
 				resolve(snap.val())
 			}, {onlyOnce: true}))
 	}
