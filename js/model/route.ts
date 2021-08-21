@@ -1,6 +1,6 @@
-import LatLngLiteral = google.maps.LatLngLiteral;
+import Ort from "./ort";
 
 export default interface Route {
-	von: LatLngLiteral,
-	zu: LatLngLiteral
+	von: Ort
+	zu: Ort
 }

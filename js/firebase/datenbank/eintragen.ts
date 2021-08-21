@@ -1,61 +1,67 @@
-import {ref, set, update, increment} from "firebase/database";
-import LatLngLiteral = google.maps.LatLngLiteral;
+import {onValue, push, ref, serverTimestamp, set} from "firebase/database";
 import {Authentifizierung} from "../authentifizierung/authentifizierung";
 import {Datenbank} from "./datenbank";
-import tabellen = Datenbank.tabellen;
-import datenbank = Datenbank.datenbank;
 import FahrerAuthentifizierung from "../authentifizierung/fahrerAuthentifizierung";
+import Route from "../../model/route";
 
-export let eintragbar = false
+/**
+ *
+ * @param schule
+ * @param klasse
+ * @param name
+ * @return id ID des existierenden Fahrers
+ */
+function fahrerBekommen(schule: string, klasse: string, name: string): Promise<string | null> {
+	const ref = ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/fahrer/" + name)
+	return new Promise(resolve =>
+		onValue(ref, snap => resolve(snap.val()), {onlyOnce: true}))
+}
+
+/**
+ *
+ * @param schule
+ * @param klasse
+ * @param name
+ * @return id ID des neuen Fahrers
+ */
+function fahrerErstellen(schule: string, klasse: string, name: string): Promise<string> {
+	const ref = ref(Datenbank.datenbank, "spezifisch/fahrer");
+	return push(ref, {schule, klasse, name}).then(({key}) => key)
+}
+
+/**
+ *
+ * @param fahrer
+ * @param strecke
+ * @return id ID der neuen Strecke
+ */
+function streckeErstellen(fahrer: string, strecke: number): Promise<string> {
+	return push(ref(Datenbank.datenbank, "spezifisch/strecken"), {
+		fahrer,
+		strecke,
+		zeitpunkt: serverTimestamp()
+	}).then(({key}) => key)
+}
+
+function routeErstellen(strecke: string, route: Route) {
+	return set(ref(Datenbank.datenbank, "spezifisch/routen/" + strecke), route)
+}
 
 export async function eintragen(
-	strecke: number,
+	laenge: number,
 	name: string,
-	route?: { von: LatLngLiteral, nach: LatLngLiteral } | undefined
+	route?: Route
 ) {
 	if (!Authentifizierung.authentifizierung.autorisiertEinzutragen)
 		throw new Error("Authentifizierung ist nicht ausreichend.")
 
-	/* * Schritte:
-	1. Strecke (Strecke anpassen)
-	2. Schulen (Strecke anpassen)
-	3. Klassen (Strecke anpassen)
-	4. Fahrer (Strecke anpassen, evtl. erstellen)
-	5. Strecken (erstellen)
-	6. Orte (Häufigkeit erhöhen, evtl. erstellen)
-	7. Routen (erstellen)
+	const {schule, klasse} = Authentifizierung.authentifizierung as FahrerAuthentifizierung
 
-	-> zuerst Fahrer sicherstellen
-	-> dann Strecke erstellen
-	-> dann atomic alle Strecken auf einmal anpassen
-	-> zuletzt Orte aktualisieren und Route erstellen (unwichtig)
+	const fahrer = await fahrerBekommen(schule, klasse, name) || await fahrerErstellen(schule, klasse, name)
+	const strecke = await streckeErstellen(fahrer, laenge)
 
-	Am Ende: Länge überprüfen, ggf. melden
-	 */
-
-	// Fahrer
-	const fahrer = ""
-
-	// Strecke
-	tabellen.strecken.eintragen({fahrer, strecke, zeitpunkt: Date.now()})
-
-	// Strecken überall anpassen
-	const klasse = (Authentifizierung.authentifizierung as FahrerAuthentifizierung).klasse
-	const schule = tabellen.klassen.get(klasse).schule
-	const updates = {}
-
-	const steigerung = increment(strecke);
-	updates[`strecke`] = steigerung
-	updates[`schulen/${schule}/strecke`] = steigerung
-	updates[`klassen/${klasse}/strecke`] = steigerung
-	updates[`fahrer/${fahrer}/strecke`] = steigerung
-
-	await update(ref(datenbank), updates)
-
-	// Orte
-
-	// Route
-
-	// ggf. melden
-
+	if (route) {
+		// TODO überlegen: sind immer beide Orte gegeben? entsprechend spezifisch/orte updaten...
+		await routeErstellen(strecke, route)
+	}
 }
