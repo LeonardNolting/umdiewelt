@@ -168,7 +168,7 @@ class NeueSaisonKontrolle extends Kontrolle {
 			.filter(li => li.checkbox.checked)
 			.map(li => ({
 				name: li.checkbox.value,
-				potAnzahlFahrer: li.potAnzahlFahrerInput.value
+				potAnzahlFahrer: parseInt(li.potAnzahlFahrerInput.value)
 			}))
 
 		if (teilnehmendeSchulen.length === 0)
