@@ -1,5 +1,11 @@
-import {koordinaten} from "./konfiguration";
 import Popup from "./popup";
+import {Datenbank} from "./firebase/datenbank/datenbank";
+import {onValue, push, ref, serverTimestamp, set} from "firebase/database";
+import Route from "./model/route";
+import {Authentifizierung, FahrerAuthentifizierung} from "./firebase/authentifizierung/authentifizierung";
+import firebase from "firebase/compat";
+import Auth = firebase.auth.Auth;
+import {getAuth} from "firebase/auth";
 
 type PopupInfo = {
 	element: HTMLFormElement,
@@ -67,7 +73,7 @@ const popups = {
 		zurueck: eintragung => eintragung.meterSetzen(undefined),
 		weiter: eintragung => {
 			eintragung.datenschutz = true
-			eintragung.eintragen()
+			eintragung.speichern()
 		}
 	}),
 	fertig: popup("fertig", {
@@ -137,14 +143,28 @@ export class Eintragung {
 		this.popupOeffnen(wert !== undefined ? popups.datenschutz : popups[this.option])
 	}
 
-	eintragen() {
+	async speichern() {
 		if (!this.name) throw new Error("Name noch nicht eingetragen.")
 		if (!this.meter) throw new Error("Länge noch nicht eingetragen.")
 		if (!this.datenschutz) throw new Error("Datenschutzerklärung wurde noch nicht zugestimmt.")
 
-		// Datenbank ...
+		console.log(getAuth().currentUser, Authentifizierung.authentifiziert, Authentifizierung.authentifizierung)
 
-		this.popupOeffnen(popups.fertig)
+		// ! Circular dependencies
+		if (!Authentifizierung.authentifizierung.autorisiertEinzutragen)
+			throw new Error("Authentifizierung ist nicht ausreichend.")
+
+		const {schule, klasse} = Authentifizierung.authentifizierung as FahrerAuthentifizierung
+
+		const fahrer = await fahrerBekommen(schule, klasse, this.name) || await fahrerErstellen(schule, klasse, this.name)
+		const strecke = await streckeErstellen(fahrer, this.meter)
+
+		/*if (route) {
+			// TODO überlegen: sind immer beide Orte gegeben? entsprechend spezifisch/orte updaten...
+			await routeErstellen(strecke, route)
+		}*/
+
+		await this.popupOeffnen(popups.fertig)
 	}
 
 	static eintragungen: Eintragung[] = []
@@ -158,4 +178,47 @@ export class Eintragung {
 		eintragung.oeffnen()
 		return eintragung
 	}
+}
+
+/**
+ *
+ * @param schule
+ * @param klasse
+ * @param name
+ * @return id ID des existierenden Fahrers
+ */
+function fahrerBekommen(schule: string, klasse: string, name: string): Promise<string | null> {
+	const ref = ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/fahrer/" + name)
+	return new Promise(resolve =>
+		onValue(ref, snap => resolve(snap.val()), {onlyOnce: true}))
+}
+
+/**
+ *
+ * @param schule
+ * @param klasse
+ * @param name
+ * @return id ID des neuen Fahrers
+ */
+function fahrerErstellen(schule: string, klasse: string, name: string): Promise<string> {
+	const ref = ref(Datenbank.datenbank, "spezifisch/fahrer");
+	return push(ref, {schule, klasse, name}).then(({key}) => key)
+}
+
+/**
+ *
+ * @param fahrer
+ * @param strecke
+ * @return id ID der neuen Strecke
+ */
+function streckeErstellen(fahrer: string, strecke: number): Promise<string> {
+	return push(ref(Datenbank.datenbank, "spezifisch/strecken"), {
+		fahrer,
+		strecke,
+		zeitpunkt: serverTimestamp()
+	}).then(({key}) => key)
+}
+
+function routeErstellen(strecke: string, route: Route) {
+	return set(ref(Datenbank.datenbank, "spezifisch/routen/" + strecke), route)
 }
