@@ -5,12 +5,12 @@ namespace Cookie {
 	 * Gibt Wert eines Cookies zurück
 	 * @param name Name des Cookies
 	 * @param json Ob in JSON geparsed werden soll
+	 * @return wert bzw. undefined wenn Cookie nicht vorhanden
 	 */
-	export function get<T>(name: string, json = true): T {
+	export function get<T>(name: string, json = true): T | undefined {
 		const matches = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)'),
 			wert = matches ? matches[2] : null;
-		if (wert === null) return null;
-		if (wert === "") return undefined;
+		if (wert === null) return undefined;
 		return (json ? JSON.parse(wert) : wert) as T;
 	}
 
