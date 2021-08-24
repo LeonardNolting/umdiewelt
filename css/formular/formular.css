@@ -1,5 +1,6 @@
 @import "./admin/admin.css";
 @import "./eintragen/eintragen.css";
+@import "./cookies.css";
 
 form {
 	display: flex;

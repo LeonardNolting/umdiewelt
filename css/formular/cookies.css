@@ -50,6 +50,7 @@
 	margin-bottom: 1rem;
 	color: orange;
 }
+
 #popup-cookies:not(.wird-resetten) .hinweis {
 	display: none
 }
