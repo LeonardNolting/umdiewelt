@@ -26,8 +26,8 @@ namespace Cookies {
 	const setzen = (einstellung: Einstellung) => {
 		if (einstellung === null) return
 		Cookies.einstellung = einstellung
-		if (notwendig()) Cookie.set("cookies", einstellung)
-		step("Cookie-Einstellung gesetzt: " + einstellung)
+		if (notwendig()) Cookie.set("cookies", Einstellung[einstellung])
+		step("Cookie-Einstellung gesetzt: " + Einstellung[einstellung])
 		return einstellung
 	}
 
