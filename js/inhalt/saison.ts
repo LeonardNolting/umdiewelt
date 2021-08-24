@@ -12,6 +12,7 @@ import {
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import m from "../formatierung/einheit/m";
 import {bereiteFaktVor, HTMLDataElementFakt, ladeFakt} from "./fakten";
+import load from "../load";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
 const lis = () => Array.from(saisonAuswahl.children) as HTMLLIElement[];
@@ -38,7 +39,7 @@ export const waehleSaisonAus = (saison: string) => {
 	saisonAuswahl.style.setProperty("--offset", offset.toString())
 
 	// Saisonanzeige
-	return ladeSaison(saison)
+	return load(ladeSaison(saison))
 }
 
 export const ausgewaehlteSaisonLi = (elements: HTMLLIElement[] = lis()) =>
