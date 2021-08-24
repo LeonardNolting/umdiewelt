@@ -12,8 +12,9 @@ import '@fortawesome/fontawesome-free/css/fontawesome.min.css'
 import 'awesome-notifications/dist/style.css'
 import {Authentifizierung} from "./firebase/authentifizierung/authentifizierung";
 import wait from "./wait";
+import load from "./load";
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => load((async () => {
 	wait()
 	browserAktualisierung()
 	popups()
@@ -25,4 +26,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 	Datenbank.initialisieren()
 	Datenbank.Lesen.lesen()
 	Authentifizierung.vorbereiten()
-})
+})()))
