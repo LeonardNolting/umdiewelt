@@ -277,7 +277,8 @@ export class Eintragung {
 	}
 
 	popupSchliessen() {
-		Popup.schliessen(this.offenesPopup.element)
+		if (this.offenesPopup) Popup.schliessen(this.offenesPopup.element)
+		else Popup.alleSchliessen()
 	}
 
 	async popupVorbereiten(popup: PopupInfo) {
