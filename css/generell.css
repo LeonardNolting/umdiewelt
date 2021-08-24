@@ -14,24 +14,24 @@ body {
 	flex-direction: column;
 }
 
-body[data-progress] {
+html[data-progress] {
 	cursor: progress
 }
 
-body[data-wait] {
+html[data-wait] {
 	cursor: wait
 }
 
-body[data-wait] :not([data-wait-immune]) {
+html[data-wait] :not([data-wait-immune]) {
 	pointer-events: none
 }
 
-body[data-wait] [data-wait-immune], body[data-wait] [data-wait-immune] * {
+html[data-wait] [data-wait-immune], html[data-wait] [data-wait-immune] * {
 	pointer-events: initial;
 	cursor: default !important
 }
 
-body[data-wait] [data-wait-immune] [onclick], body[data-wait] [data-wait-immune][onclick] {
+html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune][onclick] {
 	cursor: pointer
 }
 
