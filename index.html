@@ -304,8 +304,11 @@
 						<li id="datenschutzerklaerung">
 							<a href="datenschutzerklaerung.html">Datenschutz</a>
 						</li>
-						<li id="admin" class="nicht-admin-exklusive">
+						<li id="admin-anmelden" class="nicht-admin-exklusive">
 							<button>Admin</button>
+						</li>
+						<li id="admin-abmelden" class="admin-exklusive">
+							<button>Abmelden</button>
 						</li>
 					</ul>
 				</div>
@@ -524,8 +527,8 @@
 				<input type="submit" value="Bestätigen 🔑" name="submit" />
 			</form>
 
-			<!-- Anmeldung -->
-			<form id="popup-anmelden" class="container">
+			<!--* Eintragen Popups -->
+			<form id="popup-eintragen-authentifizierung" class="container">
 				<select title="Schule" name="schule" required></select>
 				<select title="Klasse" name="klasse" required></select>
 
@@ -538,13 +541,19 @@
 					       placeholder="Passwort..."
 					       required />
 
-					<input type="submit" value="Bestätigen 🔑" name="submit" />
+					<input type="submit" value="Bestätigen 🔑" name="weiter" />
+				</div>
+
+				<div class="angemeldet-bleiben">
+					<input name="angemeldet-bleiben"
+					       id="eintragen-authentifizierung-angemeldet-bleiben-checkbox"
+					       type="checkbox" />
+					<label for="eintragen-authentifizierung-angemeldet-bleiben-checkbox">Angemeldet bleiben</label>
 				</div>
 
 				<a class="hinweis" href="#warum-brauche-ich-ein-passwort">Warum benötige ich ein Passwort?</a>
 			</form>
 
-			<!--* Eintragen Popups -->
 			<form id="popup-eintragen-name" data-schritt="1">
 				<div class="container">
 					<input name="name"
@@ -559,11 +568,23 @@
 
 					<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
 				</div>
-				<fieldset id="eintragen-optionen" class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+				<fieldset class="buttons">
+					<input type="button" name="direkt" value="🔢 Direkt eingeben">
+					<input type="submit" name="berechnen" value="📐 Berechnen">
+				</fieldset>
+			</form>
 
-					<input type="button" id="eintragen-direkt" name="direkt" value="🔢 Direkt eingeben">
-					<input type="submit" id="eintragen-berechnen" name="berechnen" value="📐 Berechnen">
+			<form id="popup-eintragen-name-gegeben" data-schritt="1">
+				<div class="container">
+					<p>Angemeldet als: <b class="name"></b></p>
+					<p><span class="schule"></span> <span class="klasse"></span> - <span class="strecke"></span></p>
+					<button name="abmelden">Abmelden</button>
+
+					<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
+				</div>
+				<fieldset class="buttons">
+					<input type="button" name="direkt" value="🔢 Direkt eingeben">
+					<input type="submit" name="berechnen" value="📐 Berechnen">
 				</fieldset>
 			</form>
 
@@ -622,8 +643,6 @@
 				</div>
 
 				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-
 					<input type="button" value="Zurück" name="zurueck" class="leer" />
 					<input type="submit" value="Weiter" name="weiter" />
 				</fieldset>
@@ -644,8 +663,6 @@
 				</div>
 
 				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-
 					<input type="button" value="Zurück" name="zurueck" class="leer" />
 					<input type="submit" value="Weiter" name="weiter" />
 				</fieldset>
@@ -699,8 +716,6 @@
 				</div>
 
 				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-
 					<input type="button" value="Zurück" name="zurueck" class="leer" />
 					<input type="submit" value="Speichern" name="weiter" />
 				</fieldset>

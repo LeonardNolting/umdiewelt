@@ -2,6 +2,7 @@ import quellen from "./quellen";
 import {bereiteFaktenVor as fakten} from "./fakten";
 import step from "../step";
 import cookies from "./cookies";
+import admin from "./admin";
 
 const observer = new IntersectionObserver(((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
@@ -18,7 +19,7 @@ const observer = new IntersectionObserver(((eintraege, observer) => {
 	threshold: 0.3
 })
 
-export default () => {
+export default async () => {
 	step("Lädt Inhalt")
 
 	document.querySelectorAll("#inhalt .verspaetet").forEach(element => observer.observe(element))
@@ -26,4 +27,5 @@ export default () => {
 	cookies()
 	fakten(...document.getElementById("fakten-anzeige").querySelector("section").querySelectorAll("data"))
 	quellen()
+	await admin()
 }

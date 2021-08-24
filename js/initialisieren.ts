@@ -5,7 +5,6 @@ import images from "../img/*.png";
 import optionen from "./optionen";
 import step from "./step";
 import {Eintragung} from "./eintragen";
-import FahrerAuthentifizierung from "./firebase/authentifizierung/fahrerAuthentifizierung";
 
 export let initialisiert = false
 
@@ -48,9 +47,7 @@ export const punkte: { [key: string]: Markierung } = {
 	mitwirken = new Markierung(images["right-arrow"], 60, {
 		lat: latBeiLng(0),
 		lng: 0,
-	}, false, async marker => {
-		FahrerAuthentifizierung.anmelden().then(() => Eintragung.eintragen())
-	}, "pointer", () => ({
+	}, false, () => Eintragung.eintragen(), "pointer", () => ({
 		anchor: new google.maps.Point(-70, 90)
 		// anchor: new google.maps.Point(60 / 2, 60 / 2)
 

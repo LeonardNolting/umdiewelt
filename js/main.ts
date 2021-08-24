@@ -10,7 +10,6 @@ import browserAktualisierung from "./browserAktualisierung";
 import '@fortawesome/fontawesome-free/css/solid.min.css'
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css'
 import 'awesome-notifications/dist/style.css'
-import {Authentifizierung} from "./firebase/authentifizierung/authentifizierung";
 import wait from "./wait";
 import load from "./load";
 
@@ -20,10 +19,7 @@ document.addEventListener("DOMContentLoaded", () => load((async () => {
 	popups()
 	await Cookies.ueberpruefen()
 	await maps()
-	inhalt()
+	await inhalt()
 	initialisieren()
-	firebase()
-	Datenbank.initialisieren()
-	Datenbank.Lesen.lesen()
-	Authentifizierung.vorbereiten()
+	await firebase()
 })()))

@@ -1,9 +1,13 @@
-import {get, onChildAdded, onValue, ref, set, Unsubscribe, update, remove} from "firebase/database";
+import {get, onChildAdded, onValue, ref, remove, set, Unsubscribe, update} from "firebase/database";
 import {Datenbank} from "../firebase/datenbank/datenbank";
 import Popup from "../popup";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
-import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
+import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut} from "firebase/auth";
+import {auth, authentifizieren} from "../firebase/authentifizierung";
+import {Eintragung} from "../eintragen";
+import load from "../load";
+import {adminEmail} from "../konfiguration";
 
 abstract class Kontrolle {
 	_erlaubt: boolean = false
@@ -493,7 +497,59 @@ class StreckeLoeschenKontrolle extends Kontrolle {
 }
 
 export default async () => {
+	const popup = document.getElementById("popup-anmelden-admin") as HTMLFormElement
+	const submit = popup["submit"]
+
+	popup.onsubmit = async event => {
+		// Wir machen's dynamisch!
+		event.preventDefault()
+
+		// Verhindert versehentliches doppeltes Bestätigen
+		submit.disabled = true;
+
+		const passwort = popup["passwort"].value
+
+		await load(authentifizieren(adminEmail, passwort, false)
+			.then(() => {
+				Popup.schliessen(popup)
+				popup["passwort"].value = ""
+				aktivieren()
+			})
+			.finally(() => submit.disabled = false))
+	}
+
+	document.getElementById("admin-anmelden").onclick = async () => {
+		if (Eintragung.user !== undefined) {
+			if (Eintragung.user !== null) {
+				// Muss Teilnehmer sein, sonst könnte nicht auf diesen Knopf geklickt werden -> abmelden
+				await load(signOut(auth))
+			}
+
+			Popup.oeffnen(popup)
+		} else await load(new Promise(resolve => {
+			// Sonst halt warten und nochmal probieren...
+			const listener = onAuthStateChanged(auth, user => {
+				listener()
+				Eintragung.user = user
+				resolve()
+				Popup.oeffnen(popup)
+			})
+		}))
+	}
+
+	document.getElementById("admin-abmelden").onclick = () => load(signOut(auth).then(deaktivieren))
+}
+
+const aktivieren = async () => {
 	document.body.classList.add("admin")
+	await kontrollen()
+}
+
+const deaktivieren = () => {
+	document.body.classList.remove("admin")
+}
+
+async function kontrollen() {
 	Kontrolle.form.onsubmit = event => event.preventDefault()
 
 	const kontrollen = [

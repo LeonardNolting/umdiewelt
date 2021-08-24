@@ -1,7 +1,9 @@
 import {initializeApp} from "firebase/app";
 import step from "../step";
+import {Datenbank} from "./datenbank/datenbank";
+import authentifizierung from "./authentifizierung";
 
-export default () => {
+export default async () => {
 	step("Initialisiert Firebase")
 
 	// noinspection SpellCheckingInspection
@@ -15,4 +17,8 @@ export default () => {
 		appId: "1:585934420778:web:28f589b7f8d4165cfa7c53",
 		measurementId: "G-FSF7RJDSE7"
 	});
+
+	authentifizierung()
+	Datenbank.initialisieren()
+	Datenbank.Lesen.lesen()
 }
