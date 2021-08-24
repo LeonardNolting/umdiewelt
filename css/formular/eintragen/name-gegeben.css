@@ -1,0 +1,14 @@
+#popup-eintragen-name-gegeben p {
+	margin: 0;
+}
+
+#popup-eintragen-name-gegeben p:not(:first-child) {
+	margin-top: 1rem;
+}
+
+#popup-eintragen-name-gegeben p.zusatzinfo {
+	font-size: 90%;
+	font-style: italic;
+	margin-bottom: 1rem;
+	margin-top: 0.4rem;
+}
