@@ -1,6 +1,10 @@
 const toLoad: Promise<any>[] = []
 
-export default async function (promise: Promise<void>) {
+export default async function (wert: Promise<void> | void) {
+	const promise = new Promise(async resolve => {
+		await wert
+		resolve()
+	})
 	document.wait = true
 	toLoad.push(promise)
 	promise.finally(() => {
