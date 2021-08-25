@@ -43,15 +43,7 @@ export const punkte: { [key: string]: Markierung } = {
 
 		// Schauen, ob nächstes Mal raus- oder reingezoomed wird -> entsprechend cursor setzen
 		marker.setCursor("zoom-" + (berechneNeuesLevelIndex() === 0 ? "out" : "in"))
-	}, "zoom-in"),
-	mitwirken = new Markierung(images["right-arrow"], 60, {
-		lat: latBeiLng(0),
-		lng: 0,
-	}, false, () => Eintragung.eintragen(), "pointer", () => ({
-		anchor: new google.maps.Point(-70, 90)
-		// anchor: new google.maps.Point(60 / 2, 60 / 2)
-
-	}), "Gefahrene Strecke eintragen!")
+	}, "zoom-in")
 
 // "Straße"
 export let

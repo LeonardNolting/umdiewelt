@@ -11,6 +11,7 @@ import load from "./load";
 import Cookies from "./cookies";
 import m from "./formatierung/einheit/m";
 import zahl from "./formatierung/zahl";
+import {mitwirkenTextSetzen} from "./inhalt/mitwirken";
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
@@ -253,7 +254,7 @@ export class Eintragung {
 
 				await this.popupOeffnen(popups.authentifizierung)
 			} else {
-				const fahrer = Cookie.get<string>("fahrer", false)
+				const fahrer = Eintragung.fahrerAusCookie
 				if (fahrer) {
 					// Ist schon angemeldet
 					this.angemeldetBleiben = true
@@ -262,7 +263,7 @@ export class Eintragung {
 						schule,
 						klasse,
 						name
-					} = (await get(ref(Datenbank.datenbank, "spezifisch/fahrer/" + fahrer))).val()
+					} = await datenVonFahrerBekommen(fahrer)
 
 					this.authentifizierungSetzen(schule, klasse)
 					await this.nameSetzen(name, fahrer)
@@ -329,7 +330,7 @@ export class Eintragung {
 		this.fahrer = fahrer || (name === undefined ? undefined : await fahrerBekommen(this.schule, this.klasse, name))
 		if (this.angemeldetBleiben && this.fahrer) Cookie.set("fahrer", this.fahrer, false);
 
-		// Name gegeben Popup anpassen
+		// Name-gegeben Popup anpassen
 		const popup = popups.nameGegeben.element;
 		["schule", "klasse", "name"].forEach(it => popup.querySelector("." + it).textContent = this[it])
 		{
@@ -340,6 +341,8 @@ export class Eintragung {
 			const roh = zahl(meter.wert, 0)
 			popup.querySelector(".strecke").textContent = roh + meter.einheit
 		}
+
+		mitwirkenTextSetzen(this.name)
 	}
 
 	optionSetzen(option: "direkt" | "berechnen" | undefined) {
@@ -404,6 +407,18 @@ export class Eintragung {
 
 	static laufend: string | null | undefined = undefined
 	static leer: boolean | undefined = undefined
+
+	static get fahrerAusCookie() {
+		return Cookie.get<string>("fahrer", false)
+	}
+
+	static async vorbereiten() {
+		const fahrerAusCookie = this.fahrerAusCookie;
+		if (fahrerAusCookie) {
+			const {name} = await datenVonFahrerBekommen(fahrerAusCookie)
+			mitwirkenTextSetzen(name)
+		}
+	}
 }
 
 /**
@@ -429,6 +444,14 @@ const fahrerErstellen = (schule: string, klasse: string, name: string) => push(
 	ref(Datenbank.datenbank, "spezifisch/fahrer"),
 	{schule, klasse, name}
 ).then(({key}) => key)
+
+const datenVonFahrerBekommen = async (fahrer: string): Promise<{
+	schule: string
+	klasse: string
+	name: string
+	strecke: number
+	anzahlStrecken: number
+}> => (await get(ref(Datenbank.datenbank, "spezifisch/fahrer/" + fahrer))).val()
 
 /**
  *

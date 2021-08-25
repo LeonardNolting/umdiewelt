@@ -12,6 +12,7 @@ import '@fortawesome/fontawesome-free/css/fontawesome.min.css'
 import 'awesome-notifications/dist/style.css'
 import wait from "./wait";
 import load from "./load";
+import {Eintragung} from "./eintragen";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	wait()
@@ -24,5 +25,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 		await inhalt()
 		await initialisieren()
 		await firebase()
+		await Eintragung.vorbereiten()
 	})())
 })

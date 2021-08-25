@@ -5,7 +5,6 @@ import {
 	initialisiert,
 	karte,
 	mittelstreifen,
-	mitwirken,
 	punkte,
 	schule
 } from "./initialisieren";
@@ -21,7 +20,7 @@ export default function anzeigen() {
 	if (!initialisiert) throw new Error("Kann erst nach dem Initialisieren anzeigen.")
 	angezeigt = true;
 
-	[schule, ...Object.values(punkte), aktuell, mitwirken]
+	[schule, ...Object.values(punkte), aktuell]
 		.filter(markierung => markierung.url !== undefined)
 		.forEach(markierung => markierung.aufKarte());
 

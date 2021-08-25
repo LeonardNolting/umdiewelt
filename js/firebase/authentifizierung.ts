@@ -12,6 +12,7 @@ import {adminEmail} from "../konfiguration";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
 import Cookie from "../cookie";
+import {mitwirkenTextSetzen} from "../inhalt/mitwirken";
 
 export let auth: Auth
 
@@ -26,7 +27,10 @@ export default () => {
 	auth = getAuth()
 	onAuthStateChanged(auth, newUser => {
 		user = newUser
-		if (newUser === null) Cookie.kill("fahrer")
+		if (newUser === null) {
+			Cookie.kill("fahrer")
+			mitwirkenTextSetzen(null)
+		}
 		step(newUser ? "Angemeldet als " + (newUser.email === adminEmail ? "Admin" : "Teilnehmer") : "Abgemeldet")
 	})
 }

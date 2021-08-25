@@ -3,6 +3,7 @@ import {bereiteFaktenVor as fakten} from "./fakten";
 import step from "../step";
 import cookies from "./cookies";
 import admin from "./admin";
+import mitwirken from "./mitwirken";
 
 const observer = new IntersectionObserver(((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
@@ -27,5 +28,6 @@ export default async () => {
 	cookies()
 	fakten(...document.getElementById("fakten-anzeige").querySelector("section").querySelectorAll("data"))
 	quellen()
+	mitwirken()
 	await admin()
 }

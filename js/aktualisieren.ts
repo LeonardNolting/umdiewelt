@@ -1,4 +1,4 @@
-import {aktuell, aktuellesLevelIndex, karte, latBeiLng, mitwirken, progress, progressPath} from "./initialisieren";
+import {aktuell, aktuellesLevelIndex, karte, latBeiLng, progress, progressPath} from "./initialisieren";
 import anzeigen, {angezeigt, ziehtGerade} from "./anzeigen";
 import animieren from "./animieren";
 import {restriction} from "./optionen";
@@ -8,7 +8,6 @@ import step from "./step";
 
 function fortschreiten(position: LatLngLiteral, folgen: boolean) {
 	aktuell.bewegen(position)
-	mitwirken.bewegen(position)
 	progress.setPath(progressPath())
 	karte.setOptions({
 		restriction: restriction()
