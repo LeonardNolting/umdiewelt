@@ -9,6 +9,30 @@
 #popup-eintragen-name-gegeben p.zusatzinfo {
 	font-size: 90%;
 	font-style: italic;
-	margin-bottom: 1rem;
+	/*margin-bottom: 1rem;*/
+	margin-bottom: 0;
 	margin-top: 0.4rem;
+}
+
+#popup-eintragen-name-gegeben .authentifizierung {
+	display: flex;
+	justify-content: space-between;
+}
+
+#popup-eintragen-name-gegeben .info {
+	flex-grow: 1;
+}
+
+#popup-eintragen-name-gegeben .info > p {
+	display: flex;
+	justify-content: space-between;
+}
+
+#popup-eintragen-name-gegeben .authentifizierung button {
+	margin-left: 1rem;
+}
+
+#popup-eintragen-name-gegeben .zusatzinfo .strecke {
+	margin-left: .6rem;
+	font-weight: bold;
 }

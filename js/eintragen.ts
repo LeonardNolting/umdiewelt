@@ -75,7 +75,10 @@ const popups = {
 
 			eintragung.angemeldetBleiben = Cookies.optional() && (element["angemeldet-bleiben"] as HTMLInputElement).checked
 			await authentifizieren(email, data.passwort, eintragung.angemeldetBleiben)
-				.then(() => eintragung.authentifizierungSetzen(data.schule, data.klasse))
+				.then(() => {
+					eintragung.authentifizierungSetzen(data.schule, data.klasse)
+					this.popupOeffnen(popups.name)
+				})
 		}
 	}, (eintragung, element) => new Promise(resolve => {
 		const schulen = element["schule"] as HTMLSelectElement
@@ -160,11 +163,6 @@ const popups = {
 			signOut(auth)
 			eintragung.schliessen()
 		});
-		["schule", "klasse", "name"].forEach(it => element.querySelector("." + it).textContent = eintragung[it])
-		element.querySelector(".strecke").textContent = await new Promise(resolve => onValue(
-			ref(Datenbank.datenbank, "spezifisch/fahrer/" + eintragung.fahrer + "/strecke"),
-			snap => resolve(snap.val() || 0),
-			{onlyOnce: true}))
 	}),
 	berechnen: popup("berechnen", {
 		abbrechen: true,
@@ -259,15 +257,16 @@ export class Eintragung {
 				if (fahrer) {
 					// Ist schon angemeldet
 					this.angemeldetBleiben = true
-					this.fahrer = fahrer
+
 					const {
 						schule,
 						klasse,
 						name
 					} = (await get(ref(Datenbank.datenbank, "spezifisch/fahrer/" + fahrer))).val()
-					this.schule = schule
-					this.klasse = klasse
-					this.name = name
+
+					this.authentifizierungSetzen(schule, klasse)
+					await this.nameSetzen(name, fahrer)
+
 					await this.popupOeffnen(popups.nameGegeben)
 				} else {
 					// Ist schon angemeldet, es fehlt aber der Cookie, weshalb nicht klar ist, bei welcher Klasse der Nutzer angemeldet ist
@@ -323,11 +322,19 @@ export class Eintragung {
 		Popup.oeffnen(popup.element)
 	}
 
-	async nameSetzen(name: string | undefined) {
+	async nameSetzen(name: string | undefined, fahrer: string | undefined = undefined) {
 		this.name = name
-		this.fahrer = name === undefined ? undefined :
-			(await fahrerBekommen(this.schule, this.klasse, name) || await fahrerErstellen(this.schule, this.klasse, name))
-		if (this.angemeldetBleiben) Cookie.set("fahrer", this.fahrer, false)
+		this.fahrer = fahrer || (name === undefined ? undefined :
+			(await fahrerBekommen(this.schule, this.klasse, name) || await fahrerErstellen(this.schule, this.klasse, name)))
+		if (this.angemeldetBleiben) Cookie.set("fahrer", this.fahrer, false);
+
+		// Name gegeben Popup anpassen
+		const popup = popups.nameGegeben.element;
+		["schule", "klasse", "name"].forEach(it => popup.querySelector("." + it).textContent = this[it])
+		popup.querySelector(".strecke").textContent = await new Promise(resolve => onValue(
+			ref(Datenbank.datenbank, "spezifisch/fahrer/" + this.fahrer + "/strecke"),
+			snap => resolve(snap.val() || 0),
+			{onlyOnce: true}))
 	}
 
 	optionSetzen(option: "direkt" | "berechnen" | undefined) {
@@ -355,8 +362,6 @@ export class Eintragung {
 				this.alleFahrer[snap.key] = snap.val()
 			}
 		)
-
-		this.popupOeffnen(popups.name)
 	}
 
 	async speichern() {
