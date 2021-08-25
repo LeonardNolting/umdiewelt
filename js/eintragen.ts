@@ -378,7 +378,7 @@ export class Eintragung {
 
 		if (!this.fahrer) {
 			this.fahrer = await fahrerErstellen(this.schule, this.klasse, this.name)
-			Cookie.set("fahrer", this.fahrer, false)
+			if (this.angemeldetBleiben) Cookie.set("fahrer", this.fahrer, false)
 		}
 		const strecke = await streckeErstellen(this.fahrer, this.meter)
 
