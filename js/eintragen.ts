@@ -9,6 +9,8 @@ import {auth, authentifizieren} from "./firebase/authentifizierung";
 import Cookie from "./cookie";
 import load from "./load";
 import Cookies from "./cookies";
+import m from "./formatierung/einheit/m";
+import zahl from "./formatierung/zahl";
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
@@ -331,10 +333,14 @@ export class Eintragung {
 		// Name gegeben Popup anpassen
 		const popup = popups.nameGegeben.element;
 		["schule", "klasse", "name"].forEach(it => popup.querySelector("." + it).textContent = this[it])
-		popup.querySelector(".strecke").textContent = await new Promise(resolve => onValue(
-			ref(Datenbank.datenbank, "spezifisch/fahrer/" + this.fahrer + "/strecke"),
-			snap => resolve(snap.val() || 0),
-			{onlyOnce: true}))
+		{
+			const meter = m(this.fahrer ? await new Promise(resolve => onValue(
+				ref(Datenbank.datenbank, "spezifisch/fahrer/" + this.fahrer + "/strecke"),
+				snap => resolve(snap.val() || 0),
+				{onlyOnce: true})) : 0);
+			const roh = zahl(meter.wert, 0)
+			popup.querySelector(".strecke").textContent = roh + meter.einheit
+		}
 	}
 
 	optionSetzen(option: "direkt" | "berechnen" | undefined) {
