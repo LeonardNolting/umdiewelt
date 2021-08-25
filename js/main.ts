@@ -13,13 +13,16 @@ import 'awesome-notifications/dist/style.css'
 import wait from "./wait";
 import load from "./load";
 
-document.addEventListener("DOMContentLoaded", () => load((async () => {
+document.addEventListener("DOMContentLoaded", async () => {
 	wait()
 	browserAktualisierung()
 	popups()
 	await Cookies.ueberpruefen()
-	await maps()
-	await inhalt()
-	initialisieren()
-	await firebase()
-})()))
+
+	await load((async () => {
+		await maps()
+		await inhalt()
+		await initialisieren()
+		await firebase()
+	})())
+})

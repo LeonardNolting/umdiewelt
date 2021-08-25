@@ -77,7 +77,7 @@ export const progressPath = () => [
 	aktuell.position
 ]
 
-export default function initialisieren() {
+export default async function initialisieren() {
 	step("Initialisiert")
 	if (initialisiert) throw new Error("Karte wurde schon initialisiert.")
 	initialisiert = true
