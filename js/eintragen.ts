@@ -1,8 +1,8 @@
 import Popup from "./popup";
-import {Datenbank} from "./firebase/datenbank/datenbank";
+import Datenbank from "./firebase/datenbank";
 import {get, onChildAdded, onValue, push, ref, serverTimestamp, set, Unsubscribe} from "firebase/database";
 import Route from "./model/route";
-import {onAuthStateChanged, signOut, User} from "firebase/auth";
+import {onAuthStateChanged, signOut} from "firebase/auth";
 import benachrichtigung from "./benachrichtigungen/benachrichtigung";
 import {adminEmail} from "./konfiguration";
 import {auth, authentifizieren, user} from "./firebase/authentifizierung";

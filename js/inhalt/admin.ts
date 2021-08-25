@@ -1,5 +1,5 @@
 import {get, onChildAdded, onValue, ref, remove, set, Unsubscribe, update} from "firebase/database";
-import {Datenbank} from "../firebase/datenbank/datenbank";
+import Datenbank from "../firebase/datenbank";
 import Popup from "../popup";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";

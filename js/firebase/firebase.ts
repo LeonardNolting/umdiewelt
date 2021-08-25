@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
 import step from "../step";
-import {Datenbank} from "./datenbank/datenbank";
+import Datenbank from "./datenbank";
 import authentifizierung from "./authentifizierung";
 
 export default async () => {

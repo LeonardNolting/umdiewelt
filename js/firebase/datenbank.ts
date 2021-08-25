@@ -1,24 +1,12 @@
 import {getAnalytics} from "firebase/analytics";
-import {
-	Database,
-	endAt,
-	getDatabase,
-	limitToLast,
-	onChildAdded,
-	onValue,
-	orderByKey,
-	query,
-	ref,
-	get,
-	enableLogging
-} from "firebase/database";
-import step from "../../step";
-import {ausgewaehlteSaison, bieteSaisonZurAuswahlAn, waehleSaisonAus} from "../../inhalt/saison";
-import {ladeFakt} from "../../inhalt/fakten";
-import m from "../../formatierung/einheit/m";
-import kg from "../../formatierung/einheit/kg";
-import co2 from "../../co2";
-import aktualisieren from "../../aktualisieren";
+import {Database, getDatabase, onChildAdded, onValue, ref} from "firebase/database";
+import step from "../step";
+import {ausgewaehlteSaison, bieteSaisonZurAuswahlAn, waehleSaisonAus} from "../inhalt/saison";
+import {ladeFakt} from "../inhalt/fakten";
+import m from "../formatierung/einheit/m";
+import kg from "../formatierung/einheit/kg";
+import co2 from "../co2";
+import aktualisieren from "../aktualisieren";
 
 export namespace Datenbank {
 	export let datenbank: Database
@@ -129,4 +117,4 @@ export namespace Datenbank {
 	}
 }
 
-// export default Datenbank
+export default Datenbank
