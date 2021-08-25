@@ -153,8 +153,6 @@ const popups = {
 			anzeige.dataset.reaktion = reaktion
 		}
 		input.addEventListener("input", nachrichtAnpassen)
-		input.addEventListener("paste", nachrichtAnpassen)
-		input.addEventListener("cut", nachrichtAnpassen)
 	}),
 	nameGegeben: popup("name-gegeben", {
 		abbrechen: true,
