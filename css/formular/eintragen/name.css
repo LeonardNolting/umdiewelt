@@ -1,3 +1,20 @@
 #popup-eintragen-name p {
 	margin: 1rem 0 0;
 }
+
+#popup-eintragen-name p.nachricht {
+	margin-top: 0.2rem;
+	font-style: italic;
+	font-size: 95%;
+	margin-bottom: -0.2rem;
+}
+
+#popup-eintragen-name p.nachricht:empty {
+	display: none;
+}
+
+#popup-eintragen-name p.nachricht[data-reaktion]::after {
+	content: attr(data-reaktion);
+	font-style: normal;
+	margin-left: 4px;
+}

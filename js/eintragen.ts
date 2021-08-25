@@ -126,6 +126,30 @@ const popups = {
 			await eintragung.nameSetzen((element["name"] as HTMLInputElement).value)
 			eintragung.optionSetzen("berechnen")
 		}
+	}, (eintragung, element) => {
+		const input = element["name"] as HTMLInputElement
+		const datalist = input.list
+		const nachrichtAnpassen = async () => {
+			const name = input.value
+			const [nachricht, reaktion] = name ? (
+				name in eintragung.alleFahrer ? await (async () => {
+						const anzahlStrecken = await new Promise(resolve => onValue(
+							ref(Datenbank.datenbank, "spezifisch/fahrer/" + eintragung.alleFahrer[name] + "/anzahlStrecken"),
+							snap => resolve(snap.val()),
+							{onlyOnce: true}))
+						const anzahlStreckenFormatiert = anzahlStrecken === 1 ? "eine Strecke" : anzahlStrecken + " Strecken"
+						return [`Sie haben bereits ${anzahlStreckenFormatiert} eingetragen`, "😎"]
+					})() :
+					["Sie tragen ihre erste Strecke ein", "😊"]
+			) : ["", ""]
+
+			const anzeige = element.querySelector("p.nachricht") as HTMLParagraphElement
+			anzeige.textContent = nachricht
+			anzeige.dataset.reaktion = reaktion
+		}
+		input.addEventListener("input", nachrichtAnpassen)
+		input.addEventListener("paste", nachrichtAnpassen)
+		input.addEventListener("cut", nachrichtAnpassen)
 	}),
 	nameGegeben: popup("name-gegeben", {
 		abbrechen: true,
@@ -194,6 +218,7 @@ export class Eintragung {
 	klasse: string = undefined
 	name: string = undefined
 	fahrer: string = undefined
+	alleFahrer: { [name: string]: string } = {}
 	meter: number = undefined
 	datenschutz: boolean = false
 
@@ -322,9 +347,13 @@ export class Eintragung {
 		// Fahrer autocomplete
 		const datalist = (document.getElementById("eintragen-fahrer") as HTMLDataListElement)
 		datalist.innerHTML = ""
+		this.alleFahrer = {}
 		onChildAdded(
 			ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/fahrer"),
-			snap => datalist.append(new Option(undefined, snap.key))
+			snap => {
+				datalist.append(new Option(undefined, snap.key))
+				this.alleFahrer[snap.key] = snap.val()
+			}
 		)
 
 		this.popupOeffnen(popups.name)
