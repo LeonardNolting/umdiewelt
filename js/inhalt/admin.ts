@@ -4,8 +4,7 @@ import Popup from "../popup";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-import {auth, authentifizieren} from "../firebase/authentifizierung";
-import {Eintragung} from "../eintragen";
+import {auth, authentifizieren, user} from "../firebase/authentifizierung";
 import load from "../load";
 import {adminEmail} from "../konfiguration";
 
@@ -519,8 +518,8 @@ export default async () => {
 	}
 
 	document.getElementById("admin-anmelden").onclick = async () => {
-		if (Eintragung.user !== undefined) {
-			if (Eintragung.user !== null) {
+		if (user !== undefined) {
+			if (user !== null) {
 				// Muss Teilnehmer sein, sonst könnte nicht auf diesen Knopf geklickt werden -> abmelden
 				await load(signOut(auth))
 			}
@@ -528,9 +527,9 @@ export default async () => {
 			Popup.oeffnen(popup)
 		} else await load(new Promise(resolve => {
 			// Sonst halt warten und nochmal probieren...
-			const listener = onAuthStateChanged(auth, user => {
+			const listener = onAuthStateChanged(auth, newUser => {
 				listener()
-				Eintragung.user = user
+				user = newUser
 				resolve()
 				Popup.oeffnen(popup)
 			})

@@ -5,7 +5,7 @@ import Route from "./model/route";
 import {onAuthStateChanged, signOut, User} from "firebase/auth";
 import benachrichtigung from "./benachrichtigungen/benachrichtigung";
 import {adminEmail} from "./konfiguration";
-import {auth, authentifizieren} from "./firebase/authentifizierung";
+import {auth, authentifizieren, user} from "./firebase/authentifizierung";
 import Cookie from "./cookie";
 import load from "./load";
 import Cookies from "./cookies";
@@ -232,14 +232,14 @@ export class Eintragung {
 		if (this.offen) return
 
 		// Auth state ist schon bekannt
-		if (Eintragung.user !== undefined) {
-			if (Eintragung.user !== null && Eintragung.user.email === adminEmail) {
+		if (user !== undefined) {
+			if (user !== null && user.email === adminEmail) {
 				// Eingelogged aber als Admin...
 				await signOut(auth)
-				Eintragung.user = null // onAuthStateChanged ist evtl. etwas verspätet
+				user = null // onAuthStateChanged ist evtl. etwas verspätet
 			}
 
-			if (Eintragung.user === null) {
+			if (user === null) {
 				// Muss sich anmelden
 
 				// Vorab vorbereiten, damit Eintragung.laufend und Eintragung.leer gesetzt werden
@@ -282,9 +282,9 @@ export class Eintragung {
 			}
 		} else await load(new Promise(resolve => {
 			// Sonst halt warten und nochmal probieren...
-			const listener = onAuthStateChanged(auth, user => {
+			const listener = onAuthStateChanged(auth, newUser => {
 				listener()
-				Eintragung.user = user
+				user = newUser
 				resolve()
 				this.oeffnen()
 			})
@@ -371,7 +371,7 @@ export class Eintragung {
 
 	async speichern() {
 		if (!this.schule || !this.klasse) throw new Error("Noch nicht angemeldet.")
-		if (!Eintragung.user) throw new Error("Authentifizierung abgelaufen.")
+		if (!user) throw new Error("Authentifizierung abgelaufen.")
 		if (!this.name) throw new Error("Name noch nicht eingetragen.")
 		if (!this.meter) throw new Error("Länge noch nicht eingetragen.")
 		if (!this.datenschutz) throw new Error("Datenschutzerklärung wurde noch nicht zugestimmt.")
@@ -391,13 +391,6 @@ export class Eintragung {
 	}
 
 	static eintragungen: Eintragung[] = []
-
-	/**
-	 * angemeldet: User
-	 * nicht angemeldet: null
-	 * unbekannt: undefined
-	 */
-	static user: User | null | undefined
 
 	static get offen(): Eintragung | null {
 		return Eintragung.eintragungen.find(eintragung => eintragung.offen)

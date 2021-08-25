@@ -4,9 +4,9 @@ import {
 	getAuth,
 	inMemoryPersistence,
 	onAuthStateChanged,
-	setPersistence, signInWithEmailAndPassword
+	setPersistence,
+	signInWithEmailAndPassword, User
 } from "firebase/auth";
-import {Eintragung} from "../eintragen";
 import step from "../step";
 import {adminEmail} from "../konfiguration";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
@@ -15,12 +15,19 @@ import Cookie from "../cookie";
 
 export let auth: Auth
 
+/**
+ * angemeldet: User
+ * nicht angemeldet: null
+ * unbekannt: undefined
+ */
+export let user: User | null | undefined
+
 export default () => {
 	auth = getAuth()
-	onAuthStateChanged(auth, user => {
-		Eintragung.user = user
-		if (user === null) Cookie.kill("fahrer")
-		step(user ? "Angemeldet als " + (user.email === adminEmail ? "Admin" : "Teilnehmer") : "Abgemeldet")
+	onAuthStateChanged(auth, newUser => {
+		user = newUser
+		if (newUser === null) Cookie.kill("fahrer")
+		step(newUser ? "Angemeldet als " + (newUser.email === adminEmail ? "Admin" : "Teilnehmer") : "Abgemeldet")
 	})
 }
 
