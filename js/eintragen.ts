@@ -79,7 +79,7 @@ const popups = {
 			await authentifizieren(email, data.passwort, eintragung.angemeldetBleiben)
 				.then(() => {
 					eintragung.authentifizierungSetzen(data.schule, data.klasse)
-					this.popupOeffnen(popups.name)
+					eintragung.popupOeffnen(popups.name)
 				})
 		}
 	}, (eintragung, element) => new Promise(resolve => {
@@ -268,6 +268,7 @@ export class Eintragung {
 
 					this.authentifizierungSetzen(schule, klasse)
 					await this.nameSetzen(name, fahrer)
+					this.fahrer = fahrer
 
 					await this.popupOeffnen(popups.nameGegeben)
 				} else {
@@ -326,9 +327,9 @@ export class Eintragung {
 
 	async nameSetzen(name: string | undefined, fahrer: string | undefined = undefined) {
 		this.name = name
-		this.fahrer = fahrer || (name === undefined ? undefined :
-			(await fahrerBekommen(this.schule, this.klasse, name) || await fahrerErstellen(this.schule, this.klasse, name)))
-		if (this.angemeldetBleiben) Cookie.set("fahrer", this.fahrer, false);
+		// Wenn der Fahrer schon existiert, ruhig jetzt schon speichern - aber sonst erst beim wirklichen Eintragen der Strecke auch den Fahrer erstellen, damit nicht ungenutzte Fahrer erstellt werden
+		this.fahrer = fahrer || (name === undefined ? undefined : await fahrerBekommen(this.schule, this.klasse, name))
+		if (this.angemeldetBleiben && this.fahrer) Cookie.set("fahrer", this.fahrer, false);
 
 		// Name gegeben Popup anpassen
 		const popup = popups.nameGegeben.element;
@@ -377,6 +378,10 @@ export class Eintragung {
 		if (!this.meter) throw new Error("Länge noch nicht eingetragen.")
 		if (!this.datenschutz) throw new Error("Datenschutzerklärung wurde noch nicht zugestimmt.")
 
+		if (!this.fahrer) {
+			this.fahrer = await fahrerErstellen(this.schule, this.klasse, this.name)
+			Cookie.set("fahrer", this.fahrer, false)
+		}
 		const strecke = await streckeErstellen(this.fahrer, this.meter)
 
 		/*if (route) {
