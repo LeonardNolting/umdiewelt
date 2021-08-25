@@ -1,6 +1,9 @@
 name: Bauen und auf Server hochladen
 
-on: [ push ]
+on:
+    push:
+        branches:
+            - master
 
 jobs:
     build:
