@@ -7,6 +7,7 @@ import m from "../formatierung/einheit/m";
 import kg from "../formatierung/einheit/kg";
 import co2 from "../co2";
 import aktualisieren from "../aktualisieren";
+import bestenliste from "../inhalt/bestenliste";
 
 export namespace Datenbank {
 	export let datenbank: Database
@@ -30,6 +31,7 @@ export namespace Datenbank {
 			globaleStrecke()
 			beteiligteJaehrlich()
 			saisonAuswahl()
+			bestenliste()
 		}
 
 		function fortschritt() {

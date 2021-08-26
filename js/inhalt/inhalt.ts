@@ -4,8 +4,9 @@ import step from "../step";
 import cookies from "./cookies";
 import admin from "./admin";
 import mitwirken from "./mitwirken";
+import bestenliste from "./bestenliste";
 
-const observer = new IntersectionObserver(((eintraege, observer) => {
+export const observer = new IntersectionObserver(((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
 		eintrag.target.classList.add("gesehen")
 		observer.unobserve(eintrag.target)
