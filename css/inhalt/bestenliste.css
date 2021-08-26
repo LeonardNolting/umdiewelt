@@ -245,6 +245,8 @@ Track (Balken) und Streckenanzeige
 
 	animation: shine 6s linear infinite;
 	animation-delay: calc(.5s * var(--rang));
+
+	box-shadow: 0 0 16px 1px rgba(0, 0, 0, .2) inset, 0 0 16px 1px rgba(0, 0, 0, .2);
 }
 
 /*
