@@ -14,6 +14,7 @@
 	--margin: calc(var(--height) / 2);
 	--kleine-box-margin-left: 24%;
 	--große-box-margin-left: calc(1 * var(--rang-breite-max) * 1.4);
+	--transition-dauer: .4s;
 	position: relative;
 }
 
@@ -97,12 +98,15 @@
 	width: 100%;
 	--prozent: 0;
 	--rang: 0;
-	order: var(--prozent); /* Reihenfolge unabhängig vom DOM beeinflussen */
+	order: var(--rang); /* Reihenfolge unabhängig vom DOM beeinflussen */
 
 	display: flex;
 	align-items: center;
 	position: absolute;
 	margin-top: var(--top);
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-dauer);
+	transition-property: margin-top, border-width;
 
 	--background: #555;
 	--background-lighter: #656565;
@@ -139,7 +143,9 @@ Eingekreiste Zahl (Rang)
 	text-shadow: 0 0 2px #22222299;
 	font-weight: bold;
 	font-size: calc(var(--rang-breite) / 2);
-	/*transition: transform .2s ease-in-out;*/
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-dauer);
+	transition-property: width, height, font-size, margin-left, border-color, background, color;
 }
 
 /**
@@ -156,10 +162,11 @@ Name und Schule
 	position: absolute;
 	height: var(--height);
 	min-height: var(--height);
-	/*margin: calc(var(--gap) / 2) 0;*/
-	/*margin: 0;*/
 	left: var(--left);
-	/*top: var(--top);*/
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-dauer);
+	transition-property: left, transform, font-size;
+	transition-delay: calc(var(--transition-dauer) / 2);
 	transform: translateX(var(--translate-x));
 
 	white-space: nowrap;
@@ -191,6 +198,9 @@ Fahrrad-Icon
 
 	height: 100%; /* kann benutzt werden, damit Fahrräder sich nicht berühren bei --gap-vertical: 0 */
 	width: calc((var(--gap-track-inhalt) - var(--gap-fahrrad-inhalt)) * 2);
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-dauer);
+	transition-property: width, margin-left;
 
 	background-image: var(--url);
 	background-size: contain;
@@ -239,6 +249,9 @@ Track (Balken) und Streckenanzeige
 	width: 100vw;
 	transform: translateX(-100%);
 	margin-left: calc(-1 * var(--gap-track-inhalt));
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-dauer);
+	transition-property: height, padding-right, margin-left, font-size, background-image;
 
 	background-image: linear-gradient(135deg, var(--background) 48%, var(--background-lighter), var(--background) 52%);
 	background-size: 200% 100%;
