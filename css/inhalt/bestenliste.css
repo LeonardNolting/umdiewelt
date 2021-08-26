@@ -26,6 +26,7 @@
 
 #bestenliste-container > h3 {
 	padding: var(--padding) 0 calc(var(--padding) - .8rem) 0;
+	font-size: 1.8rem;
 }
 
 #bestenliste-container > button {
