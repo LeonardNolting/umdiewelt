@@ -83,6 +83,7 @@ abstract class Kontrolle {
 			this.submit()
 				.then(erfolgsnachricht => {
 					Popup.schliessen(this.popup)
+					this.popup.reset()
 					benachrichtigung(erfolgsnachricht, BenachrichtigungsLevel.ERFOLG)
 				})
 				.catch(reason => {
