@@ -229,6 +229,7 @@ class NeueKlasseKontrolle extends Kontrolle {
 		const password = this.element("password").value;
 		const schule = this.element("schule").value;
 		const klasse = this.element("name").value;
+		const potAnzahlFahrer = parseInt(this.element("pot-anzahl-fahrer").value);
 
 		const auth = getAuth();
 		const admin = auth.currentUser
@@ -241,7 +242,7 @@ class NeueKlasseKontrolle extends Kontrolle {
 		await auth.updateCurrentUser(admin)
 
 		const updates = {}
-		updates["spezifisch/klassen/details/" + schule + "/" + klasse] = {email, uid}
+		updates["spezifisch/klassen/details/" + schule + "/" + klasse] = {email, uid, potAnzahlFahrer}
 		updates["spezifisch/klassen/liste/" + schule + "/" + klasse] = true
 		return update(ref(Datenbank.datenbank), updates)
 			.then(() => "Neue Klasse erstellt 👍")
