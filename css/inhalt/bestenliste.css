@@ -1,6 +1,4 @@
-#bestenliste-anzeige {
-	display: flex;
-	flex-direction: column;
+#bestenliste-container {
 	--gap-vertical: .2rem;
 	--gap-track-inhalt-max: 2.6rem;
 	--gap-track-inhalt: 2.4rem;
@@ -13,29 +11,52 @@
 	--rang-breite: calc(var(--height) / 2);
 	--padding: var(--container-padding);
 	--general-margin-left: calc(var(--gap-track-inhalt-max) * 2 + var(--strecke-breite) + var(--padding) + var(--rang-breite-max));
-
-	height: calc(var(--anzahl) * (var(--gap-vertical) + var(--height)) - var(--gap-vertical));
-
 	--margin: calc(var(--height) / 2);
-	margin: var(--margin) 0;
-	margin-left: var(--general-margin-left);
+	--kleine-box-margin-left: 24%;
+	--große-box-margin-left: calc(1 * var(--rang-breite-max) * 1.4);
+	position: relative;
+}
+
+#bestenliste-container > h3, #bestenliste-container > button {
+	--padding: 1.4rem;
+	/*z-index: 1;*/
+	/*position: relative;*/
+	margin: 0 0 0 calc(var(--große-box-margin-left) + 1.6rem) !important;
+}
+
+#bestenliste-container > h3 {
+	padding: var(--padding) 0 calc(var(--padding) - .8rem) 0;
+}
+
+#bestenliste-container > button {
+	--padding: 1.4rem;
+	padding: calc(var(--padding) - .6rem) 0 var(--padding) 0;
+	font-size: 1.3rem;
+}
+
+#bestenliste-anzeige {
+	display: flex;
+	flex-direction: column;
+	height: calc(var(--anzahl) * (var(--gap-vertical) + var(--height)) - var(--gap-vertical));
+	margin: 0 0 0 var(--general-margin-left);
 	padding: 0;
 	position: relative;
 	user-select: none;
 	cursor: default;
 }
 
-#bestenliste-anzeige::before, #bestenliste-anzeige::after {
+#bestenliste-container::before, #bestenliste-anzeige::after {
 	content: "";
 	position: absolute;
-	height: calc(100% + 2 * var(--margin));
 	width: 100vw;
-	left: 0;
-	margin-left: calc(-1 * var(--general-margin-left) + var(--rang-breite-max) * 1.4);
-	margin-top: calc(-1 * var(--margin));
 	transform: translateX(-100%);
 	background: #c2cdd8;
 	box-shadow: 0 0 20px -1px #1b1e20bd;
+}
+
+#bestenliste-container::before {
+	height: 100%;
+	margin-left: var(--große-box-margin-left);
 }
 
 #bestenliste-anzeige::after {
@@ -48,6 +69,7 @@
 	width: 100%;
 	margin-left: 24%;
 	opacity: 1;
+	left: 0;
 }
 
 #bestenliste-anzeige:empty {
