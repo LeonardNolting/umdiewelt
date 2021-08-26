@@ -47,8 +47,8 @@ abstract class Kontrolle {
 
 	async initialisieren() {
 		if (this.isInit) return
-		await this.init()
 		this.isInit = true
+		await this.init()
 	}
 
 	protected async abstract init(): Promise<void>
@@ -539,32 +539,27 @@ export default async () => {
 	}
 
 	document.getElementById("admin-abmelden").onclick = () => load(signOut(auth).then(deaktivieren))
+
+	Kontrolle.form.onsubmit = event => event.preventDefault()
 }
+
+const kontrollen = [
+	new NeueSaisonKontrolle(),
+	new NeueKlasseKontrolle(),
+	new NeueSchuleKontrolle(),
+	new SaisonstartKontrolle(),
+	new SaisonendeKontrolle(),
+	new SaisonLoeschenKontrolle(),
+	new TestnachrichtKontrolle(),
+	new StreckeLoeschenKontrolle()
+]
 
 const aktivieren = async () => {
 	document.body.classList.add("admin")
-	await kontrollen()
+	await Promise.all(kontrollen.map(kontrolle => kontrolle.initialisieren()))
+	Kontrolle.fieldset.disabled = false
 }
 
 const deaktivieren = () => {
 	document.body.classList.remove("admin")
-}
-
-async function kontrollen() {
-	Kontrolle.form.onsubmit = event => event.preventDefault()
-
-	const kontrollen = [
-		new NeueSaisonKontrolle(),
-		new NeueKlasseKontrolle(),
-		new NeueSchuleKontrolle(),
-		new SaisonstartKontrolle(),
-		new SaisonendeKontrolle(),
-		new SaisonLoeschenKontrolle(),
-		new TestnachrichtKontrolle(),
-		new StreckeLoeschenKontrolle()
-	]
-
-	await Promise.all(kontrollen.map(kontrolle => kontrolle.initialisieren()))
-
-	Kontrolle.fieldset.disabled = false
 }
