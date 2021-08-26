@@ -50,11 +50,18 @@
 	position: absolute;
 	width: 100vw;
 	transform: translateX(-100%);
-	background: #c2cdd8;
+	background: var(--background);
 	box-shadow: 0 0 20px -1px #1b1e20bd;
+
+	background-repeat: no-repeat;
+	background-position: 100% 100%;
 }
 
 #bestenliste-container::before {
+	--background: #c2cdd8;
+	--background2: #acb9c4;
+	background-image: linear-gradient(-45deg, var(--background2), var(--background2) 50%, var(--background) 50%, var(--background));
+	background-size: 60vmin 60vmin; /* 45deg -> gleiche Höhe wie Breite */
 	height: 100%;
 	margin-left: var(--große-box-margin-left);
 }
@@ -64,9 +71,11 @@
 	height: calc(100% - 2 * var(--einschnitt));
 	margin-top: var(--einschnitt);
 	margin-right: 0;
-	background: #a1b1c1;
+	--background: #a1b1c1;
+	--background2: #91a3b1;
+	background-image: linear-gradient(-40deg, var(--background2), var(--background2) 40%, var(--background) 40%, var(--background));
 	z-index: -1;
-	width: 100%;
+	width: calc(24% + var(--general-margin-left));
 	margin-left: 24%;
 	opacity: 1;
 	left: 0;
