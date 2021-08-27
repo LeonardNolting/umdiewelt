@@ -19,6 +19,7 @@ import {observer} from "./inhalt";
 
 // @ts-ignore
 import images from "../../img/bicyclists/*.png";
+import {bestenlisteChunkGroesse, bestenlisteErsterChunkGroesse} from "../konfiguration";
 
 const anzeige = document.getElementById("bestenliste-anzeige") as HTMLUListElement
 const container = anzeige.parentElement as HTMLDivElement
@@ -92,19 +93,29 @@ const passeElementAn = (fahrer: string, werte: Werte, element: BestenlisteElemen
 let anzahlFahrer: number | undefined = undefined
 
 export default () => {
+
 	let anzahlFahrerListener: Unsubscribe | undefined
 	onValue(ref(Datenbank.datenbank, "allgemein/saisons/laufend"), snap => {
 		const laufend = snap.val()
-		anzahlFahrerListener?.()
-		anzahlFahrerListener = onValue(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/anzahlFahrer"), snap => {
-			anzahlFahrer = snap.val() || 0
-			kannGeladenWerdenUeberpruefen()
-		})
+
+		if (laufend !== null) {
+			anzahlFahrerListener?.()
+			anzahlFahrerListener = onValue(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/anzahlFahrer"), snap => {
+				anzahlFahrer = snap.val() || 0
+				kannGeladenWerdenUeberpruefen()
+				if (anzahlFahrer === 0) container.classList.add("keine-teilnehmer")
+			})
+
+			container.style.setProperty("--anzahl", bestenlisteErsterChunkGroesse.toString())
+			anzeige.innerHTML = ""
+			container.classList.remove("versteckt")
+			laden(bestenlisteErsterChunkGroesse)
+		} else {
+			container.classList.add("versteckt")
+		}
 	})
 
-	mehrLadenKnopf.addEventListener("click", () => laden(10))
-
-	laden(10)
+	mehrLadenKnopf.addEventListener("click", () => laden(bestenlisteChunkGroesse))
 }
 
 const setze = (fahrer: string, werte: Werte) => {
@@ -118,7 +129,7 @@ const setzeAusSnapshot = (snap: DataSnapshot) => setze(snap.key, snap.val())
 export const laden = (anzahl: number) => {
 	const sortiert = sortieren();
 	const reference = sortiert.length > 0 ?
-		query(ref(Datenbank.datenbank, "spezifisch/fahrer"), limitToLast(anzahl), endAt(sortiert[sortiert.length - 1][1].strecke || 0, sortiert[sortiert.length - 2][0]), orderByChild("strecke")) :
+		query(ref(Datenbank.datenbank, "spezifisch/fahrer"), limitToLast(anzahl), endAt(sortiert[sortiert.length - 1][1].strecke || 0), orderByChild("strecke")) :
 		query(ref(Datenbank.datenbank, "spezifisch/fahrer"), limitToLast(anzahl), orderByChild("strecke"))
 
 	onChildAdded(reference, setzeAusSnapshot)

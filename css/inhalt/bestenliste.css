@@ -4,7 +4,6 @@
 	--gap-track-inhalt: 2.4rem;
 	--gap-fahrrad-inhalt: 0.6rem;
 	--height: 4rem;
-	--anzahl: 0;
 	--strecke-breite: 2.8rem;
 	--track-hoehe: calc(var(--height) * 3 / 7);
 	--rang-breite-max: calc(var(--height) * 2 / 3);
@@ -18,7 +17,11 @@
 	position: relative;
 }
 
-#bestenliste-container > h3, #bestenliste-container > button {
+#bestenliste-container.versteckt {
+	display: none;
+}
+
+#bestenliste-container > h3, #bestenliste-container > button, #bestenliste-container > .keine-teilnehmer {
 	--padding: 1.4rem;
 	/*z-index: 1;*/
 	/*position: relative;*/
@@ -36,7 +39,12 @@
 	font-size: 1.3rem;
 }
 
+#bestenliste-container.keine-teilnehmer #bestenliste-anzeige, #bestenliste-container:not(.keine-teilnehmer) .keine-teilnehmer {
+	display: none;
+}
+
 #bestenliste-anzeige {
+	--anzahl: 0;
 	display: flex;
 	flex-direction: column;
 	height: calc(var(--anzahl) * (var(--gap-vertical) + var(--height)) - var(--gap-vertical));
@@ -81,10 +89,6 @@
 	margin-left: 24%;
 	opacity: 1;
 	left: 0;
-}
-
-#bestenliste-anzeige:empty {
-	display: none;
 }
 
 #bestenliste-anzeige li {

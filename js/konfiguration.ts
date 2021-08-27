@@ -95,6 +95,10 @@ export const
 	 * Wie viele Einträge der Bestenliste auf einmal geladen werden
 	 */
 	bestenlisteChunkGroesse = 10,
+	/**
+	 * Wie viele Einträge der Bestenliste am Anfang auf einmal geladen werden
+	 */
+	bestenlisteErsterChunkGroesse = bestenlisteChunkGroesse,
 
 	koordinaten = {
 		hoechstadt: {lat: 49.709576321528836, lng: 10.81265000522466},
