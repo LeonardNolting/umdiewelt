@@ -18,11 +18,27 @@
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/main.css">
 
+		<script src="//unpkg.com/globe.gl"></script>
+
 		<meta name="theme-color" content="#fafafa">
 	</head>
 
 	<body>
-		<div id="karte"></div>
+		<div id="welt"></div>
+
+		<script>
+			const world = Globe()
+			world(document.getElementById('welt'))
+			.globeImageUrl('//unpkg.com/three-globe@2.18.8/example/img/earth-blue-marble.jpg')
+			.backgroundColor("#dddddd00")
+			.width(1000)
+			.height(1000)
+			// .backgroundImage("linear-gradient(black, white)")
+			// .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+			.pointOfView({altitude: 3.5})
+		</script>
+
+		<!--		<div id="karte"></div>-->
 
 		<div id="mitwirken"></div>
 

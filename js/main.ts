@@ -1,7 +1,5 @@
-import initialisieren from "./initialisieren";
 import firebase from "./firebase/firebase";
 import inhalt from "./inhalt/inhalt";
-import maps from "./maps";
 import Cookies from "./cookies";
 import popups from "./popups";
 import browserAktualisierung from "./browserAktualisierung";
@@ -12,6 +10,7 @@ import 'awesome-notifications/dist/style.css'
 import wait from "./wait";
 import load from "./load";
 import {Eintragung} from "./eintragen";
+import welt from "./welt/welt";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	wait()
@@ -20,9 +19,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await Cookies.ueberpruefen()
 
 	await load((async () => {
-		await maps()
+		// await maps() // TODO erst wenn autocomplete/distance matrix benötigt wird
+		await welt()
 		await inhalt()
-		await initialisieren()
 		await firebase()
 		await Eintragung.vorbereiten()
 	})())
