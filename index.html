@@ -27,15 +27,21 @@
 		<div id="welt"></div>
 
 		<script>
-			const world = Globe()
-			world(document.getElementById('welt'))
+			const welt  = document.getElementById('welt');
+			const world = Globe()(welt)
 			.globeImageUrl('//unpkg.com/three-globe@2.18.8/example/img/earth-blue-marble.jpg')
 			.backgroundColor("#dddddd00")
-			.width(1000)
-			.height(1000)
 			// .backgroundImage("linear-gradient(black, white)")
 			// .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
 			.pointOfView({altitude: 3.5})
+
+			const setSize = () => {
+				world.width(welt.clientWidth)
+				world.height(welt.clientHeight)
+			}
+			setSize()
+			const resizeObserver = new ResizeObserver(setSize)
+			resizeObserver.observe(welt, {box: "border-box"})
 		</script>
 
 		<!--		<div id="karte"></div>-->
