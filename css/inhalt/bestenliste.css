@@ -1,4 +1,4 @@
-#bestenliste-container {
+#bestenliste-wrapper {
 	--gap-vertical: .2rem;
 	--gap-track-inhalt-max: 2.6rem;
 	--gap-track-inhalt: 2.4rem;
@@ -17,29 +17,29 @@
 	position: relative;
 }
 
-#bestenliste-container.versteckt {
+#bestenliste-wrapper.versteckt {
 	display: none;
 }
 
-#bestenliste-container > h3, #bestenliste-container > button, #bestenliste-container > .keine-teilnehmer {
+#bestenliste-wrapper > h3, #bestenliste-wrapper > button, #bestenliste-wrapper > .keine-teilnehmer {
 	--padding: 1.4rem;
 	/*z-index: 1;*/
 	/*position: relative;*/
 	margin: 0 0 0 calc(var(--große-box-margin-left) + 1.6rem) !important;
 }
 
-#bestenliste-container > h3 {
+#bestenliste-wrapper > h3 {
 	padding: var(--padding) 0 calc(var(--padding) - .8rem) 0;
 	font-size: 1.8rem;
 }
 
-#bestenliste-container > button {
+#bestenliste-wrapper > button {
 	--padding: 1.4rem;
 	padding: calc(var(--padding) - .6rem) 0 var(--padding) 0;
 	font-size: 1.3rem;
 }
 
-#bestenliste-container.keine-teilnehmer #bestenliste-anzeige, #bestenliste-container:not(.keine-teilnehmer) .keine-teilnehmer {
+#bestenliste-wrapper.keine-teilnehmer #bestenliste-anzeige, #bestenliste-wrapper:not(.keine-teilnehmer) .keine-teilnehmer {
 	display: none;
 }
 
@@ -55,7 +55,7 @@
 	cursor: default;
 }
 
-#bestenliste-container::before, #bestenliste-anzeige::after {
+#bestenliste-wrapper::before, #bestenliste-anzeige::after {
 	content: "";
 	position: absolute;
 	width: 100vw;
@@ -67,7 +67,7 @@
 	background-position: 100% 100%;
 }
 
-#bestenliste-container::before {
+#bestenliste-wrapper::before {
 	--background: #c2cdd8;
 	--background2: #acb9c4;
 	background-image: linear-gradient(-45deg, var(--background2), var(--background2) 50%, var(--background) 50%, var(--background));
@@ -206,10 +206,8 @@ Fahrrad-Icon
 	transition-duration: var(--transition-dauer);
 	transition-property: width, margin-left;
 
-	background-image: var(--url);
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+	--url: rgba(0, 0, 0, 0);
+	background: center / contain no-repeat var(--url);
 }
 
 /*

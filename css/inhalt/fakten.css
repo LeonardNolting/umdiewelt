@@ -1,10 +1,10 @@
-#fakten-anzeige {
+#fakten {
 	margin-top: 0.8rem;
 	position: relative;
 	overflow: hidden;
 }
 
-#fakten-anzeige::before {
+#fakten::before {
 	position: absolute;
 	--border-width: 4px;
 	width: calc(100% + var(--border-width) * 2);

@@ -1,4 +1,4 @@
-#fusszeile-anzeige {
+#fusszeile {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -7,20 +7,22 @@
 	flex-wrap: wrap;
 	margin: 1rem 0;
 }
-#fusszeile-anzeige, #fusszeile-anzeige li, #fusszeile-anzeige a {
+
+#fusszeile, #fusszeile li, #fusszeile a {
 	color: #999;
 }
-#fusszeile-anzeige a:not(:hover) {
+
+#fusszeile a:not(:hover) {
 	text-decoration: none;
 }
 
 @media (max-width: 620px) {
-	#fusszeile-anzeige {
+	#fusszeile {
 		flex-direction: column;
 		align-items: center;
 	}
 
-	#fusszeile-anzeige * + * {
+	#fusszeile * + * {
 		margin-top: .4rem;
 	}
 }

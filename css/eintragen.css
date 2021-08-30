@@ -1,4 +1,4 @@
-#mitwirken {
+#eintragen {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -13,17 +13,17 @@
 	flex-direction: column;
 }
 
-#mitwirken::before {
+#eintragen::before {
 	content: "Strecke eintragen";
 	color: var(--color);
 	text-shadow: 0 0 16px rgba(0, 0, 0, .5);
 }
 
-#mitwirken[data-text]::before {
+#eintragen[data-text]::before {
 	content: attr(data-text);
 }
 
-#mitwirken::after {
+#eintragen::after {
 	content: "";
 	width: 100%;
 	height: 2px;

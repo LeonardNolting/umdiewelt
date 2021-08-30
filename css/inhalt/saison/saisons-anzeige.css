@@ -2,7 +2,7 @@
 @import "./saison.css";
 @import "./saisons.css";
 
-#saisons-anzeige {
+#saisons-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -32,12 +32,12 @@
 	box-shadow: 0 0 4px 4px black;
 }*/
 
-#saisons-anzeige #schulen-anzeige {
+#saisons-wrapper #schulen-anzeige {
 	display: flex;
 	justify-content: space-evenly;
 }
 
-#saisons-anzeige .schule {
+#saisons-wrapper .schule {
 	max-width: 1000px;
 	flex-basis: 0;
 	flex-grow: .5;
@@ -55,7 +55,7 @@
 	transition: transform .1s ease-in-out;
 }
 
-#saisons-anzeige .schule:hover {
+#saisons-wrapper .schule:hover {
 	transform: scale(1.02);
 }
 
@@ -75,7 +75,7 @@
 	padding-left: 1rem;
 }
 
-#saisons-anzeige #schulen-anzeige .schule[data-schule="Gymnasium Höchstadt"] {
+#saisons-wrapper #schulen-anzeige .schule[data-schule="Gymnasium Höchstadt"] {
 	/*background-image: url("../../../img/gymnasium-hoechstadt.png");*/
 	background-position: bottom;
 	background-repeat: no-repeat;

@@ -1,5 +1,6 @@
 #welt {
 	height: var(--hoehe);
+	max-height: 100vmin; /* Welt auf Portrait-Bildschirmen nicht breiter als maximale Breite */
 	width: 100%;
 	position: fixed !important;
 }

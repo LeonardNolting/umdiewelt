@@ -3,8 +3,7 @@ import {bereiteFaktenVor as fakten} from "./fakten";
 import step from "../step";
 import cookies from "./cookies";
 import admin from "./admin";
-import mitwirken from "./mitwirken";
-import bestenliste from "./bestenliste";
+import eintragen from "./eintragen";
 
 export const observer = new IntersectionObserver(((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
@@ -27,8 +26,8 @@ export default async () => {
 	document.querySelectorAll("#inhalt .verspaetet").forEach(element => observer.observe(element))
 
 	cookies()
-	fakten(...document.getElementById("fakten-anzeige").querySelector("section").querySelectorAll("data"))
+	fakten(...document.getElementById("fakten").querySelectorAll("data"))
 	quellen()
-	mitwirken()
+	eintragen()
 	await admin()
 }
