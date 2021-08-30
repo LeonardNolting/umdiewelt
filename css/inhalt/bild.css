@@ -30,7 +30,7 @@ figure {
 
 figure img {
 	transition: transform .2s ease;
-	width: 100%;
+	width: 67%;
 }
 
 /*figure::before {
