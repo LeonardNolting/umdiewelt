@@ -1,7 +1,8 @@
 .wussten-sie-schon {
 	padding: 1.6rem;
 	width: 100%;
-	background: center/cover no-repeat linear-gradient(-45deg, transparent 10%, #e0e3e5 30%, #f0f0f0f0 30%);
+	--background: center/cover no-repeat linear-gradient(-45deg, transparent 10%, #e0e3e5 30%, #f0f0f0f0 30%);
+	background: var(--background);
 	font-size: 1.2rem;
 	position: relative;
 	overflow: hidden;

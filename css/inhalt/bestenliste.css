@@ -23,7 +23,20 @@
 
 #bestenliste-wrapper > .wussten-sie-schon {
 	margin-left: var(--große-box-margin-left);
+	/*z-index: -1;*/
+	background: none;
+	position: relative;
+}
+
+#bestenliste-wrapper > .wussten-sie-schon::after {
+	content: "";
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
 	z-index: -1;
+	background: var(--background);
 }
 
 #bestenliste-wrapper > h3, #bestenliste-wrapper > button, #bestenliste-wrapper > .keine-teilnehmer {
