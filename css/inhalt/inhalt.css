@@ -35,7 +35,8 @@
 
 	--fakten-groesse: calc(var(--hoehe) / 3);
 
-	background: left/100% 100% no-repeat linear-gradient(45deg, #4b5865, transparent);
+	/*background: left/100% 100% no-repeat linear-gradient(45deg, #4b5865, transparent);*/
+	background: linear-gradient(14deg, #6a757a 0%, transparent 80%);
 }
 
 #vorstellung {
