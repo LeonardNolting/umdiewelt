@@ -124,6 +124,8 @@
 	--background: #555;
 	--background-lighter: #656565;
 	--background-darker: #242424;
+
+	--url: rgba(0, 0, 0, 0);
 }
 
 /*
@@ -215,7 +217,6 @@ Fahrrad-Icon
 	transition-duration: var(--transition-dauer);
 	transition-property: width, margin-left;
 
-	--url: rgba(0, 0, 0, 0);
 	background: center / contain no-repeat var(--url);
 }
 
