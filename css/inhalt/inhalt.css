@@ -55,10 +55,6 @@
 	z-index: 1;
 }
 
-img {
-	display: none;
-}
-
 #inhalt > h1:first-of-type {
 	margin-top: var(--padding);
 }

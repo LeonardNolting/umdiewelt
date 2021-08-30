@@ -1,4 +1,4 @@
-figure + .container {
+/*figure + .container {
 	--padding-nach-bild: 1.6rem;
 	padding-top: var(--padding-nach-bild);
 }
@@ -17,7 +17,7 @@ figure + .container::before {
 	background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 48 16" xmlns="http://www.w3.org/2000/svg"><path d="m 0,0 v 16 h 48 c -23,0 -48,0 -48,-16 z" style="stroke:none;fill:white;" /></svg>');
 	background-repeat: no-repeat;
 	background-size: contain;
-}
+}*/
 
 figure {
 	overflow: hidden;
@@ -33,15 +33,15 @@ figure img {
 	width: 100%;
 }
 
-figure::before {
+/*figure::before {
 	content: "";
 	height: 100%;
 	width: 100%;
 	position: absolute;
 	background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 20%, rgba(0, 0, 0, .4) 100%);
 	z-index: 1;
-}
+}*/
 
-figure:hover img {
+/*figure:hover img {
 	transform: scale(1.05);
-}
+}*/
