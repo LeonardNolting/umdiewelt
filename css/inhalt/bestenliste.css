@@ -21,6 +21,11 @@
 	display: none;
 }
 
+#bestenliste-wrapper > .wussten-sie-schon {
+	margin-left: var(--große-box-margin-left);
+	z-index: -1;
+}
+
 #bestenliste-wrapper > h3, #bestenliste-wrapper > button, #bestenliste-wrapper > .keine-teilnehmer {
 	--padding: 1.4rem;
 	/*z-index: 1;*/
@@ -31,6 +36,10 @@
 #bestenliste-wrapper > h3 {
 	padding: var(--padding) 0 calc(var(--padding) - .8rem) 0;
 	font-size: 1.8rem;
+}
+
+#bestenliste-wrapper > h3 > a::before {
+	display: none;
 }
 
 #bestenliste-wrapper > button {
