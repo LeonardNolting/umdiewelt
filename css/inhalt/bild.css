@@ -30,7 +30,19 @@ figure {
 
 figure img {
 	transition: transform .2s ease;
-	width: 67%;
+	--width: 0.67;
+	width: calc(var(--width) * 100%);
+	max-width: calc(var(--container-max-width) * var(--width));
+}
+
+figure::before, figure::after {
+	content: "";
+	height: 10px;
+	background: #999;
+	display: flex;
+	flex-grow: 1;
+	margin: 10% 1rem 0 1rem;
+	border-radius: 500px;
 }
 
 /*figure::before {

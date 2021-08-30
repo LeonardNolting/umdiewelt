@@ -44,6 +44,9 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
 	--link-farbe: dodgerblue;
 	--border: .3rem solid #222;
+
+	--container-padding: 1rem;
+	--container-max-width: 1000px;
 }
 
 * {
@@ -53,9 +56,6 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 .container {
 	/*max-width: 70%;*/
 	/*min-width: 600px;*/
-
-	--container-padding: 1rem;
-	--container-max-width: 1000px;
 	max-width: var(--container-max-width);
 	margin: 0 auto;
 	padding: 0 var(--container-padding);
