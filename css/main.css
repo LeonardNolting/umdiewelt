@@ -1,4 +1,5 @@
 @import "./generell.css";
+@import "./inhaltsverzeichnis.css";
 @import "./ueberschriften.css";
 @import "./verspaetet.css";
 @import "./ul-horizontal.css";
@@ -7,6 +8,7 @@
 @import "./fakten.css";
 @import "./admin.css";
 @import "./welt.css";
+@import "./wussten-sie-schon.css";
 
 @import "./popups.css";
 

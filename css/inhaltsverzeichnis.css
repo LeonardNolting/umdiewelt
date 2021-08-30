@@ -1,0 +1,41 @@
+#inhaltsverzeichnis {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100vh;
+	position: fixed;
+	z-index: 20;
+	width: var(--inhaltsverzeichnis-breite);
+	/*align-items: center;*/
+	padding: 1rem 2.4rem;
+	background-color: #0d3349;
+	color: white;
+	margin-top: 0;
+	--gap: 1.2rem;
+	--font-size: 1.2rem;
+	--height: calc(var(--font-size) * var(--font-size));
+	border-right: var(--border);
+	border-right-color: #111;
+}
+
+#inhaltsverzeichnis li + li {
+	margin-top: var(--gap);
+}
+
+#inhaltsverzeichnis li {
+	list-style: none;
+	/*padding: .4rem;*/
+	font-size: var(--font-size);
+	height: var(--height);
+	display: flex;
+	align-items: center
+}
+
+#inhaltsverzeichnis li a {
+	color: white;
+	text-decoration: none;
+}
+
+#inhaltsverzeichnis li.abseits {
+	--gap: 3.6rem;
+}

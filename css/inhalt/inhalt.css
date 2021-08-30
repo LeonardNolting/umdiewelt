@@ -12,15 +12,50 @@
 @import "./admin.css";
 
 #inhalt {
+	margin-left: var(--inhaltsverzeichnis-breite);
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 	position: relative;
 	z-index: 10;
 	background-color: white;
 	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
 	width: 100%;
-	box-shadow: 0 0 24px 2px #111, inset 0 12px 12px -8px grey;
-	/*min-height: calc(100vh - var(--hoehe));*/
-	/*overflow-x: hidden;*/
+	/*box-shadow: 0 0 24px 2px #111, inset 0 12px 12px -8px grey;*/
+	border-top: var(--border);
+}
+
+#willkommen {
+	display: flex;
+	position: fixed;
+	height: var(--hoehe);
+	width: calc(100vw - var(--inhaltsverzeichnis-breite));
+	left: var(--inhaltsverzeichnis-breite);
+
+	--fakten-groesse: calc(var(--hoehe) / 3);
+
+	background: left/100% 100% no-repeat linear-gradient(45deg, #4b5865, transparent);
+}
+
+#vorstellung {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+}
+
+#vorstellung > :not(#welt) {
+	position: relative;
+	z-index: 1;
+}
+
+img {
+	display: none;
 }
 
 #inhalt > h1:first-of-type {

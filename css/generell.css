@@ -11,7 +11,7 @@ body {
 	position: relative;
 
 	display: flex;
-	flex-direction: column;
+	--inhaltsverzeichnis-breite: 18rem;
 }
 
 html[data-progress] {
@@ -39,10 +39,11 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--ueberschrift-groesse: 3.2rem;
 	--padding: 2rem;
 	/*--hoehe: calc(100% - var(--ueberschrift-groesse) - var(--padding) - 20px)*/
-	--hoehe: 80vh;
+	--hoehe: 90vh;
 	--schrift-groesse: 1.4rem;
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
 	--link-farbe: dodgerblue;
+	--border: .3rem solid #222;
 }
 
 * {
@@ -52,8 +53,9 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 .container {
 	/*max-width: 70%;*/
 	/*min-width: 600px;*/
+
 	--container-padding: 1rem;
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: 0 auto;
 	padding: 0 var(--container-padding);
 }

@@ -1,10 +1,24 @@
 #fakten {
-	margin-top: 0.8rem;
 	position: relative;
-	overflow: hidden;
+	/*overflow: hidden;*/
+	height: 100%;
+	/*display: flex;*/
+	flex-direction: column;
+	margin-top: 0;
+	padding: 0;
 }
 
-#fakten::before {
+#fakten .fakt {
+	width: var(--fakten-groesse);
+	flex-grow: unset;
+	padding: 1.6rem;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+/*#fakten::before {
 	position: absolute;
 	--border-width: 4px;
 	width: calc(100% + var(--border-width) * 2);
@@ -19,4 +33,4 @@
 	transform: translateX(calc(-1 * var(--border-width))) translateY(-100%);
 	margin-top: 2.2rem;
 	background: white;
-}
+}*/

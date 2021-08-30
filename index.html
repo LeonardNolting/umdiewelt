@@ -40,72 +40,78 @@
 
 		<div id="eintragen"></div>
 
+		<div id="willkommen">
+			<div id="vorstellung">
+				<div id="welt"></div>
+				<h1>Um Die Welt</h1>
+				<h2>Auf dem <span class="fahrradweg">Fahr&shy;rad&shy;weg</span> zu mehr <span class="klimaschutz">Klima&shy;schutz</span>.
+				</h2>
+			</div>
+			<div id="fakten" class="fakten verspaetet">
+				<data class="fakt" value="0" data-einheit="g" data-bezeichnung="gespart">
+					<span>Ein&shy;ge&shy;spartes CO<sub>2</sub><a href="#quellen" class="sternchen">*</a></span>
+				</data>
+				<data class="fakt bigger" value="0" data-einheit="m" data-bezeichnung="strecke">
+					Zu&shy;rück&shy;ge&shy;legte Strecke
+				</data>
+				<data class="fakt" value="0" data-bezeichnung="fahrer">
+					Betei&shy;lig&shy;te jähr&shy;lich
+				</data>
+			</div>
+		</div>
+
 		<div id="inhalt">
 			<section id="browser-aktualisierung"></section>
 
-			<div id="willkommen">
-				<div id="vorstellung">
-					<div id="welt"></div>
-					<h1>Um Die Welt</h1>
-					<h2>Auf dem <span class="fahrradweg">Fahr&shy;rad&shy;weg</span> zu mehr <span class="klimaschutz">Klima&shy;schutz</span>.
-					</h2>
-				</div>
-				<div id="fakten" class="verspaetet">
-					<data class="fakt" value="0" data-einheit="g" data-bezeichnung="gespart">
-						Ein&shy;ge&shy;spartes CO<sub>2</sub><a href="#quellen" class="sternchen">*</a>
-					</data>
-					<data class="fakt bigger" value="0" data-einheit="m" data-bezeichnung="strecke">
-						Zu&shy;rück&shy;ge&shy;legte Strecke
-					</data>
-					<data class="fakt" value="0" data-bezeichnung="fahrer">
-						Betei&shy;lig&shy;te jähr&shy;lich
-					</data>
+			<div class="container">
+				<div id="ansprache">
+					<h3>Sehr geeherte Leserinnen und Leser,</h3>
+					<p>Umwelt problematisch</p>
+					<p>viele Wege</p>
+					<p>möchten zeigen, dass jeder helfen kann</p>
+					<p>haben schon <a href="https://gymnasium-hoechstadt.de">andere Aktionen
+						<!-- TODO tooltip "Am ... initiierte das GH die Sternfahrten *Bild* --></a> gestartet</p>
+					<p>neu: laden alle Schüler der [dynamisch: Schulen] ein, möglichst viele Strecken mit dem Fahrrad
+						zurückzulegen!</p>
+					<p>Natürlich auch Spaß und Zusammenhalt und Schulfamilie und alles ...</p>
+					<p>Erfahren Sie, <a href="#ablauf">wie's funktioniert</a> und was wir dadurch erreichen.</p>
+					<p>Danke an alle Beteiligten!</p>
 				</div>
 			</div>
+			<ul id="fahrer" class="horizontal">
+				<li>Leonard Nolting</li>
+				<li>Thomas Nolting</li>
+				<li>Noch Jemand</li>
+				<li>Und Nochjemand</li>
+			</ul>
+			<div class="container">
+				<div id="ansprache-ende">
+					<p>Ihr P-Seminar *Name*</p>
+					<!--suppress HtmlUnknownAttribute -->
+					<img loading="lazy"
+					     src="./img/Gruppe.svg"
+					     alt="" />
+				</div>
 
-			<div id="ansprache">
-				<h3>Sehr geeherte Leserinnen und Leser,</h3>
-				<p>Umwelt problematisch</p>
-				<p>viele Wege</p>
-				<p>möchten zeigen, dass jeder helfen kann</p>
-				<p>haben schon <a href="https://gymnasium-hoechstadt.de">andere Aktionen
-					<!-- TODO tooltip "Am ... initiierte das GH die Sternfahrten *Bild* --></a> gestartet</p>
-				<p>neu: laden alle Schüler der [dynamisch: Schulen] ein, möglichst viele Strecken mit dem Fahrrad
-					zurückzulegen!</p>
-				<p>Natürlich auch Spaß und Zusammenhalt und Schulfamilie und alles ...</p>
-				<p>Sehen Sie sich an, <a href="#ablauf">wie's funktioniert</a>.</p>
-				<p>Danke an alle Beteiligten!</p>
-				<ul id="fahrer" class="horizontal">
-					<li>Leonard Nolting</li>
-					<li>Thomas Nolting</li>
-					<li>Noch Jemand</li>
-					<li>Und Nochjemand</li>
-				</ul>
-				<p>Ihr P-Seminar *Name*</p>
-				<!--suppress HtmlUnknownAttribute -->
-				<img loading="lazy"
-				     src="./img/Gruppe.svg"
-				     alt="" />
-			</div>
+				<div id="ablauf">
+					<h3>Wie's funktioniert:</h3>
 
-			<div id="ablauf">
-				<h3>Wie's funktioniert:</h3>
+				</div>
 
-			</div>
-
-			<div id="faq">
-				<details>
-					<summary>Wie kann ich mitmachen?</summary>
-					<p></p>
-				</details>
-				<details>
-					<summary>Ich möchte auch so helfen können.</summary>
-					<p></p>
-				</details>
-				<details>
-					<summary>Sind E-Bikes erlaubt?</summary>
-					<p></p>
-				</details>
+				<div id="faq">
+					<details>
+						<summary>Wie kann ich mitmachen?</summary>
+						<p></p>
+					</details>
+					<details>
+						<summary>Ich möchte auch so helfen können.</summary>
+						<p></p>
+					</details>
+					<details>
+						<summary>Sind E-Bikes erlaubt?</summary>
+						<p></p>
+					</details>
+				</div>
 			</div>
 
 			<div id="saisons-wrapper">
@@ -113,6 +119,9 @@
 				<ul id="saison-auswahl"></ul>
 				<div id="saisons"></div>
 			</div>
+
+			<p id="feed-hinweis" class="wussten-sie-schon">Im <a href="#feed">Feed</a> sehen Sie alle Aktivitäten auf
+				dieser Seite.</p>
 
 			<div id="bestenliste-wrapper" class="container versteckt">
 				<h3><a href="#bestenliste" id="bestenliste">Aktivste Teilnehmer:</a></h3>
@@ -194,12 +203,15 @@
 
 		<script>
 			const welt  = document.getElementById('welt');
-			const world = Globe()(welt)
+			const world = Globe({
+				animateIn: false,
+			})(welt)
 			.globeImageUrl('//unpkg.com/three-globe@2.18.8/example/img/earth-blue-marble.jpg')
 			.backgroundColor("#dddddd00")
 			// .backgroundImage("linear-gradient(black, white)")
 			// .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
-			.pointOfView({altitude: 2})
+			.pointOfView({altitude: 1.8})
+			.atmosphereColor("#ffffffcc")
 
 			const setSize = () => {
 				world.width(welt.clientWidth)

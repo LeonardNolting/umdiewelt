@@ -1,6 +1,11 @@
 #welt {
 	height: var(--hoehe);
 	max-height: 100vmin; /* Welt auf Portrait-Bildschirmen nicht breiter als maximale Breite */
-	width: 100%;
-	position: fixed !important;
+	/*width: 100%;*/
+	/*height: var(--hoehe);*/
+	width: calc(100vw - var(--inhaltsverzeichnis-breite) - var(--fakten-groesse));
+	/*position: relative;*/
+	position: absolute;
+
+	/*background: center/contain no-repeat radial-gradient(circle at center, black 37%, transparent 63%)*/
 }
