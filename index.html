@@ -19,8 +19,6 @@
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/main.css">
 
-		<script src="//unpkg.com/globe.gl"></script>
-
 		<meta name="theme-color" content="#fafafa">
 	</head>
 
@@ -230,7 +228,7 @@
 			</div>
 		</div>
 
-		<script>
+		<!--<script>
 			const welt  = document.getElementById('welt');
 			const world = Globe({
 				animateIn: false,
@@ -246,15 +244,7 @@
 			controls.enableZoom             = false
 			controls.enableTwoFingerZoomPan = false;
 			controls.addEventListener("change", () => world.camera().position.setY(0))
-
-			const setSize = () => {
-				world.width(welt.clientWidth)
-				world.height(welt.clientHeight)
-			}
-			setSize()
-			const resizeObserver = new ResizeObserver(setSize)
-			resizeObserver.observe(welt, {box: "border-box"})
-		</script>
+		</script>-->
 
 		<!--<div id="inhalt">
 			&lt;!&ndash;<span id="runde">Runde </span>&ndash;&gt;

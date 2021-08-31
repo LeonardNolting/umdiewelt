@@ -39,7 +39,7 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--ueberschrift-groesse: 3.2rem;
 	--padding: 2rem;
 	/*--hoehe: calc(100% - var(--ueberschrift-groesse) - var(--padding) - 20px)*/
-	--hoehe: 75vh;
+	--hoehe: 85vh;
 	--schrift-groesse: 1.4rem;
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
 	--link-farbe: dodgerblue;
