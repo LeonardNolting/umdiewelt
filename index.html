@@ -229,10 +229,15 @@
 			})(welt)
 			.globeImageUrl('//unpkg.com/three-globe@2.18.8/example/img/earth-blue-marble.jpg')
 			.backgroundColor("#dddddd00")
-			// .backgroundImage("linear-gradient(black, white)")
 			// .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
 			.pointOfView({altitude: 2.5})
 			.atmosphereColor("#ffffffcc")
+			.enablePointerInteraction(false)
+
+			const controls                  = world.controls();
+			controls.enableZoom             = false
+			controls.enableTwoFingerZoomPan = false;
+			controls.addEventListener("change", () => world.camera().position.setY(0))
 
 			const setSize = () => {
 				world.width(welt.clientWidth)
