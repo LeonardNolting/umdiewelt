@@ -224,7 +224,7 @@
 			</div>
 		</div>
 
-		<script type="module">
+		<script>
 			const welt  = document.getElementById('welt');
 			const world = Globe({
 				animateIn: false,
@@ -248,103 +248,6 @@
 			setSize()
 			const resizeObserver = new ResizeObserver(setSize)
 			resizeObserver.observe(welt, {box: "border-box"})
-
-			world.onGlobeReady(() => {
-				setTimeout(async () => {
-					world.pathPointAlt(() => .05)
-					world.pathStroke(10)
-
-					/*.pathDashLength(0)
-					.pathDashGap(1)
-					.pathDashAnimateTime(1500)
-					// .pathDashGap(0)
-					.pathDashLength(1)
-					// world.pathDashLength(0.5)
-					// world.pathDashInitialGap(1)
-					const duration = 1500
-					world.pathTransitionDuration(0)
-
-					world.pathsData([[
-						[0, 0],
-						[0, 180],
-						[0, 360]
-					]])*/
-
-					const wegFarbe                     = "#aaa";
-					const fortschrittFarbe             = "#00ffff";
-					const animationsDauer              = 1600;
-					const animationsDauerEinesViertels = animationsDauer / 4;
-
-					world.pathColor([wegFarbe, wegFarbe])
-
-					const paths = []
-
-					world.pathTransitionDuration(animationsDauerEinesViertels)
-
-					const part = (path, delay = animationsDauerEinesViertels) => new Promise(resolve => {
-						setTimeout(() => {
-							paths.push(path)
-							world.pathsData(paths)
-							resolve()
-						}, delay)
-					})
-
-					await part([[0, 0], [0, 90]], 0)
-					await part([[0, 90], [0, 180]])
-					await part([[0, 180], [0, 270]])
-					await part([[0, 270], [0, 360]])
-					await new Promise(resolve => setTimeout(resolve, animationsDauerEinesViertels))
-					// world.pathsData([])
-					// console.log("fertig")
-
-					{
-						// world.pathsData([[0, 0], [0, 360]])
-						world.pathColor([fortschrittFarbe, fortschrittFarbe])
-						// world.pathsData([...paths, [[0, 0], [0, 360]]])
-
-						/*world.pathColor([fortschrittFarbe, fortschrittFarbe])
-
-						const umfang = 40_075_017
-						const fortschritt = 5_000_000
-						const fortschrittLat = 360 / umfang * fortschritt;
-						const anzahlSchritte           = 100
-						const animationsDauer = 100
-						const dauerEinesSchritts = animationsDauer / anzahlSchritte
-						for (let i = 0; i < anzahlSchritte; i++) {
-
-							setTimeout(() => {
-								world.pathsData([...paths,])
-							}, dauerEinesSchritts * i)
-							const path = [
-								[0, 0],
-								[0, fortschrittLat / anzahlSchritte * i]
-							]
-						}*/
-					}
-
-					// world.
-
-					// world.pathDashAnimateTime(duration)
-					// world.pathDashLength(1)
-
-					/*const data = [[
-						[0, 180],
-						[0, 270],
-						[0, 0],
-					]]
-					world.pathTransitionDuration(duration)
-
-					world.pathsData(data)*/
-					/*setTimeout(() => {
-						data.push([
-							[0, 180],
-							[0, 270],
-							[0, 0],
-						])
-						world.pathsData(data)
-					}, duration)*/
-				}, 1000)
-			})
 		</script>
 
 		<!--<div id="inhalt">
