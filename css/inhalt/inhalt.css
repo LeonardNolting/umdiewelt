@@ -11,6 +11,13 @@
 @import "./fusszeile.css";
 @import "./admin.css";
 
+@font-face {
+	src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2") format("woff2");
+	font-family: "Meta";
+	font-style: normal;
+	font-weight: normal;
+}
+
 #inhalt {
 	margin-left: var(--inhaltsverzeichnis-breite);
 	display: flex;
@@ -21,9 +28,10 @@
 	background-color: white;
 	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
-	width: 100%;
+	width: calc(100% - var(--inhaltsverzeichnis-breite));
 	/*box-shadow: 0 0 24px 2px #111, inset 0 12px 12px -8px grey;*/
 	border-top: var(--border);
+	align-items: center;
 }
 
 #willkommen {
@@ -48,12 +56,44 @@
 	height: 100%;
 	width: 100%;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 }
 
-#vorstellung > :not(#welt) {
-	position: relative;
+#name {
+	position: absolute;
 	z-index: 1;
+	pointer-events: none;
+	text-transform: uppercase;
+	color: white;
+	/* margin: 0 !important; */
+	bottom: 16%;
+	font-size: 6rem;
+	font-weight: bold;
+	font-variation-settings: "wght" 900, "ital" 0;
+	font-family: "Meta", var(--font-family);
+	-webkit-text-stroke: 2px #18252d;
+}
+
+#slogan {
+	font-size: 2.2rem;
+	color: #222;
+	background: white;
+	padding: .4rem .8rem;
+	border-radius: 8px;
+	transform: translateY(-56%);
+	border: var(--border);
+}
+
+#slogan span {
+	font-size: 120%;
+}
+
+#slogan > span.fahrradweg {
+	color: #0d3349;
+}
+
+#slogan > span.klimaschutz {
+	color: green;
 }
 
 #inhalt > h1:first-of-type {
@@ -79,13 +119,6 @@
 	display: none
 }*/
 
-h1 span#fahrradweg {
-	color: #0d3349;
-}
-
-h1 span#klimaschutz {
-	color: green;
-}
 
 #inhalt h2:first-of-type {
 	margin-top: 0
