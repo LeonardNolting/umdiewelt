@@ -22,10 +22,16 @@ export default async () => {
 	const anfang = -Math.PI / 2 - .2
 	const wegFarbe = 0xffffff;
 	const wegBreite = 8;
+	const wegAbstand = 1;
 	const fortschritt = .1
 	const fortschrittFarbe = 0x71c31e
 	const fortschrittBreite = wegBreite * 1.5
+	const fortschrittAbstand = wegAbstand + .15;
 	const hoehe = 18;
+	const anfangLaenge = .05;
+	const anfangAbstand = fortschrittAbstand
+	const anfangBreite = fortschrittBreite;
+	const anfangFarbe = 0x111111;
 
 	const container = document.getElementById("welt")
 	const scene = new Scene()
@@ -70,9 +76,14 @@ export default async () => {
 	camera.position.z = hoehe
 
 	// Weg & Fortschritt
-	const kreis = (farbe: number, breite: number, radius: number, start: number, ende: number): Line2 => {
-		// const wegStartWinkel = Math.PI / 2
-		// const wegEndWinkel = wegStartWinkel - wegFortschritt * (2 * Math.PI)
+	const kreis = (
+		farbe: number,
+		breite: number,
+		abstand: number,
+		start: number = 0,
+		ende: number = 2 * Math.PI,
+		map: (x: number, y: number) => [number, number, number] = (x, y) => [x, 0, y]
+	): Line2 => {
 		const material = new LineMaterial({
 			color: farbe,
 			linewidth: breite
@@ -81,9 +92,9 @@ export default async () => {
 		});
 
 		const positions = new Path()
-			.absarc(0, 0, radius, start, ende, true)
+			.absarc(0, 0, radius + abstand, start, ende, true)
 			.getPoints(segments)
-			.flatMap(vector2 => [vector2.x, 0, vector2.y])
+			.flatMap(({x, y}) => map(x, y))
 		const geometry = new LineGeometry()
 		const line = new Line2(geometry, material);
 
@@ -95,19 +106,24 @@ export default async () => {
 	}
 
 	// Weg
-	const wegKreis = kreis(wegFarbe, wegBreite, radius + 1, 0, 2 * Math.PI)
+	const wegKreis = kreis(wegFarbe, wegBreite, wegAbstand, 0, 2 * Math.PI)
 
 	// Fortschritt
 	const fortschrittStartWinkel = Math.PI / 2
 	const fortschrittEndWinkel = fortschrittStartWinkel - fortschritt * (2 * Math.PI)
-	const fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite, radius + 1.15, fortschrittStartWinkel, fortschrittEndWinkel)
+	const fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite, fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel)
+
+	// Anfang
+	const anfangKreis = kreis(anfangFarbe, anfangBreite, anfangAbstand, anfangLaenge, -anfangLaenge, (x, y) => [0, y, x])
+
+	const kreise = [wegKreis, fortschrittKreis, anfangKreis]
 
 	// Resizing
 	const setSize = () => {
 		camera.aspect = container.clientWidth / container.clientHeight
 		camera.updateProjectionMatrix()
 		renderer.setSize(container.clientWidth, container.clientHeight);
-		[wegKreis, fortschrittKreis].forEach(kreis => kreis.material.resolution = new Vector2(container.clientWidth, container.clientHeight))
+		kreise.forEach(kreis => kreis.material.resolution = new Vector2(container.clientWidth, container.clientHeight))
 	}
 	setSize()
 	const resizeObserver = new ResizeObserver(setSize)
@@ -146,12 +162,6 @@ export default async () => {
 	animate()
 
 	container.append(renderer.domElement)
-
-	/*const world = Globe()
-	world(document.getElementById('welt'))
-		.globeImageUrl('https://unpkg.com/three-globe@2.18.8/example/img/earth-blue-marble.jpg')
-		// .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
-		.pointOfView({altitude: 3.5})*/
 }
 
 export const aktualisieren = (wert: number) => {
