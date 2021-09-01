@@ -1,5 +1,5 @@
 import {
-	AdditiveBlending, BackSide, Group,
+	AdditiveBlending, BackSide, BufferAttribute, Group,
 	Mesh, Path,
 	PerspectiveCamera,
 	Scene,
@@ -23,10 +23,14 @@ export default async () => {
 	const wegFarbe = 0xffffff;
 	const wegBreite = 8;
 	const wegAbstand = 1;
+	const wegStartWinkel = Math.PI / 2
+	const wegEndWinkel = wegStartWinkel - 2 * Math.PI
 	const fortschritt = .1
 	const fortschrittFarbe = 0x71c31e
 	const fortschrittBreite = wegBreite * 1.5
 	const fortschrittAbstand = wegAbstand + .15;
+	const fortschrittStartWinkel = wegStartWinkel
+	const fortschrittEndWinkel = fortschrittStartWinkel - fortschritt * (2 * Math.PI)
 	const hoehe = 18;
 	const anfangLaenge = .05;
 	const anfangAbstand = fortschrittAbstand
@@ -76,13 +80,24 @@ export default async () => {
 	camera.position.z = hoehe
 
 	// Weg & Fortschritt
-	const kreis = (
-		farbe: number,
-		breite: number,
+	const kreise = []
+
+	const positions = (
 		abstand: number,
 		start: number = 0,
 		ende: number = 2 * Math.PI,
-		map: (x: number, y: number) => [number, number, number] = (x, y) => [x, 0, y]
+		anzahlSegmente: number = segments,
+		map: (x: number, y: number) => [number, number, number] = (x, y) => [x, 0, y],
+	) => new Path()
+		.absarc(0, 0, radius + abstand, start, ende, true)
+		.getPoints(anzahlSegmente)
+		.flatMap(({x, y}) => map(x, y))
+
+	const kreis = (
+		farbe: number,
+		breite: number,
+		positions: number[] = [],
+		anzeigen: boolean = true
 	): Line2 => {
 		const material = new LineMaterial({
 			color: farbe,
@@ -91,32 +106,61 @@ export default async () => {
 			blending: AdditiveBlending*/
 		});
 
-		const positions = new Path()
-			.absarc(0, 0, radius + abstand, start, ende, true)
-			.getPoints(segments)
-			.flatMap(({x, y}) => map(x, y))
 		const geometry = new LineGeometry()
-		const line = new Line2(geometry, material);
+		const kreis = new Line2(geometry, material);
 
-		geometry.setPositions(positions)
-		bewegenGruppe.add(line);
-		line.computeLineDistances();
+		const typedArray = new Float32Array(positions.length);
+		geometry.setPositions(typedArray)
+		// geometry.setAttribute("position", new BufferAttribute(typedArray, 3))
 
-		return line
+		// zeichneKreis(kreis, positions)
+		// if (!anzeigen) geometry.setPositions(positions.slice(0, 6))
+		bewegenGruppe.add(kreis);
+
+		return kreis
+	}
+	const zeichneKreis = (kreis: Line2, positions: number[]) => {
+		kreis.geometry.setPositions(positions)
+		kreis.geometry.attributes["position"].needsUpdate = true
+
 	}
 
 	// Weg
-	const wegKreis = kreis(wegFarbe, wegBreite, wegAbstand, 0, 2 * Math.PI)
+	const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
+	const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
+	const wegKreis = kreis(wegFarbe, wegBreite, wegPositions, false)
+
+	// zeichneKreis(wegKreis, wegPositions.slice(0, 6))
+	const pos = wegKreis.geometry.getAttribute("position")
+	const pa = pos.array
+
+	let i = 6; // zwei Punkte müssen mindestens gegeben sein
+	const wegInterval = setInterval(() => {
+		// zeichneKreis(wegKreis, wegPositions.slice(0, i))
+		pa[6 * i] = wegPositions[6 * i];
+		pa[6 * i + 1] = wegPositions[6 * i + 1];
+		pa[6 * i + 2] = wegPositions[6 * i + 2];
+		pa[6 * i + 4] = wegPositions[6 * i + 4];
+		pa[6 * i + 5] = wegPositions[6 * i + 5];
+		pa[6 * i + 6] = wegPositions[6 * i + 6];
+
+		if (i === wegPositions.length) clearInterval(wegInterval)
+		i += 3
+	}, 20)
+	kreise.push(wegKreis)
+	wegKreis.computeLineDistances()
+	pos.needsUpdate = true
+	// wegKreis.geometry.getAttribute("positions").needsUpdate = true
 
 	// Fortschritt
-	const fortschrittStartWinkel = Math.PI / 2
-	const fortschrittEndWinkel = fortschrittStartWinkel - fortschritt * (2 * Math.PI)
-	const fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite, fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel)
+	/*const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
+	const fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite)
+	kreise.push(fortschrittKreis)
+	setSize()*/
 
 	// Anfang
-	const anfangKreis = kreis(anfangFarbe, anfangBreite, anfangAbstand, anfangLaenge, -anfangLaenge, (x, y) => [0, y, x])
-
-	const kreise = [wegKreis, fortschrittKreis, anfangKreis]
+	const anfangKreis = kreis(anfangFarbe, anfangBreite, positions(anfangAbstand, anfangLaenge, -anfangLaenge, segments, (x, y) => [0, y, x]))
+	kreise.push(anfangKreis)
 
 	// Resizing
 	const setSize = () => {
