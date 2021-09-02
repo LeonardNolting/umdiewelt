@@ -13,7 +13,8 @@ import weltFragment from "../../shaders/welt/fragment.glsl";
 import atmosphaereVertex from "../../shaders/atmosphaere/vertex.glsl";
 import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
 import texture from "../../img/earth.png"
-import {Line2, LineGeometry, LineMaterial} from "three-fatline";
+// noinspection TypeScriptCheckImport
+import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
 export default async () => {
 	const radius = 5
@@ -98,32 +99,26 @@ export default async () => {
 		breite: number,
 		positions: number[] = [],
 		anzeigen: boolean = true
-	): Line2 => {
-		const material = new LineMaterial({
+	): MeshLine => {
+		const line = new MeshLine()
+		line.setPoints(positions)
+
+		const material = new MeshLineMaterial({
 			color: farbe,
-			linewidth: breite
+			lineWidth: breite
 			/*side: BackSide,
 			blending: AdditiveBlending*/
 		});
 
-		const geometry = new LineGeometry()
-		const kreis = new Line2(geometry, material);
-
-		const typedArray = new Float32Array(positions.length);
-		geometry.setPositions(typedArray)
-		// geometry.setAttribute("position", new BufferAttribute(typedArray, 3))
-
-		// zeichneKreis(kreis, positions)
-		// if (!anzeigen) geometry.setPositions(positions.slice(0, 6))
-		bewegenGruppe.add(kreis);
-
-		return kreis
+		const mesh = new Mesh(line, material)
+		bewegenGruppe.add(mesh)
+		return mesh
 	}
-	const zeichneKreis = (kreis: Line2, positions: number[]) => {
+	/*const zeichneKreis = (kreis: Line2, positions: number[]) => {
 		kreis.geometry.setPositions(positions)
 		kreis.geometry.attributes["position"].needsUpdate = true
 
-	}
+	}*/
 
 	// Weg
 	const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
@@ -131,26 +126,15 @@ export default async () => {
 	const wegKreis = kreis(wegFarbe, wegBreite, wegPositions, false)
 
 	// zeichneKreis(wegKreis, wegPositions.slice(0, 6))
-	const pos = wegKreis.geometry.getAttribute("position")
-	const pa = pos.array
 
 	let i = 6; // zwei Punkte müssen mindestens gegeben sein
 	const wegInterval = setInterval(() => {
 		// zeichneKreis(wegKreis, wegPositions.slice(0, i))
-		pa[6 * i] = wegPositions[6 * i];
-		pa[6 * i + 1] = wegPositions[6 * i + 1];
-		pa[6 * i + 2] = wegPositions[6 * i + 2];
-		pa[6 * i + 4] = wegPositions[6 * i + 4];
-		pa[6 * i + 5] = wegPositions[6 * i + 5];
-		pa[6 * i + 6] = wegPositions[6 * i + 6];
 
 		if (i === wegPositions.length) clearInterval(wegInterval)
 		i += 3
 	}, 20)
 	kreise.push(wegKreis)
-	wegKreis.computeLineDistances()
-	pos.needsUpdate = true
-	// wegKreis.geometry.getAttribute("positions").needsUpdate = true
 
 	// Fortschritt
 	/*const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
