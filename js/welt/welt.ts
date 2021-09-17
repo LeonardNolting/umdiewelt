@@ -123,7 +123,7 @@ export default async () => {
 	// Weg
 	const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
 	const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
-	const wegKreis = kreis(wegFarbe, wegBreite, wegPositions, false)
+	// const wegKreis = kreis(wegFarbe, wegBreite, wegPositions, false)
 
 	// zeichneKreis(wegKreis, wegPositions.slice(0, 6))
 
@@ -134,7 +134,7 @@ export default async () => {
 		if (i === wegPositions.length) clearInterval(wegInterval)
 		i += 3
 	}, 20)
-	kreise.push(wegKreis)
+	// kreise.push(wegKreis)
 
 	// Fortschritt
 	/*const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
@@ -143,8 +143,8 @@ export default async () => {
 	setSize()*/
 
 	// Anfang
-	const anfangKreis = kreis(anfangFarbe, anfangBreite, positions(anfangAbstand, anfangLaenge, -anfangLaenge, segments, (x, y) => [0, y, x]))
-	kreise.push(anfangKreis)
+	// const anfangKreis = kreis(anfangFarbe, anfangBreite, positions(anfangAbstand, anfangLaenge, -anfangLaenge, segments, (x, y) => [0, y, x]))
+	// kreise.push(anfangKreis)
 
 	// Resizing
 	const setSize = () => {
