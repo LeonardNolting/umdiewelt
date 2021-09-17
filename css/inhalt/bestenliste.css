@@ -15,6 +15,7 @@
 	--große-box-margin-left: calc(1 * var(--rang-breite-max) * 1.4);
 	--transition-dauer: .4s;
 	position: relative;
+	max-width: 100%;
 }
 
 #bestenliste-wrapper.versteckt {
