@@ -33,6 +33,10 @@
 	font-size: 1.8rem;
 }
 
+#bestenliste-container > h3 a::before {
+	display: none;
+}
+
 #bestenliste-container > button {
 	--padding: 1.4rem;
 	padding: calc(var(--padding) - .6rem) 0 var(--padding) 0;
