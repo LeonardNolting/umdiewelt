@@ -16,6 +16,7 @@
 	--transition-dauer: .4s;
 	position: relative;
 	max-width: 100%;
+	overflow-y: clip;
 }
 
 #bestenliste-wrapper.versteckt {
