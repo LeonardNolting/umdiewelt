@@ -42,11 +42,15 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--hoehe: 85vh;
 	--schrift-groesse: 1.4rem;
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
+
+	--primary: rgb(194, 220, 98);
 	--link-farbe: dodgerblue;
 	--border: .3rem solid #222;
 
 	--container-padding: 1rem;
 	--container-max-width: 1000px;
+
+	--trennung-breite: 8vh;
 }
 
 * {
