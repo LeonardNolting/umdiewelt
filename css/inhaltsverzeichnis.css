@@ -18,8 +18,12 @@
 	border-right-color: #111;
 }
 
-#inhaltsverzeichnis li + li {
-	margin-top: var(--gap);
+#inhaltsverzeichnis li:not(:first-child) a {
+	padding-top: calc(var(--gap) / 2);
+}
+
+#inhaltsverzeichnis li:not(:last-child) a {
+	padding-bottom: calc(var(--gap) / 2);
 }
 
 #inhaltsverzeichnis li {
@@ -29,6 +33,10 @@
 	height: var(--height);
 	display: flex;
 	align-items: center
+}
+
+#inhaltsverzeichnis li:hover a {
+	color: var(--primary);
 }
 
 #inhaltsverzeichnis li a {
