@@ -11,6 +11,7 @@
 	background-color: #213844;
 	color: white;
 	margin-top: 0;
+	top: 0;
 	--gap: 1.2rem;
 	--font-size: 1.2rem;
 	--height: calc(var(--font-size) * var(--font-size));
