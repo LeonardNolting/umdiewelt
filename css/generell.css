@@ -39,7 +39,8 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--ueberschrift-groesse: 3.2rem;
 	--padding: 2rem;
 	/*--hoehe: calc(100% - var(--ueberschrift-groesse) - var(--padding) - 20px)*/
-	--hoehe: 85vh;
+	/*--hoehe: 85vh;*/
+	--hoehe: 100vh;
 	--schrift-groesse: 1.4rem;
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
 
@@ -61,12 +62,15 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	/*max-width: 70%;*/
 	/*min-width: 600px;*/
 	max-width: var(--container-max-width);
-	margin: 0 auto;
+}
+
+.container, .safe {
 	padding: 0 var(--container-padding);
+	margin: 0 auto;
 }
 
 .container.max {
-	width: var(--container-max-width);
+	/*width: var(--container-max-width);*/
 }
 
 a {
