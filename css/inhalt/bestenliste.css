@@ -19,6 +19,22 @@
 	overflow-y: clip;
 }
 
+#bestenliste-wrapper + *::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	transform: translateY(calc(-100% + 2px)) translateX(calc(1 / 2 * var(--trennung-breite)));
+	z-index: 2;
+	pointer-events: none;
+	width: 40vw;
+	min-width: 3rem;
+	height: 13.33333vw;
+	min-height: 1rem;
+	background-image: url('data:image/svg+xml;utf8,<svg viewBox= "0 0 48 16" xmlns= "http://www.w3.org/2000/svg" ><path d= "m 0,0 v 16 h 48 c -23,0 -48,0 -48,-16 z" style= "stroke:none;fill:white;" /></svg>');
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
 #bestenliste-wrapper.versteckt {
 	display: none;
 }
