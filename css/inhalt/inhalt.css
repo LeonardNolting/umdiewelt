@@ -39,8 +39,9 @@
 	width: var(--trennung-breite);
 	margin-left: calc(-1 * var(--trennung-breite));
 	transform: translateX(calc(1 / 2 * var(--trennung-breite))) skewY(12deg);
+	transform-origin: top left;
 	z-index: 1;
-	height: 200vh;
+	height: 80vh;
 	top: 20vh;
 	position: sticky;
 	background: var(--primary);
