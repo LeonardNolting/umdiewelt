@@ -11,10 +11,10 @@
 @import "./fusszeile.css";
 @import "./admin.css";
 
-#inhalt {
+#scrollable {
 	margin-left: var(--inhaltsverzeichnis-breite);
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	flex-grow: 1;
 	position: relative;
 	z-index: 10;
@@ -24,6 +24,30 @@
 	width: calc(100% - var(--inhaltsverzeichnis-breite));
 	/*box-shadow: 0 0 24px 2px #111, inset 0 12px 12px -8px grey;*/
 	border-top: var(--border);
+}
+
+#scrollable::before {
+	/*content: "";*/
+	position: sticky;
+	left: 0;
+	height: 100vh;
+	width: 2rem;
+	/*background: white;*/
+}
+
+#trennung {
+	width: 6vh;
+	height: 80vh;
+	top: 20vh;
+	position: sticky;
+	background: red;
+	transform: translateX(-50%);
+}
+
+#inhalt {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 	align-items: center;
 }
 
