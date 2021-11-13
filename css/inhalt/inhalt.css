@@ -36,12 +36,13 @@
 }
 
 #trennung {
-	width: 6vh;
+	width: 8vh;
 	height: 80vh;
 	top: 20vh;
 	position: sticky;
 	background: red;
 	transform: translateX(-50%);
+	margin-top: -32vh;
 }
 
 #inhalt {
