@@ -36,7 +36,9 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 }
 
 :root {
-	--seite-breite: 18rem;
+	/*--seite-breite: 18rem;*/
+	/*--seite-breite: calc(3.5/16 * 100vw);*/
+	--seite-breite: calc((100vw - 100vh) * 0.5);
 	--seite-padding-x: 2.4rem;
 	--seite-padding-y: 1rem;
 
