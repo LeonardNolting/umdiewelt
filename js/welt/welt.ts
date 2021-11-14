@@ -17,7 +17,7 @@ import texture from "../../img/earth.png"
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
 export default async () => {
-	const radius = 5
+	const radius = 6
 	const segments = 50
 	const atmosphaereScale = .95
 	const anfang = -Math.PI / 2 - .2
