@@ -65,6 +65,9 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--kreis-hoehe: var(--kreis-groesse);
 	--kreis-breite: calc(var(--kreis-groesse) + .8rem);
 	--kreis-dicke: 3.8rem;
+
+	/*--fakten-groesse: calc(var(--hoehe) / 3);*/
+	--fakten-groesse: var(--inhaltsverzeichnis-breite);
 }
 
 * {
