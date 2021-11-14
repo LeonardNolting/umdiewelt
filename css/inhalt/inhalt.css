@@ -21,7 +21,8 @@
 	background-color: white;
 	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
-	width: calc(100% - var(--inhaltsverzeichnis-breite));
+	/*width: calc(100% - var(--inhaltsverzeichnis-breite));*/
+	width: 100%;
 	/*box-shadow: 0 0 24px 2px #111, inset 0 12px 12px -8px grey;*/
 }
 
@@ -121,10 +122,17 @@
 }
 
 #slogan {
-	font-size: 2.2rem;
-	color: #222;
-	align-self: flex-start;
-	padding: 1rem 2rem;
+	position: sticky;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: var(--slogan-padding) var(--slogan-padding) 0 0;
+	color: #ddd;
+	font-size: var(--slogan-groesse);
+	z-index: 11;
+	-webkit-text-stroke: 2px black;
+	font-weight: 900;
+	letter-spacing: -1px;
 }
 
 #slogan span {
@@ -132,11 +140,13 @@
 }
 
 #slogan > span.fahrradweg {
-	color: #0d3349;
+	/*color: #0d3349;*/
+	color: #5b99d3;
 }
 
 #slogan > span.klimaschutz {
-	color: green;
+	/*color: green;*/
+	color: var(--primary);
 }
 
 #inhalt > h1:first-of-type {
