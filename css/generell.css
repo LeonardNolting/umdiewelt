@@ -12,7 +12,6 @@ body {
 
 	display: flex;
 	flex-direction: column;
-	--inhaltsverzeichnis-breite: 18rem;
 }
 
 html[data-progress] {
@@ -37,6 +36,7 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 }
 
 :root {
+	--inhaltsverzeichnis-breite: 18rem;
 	--ueberschrift-groesse: 3.2rem;
 	--slogan-groesse: 2.2rem;
 	--slogan-padding: 1rem;
@@ -59,6 +59,11 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--trennung-hoehe-min: 12vh;
 	--trennung-hoehe-normal: 20vh;
 	--trennung-hoehe-max: 72vh;
+
+	--kreis-groesse: calc(.78 * var(--inhaltsverzeichnis-breite));
+	--kreis-hoehe: var(--kreis-groesse);
+	--kreis-breite: calc(var(--kreis-groesse) + .8rem);
+	--kreis-dicke: 3.8rem;
 }
 
 * {
