@@ -38,13 +38,14 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 :root {
 	--inhaltsverzeichnis-breite: 18rem;
 	--ueberschrift-groesse: 3.2rem;
-	--slogan-groesse: 2.2rem;
+	--slogan-groesse: 2rem;
 	--slogan-padding: 1rem;
 	--padding: 2rem;
 	/*--hoehe: calc(100% - var(--ueberschrift-groesse) - var(--padding) - 20px)*/
 	/*--hoehe: 85vh;*/
 	/*--hoehe: 80vh;*/
-	--hoehe: calc(100vh - var(--slogan-groesse) - var(--slogan-padding));
+	/*--hoehe: calc(100vh - var(--slogan-groesse) - var(--slogan-padding));*/
+	--hoehe: 100vh;
 	--schrift-groesse: 1.4rem;
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
 

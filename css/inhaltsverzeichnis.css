@@ -30,9 +30,9 @@
 	left: 0;
 	border: var(--kreis-dicke) #ddd solid;
 	border-radius: 50%;
-	--translate: translate(-28%, -39%);
+	--translate: translate(-24%, -39%);
 	transform: var(--translate);
-	animation: drehen 10s infinite linear;
+	animation: drehen 12s infinite linear;
 }
 
 @keyframes drehen {
