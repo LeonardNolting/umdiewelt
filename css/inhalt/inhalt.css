@@ -10,6 +10,7 @@
 @import "./quellen.css";
 @import "./fusszeile.css";
 @import "./admin.css";
+@import "./verweis.css";
 
 #scrollable {
 	display: flex;
