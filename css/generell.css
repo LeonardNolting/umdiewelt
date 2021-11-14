@@ -44,7 +44,7 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 
 	--ueberschrift-groesse: 3.2rem;
 	--slogan-groesse: 2rem;
-	--slogan-padding: 1rem;
+	--slogan-padding: 1.6rem;
 	--padding: 2rem;
 	/*--hoehe: calc(100% - var(--ueberschrift-groesse) - var(--padding) - 20px)*/
 	/*--hoehe: 85vh;*/
@@ -66,10 +66,10 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--trennung-hoehe-normal: 20vh;
 	--trennung-hoehe-max: 72vh;
 
-	--kreis-groesse: calc(.78 * var(--seite-breite));
+	--kreis-groesse: calc(.7 * var(--seite-breite));
 	--kreis-hoehe: var(--kreis-groesse);
 	--kreis-breite: calc(var(--kreis-groesse) + .8rem);
-	--kreis-dicke: 3.8rem;
+	--kreis-dicke: calc(.24 * var(--kreis-groesse));
 }
 
 * {

@@ -123,13 +123,14 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	margin: 0;
-	padding: var(--slogan-padding) var(--slogan-padding) 0 calc(var(--slogan-padding) * 1.6 + var(--seite-breite));
+	margin: 0 0 0 var(--seite-breite);
+	padding: var(--slogan-padding) var(--slogan-padding) 0 var(--slogan-padding);
 	color: #ddd;
 	font-size: var(--slogan-groesse);
 	z-index: 1;
 	text-align: left;
 	pointer-events: none;
+	line-height: var(--slogan-groesse);
 }
 
 #slogan span {
