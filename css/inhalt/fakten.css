@@ -13,9 +13,9 @@
 }
 
 #fakten .fakt {
-	width: var(--fakten-groesse);
+	width: var(--seite-breite);
 	flex-grow: unset;
-	padding: 1.6rem;
+	padding: var(--seite-padding-y) var(--seite-padding-x);
 	align-items: center;
 	justify-content: center;
 	display: flex;

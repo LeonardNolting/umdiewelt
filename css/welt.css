@@ -3,7 +3,7 @@
 	max-height: 100vmin; /* Welt auf Portrait-Bildschirmen nicht breiter als maximale Breite */
 	/*width: 100%;*/
 	/*height: var(--hoehe);*/
-	width: calc(100vw - var(--inhaltsverzeichnis-breite) - var(--fakten-groesse));
+	width: calc(100vw - 2 * var(--seite-breite));
 	/*position: relative;*/
 	position: absolute;
 

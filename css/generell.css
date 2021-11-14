@@ -36,7 +36,10 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 }
 
 :root {
-	--inhaltsverzeichnis-breite: 18rem;
+	--seite-breite: 18rem;
+	--seite-padding-x: 2.4rem;
+	--seite-padding-y: 1rem;
+
 	--ueberschrift-groesse: 3.2rem;
 	--slogan-groesse: 2rem;
 	--slogan-padding: 1rem;
@@ -56,18 +59,15 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--container-padding: 1rem;
 	--container-max-width: 1000px;
 
-	--trennung-breite: 6vh;
-	--trennung-hoehe-min: 12vh;
+	--trennung-breite: 4vh;
+	--trennung-hoehe-min: 4vh;
 	--trennung-hoehe-normal: 20vh;
 	--trennung-hoehe-max: 72vh;
 
-	--kreis-groesse: calc(.78 * var(--inhaltsverzeichnis-breite));
+	--kreis-groesse: calc(.78 * var(--seite-breite));
 	--kreis-hoehe: var(--kreis-groesse);
 	--kreis-breite: calc(var(--kreis-groesse) + .8rem);
 	--kreis-dicke: 3.8rem;
-
-	/*--fakten-groesse: calc(var(--hoehe) / 3);*/
-	--fakten-groesse: var(--inhaltsverzeichnis-breite);
 }
 
 * {
