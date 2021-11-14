@@ -51,7 +51,10 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--container-padding: 1rem;
 	--container-max-width: 1000px;
 
-	--trennung-breite: 8vh;
+	--trennung-breite: 6vh;
+	--trennung-hoehe-min: 12vh;
+	--trennung-hoehe-normal: 20vh;
+	--trennung-hoehe-max: 72vh;
 }
 
 * {

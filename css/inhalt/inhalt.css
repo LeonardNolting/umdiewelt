@@ -40,11 +40,12 @@
 	transform: translateX(calc(1 / 2 * var(--trennung-breite))) skewY(12deg);
 	transform-origin: top left;
 	z-index: 11;
-	height: 80vh;
-	top: 20vh;
+	height: var(--trennung-hoehe-max);
+	/*top: 84vh;*/
+	top: calc(100vh - var(--trennung-hoehe-normal));
 	position: sticky;
 	background: var(--primary);
-	margin-top: -44vh;
+	margin-top: calc(-1 * var(--trennung-hoehe-min));
 	border: 2px white;
 	border-right: 0.4em solid #eee;
 	border-top: 0.4em solid #eee;
