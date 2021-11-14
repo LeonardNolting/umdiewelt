@@ -101,8 +101,8 @@
 	text-transform: uppercase;
 	color: white;
 	/* margin: 0 !important; */
-	top: 11%;
-	font-size: 6rem;
+	bottom: 16%;
+	font-size: 5rem;
 	font-weight: 900;
 	text-shadow: 0 2px 2px black;
 	display: flex;
