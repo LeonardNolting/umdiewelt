@@ -25,12 +25,26 @@
 	position: absolute;
 	z-index: 1;
 	height: calc(3 / 5 * var(--inhaltsverzeichnis-breite));
-	width: calc(3 / 5 * var(--inhaltsverzeichnis-breite));
+	width: calc(3 / 5 * var(--inhaltsverzeichnis-breite) + .8rem);
 	top: 0;
 	left: 0;
 	border: 3.2rem #ddd solid;
 	border-radius: 50%;
-	transform: translate(-28%, -39%);
+	--translate: translate(-28%, -39%);
+	transform: var(--translate);
+	animation: drehen 10s infinite linear;
+}
+
+@keyframes drehen {
+	0% {
+		transform: var(--translate) rotate(0deg);
+	}
+	50% {
+		transform: var(--translate) rotate(160deg);
+	}
+	100% {
+		transform: var(--translate) rotate(360deg);
+	}
 }
 
 #inhaltsverzeichnis li:not(:first-child) a {
