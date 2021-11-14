@@ -20,6 +20,19 @@
 	/*border-right-color: #111;*/
 }
 
+#inhaltsverzeichnis::before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	height: calc(3 / 4 * var(--inhaltsverzeichnis-breite));
+	width: calc(3 / 4 * var(--inhaltsverzeichnis-breite));
+	top: 0;
+	left: 0;
+	border: 4rem white solid;
+	border-radius: 50%;
+	transform: translate(-28%, -39%);
+}
+
 #inhaltsverzeichnis li:not(:first-child) a {
 	padding-top: calc(var(--gap) / 2);
 }

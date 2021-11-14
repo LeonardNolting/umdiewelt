@@ -83,19 +83,6 @@
 	user-select: none;
 }
 
-#willkommen::before {
-	content: "";
-	position: absolute;
-	z-index: 1;
-	height: 24vmin;
-	width: 24vmin;
-	bottom: 0;
-	left: 0;
-	border: 4rem white solid;
-	border-radius: 50%;
-	transform: translate(-28%, 39%);
-}
-
 #vorstellung {
 	display: flex;
 	flex-direction: column;
