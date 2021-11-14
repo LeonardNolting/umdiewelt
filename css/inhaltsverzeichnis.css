@@ -8,15 +8,16 @@
 	width: var(--inhaltsverzeichnis-breite);
 	/*align-items: center;*/
 	padding: 1rem 2.4rem;
-	background-color: #213844;
+	/*background-color: #213844;*/
+	background-color: black;
 	color: white;
 	margin-top: 0;
 	top: 0;
 	--gap: 1.2rem;
 	--font-size: 1.2rem;
 	--height: calc(var(--font-size) * var(--font-size));
-	border-right: var(--border);
-	border-right-color: #111;
+	/*border-right: var(--border);*/
+	/*border-right-color: #111;*/
 }
 
 #inhaltsverzeichnis li:not(:first-child) a {

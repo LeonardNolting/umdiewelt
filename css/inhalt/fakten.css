@@ -6,6 +6,10 @@
 	flex-direction: column;
 	margin-top: 0;
 	padding: 0;
+
+	/* temp */
+	color: #ddd;
+	opacity: 1;
 }
 
 #fakten .fakt {
