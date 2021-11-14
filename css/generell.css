@@ -65,6 +65,7 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	--trennung-hoehe-min: 4vh;
 	--trennung-hoehe-normal: 20vh;
 	--trennung-hoehe-max: 72vh;
+	--trennung-border-breite: .4rem;
 
 	--kreis-groesse: calc(.7 * var(--seite-breite));
 	--kreis-hoehe: var(--kreis-groesse);

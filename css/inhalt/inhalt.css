@@ -37,8 +37,8 @@
 
 #trennung {
 	width: var(--trennung-breite);
-	margin-left: calc(-1 * var(--trennung-breite) + var(--seite-breite));
-	transform: translateX(calc(1 / 2 * var(--trennung-breite))) skewY(12deg);
+	margin-left: calc(-1 * var(--trennung-breite) + var(--seite-breite) + var(--trennung-border-breite));
+	transform: translateX(calc(1 / 2 * var(--trennung-breite) - var(--trennung-border-breite))) skewY(12deg);
 	transform-origin: top left;
 	z-index: 11;
 	height: var(--trennung-hoehe-max);
@@ -48,8 +48,8 @@
 	background: var(--primary);
 	margin-top: calc(-1 * var(--trennung-hoehe-min));
 	border: 2px white;
-	border-right: 0.4em solid #eee;
-	border-top: 0.4em solid #eee;
+	border-right: var(--trennung-border-breite) solid #eee;
+	border-top: var(--trennung-border-breite) solid #eee;
 	/*box-shadow: 2px 0 6px -2px #222;*/
 	box-shadow: 0 2px 2px black;
 	/*border-top-left-radius: 147px;
