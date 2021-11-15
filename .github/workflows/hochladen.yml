@@ -27,5 +27,6 @@ jobs:
                     port: ${{ secrets.PORT }}
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
-                    source: "dist"
+                    source: "./dist/*"
                     target: ""
+                    strip_components: 1
