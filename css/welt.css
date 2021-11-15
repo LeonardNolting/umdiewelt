@@ -1,0 +1,17 @@
+#welt {
+	height: var(--hoehe);
+	max-height: 100vmin; /* Welt auf Portrait-Bildschirmen nicht breiter als maximale Breite */
+	/*width: 100%;*/
+	/*height: var(--hoehe);*/
+	width: calc(100vw - 2 * var(--seite-breite));
+	/*position: relative;*/
+	position: absolute;
+
+	/*background: center/contain no-repeat radial-gradient(circle at center, black 37%, transparent 63%)*/
+
+	cursor: grab;
+}
+
+body.moving * {
+	cursor: grabbing !important;
+}

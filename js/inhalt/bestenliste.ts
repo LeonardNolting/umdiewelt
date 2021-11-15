@@ -22,8 +22,8 @@ import images from "../../img/bicyclists/*.png";
 import {bestenlisteChunkGroesse, bestenlisteErsterChunkGroesse} from "../konfiguration";
 
 const anzeige = document.getElementById("bestenliste-anzeige") as HTMLUListElement
-const container = anzeige.parentElement as HTMLDivElement
-const mehrLadenKnopf = container.querySelector("button") as HTMLButtonElement
+const wrapper = anzeige.parentElement as HTMLDivElement
+const mehrLadenKnopf = wrapper.querySelector("button") as HTMLButtonElement
 
 const liste: { [fahrer: string]: Werte } = {}
 const sortieren = () => Object.entries(liste).sort(([, {strecke: a}], [, {strecke: b}]) => (b || 0) - (a || 0))
@@ -103,15 +103,15 @@ export default () => {
 			anzahlFahrerListener = onValue(ref(Datenbank.datenbank, "allgemein/saisons/details/" + laufend + "/anzahlFahrer"), snap => {
 				anzahlFahrer = snap.val() || 0
 				kannGeladenWerdenUeberpruefen()
-				if (anzahlFahrer === 0) container.classList.add("keine-teilnehmer")
+				if (anzahlFahrer === 0) wrapper.classList.add("keine-teilnehmer")
 			})
 
-			container.style.setProperty("--anzahl", bestenlisteErsterChunkGroesse.toString())
+			wrapper.style.setProperty("--anzahl", bestenlisteErsterChunkGroesse.toString())
 			anzeige.innerHTML = ""
-			container.classList.remove("versteckt")
+			wrapper.classList.remove("versteckt")
 			laden(bestenlisteErsterChunkGroesse)
 		} else {
-			container.classList.add("versteckt")
+			wrapper.classList.add("versteckt")
 		}
 	})
 

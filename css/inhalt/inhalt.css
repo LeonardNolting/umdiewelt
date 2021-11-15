@@ -10,17 +10,141 @@
 @import "./quellen.css";
 @import "./fusszeile.css";
 @import "./admin.css";
+@import "./verweis.css";
 
-#inhalt {
+#scrollable {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
 	position: relative;
 	z-index: 10;
 	background-color: white;
 	font-size: var(--schrift-groesse);
 	top: var(--hoehe);
+	/*width: calc(100% - var(--seite-breite));*/
 	width: 100%;
-	box-shadow: 0 0 24px 2px #111, inset 0 12px 12px -8px grey;
-	/*min-height: calc(100vh - var(--hoehe));*/
-	/*overflow-x: hidden;*/
+	/*box-shadow: 0 0 24px 2px #111, inset 0 12px 12px -8px grey;*/
+}
+
+#scrollable::before {
+	/*content: "";*/
+	position: sticky;
+	left: 0;
+	height: 100vh;
+	width: 2rem;
+	/*background: white;*/
+}
+
+#trennung {
+	width: var(--trennung-breite);
+	margin-left: calc(-1 * var(--trennung-breite) + var(--seite-breite) + var(--trennung-border-breite));
+	transform: translateX(calc(1 / 2 * var(--trennung-breite) - var(--trennung-border-breite))) skewY(12deg);
+	transform-origin: top left;
+	z-index: 11;
+	height: var(--trennung-hoehe-max);
+	/*top: 84vh;*/
+	top: calc(100vh - var(--trennung-hoehe-normal));
+	position: sticky;
+	background: var(--primary);
+	margin-top: calc(-1 * var(--trennung-hoehe-min));
+	border: 2px white;
+	border-right: var(--trennung-border-breite) solid #eee;
+	border-top: var(--trennung-border-breite) solid #eee;
+	/*box-shadow: 2px 0 6px -2px #222;*/
+	box-shadow: 0 2px 2px black;
+	/*border-top-left-radius: 147px;
+	border-top-left-radius: 115%;*/
+}
+
+#inhalt {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow-x: clip;
+	position: relative;
+}
+
+#inhalt .container {
+	padding-left: calc(var(--container-padding) + 1 / 2 * var(--trennung-breite) - var(--trennung-border-breite));
+}
+
+#willkommen {
+	display: flex;
+	position: fixed;
+	height: var(--hoehe);
+	width: calc(100vw - var(--seite-breite));
+	left: var(--seite-breite);
+
+	/*background: left/100% 100% no-repeat linear-gradient(45deg, #4b5865, transparent);*/
+	/*background: linear-gradient(14deg, #6a757a 0%, transparent 80%);*/
+	/*background: linear-gradient(9deg, #6a757a 0%, transparent 32%);*/
+	background: black;
+	user-select: none;
+}
+
+#vorstellung {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#name {
+	position: absolute;
+	z-index: 1;
+	pointer-events: none;
+	text-transform: uppercase;
+	color: white;
+	/* margin: 0 !important; */
+	bottom: 16%;
+	font-size: 5rem;
+	font-weight: 900;
+	text-shadow: 0 2px 2px black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#name::after {
+	content: "";
+	width: 106%;
+	height: 1.6rem;
+	background: var(--primary);
+	margin-top: -2.5rem;
+	z-index: -1;
+}
+
+#slogan {
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin: 0 0 0 var(--seite-breite);
+	padding: var(--slogan-padding) var(--slogan-padding) 0 var(--slogan-padding);
+	color: #ddd;
+	font-size: var(--slogan-groesse);
+	z-index: 1;
+	text-align: left;
+	pointer-events: none;
+	line-height: var(--slogan-groesse);
+}
+
+#slogan span {
+	font-size: 120%;
+}
+
+#slogan > span.fahrradweg {
+	/*color: #0d3349;*/
+	color: #5b99d3;
+}
+
+#slogan > span.klimaschutz {
+	/*color: green;*/
+	color: var(--primary);
 }
 
 #inhalt > h1:first-of-type {
@@ -46,13 +170,6 @@
 	display: none
 }*/
 
-h1 span#fahrradweg {
-	color: #0d3349;
-}
-
-h1 span#klimaschutz {
-	color: green;
-}
 
 #inhalt h2:first-of-type {
 	margin-top: 0

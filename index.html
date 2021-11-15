@@ -1,4 +1,5 @@
 <!doctype html>
+<!--suppress HtmlFormInputWithoutLabel -->
 <html class="no-js" lang="de">
 	<head>
 		<meta charset="utf-8">
@@ -15,6 +16,11 @@
 		<link rel="apple-touch-icon" href="icon.png">
 		<!-- Place favicon.ico in the root directory -->
 
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+		      rel="stylesheet">
+
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/main.css">
 
@@ -22,246 +28,271 @@
 	</head>
 
 	<body>
-		<div id="karte"></div>
+		<h2 id="slogan">
+			Auf dem <span class="fahrradweg">Fahr&shy;rad&shy;weg</span> zu mehr <span class="klimaschutz">Klima&shy;schutz</span>.
+		</h2>
 
-		<div id="mitwirken"></div>
-
-		<div id="inhalt">
-			<span id="runde">Runde </span>
-
-			<section id="browser-aktualisierung"></section>
-
-			<h1>Auf dem <span id="fahrradweg">Fahr&shy;rad&shy;weg</span> zu mehr <span id="klimaschutz">Klima&shy;schutz</span>.
-			</h1>
-
-			<a href="#fakten" id="fakten"></a>
-			<div id="fakten-anzeige" class="verspaetet">
-				<section class="fakten">
-					<data class="fakt" value="0" data-einheit="g" data-bezeichnung="gespart">
-						Ein&shy;ge&shy;spartes CO<sub>2</sub><a href="#quellen" class="sternchen">*</a>
-					</data>
-					<data class="fakt bigger" value="0" data-einheit="m" data-bezeichnung="strecke">
-						Zu&shy;rück&shy;ge&shy;legte Strecke
-					</data>
-					<data class="fakt" value="0" data-bezeichnung="fahrer">
-						Betei&shy;lig&shy;te jähr&shy;lich
-					</data>
-					<!--<data value="0" data-einheit="m" data-bezeichnung="durchschnitt">
-						Durchschnittlich gefahrene Strecke
-					</data>-->
-				</section>
-				<!--<div class="versteckt">
-					<div id="tageszeit-anzeige" class="verspaetet"></div>
-				</div>
-				<button class="leer allein" onclick="this.previousElementSibling.classList.remove('versteckt')">
-					Weitere Statistiken ▼
-				</button>-->
+		<div id="willkommen">
+			<div id="vorstellung">
+				<div id="welt"></div>
+				<h1 id="name">Um Die Welt</h1>
 			</div>
-
-			<div class="container">
-				<h2 class="verspaetet striche">
-					<span>🚀 Eine Ini&shy;ti&shy;a&shy;ti&shy;ve der Schüler&shy;innen und Schüler des <a href="https://gymnasium-hoechstadt.de">Gymnasium Höchstadt</a></span>
-				</h2>
+			<div id="fakten" class="fakten verspaetet">
+				<data class="fakt" value="0" data-einheit="g" data-bezeichnung="gespart">
+					<span>Ein&shy;ge&shy;spartes CO<sub>2</sub><a href="#quellen" class="sternchen">*</a></span>
+				</data>
+				<data class="fakt bigger" value="0" data-einheit="m" data-bezeichnung="strecke">
+					Zu&shy;rück&shy;ge&shy;legte Strecke
+				</data>
+				<data class="fakt" value="0" data-bezeichnung="fahrer">
+					Betei&shy;lig&shy;te jähr&shy;lich
+				</data>
 			</div>
+		</div>
 
-			<a href="#saison" id="saison"></a>
-			<div id="saisons-anzeige">
-				<ul id="saison-auswahl"></ul>
-				<div id="saisons"></div>
-				<!--<div id="saison-anzeige">
-					<div>
-						<p>
-							Du willst mit deiner Klasse auch teilnehmen?
-							<wbr>
-							Bitte fragt euren Klassenlehrer/eure Klassenlehrerin, ob er/sie mit Herrn Hipp Kontakt
-							aufnehmen kann.
-						</p>
-						<p>
-							In dieser Saison können nur Klassen der oben gezeigten Schulen teilnehmen.
-							<a href="#mitmachen">Mehr Informationen</a>
-						</p>
-					</div>
-				</div>-->
-				<!--<div id="schulen-anzeige" class="verspaetet">
-					<div class="schule" data-schule="Gymnasium Höchstadt">
-						<h3>Gymnasium Höchstadt</h3>
-						<ul class="jahre">
-							<li>2021</li>
-							<li>2020</li>
-							<li>2019</li>
-							<li>2018</li>
-							<li>2017</li>
-						</ul>
-						<button class="anfeuern">🔥 Anfeuern</button>
-						<em class="angefeuert">
-							<output>2</output>
-							x angefeuert</em>
+		<div id="scrollable">
+			<ul id="inhaltsverzeichnis">
+				<li><a href="#willkommen">Anzeige</a></li>
+				<li><a href="#ansprache">Unser Anliegen</a></li>
+				<li><a href="#ablauf">Wie funktioniert's?</a></li>
+				<li><a href="#faq">FAQ</a></li>
+				<!-- Wie kann ich mitmachen? Sind E-Bikes erlaubt? Ich möchte auch so helfen können. -->
+				<li><a href="#saison">Saisons</a></li>
+				<li><a href="#bestenliste">Bestenliste</a></li>
+				<li><a href="#quellen">Quellen</a></li>
 
-						&lt;!&ndash; TODO Fakten &ndash;&gt;
-						&lt;!&ndash; TODO km/möglicher Fahrer &ndash;&gt;
+				<li class="abseits"><a href="#feed">Feed</a></li>
 
-						<table class="klassen">
-							<tr>
-								<td>9D</td>
-								<td>312km</td>
-								<td>12</td>
-							</tr>
-							<tr>
-								<td>9D</td>
-								<td>312km</td>
-								<td>12</td>
-							</tr>
-							<tr>
-								<td>9D</td>
-								<td>312km</td>
-								<td>12</td>
-							</tr>
-							<tr>
-								<td>9D</td>
-								<td>312km</td>
-								<td>12</td>
-							</tr>
-							<tr>
-								<td>9D</td>
-								<td>312km</td>
-								<td>12</td>
-							</tr>
-						</table>
-					</div>
-				</div>-->
-			</div>
-
-			<div id="bestenliste-container" class="container versteckt">
-				<a href="#bestenliste" id="bestenliste"></a>
-				<h3>Aktivste Teilnehmer:</h3>
-				<ul id="bestenliste-anzeige"></ul>
-				<div class="keine-teilnehmer">
-					<span>Noch keine Teilnehmer! <a href="#mitmachen">Seien Sie der Erste.</a></span>
-				</div>
-				<button class="links leer" disabled>Mehr laden</button>
-			</div>
-
-			<!--<div class="container">
-				<h3><a id="feed" href="#feed">Feed:</a></h3>
-				<ul id="feed-anzeige" class="verspaetet"></ul>
-
-				&lt;!&ndash;<h3><a href="#bestenliste" id="bestenliste">Bestenliste:</a></h3>
-				<div id="bestenliste-anzeige" class="verspaetet">
-					<table></table>
-					<button class="leer allein versteckt">Mehr laden ▼</button>
-				</div>&ndash;&gt;
-
-				<div>&lt;!&ndash; Platzhalter &ndash;&gt;</div>
-			</div>-->
-			<figure>
-				<!--suppress HtmlUnknownAttribute -->
-				<img loading="lazy"
-				     src="https://gymnasium-hoechstadt.de/images/Aktuelles/Abiturfeier_2020.jpg"
-				     alt="" />
-			</figure>
-			<div class="container">
-				<h3><a href="#ansprache" id="ansprache">Sehr geehrte Leserinnen und Leser,</a></h3>
-				<p id="ansprache-anzeige" class="verspaetet">
-					Im Rahmen des P-Seminars ...
-					<br>
-					Danke an alle Beteiligten!
-				</p>
-			</div>
-			<a href="#fahrer" id="fahrer"></a>
-			<ul id="fahrer-anzeige" class="horizontal">
-				<li>Leonard Nolting</li>
-				<li>Thomas Nolting</li>
-				<li>Noch Jemand</li>
-				<li>Und Nochjemand</li>
+				<li id="eintragen" class="abseits"><a href="#eintragen"></a></li>
 			</ul>
-			<div class="container">
-				<h3><a href="#mitmachen" id="mitmachen">Mitmachen:</a></h3>
-				<div id="mitmachen-anzeige" class="verspaetet">
-					<a href="#eintragen">Ich habe schon ein Passwort.</a>
-					<h4><a id="warum-brauche-ich-ein-passwort" href="#warum-brauche-ich-ein-passwort">Warum brauche ich
-						ein Passwort?</a></h4>
-					<!-- TODO-->
-					<p>Um Missbrauch vorzubeugen, möchten wir nur uns bekannten Partnern nach individueller Rücksprache
-						ein Mitwirken an
-						unserem Ziel erlauben.</p>
-					<h4><a id="wie-erhalte-ich-ein-passwort" href="#wie-erhalte-ich-ein-passwort">Wie erhalte ich ein
-						Passwort?</a></h4>
-					<p>Bitte nehmen Sie
-						<a href="mailto:hip@gy-ho.de?subject=Um%20Die%20Welt:%20Mitmachen">Kontakt</a>
-						mit uns auf.</p>
+			<div id="trennung"></div>
+			<div id="inhalt">
+				<section id="browser-aktualisierung"></section>
+
+				<div class="container max">
+					<div id="ansprache">
+						<h3>Hallo Fahrradfahrer!</h3>
+						<p></p>
+						<p>"Um Die Welt" ist damit das Dritte in einer Reihe von Projekten rund ums Thema Fahrrad fahren
+							und
+							Umweltschutz. <!-- TODO Link zu Zeitungsartikel einfügen -->Zuvor haben wir mit unseren
+							ersten
+							Projekten "Sternfahrten" und "Fridays for Fahrrad - Bergwacht" für ... gesorgt. Wir hoffen,
+							mit
+							eurer Hilfe auch dieses Projekt einen Erfolg werden zu lassen!</p>
+						<h4>So nimmst du teil</h4>
+						<p>Du hast bereits von uns <!-- TODO uns oder Klassenlehrer? --> deine Anmeldedaten mitgeteilt
+							bekommen und kannst dich somit hier <!-- TODO link -->
+							<a href="#eintragen">anmelden</a>.</p>
+						<p>Weißt du deine Daten nicht mehr, frage ... <!-- TODO Klassenlehrer fragen? oder was?--></p>
+						<p>Hast du dich angemeldet, musst du nur noch fleißig in die Pedale treten. Das Eintragen von
+							Strecken ist ganz einfach:
+							<a href="">Lass uns dir zeigen, wie es geht.</a> <!-- TODO Wie? Video? --></p>
+						<h4>Jeder kann helfen</h4>
+						<p>Auch wenn du nicht direkt Kilometer sammeln kannst, ist deine Unterstützung wertvoll.</p>
+						<p>Unsere Sponsoren ermöglichen es uns,
+							<!-- TODO was? Geld in guten Händen, ... alles guter Zweck ...? -->. Ihre Hilfe gibt uns
+							zusätzliche Motivation.</p>
+						<p>Wir freuen uns über finanzielle Unterstützung in jeder Höhe. ... typisch 1€/gefahrener
+							Kilometer
+							beitragen als Elternteil / was auch immer ...
+							<!-- TODO private Unterstützung ausarbeiten --></p>
+						<p>Hilf uns auch, indem du anderen von unserem Vorhaben erzählst. Je mehr aufmerksam wir
+							erreichen,
+							auf desto mehr Sponsoren dürfen wir hoffen</p>
+						<p>- anderen erzählen, - spenden, - sponsern (auch Großeltern, ...), - selber mit dem Fahrrad
+							fahren?, - selber umweltfreundlicher verhalten?</p>
+
+
+						<p>Umwelt problematisch</p>
+						<p>viele Wege</p>
+						<p>möchten zeigen, dass jeder helfen kann</p>
+						<p>haben schon <a href="https://gymnasium-hoechstadt.de">andere Aktionen
+							<!-- TODO tooltip "Am ... initiierte das GH die Sternfahrten *Bild* --></a> gestartet</p>
+						<p>neu: laden alle Schüler der [dynamisch: Schulen] ein, möglichst viele Strecken mit dem
+							Fahrrad
+							zurückzulegen!</p>
+						<p>Natürlich auch Spaß und Zusammenhalt und Schulfamilie und alles ...</p>
+						<p>Erfahren Sie, <a href="#ablauf">wie's funktioniert</a> und was wir dadurch erreichen.</p>
+						<p>Danke an alle Beteiligten!</p>
+					</div>
+				</div>
+				<ul id="fahrer" class="horizontal">
+					<li>Leonard Nolting</li>
+					<li>Thomas Nolting</li>
+					<li>Noch Jemand</li>
+					<li>Und Nochjemand</li>
+				</ul>
+				<figure>
+					<!--				<figcaption>Ihr P-Seminar *Name*</figcaption>-->
+					<!--suppress HtmlUnknownAttribute -->
+					<img loading="lazy"
+					     src="./img/Gruppe.svg"
+					     alt="" />
+				</figure>
+				<div class="container max">
+					<div id="ablauf">
+						<h3>Wie's funktioniert:</h3>
+						<div class="schritt">
+							<p>"Mark" fährt heute mit dem Fahrrad zur Schule.</p>
+						</div>
+						<div class="schritt">
+							<p>Dort angekommen trägt er seine Strecke in die Website ein.</p>
+							<p class="hinweis">
+								Zur Aufrechterhaltung der Fairness werden besonders lange Strecken überprüft.
+							</p>
+						</div>
+						<div class="schritt">
+							<p>Für jeden eingetragenen Kilometer spendet uns die Sparkasse 1 Cent 💸</p>
+						</div>
+						<div class="schritt">
+							<p>Zum Saisonende wird das gesammelte Geld an ... gespendet</p>
+							<p>Dort können sich dann Kinder Fahrräder kaufen.</p>
+							<p>So können wir momentan schon x Fahrräder finanzieren!</p>
+							<p>Und ganz nebenbei haben wir dem Klimawandel entgegengewirkt.</p>
+						</div>
+						<div class="fazit">
+							<p>Es lohnt sich also jede eingetragene Strecke!</p>
+							<p><a href="#mitmachen">Erfahre, wie auch DU helfen kannst.</a></p>
+						</div>
+					</div>
+
+					<div id="faq">
+						<details>
+							<summary>Wie kann ich mitmachen?</summary>
+							<p></p>
+						</details>
+						<details>
+							<summary>Ich kann nicht mitmachen, möchte aber auch so helfen können.</summary>
+							<p></p>
+						</details>
+						<details>
+							<summary>Sind E-Bikes erlaubt?</summary>
+							<p></p>
+						</details>
+						<details>
+							<summary>Wie wird mein Kind im Straßenverkehr geschützt?</summary>
+							<p>Anders als bei unseren vorigen Aktionen, ist diese dezentral organisiert, weshalb keine
+								besondere Aufsicht seitens der Schule geplant ist.</p>
+							<p>Wir empfehlen allerdings dringend, dass Sie sich und ihr Kind mit den
+								<a href="https://www.xn--polizeifrdich-3ob.de/deine-themen/verkehr/fahrradfahrer/">Sicherheitsempfehlungen
+									der Polizei</a> vertraut machen.</p>
+						</details>
+						<details>
+							<summary>Kann man nicht ganz einfach schummeln?</summary>
+							<p>... Goodwill ... keine Gewinne ... zufällige Überprüfungen ... besonders lange Strecken
+								werden überprüft ... Ausschluss bei Schummelversuchen? ...</p>
+						</details>
+					</div>
 				</div>
 
-				<!-- TODO-->
-				<h3><a>Wussten Sie schon...? 🤯</a></h3>
-				<p class="verspaetet">Fahrradfahren ist gut.</p>
-
-				<h3><a href="#fakten" class="sternchen">*</a><a href="#quellen" id="quellen">Quellen:</a></h3>
-				<ul id="quellen-anzeige" class="verspaetet"></ul>
-
-				<h3><a href="#bildquellen" id="bildquellen">Bildquellen:</a></h3>
-				<div id="bildquellen-anzeige" class="verspaetet">
-					<p>
-						Fahrrad-Icons erstellt von
-						<a href="https://www.freepik.com" title="Freepik">Freepik</a>,
-						<a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a>,
-						<a href="" title="ultimatearm">ultimatearm</a> und
-						<a href="" title="Skyclick">Skyclick</a>
-						bereitgestellt auf <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
-					</p>
-					<p>
-						Restliche Icons erstellt von
-						<a href="https://www.freepik.com" title="Freepik">Freepik</a> und
-						<a href="https://www.flaticon.com/authors/dighital" title="Dighital">Dighital</a>
-						bereitgestellt auf <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-					</p>
+				<div id="saisons-wrapper">
+					<a href="#saison" id="saison"></a>
+					<ul id="saison-auswahl"></ul>
+					<div id="saisons"></div>
 				</div>
 
-				<hr class="admin-exklusive" />
-				<a href="#admin" id="admin"></a>
-				<form id="admin-anzeige" class="verspaetet admin-exklusive">
-					<fieldset disabled>
-						<button name="neue-saison">Neue Saison anlegen</button>
-						<button name="neue-klasse">Klasse eintragen</button>
-						<button name="saisonstart">Saisonstart festlegen/verändern</button>
-						<button name="saisonende">Saisonende festlegen/verändern</button>
-						<button name="saison-loeschen">Aktuelle Saison löschen</button>
-						<button name="strecke-loeschen">Eine Strecke löschen</button>
-						<button name="testnachricht">Testnachricht senden</button>
-						<button name="neue-schule">Schule hinzufügen</button>
-					</fieldset>
-				</form>
+				<div id="bestenliste-wrapper" class="container max versteckt">
+					<p id="feed-hinweis" class="wussten-sie-schon">
+						Im <a href="#feed">Feed</a> sehen Sie alle Aktivitäten auf dieser Seite.
+					</p>
+					<h3><a href="#bestenliste" id="bestenliste">Aktivste Teilnehmer:</a></h3>
+					<ul id="bestenliste-anzeige"></ul>
+					<div class="keine-teilnehmer">
+						<span>Noch keine Teilnehmer! <a href="#mitmachen">Seien Sie der Erste.</a></span>
+					</div>
+					<button class="links leer" disabled>Mehr laden</button>
+				</div>
+				<div id="bestenliste-kurve"></div>
 
-				<hr />
+				<p id="verweis" class="safe">Sehen Sie sich <a href="https://gymnasium-hoechstadt.de/schule/aktuelles/"
+				                                               target="_blank">weitere
+					Projekte</a> des Gymnasium
+					Höchstadt an.</p>
 
-				<a href="#fusszeile" id="fusszeile"></a>
-				<div id="fusszeile-anzeige">
-					<p id="copyright">&copy; 2021 Leonard Nolting</p>
-					<ul id="links" class="horizontal">
-						<li id="cookies">Cookies</li>
-						<li id="kontakt">
-							<a href="mailto:hip@gy-ho.de?subject=Um%20Die%20Welt:%20">Kontakt</a>
-						</li>
-						<li id="github">
-							<a href="https://github.com/LeonardNolting/umdiewelt">Quellcode</a>
-						</li>
-						<li id="impressum">
-							<a href="impressum.html">Impressum</a>
-						</li>
-						<li id="datenschutzerklaerung">
-							<a href="datenschutzerklaerung.html">Datenschutz</a>
-						</li>
-						<li id="admin-anmelden" class="nicht-admin-exklusive">
-							<button>Admin</button>
-						</li>
-						<li id="admin-abmelden" class="admin-exklusive">
-							<button>Abmelden</button>
-						</li>
-					</ul>
+				<div class="container">
+					<hr class="admin-exklusive" />
+					<a href="#admin" id="admin"></a>
+					<form id="admin-anzeige" class="verspaetet admin-exklusive">
+						<fieldset disabled>
+							<button name="neue-saison">Neue Saison anlegen</button>
+							<button name="neue-klasse">Klasse eintragen</button>
+							<button name="saisonstart">Saisonstart festlegen/verändern</button>
+							<button name="saisonende">Saisonende festlegen/verändern</button>
+							<button name="saison-loeschen">Aktuelle Saison löschen</button>
+							<button name="strecke-loeschen">Eine Strecke löschen</button>
+							<button name="testnachricht">Testnachricht senden</button>
+							<button name="neue-schule">Schule hinzufügen</button>
+						</fieldset>
+					</form>
+
+					<hr />
+
+					<div id="fusszeile">
+						<p id="copyright">&copy; 2021 Leonard Nolting</p>
+						<ul id="links" class="horizontal">
+							<li id="quellen">Quellen</li>
+							<li id="cookies">Cookies</li>
+							<li id="kontakt">
+								<a href="mailto:hip@gy-ho.de?subject=Um%20Die%20Welt:%20">Kontakt</a>
+							</li>
+							<li id="github">
+								<a href="https://github.com/LeonardNolting/umdiewelt">Quellcode</a>
+							</li>
+							<li id="impressum">
+								<a href="impressum.html">Impressum</a>
+							</li>
+							<li id="datenschutzerklaerung">
+								<a href="datenschutzerklaerung.html">Datenschutz</a>
+							</li>
+							<li id="admin-anmelden" class="nicht-admin-exklusive">
+								<button>Admin</button>
+							</li>
+							<li id="admin-abmelden" class="admin-exklusive">
+								<button>Abmelden</button>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div id="popups">
+			<!-- Quellen -->
+			<div id="popup-quellen">
+				<div class="container">
+					<h3>Quellen</h3>
+					<ul id="quellen-anzeige"></ul>
+
+					<h3>Bilder</h3>
+					<div id="bildquellen-anzeige">
+						<p>
+							Fahrrad-Icons erstellt von
+							<a href="https://www.freepik.com" title="Freepik">Freepik</a>,
+							<a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a>,
+							<a href="" title="ultimatearm">ultimatearm</a> und
+							<a href="" title="Skyclick">Skyclick</a>
+							bereitgestellt auf <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
+						</p>
+						<p>
+							Restliche Icons erstellt von
+							<a href="https://www.freepik.com" title="Freepik">Freepik</a> und
+							<a href="https://www.flaticon.com/authors/dighital" title="Dighital">Dighital</a>
+							bereitgestellt auf <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+						</p>
+						<p>
+							Bild der Erde von
+							<a href="https://visibleearth.nasa.gov/images/73751/july-blue-marble-next-generation-w-topography-and-bathymetry/73753l">
+								Reto Stöckli, NASA Earth Observatory
+							</a> (Juli)
+						</p>
+					</div>
+				</div>
+				<div class="buttons">
+					<button id="popup-quellen-fertig" title="Fertig gelesen">Zurück</button>
+				</div>
+			</div>
+
 			<!-- Admin -->
 			<!-- Strecke löschen -->
 			<form id="popup-admin-strecke-loeschen">
@@ -498,7 +529,7 @@
 					<label for="eintragen-authentifizierung-angemeldet-bleiben-checkbox">Angemeldet bleiben</label>
 				</div>
 
-				<a class="hinweis" href="#warum-brauche-ich-ein-passwort">Warum benötige ich ein Passwort?</a>
+				<a class="hinweis" href="#faq">Warum benötige ich ein Passwort?</a>
 			</form>
 
 			<form id="popup-eintragen-name" data-schritt="1">

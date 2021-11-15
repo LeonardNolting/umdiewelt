@@ -19,7 +19,15 @@
 	user-select: none;
 }
 
-#saison-auswahl::before {
+ul#saison-auswahl::before {
+	content: "Saisons:";
+	position: absolute;
+	left: var(--padding);
+	font-weight: bold;
+	font-size: 1.8rem;
+}
+
+#saison-auswahl::after {
 	content: "";
 	display: flex;
 	width: var(--width);
