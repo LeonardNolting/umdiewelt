@@ -20,7 +20,7 @@
 }
 
 #bestenliste-kurve {
-	transform: translateX(calc(1 / 2 * var(--trennung-breite)));
+	transform: translateX(calc(1 / 2 * var(--trennung-breite) - var(--trennung-border-breite)));
 	z-index: 2;
 	pointer-events: none;
 	min-width: 3rem;

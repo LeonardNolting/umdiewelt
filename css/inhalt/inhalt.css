@@ -66,7 +66,7 @@
 }
 
 #inhalt .container {
-	padding-left: calc(var(--container-padding) + 1 / 2 * var(--trennung-breite));
+	padding-left: calc(var(--container-padding) + 1 / 2 * var(--trennung-breite) - var(--trennung-border-breite));
 }
 
 #willkommen {
