@@ -47,11 +47,11 @@
 	}
 }
 
-#inhaltsverzeichnis li:not(:first-child) a {
+#inhaltsverzeichnis li:not(:first-child) a, #inhaltsverzeichnis li#eintragen:not(:first-child) {
 	padding-top: calc(var(--gap) / 2);
 }
 
-#inhaltsverzeichnis li:not(:last-child) a {
+#inhaltsverzeichnis li:not(:last-child) a, #inhaltsverzeichnis li#eintragen:not(:last-child) {
 	padding-bottom: calc(var(--gap) / 2);
 }
 
@@ -73,6 +73,6 @@
 	text-decoration: none;
 }
 
-#inhaltsverzeichnis li.abseits a {
+#inhaltsverzeichnis li.abseits a, #inhaltsverzeichnis li#eintragen.abseits {
 	padding-top: 2rem;
 }
