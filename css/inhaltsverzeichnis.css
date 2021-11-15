@@ -1,0 +1,78 @@
+#inhaltsverzeichnis {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100vh;
+	position: fixed;
+	z-index: 10;
+	width: var(--seite-breite);
+	/*align-items: center;*/
+	padding: var(--seite-padding-y) var(--seite-padding-x);
+	/*background-color: #213844;*/
+	background-color: #000;
+	color: #ddd;
+	margin-top: 0;
+	top: 0;
+	--gap: 1.2rem;
+	--font-size: 1.2rem;
+	--height: calc(var(--font-size) * var(--font-size));
+	/*border-right: var(--border);*/
+	/*border-right-color: #111;*/
+}
+
+#inhaltsverzeichnis::before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	height: var(--kreis-hoehe);
+	width: var(--kreis-breite);
+	top: 0;
+	left: 0;
+	border: var(--kreis-dicke) #ddd solid;
+	border-radius: 50%;
+	--translate: translate(-24%, -39%);
+	transform: var(--translate);
+	animation: drehen 12s infinite linear;
+}
+
+@keyframes drehen {
+	0% {
+		transform: var(--translate) rotate(0deg);
+	}
+	50% {
+		transform: var(--translate) rotate(160deg);
+	}
+	100% {
+		transform: var(--translate) rotate(360deg);
+	}
+}
+
+#inhaltsverzeichnis li:not(:first-child) a, #inhaltsverzeichnis li#eintragen:not(:first-child) {
+	padding-top: calc(var(--gap) / 2);
+}
+
+#inhaltsverzeichnis li:not(:last-child) a, #inhaltsverzeichnis li#eintragen:not(:last-child) {
+	padding-bottom: calc(var(--gap) / 2);
+}
+
+#inhaltsverzeichnis li {
+	list-style: none;
+	/*padding: .4rem;*/
+	font-size: var(--font-size);
+	height: var(--height);
+	display: flex;
+	align-items: center
+}
+
+#inhaltsverzeichnis li:hover a {
+	color: var(--primary);
+}
+
+#inhaltsverzeichnis li a {
+	color: white;
+	text-decoration: none;
+}
+
+#inhaltsverzeichnis li.abseits a, #inhaltsverzeichnis li#eintragen.abseits {
+	padding-top: 2rem;
+}

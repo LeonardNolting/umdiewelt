@@ -1,6 +1,6 @@
 html, body {
 	min-height: 100%;
-	--font-family: Georgia, serif;
+	--font-family: Montserrat, sans-serif;
 	font-family: var(--font-family);
 	--grund-schrift-groesse: calc(.8vmin + 8px);
 	font-size: var(--grund-schrift-groesse);
@@ -36,32 +36,60 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 }
 
 :root {
+	/*--seite-breite: 18rem;*/
+	/*--seite-breite: calc(3.5/16 * 100vw);*/
+	--seite-breite: clamp(17rem, calc((100vw - var(--hoehe)) * 0.5), 22rem);
+	--seite-padding-x: 2.4rem;
+	--seite-padding-y: 1rem;
+
 	--ueberschrift-groesse: 3.2rem;
+	--slogan-groesse: 2rem;
+	--slogan-padding: 1.6rem;
 	--padding: 2rem;
 	/*--hoehe: calc(100% - var(--ueberschrift-groesse) - var(--padding) - 20px)*/
-	--hoehe: 60vh;
+	/*--hoehe: 85vh;*/
+	/*--hoehe: 80vh;*/
+	/*--hoehe: calc(100vh - var(--slogan-groesse) - var(--slogan-padding));*/
+	--hoehe: 90vh;
 	--schrift-groesse: 1.4rem;
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
+
+	--primary: rgb(194, 220, 98);
 	--link-farbe: dodgerblue;
+	--border: .3rem solid #222;
+
+	--container-padding: 1rem;
+	--container-max-width: 1000px;
+
+	--trennung-breite: 4vh;
+	--trennung-hoehe-min: 4vh;
+	--trennung-hoehe-normal: 20vh;
+	--trennung-hoehe-max: 72vh;
+	--trennung-border-breite: .4rem;
+
+	--kreis-groesse: calc(.7 * var(--seite-breite));
+	--kreis-hoehe: var(--kreis-groesse);
+	--kreis-breite: calc(var(--kreis-groesse) + .8rem);
+	--kreis-dicke: calc(.24 * var(--kreis-groesse));
 }
 
 * {
 	box-sizing: border-box;
 }
 
-#karte {
-	height: var(--hoehe);
-	width: 100%;
-	position: fixed !important;
-}
-
 .container {
 	/*max-width: 70%;*/
 	/*min-width: 600px;*/
-	--container-padding: 1rem;
-	max-width: 1000px;
-	margin: 0 auto;
+	max-width: var(--container-max-width);
+}
+
+.container, .safe {
 	padding: 0 var(--container-padding);
+	margin: 0 auto;
+}
+
+.container.max {
+	/*width: var(--container-max-width);*/
 }
 
 a {

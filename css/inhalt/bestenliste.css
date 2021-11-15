@@ -1,4 +1,4 @@
-#bestenliste-container {
+#bestenliste-wrapper {
 	--gap-vertical: .2rem;
 	--gap-track-inhalt-max: 2.6rem;
 	--gap-track-inhalt: 2.4rem;
@@ -15,35 +15,69 @@
 	--große-box-margin-left: calc(1 * var(--rang-breite-max) * 1.4);
 	--transition-dauer: .4s;
 	position: relative;
+	max-width: 100%;
+	overflow-y: clip;
 }
 
-#bestenliste-container.versteckt {
+#bestenliste-kurve {
+	transform: translateX(calc(1 / 2 * var(--trennung-breite) - var(--trennung-border-breite)));
+	z-index: 2;
+	pointer-events: none;
+	min-width: 3rem;
+	height: 13.33333vw;
+	margin-top: -13.33333vw;
+	min-height: 1rem;
+	background-image: url('data:image/svg+xml;utf8,<svg viewBox= "0 0 48 16" xmlns= "http://www.w3.org/2000/svg" ><path d= "m 0,0 v 16 h 48 c -23,0 -48,0 -48,-16 z" style= "stroke:none;fill:white;" /></svg>');
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 100%;
+}
+
+#bestenliste-wrapper.versteckt {
 	display: none;
 }
 
-#bestenliste-container > h3, #bestenliste-container > button, #bestenliste-container > .keine-teilnehmer {
+#bestenliste-wrapper > .wussten-sie-schon {
+	margin-left: var(--große-box-margin-left);
+	/*z-index: -1;*/
+	background: none;
+	position: relative;
+}
+
+#bestenliste-wrapper > .wussten-sie-schon::after {
+	content: "";
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
+	z-index: -1;
+	background: var(--background);
+}
+
+#bestenliste-wrapper > h3, #bestenliste-wrapper > button, #bestenliste-wrapper > .keine-teilnehmer {
 	--padding: 1.4rem;
 	/*z-index: 1;*/
 	/*position: relative;*/
 	margin: 0 0 0 calc(var(--große-box-margin-left) + 1.6rem) !important;
 }
 
-#bestenliste-container > h3 {
+#bestenliste-wrapper > h3 {
 	padding: var(--padding) 0 calc(var(--padding) - .8rem) 0;
 	font-size: 1.8rem;
 }
 
-#bestenliste-container > h3 a::before {
+#bestenliste-wrapper > h3 > a::before {
 	display: none;
 }
 
-#bestenliste-container > button {
+#bestenliste-wrapper > button {
 	--padding: 1.4rem;
 	padding: calc(var(--padding) - .6rem) 0 var(--padding) 0;
 	font-size: 1.3rem;
 }
 
-#bestenliste-container.keine-teilnehmer #bestenliste-anzeige, #bestenliste-container:not(.keine-teilnehmer) .keine-teilnehmer {
+#bestenliste-wrapper.keine-teilnehmer #bestenliste-anzeige, #bestenliste-wrapper:not(.keine-teilnehmer) .keine-teilnehmer {
 	display: none;
 }
 
@@ -59,7 +93,7 @@
 	cursor: default;
 }
 
-#bestenliste-container::before, #bestenliste-anzeige::after {
+#bestenliste-wrapper::before, #bestenliste-anzeige::after {
 	content: "";
 	position: absolute;
 	width: 100vw;
@@ -71,7 +105,7 @@
 	background-position: 100% 100%;
 }
 
-#bestenliste-container::before {
+#bestenliste-wrapper::before {
 	--background: #c2cdd8;
 	--background2: #acb9c4;
 	background-image: linear-gradient(-45deg, var(--background2), var(--background2) 50%, var(--background) 50%, var(--background));
@@ -119,6 +153,8 @@
 	--background: #555;
 	--background-lighter: #656565;
 	--background-darker: #242424;
+
+	--url: rgba(0, 0, 0, 0);
 }
 
 /*
@@ -210,10 +246,7 @@ Fahrrad-Icon
 	transition-duration: var(--transition-dauer);
 	transition-property: width, margin-left;
 
-	background-image: var(--url);
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+	background: center / contain no-repeat var(--url);
 }
 
 /*

@@ -6,8 +6,8 @@ import {ladeFakt} from "../inhalt/fakten";
 import m from "../formatierung/einheit/m";
 import kg from "../formatierung/einheit/kg";
 import co2 from "../co2";
-import aktualisieren from "../aktualisieren";
 import bestenliste from "../inhalt/bestenliste";
+import {aktualisieren} from "../welt/welt";
 
 export namespace Datenbank {
 	export let datenbank: Database

@@ -1,0 +1,22 @@
+#inhaltsverzeichnis li#eintragen {
+	cursor: pointer;
+	display: inline-block;
+	margin-right: auto;
+}
+
+#eintragen::before {
+	content: "🚴‍♀️ Strecke eintragen";
+}
+
+#eintragen[data-text]::before {
+	content: attr(data-text);
+}
+
+#eintragen::after {
+	content: "";
+	width: 100%;
+	height: 1px;
+	background: currentColor;
+	display: block;
+	margin-top: 2px;
+}

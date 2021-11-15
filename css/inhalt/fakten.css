@@ -1,10 +1,28 @@
-#fakten-anzeige {
-	margin-top: 0.8rem;
+#fakten {
 	position: relative;
-	overflow: hidden;
+	/*overflow: hidden;*/
+	height: 100%;
+	/*display: flex;*/
+	flex-direction: column;
+	margin-top: 0;
+	padding: 0;
+
+	/* temp */
+	color: #ddd;
+	opacity: 1;
 }
 
-#fakten-anzeige::before {
+#fakten .fakt {
+	width: var(--seite-breite);
+	flex-grow: unset;
+	padding: var(--seite-padding-y) var(--seite-padding-x);
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+/*#fakten::before {
 	position: absolute;
 	--border-width: 4px;
 	width: calc(100% + var(--border-width) * 2);
@@ -19,4 +37,4 @@
 	transform: translateX(calc(-1 * var(--border-width))) translateY(-100%);
 	margin-top: 2.2rem;
 	background: white;
-}
+}*/

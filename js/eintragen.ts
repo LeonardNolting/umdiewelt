@@ -11,7 +11,7 @@ import load from "./load";
 import Cookies from "./cookies";
 import m from "./formatierung/einheit/m";
 import zahl from "./formatierung/zahl";
-import {mitwirkenTextSetzen} from "./inhalt/mitwirken";
+import {eintragenTextSetzen} from "./inhalt/eintragen";
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
@@ -134,7 +134,6 @@ const popups = {
 		}
 	}, (eintragung, element) => {
 		const input = element["name"] as HTMLInputElement
-		const datalist = input.list
 		const nachrichtAnpassen = async () => {
 			const name = input.value
 			const [nachricht, reaktion] = name ? (
@@ -342,7 +341,7 @@ export class Eintragung {
 			popup.querySelector(".strecke").textContent = roh + meter.einheit
 		}
 
-		mitwirkenTextSetzen(this.name)
+		eintragenTextSetzen(this.name)
 	}
 
 	optionSetzen(option: "direkt" | "berechnen" | undefined) {
@@ -416,7 +415,7 @@ export class Eintragung {
 		const fahrerAusCookie = this.fahrerAusCookie;
 		if (fahrerAusCookie) {
 			const {name} = await datenVonFahrerBekommen(fahrerAusCookie)
-			mitwirkenTextSetzen(name)
+			eintragenTextSetzen(name)
 		}
 	}
 }
