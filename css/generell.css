@@ -38,7 +38,7 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 :root {
 	/*--seite-breite: 18rem;*/
 	/*--seite-breite: calc(3.5/16 * 100vw);*/
-	--seite-breite: calc((100vw - 100vh) * 0.5);
+	--seite-breite: clamp(17rem, calc((100vw - var(--hoehe)) * 0.5), 22rem);
 	--seite-padding-x: 2.4rem;
 	--seite-padding-y: 1rem;
 
@@ -50,7 +50,7 @@ html[data-wait] [data-wait-immune] [onclick], html[data-wait] [data-wait-immune]
 	/*--hoehe: 85vh;*/
 	/*--hoehe: 80vh;*/
 	/*--hoehe: calc(100vh - var(--slogan-groesse) - var(--slogan-padding));*/
-	--hoehe: 100vh;
+	--hoehe: 90vh;
 	--schrift-groesse: 1.4rem;
 	/*--schrift-groesse: calc(1vw * 0.4rem / 100);*/
 
