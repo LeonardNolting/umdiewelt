@@ -19,7 +19,7 @@ import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 export default async () => {
 	const radius = 6
 	const segments = 50
-	const atmosphaereScale = .95
+	const atmosphaereScale = 1.02
 	const anfang = -Math.PI / 2 - .2
 	const wegFarbe = 0xffffff;
 	const wegBreite = 8;
