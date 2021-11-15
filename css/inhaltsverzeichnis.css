@@ -73,6 +73,6 @@
 	text-decoration: none;
 }
 
-#inhaltsverzeichnis li.abseits {
-	--gap: 3.6rem;
+#inhaltsverzeichnis li.abseits a {
+	padding-top: 2rem;
 }
