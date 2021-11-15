@@ -8,4 +8,10 @@
 	position: absolute;
 
 	/*background: center/contain no-repeat radial-gradient(circle at center, black 37%, transparent 63%)*/
+
+	cursor: grab;
+}
+
+body.moving * {
+	cursor: grabbing !important;
 }

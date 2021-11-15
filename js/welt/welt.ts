@@ -171,9 +171,15 @@ export default async () => {
 	{
 		const options = {passive: true}
 		const listener = {
-			down: () => addEventListener("mousemove", listener.move, options),
+			down: () => {
+				addEventListener("mousemove", listener.move, options);
+				document.body.classList.add("moving");
+			},
 			move: (event: MouseEvent) => bewegenGruppe.rotation.y += event.movementX / 300,
-			up: () => removeEventListener("mousemove", listener.move)
+			up: () => {
+				removeEventListener("mousemove", listener.move);
+				document.body.classList.remove("moving");
+			}
 		}
 		container.addEventListener("mousedown", listener.down)
 		addEventListener("mouseup", listener.up)
