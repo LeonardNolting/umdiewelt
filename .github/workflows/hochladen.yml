@@ -28,5 +28,5 @@ jobs:
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
                     source: "./dist/*"
-                    target: ""
+                    target: "./"
                     strip_components: 1
