@@ -67,6 +67,7 @@
 						Straßenverkehr, bekämpfen den Klimawandel durch geringere CO<sub>2</sub>-Emissionen und haben
 						zusammen Spaß.
 						<!-- TODO im Hintergrund "40.000km" anzeigen? -->
+						<!-- TODO auch gut für Fitness/Gesundheit, Gemeinschaft, ...-->
 						<!-- Champs Elysee? Triumphbogen? -->
 					</p>
 
@@ -111,13 +112,25 @@
 						<em>Unterstützung</em>
 						<b>Auch wenn du nicht direkt Kilometer sammeln kannst, ist deine
 							Unterstützung wertvoll.</b> Unsere Sponsoren ermöglichen es uns,
-						<!-- TODO was? Geld in guten Händen, ... alles guter Zweck ...? -->... . Ihre Hilfe gibt uns
+						<!-- TODO was? Geld in guten Händen, ... alles guter Zweck ...? -->... . Ihre Unterstützung
+						hilft <!-- TODO wenn X > 0: hat schon X Menschen in Afrika geholfen --> Bedürftigen in Afrika
+						und gibt uns
 						zusätzliche Motivation.
 
 						<!-- TODO Sponsoren auflisten -->
 						<!-- TODO Unterstützte anzeigen (Bilder): Kinder in Afrika mit Fahrrädern, bessere Infrastruktur, was weiß ich ... -->
 						<!-- https://www.dropbox.com/sh/4tufp3si0jnezdp/AAD4X8z3VN-G5l4nU9tdngCta/World%20Bicycle%20Relief%20Fotoauswahl?dl=0&subfolder_nav_tracking=1 -->
 						<!-- https://www.dropbox.com/sh/24dk6cgjdmxopm0/AADqQyTdjUA2KcgU437UvLtFa?dl=0 -->
+
+						<!--<p>Wir freuen uns über finanzielle Unterstützung in jeder Höhe. ... typisch 1€/gefahrener
+							Kilometer
+							beitragen als Elternteil / was auch immer ...
+							&lt;!&ndash; TODO private Unterstützung ausarbeiten &ndash;&gt;</p>
+						<p>Hilf uns auch, indem du anderen von unserem Vorhaben erzählst. Je mehr aufmerksam wir
+							erreichen,
+							auf desto mehr Sponsoren dürfen wir hoffen</p>
+						<p>- anderen erzählen, - spenden, - sponsern (auch Großeltern, ...), - selber mit dem Fahrrad
+							fahren?, - selber umweltfreundlicher verhalten?</p>-->
 					</p>
 
 					<!-- * ✓ Fazit -->
@@ -171,6 +184,43 @@
 						</p>
 					</details>
 				</div>
+
+				<div id="saisons-wrapper">
+					<a href="#saison" id="saison"></a>
+					<ul id="saison-auswahl"></ul>
+					<div id="saisons"></div>
+				</div>
+
+				<div id="bestenliste-wrapper" class="container max versteckt">
+					<p id="feed-hinweis" class="wussten-sie-schon">
+						Auf unserem Instagram-Kanal
+						<a href="https://www.instagram.com/one.car.less/"><i>one.car.less</i></a> findest du aktuelle
+						Informationen und viel mehr, z.B. von uns getestete Schulwege.
+					</p>
+					<h3><a href="#bestenliste" id="bestenliste">Aktivste Teilnehmer:</a></h3>
+					<ul id="bestenliste-anzeige"></ul>
+					<div class="keine-teilnehmer">
+						<span>Noch keine Teilnehmer! <a href="#mitmachen">Seien Sie der Erste.</a></span>
+					</div>
+					<button class="links leer" disabled>Mehr laden</button>
+				</div>
+				<div id="bestenliste-kurve"></div>
+				<!-- TODO Danksagung anpassen, solange noch keine Strecken da sind! -->
+				<p id="danksagung1" class="safe">Wir danken allen fleißigen Fahrradfahrern, euer Einsatz ist
+					großartig!</p>
+				<ul id="fahrer" class="horizontal">
+					<li>Leonard Nolting</li>
+					<li>Thomas Nolting</li>
+					<li>Noch Jemand</li>
+					<li>Und Nochjemand</li>
+				</ul>
+				<p id="danksagung2" class="safe">Ein großer Dank geht auch an unsere Schulleitung unter Leitung von OStD
+					Roland Deinzer. Allen voran <!-- TODO Herrn Hipp und restlichem P-Seminar danken --></p>
+
+				<p id="verweis" class="safe">Sieh dir <a href="https://gymnasium-hoechstadt.de/schule/aktuelles/"
+				                                         target="_blank">weitere
+					Projekte</a> des Gymnasium
+					Höchstadt an.</p>
 			</section>
 		</main>
 
@@ -201,188 +251,20 @@
 					<button>Abmelden</button>
 				</li>
 			</ul>
+			<form id="admin-anzeige" class="admin-exklusive">
+				<a href="#admin" id="admin"></a>
+				<fieldset disabled>
+					<button name="neue-saison">Neue Saison anlegen</button>
+					<button name="neue-klasse">Klasse eintragen</button>
+					<button name="saisonstart">Saisonstart festlegen/verändern</button>
+					<button name="saisonende">Saisonende festlegen/verändern</button>
+					<button name="saison-loeschen">Aktuelle Saison löschen</button>
+					<button name="strecke-loeschen">Eine Strecke löschen</button>
+					<button name="testnachricht">Testnachricht senden</button>
+					<button name="neue-schule">Schule hinzufügen</button>
+				</fieldset>
+			</form>
 		</footer>
-
-		<div id="scrollable">
-			<ul id="inhaltsverzeichnis">
-				<li><a href="#willkommen">Anzeige</a></li>
-				<li><a href="#ansprache">Unser Anliegen</a></li>
-				<li><a href="#ablauf">Wie funktioniert's?</a></li>
-				<li><a href="#faq">FAQ</a></li>
-				<!-- Wie kann ich mitmachen? Sind E-Bikes erlaubt? Ich möchte auch so helfen können. -->
-				<li><a href="#saison">Saisons</a></li>
-				<li><a href="#bestenliste">Bestenliste</a></li>
-				<li><a href="#quellen">Quellen</a></li>
-
-				<li class="abseits"><a href="#feed">Feed</a></li>
-
-				<li id="eintragen" class="abseits"><a href="#eintragen"></a></li>
-			</ul>
-			<div id="trennung"></div>
-			<div id="inhalt">
-				<section id="browser-aktualisierung"></section>
-
-				<div class="container max">
-					<div id="ansprache">
-						<h3>Hallo Fahrradfahrer!</h3>
-						<p></p>
-						<p>"Um Die Welt" ist damit das Dritte in einer Reihe von Projekten rund ums Thema Fahrrad fahren
-							und
-							Umweltschutz. <!-- TODO Link zu Zeitungsartikel einfügen -->Zuvor haben wir mit unseren
-							ersten
-							Projekten "Sternfahrten" und "Fridays for Fahrrad - Bergwacht" für ... gesorgt. Wir hoffen,
-							mit
-							eurer Hilfe auch dieses Projekt einen Erfolg werden zu lassen!</p>
-						<h4>So nimmst du teil</h4>
-						<p>Du hast bereits von uns <!-- TODO uns oder Klassenlehrer? --> deine Anmeldedaten mitgeteilt
-							bekommen und kannst dich somit hier <!-- TODO link -->
-							<a href="#eintragen">anmelden</a>.</p>
-						<p>Weißt du deine Daten nicht mehr, frage ... <!-- TODO Klassenlehrer fragen? oder was?--></p>
-						<p>Hast du dich angemeldet, musst du nur noch fleißig in die Pedale treten. Das Eintragen von
-							Strecken ist ganz einfach:
-							<a href="">Lass uns dir zeigen, wie es geht.</a> <!-- TODO Wie? Video? --></p>
-						<h4>Jeder kann helfen</h4>
-						<p>Auch wenn du nicht direkt Kilometer sammeln kannst, ist deine Unterstützung wertvoll.</p>
-						<p>Unsere Sponsoren ermöglichen es uns,
-							<!-- TODO was? Geld in guten Händen, ... alles guter Zweck ...? -->. Ihre Hilfe gibt uns
-							zusätzliche Motivation.</p>
-						<p>Wir freuen uns über finanzielle Unterstützung in jeder Höhe. ... typisch 1€/gefahrener
-							Kilometer
-							beitragen als Elternteil / was auch immer ...
-							<!-- TODO private Unterstützung ausarbeiten --></p>
-						<p>Hilf uns auch, indem du anderen von unserem Vorhaben erzählst. Je mehr aufmerksam wir
-							erreichen,
-							auf desto mehr Sponsoren dürfen wir hoffen</p>
-						<p>- anderen erzählen, - spenden, - sponsern (auch Großeltern, ...), - selber mit dem Fahrrad
-							fahren?, - selber umweltfreundlicher verhalten?</p>
-
-
-						<p>Umwelt problematisch</p>
-						<p>viele Wege</p>
-						<p>möchten zeigen, dass jeder helfen kann</p>
-						<p>haben schon <a href="https://gymnasium-hoechstadt.de">andere Aktionen
-							<!-- TODO tooltip "Am ... initiierte das GH die Sternfahrten *Bild* --></a> gestartet</p>
-						<p>neu: laden alle Schüler der [dynamisch: Schulen] ein, möglichst viele Strecken mit dem
-							Fahrrad
-							zurückzulegen!</p>
-						<p>Natürlich auch Spaß und Zusammenhalt und Schulfamilie und alles ...</p>
-						<p>Erfahren Sie, <a href="#ablauf">wie's funktioniert</a> und was wir dadurch erreichen.</p>
-						<p>Danke an alle Beteiligten!</p>
-					</div>
-				</div>
-				<ul id="fahrer" class="horizontal">
-					<li>Leonard Nolting</li>
-					<li>Thomas Nolting</li>
-					<li>Noch Jemand</li>
-					<li>Und Nochjemand</li>
-				</ul>
-				<figure>
-					<!--				<figcaption>Ihr P-Seminar *Name*</figcaption>-->
-					<!--suppress HtmlUnknownAttribute -->
-					<img loading="lazy"
-					     src="./img/Gruppe.svg"
-					     alt="" />
-				</figure>
-				<div class="container max">
-					<div id="ablauf">
-						<h3>Wie's funktioniert:</h3>
-						<div class="schritt">
-							<p>"Mark" fährt heute mit dem Fahrrad zur Schule.</p>
-						</div>
-						<div class="schritt">
-							<p>Dort angekommen trägt er seine Strecke in die Website ein.</p>
-							<p class="hinweis">
-								Zur Aufrechterhaltung der Fairness werden besonders lange Strecken überprüft.
-							</p>
-						</div>
-						<div class="schritt">
-							<p>Für jeden eingetragenen Kilometer spendet uns die Sparkasse 1 Cent 💸</p>
-						</div>
-						<div class="schritt">
-							<p>Zum Saisonende wird das gesammelte Geld an ... gespendet</p>
-							<p>Dort können sich dann Kinder Fahrräder kaufen.</p>
-							<p>So können wir momentan schon x Fahrräder finanzieren!</p>
-							<p>Und ganz nebenbei haben wir dem Klimawandel entgegengewirkt.</p>
-						</div>
-						<div class="fazit">
-							<p>Es lohnt sich also jede eingetragene Strecke!</p>
-							<p><a href="#mitmachen">Erfahre, wie auch DU helfen kannst.</a></p>
-						</div>
-					</div>
-
-
-				</div>
-
-				<div id="saisons-wrapper">
-					<a href="#saison" id="saison"></a>
-					<ul id="saison-auswahl"></ul>
-					<div id="saisons"></div>
-				</div>
-
-				<div id="bestenliste-wrapper" class="container max versteckt">
-					<p id="feed-hinweis" class="wussten-sie-schon">
-						Im <a href="#feed">Feed</a> sehen Sie alle Aktivitäten auf dieser Seite.
-					</p>
-					<h3><a href="#bestenliste" id="bestenliste">Aktivste Teilnehmer:</a></h3>
-					<ul id="bestenliste-anzeige"></ul>
-					<div class="keine-teilnehmer">
-						<span>Noch keine Teilnehmer! <a href="#mitmachen">Seien Sie der Erste.</a></span>
-					</div>
-					<button class="links leer" disabled>Mehr laden</button>
-				</div>
-				<div id="bestenliste-kurve"></div>
-
-				<p id="verweis" class="safe">Sehen Sie sich <a href="https://gymnasium-hoechstadt.de/schule/aktuelles/"
-				                                               target="_blank">weitere
-					Projekte</a> des Gymnasium
-					Höchstadt an.</p>
-
-				<div class="container">
-					<hr class="admin-exklusive" />
-					<a href="#admin" id="admin"></a>
-					<form id="admin-anzeige" class="verspaetet admin-exklusive">
-						<fieldset disabled>
-							<button name="neue-saison">Neue Saison anlegen</button>
-							<button name="neue-klasse">Klasse eintragen</button>
-							<button name="saisonstart">Saisonstart festlegen/verändern</button>
-							<button name="saisonende">Saisonende festlegen/verändern</button>
-							<button name="saison-loeschen">Aktuelle Saison löschen</button>
-							<button name="strecke-loeschen">Eine Strecke löschen</button>
-							<button name="testnachricht">Testnachricht senden</button>
-							<button name="neue-schule">Schule hinzufügen</button>
-						</fieldset>
-					</form>
-
-					<hr />
-
-					<div id="fusszeile">
-						<p id="copyright">&copy; 2021 Leonard Nolting</p>
-						<ul id="links" class="horizontal">
-							<li id="quellen">Quellen</li>
-							<li id="cookies">Cookies</li>
-							<li id="kontakt">
-								<a href="mailto:hip@gy-ho.de?subject=Um%20Die%20Welt:%20">Kontakt</a>
-							</li>
-							<li id="github">
-								<a href="https://github.com/LeonardNolting/umdiewelt">Quellcode</a>
-							</li>
-							<li id="impressum">
-								<a href="impressum.html">Impressum</a>
-							</li>
-							<li id="datenschutzerklaerung">
-								<a href="datenschutzerklaerung.html">Datenschutz</a>
-							</li>
-							<li id="admin-anmelden" class="nicht-admin-exklusive">
-								<button>Admin</button>
-							</li>
-							<li id="admin-abmelden" class="admin-exklusive">
-								<button>Abmelden</button>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<div id="popups">
 			<!-- Quellen -->
