@@ -195,7 +195,7 @@ export default async () => {
 
 	animate()
 
-	container.append(renderer.domElement)
+	container.insertBefore(renderer.domElement, container.firstChild)
 }
 
 export const aktualisieren = (wert: number) => {
