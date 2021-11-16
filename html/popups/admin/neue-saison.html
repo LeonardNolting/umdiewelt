@@ -1,0 +1,57 @@
+<form id="popup-admin-neue-saison">
+	<div class="container">
+		<h3>Neue Saison eintragen</h3>
+		<div class="name">
+			<label for="admin-neue-saison-name">Saisonname:</label>
+			<input name="name" id="admin-neue-saison-name" type="text" disabled required />
+		</div>
+		<p class="hinweis schulen-hinweis">Teilnehmende Schulen können später nicht mehr verändert
+			werden.</p>
+		<ul class="schulen"></ul>
+		<div class="runden">
+			<label for="admin-neue-saison-runden">Anzahl Runden:</label>
+			<input name="runden" id="admin-neue-saison-runden" type="number" min="1" value="1" required />
+		</div>
+		<div class="hinweis hinweis-gross daten-hinweis">
+			<div>
+				<span>Dies löscht alle "aktuellen"</span>
+				<details>
+					<summary>Daten:</summary>
+					<ul>
+						<li>einzelne Klassen</li>
+						<li>einzelne Teilnehmer</li>
+						<li>einzelne Eintragungen</li>
+						<li>wenige Metadaten</li>
+					</ul>
+				</details>
+			</div>
+			<div>
+				<span>Nicht gelöscht werden diese</span>
+				<details>
+					<summary>Daten:</summary>
+					<ul>
+						<li>Allgemeine Daten</li>
+						<li>alte Saisons (inkl. der <em>noch</em> Aktuellen) mitsamt des Zeitraums, der
+							Statistiken
+							und der teilnehmenden Schulen
+						</li>
+						<li>Schulen</li>
+					</ul>
+				</details>
+			</div>
+		</div>
+
+		<div class="zustimmung">
+			<input name="zustimmung"
+			       id="admin-neue-saison-zustimmung-checkbox"
+			       type="checkbox"
+			       required />
+			<label for="admin-neue-saison-zustimmung-checkbox">Habe ich verstanden.</label>
+		</div>
+	</div>
+
+	<fieldset class="buttons">
+		<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+		<input type="submit" value="Eintragen" name="submit" />
+	</fieldset>
+</form>
