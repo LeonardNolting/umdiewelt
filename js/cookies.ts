@@ -9,9 +9,9 @@ namespace Cookies {
 		// "as any" erlaubt index access operator (CookieEinstellung[...])
 		// s. https://stackoverflow.com/questions/62215454/how-to-get-enum-key-by-value-in-typescript
 
-		ALLE = "alle" as any,
-		NOTWENDIG = "notwendig" as any,
-		KEINE = "keine" as any,
+		ALLE = "alle",
+		NOTWENDIG = "notwendig",
+		KEINE = "keine",
 		UNDEFINED = 0
 	}
 
