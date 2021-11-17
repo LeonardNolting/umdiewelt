@@ -17,8 +17,7 @@ import m from "../formatierung/einheit/m";
 import zahl from "../formatierung/zahl";
 import {observer} from "./inhalt";
 
-// @ts-ignore
-import images from "../../img/bicyclists/*.png";
+const image = name => new URL(`../../img/bicyclists/${name}.png`, import.meta.url)
 import {bestenlisteChunkGroesse, bestenlisteErsterChunkGroesse} from "../konfiguration";
 
 const anzeige = document.getElementById("bestenliste-anzeige") as HTMLUListElement
@@ -79,7 +78,7 @@ const neuesElement = (fahrer: string, werte: Werte): BestenlisteElement => {
 	inhalt.schule = schule
 	inhalt.append(name, schule)
 
-	li.style.setProperty("--url", "url('" + images[Math.floor(Math.random() * 9) + 1] + "')")
+	li.style.setProperty("--url", "url('" + image(Math.floor(Math.random() * 9) + 1) + "')")
 
 	passeElementAn(fahrer, werte, li)
 
