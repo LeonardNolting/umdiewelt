@@ -18,6 +18,7 @@
 	"devDependencies": {
 		"@fortawesome/fontawesome-free": "^5.15.3",
 		"@googlemaps/js-api-loader": "^1.11.4",
+		"@parcel/transformer-glsl": "^2.0.1",
 		"@types/google.maps": "^3.44.6",
 		"@types/three": "^0.131.0",
 		"autoprefixer": "^10.4.0",
