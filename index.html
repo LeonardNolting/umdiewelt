@@ -35,114 +35,11 @@
 			<section id="willkommen">
 				<h1>Hallo Fahrradfahrer!</h1>
 				<div id="welt">
-					<div id="fakten" class="fakten">
-						<data class="fakt" value="0" data-einheit="g" data-bezeichnung="gespart">
-							<span>Ein&shy;ge&shy;spartes CO<sub>2</sub><a href="#quellen" class="sternchen">*</a></span>
-						</data>
-						<data class="fakt bigger" value="0" data-einheit="m" data-bezeichnung="strecke">
-							Zu&shy;rück&shy;ge&shy;legte Strecke
-						</data>
-						<data class="fakt" value="0" data-bezeichnung="fahrer">
-							Betei&shy;lig&shy;te jähr&shy;lich
-						</data>
-					</div>
+					<include src="html/fakten.html"></include>
 				</div>
 			</section>
 			<section id="inhalt">
-				<div id="ansprache">
-					<!-- Prägnanter: -->
-
-					<!-- TODO Hierarchie/Linie: Einleitung -> Ziel -> (Herausforderung -> (Teilname, Unterstützung)), Vorige Projekte)-->
-
-					<!-- * Einleitung -->
-					<p id="motto">
-						<em>One Car Less <!-- TODO Auto überlagern und ausfaden wenn in viewport --></em> lautet das
-						Motto unseres P-Seminars.
-					</p>
-
-					<!-- * Ziel -->
-					<p id="ziel">
-						<em>Ziel</em>
-						<b>Unsere Schule soll auf's Rad!</b> Dadurch entlasten wir gemeinsam den
-						Straßenverkehr, bekämpfen den Klimawandel durch geringere CO<sub>2</sub>-Emissionen und haben
-						zusammen Spaß.
-						<!-- TODO im Hintergrund "40.000km" anzeigen? -->
-						<!-- TODO auch gut für Fitness/Gesundheit, Gemeinschaft, ...-->
-						<!-- Champs Elysee? Triumphbogen? -->
-					</p>
-
-					<!-- * ✓ Herausforderung -->
-					<p id="herausforderung">
-						<em>Herausforderung</em>
-						<b>Insgesamt wollen wir einmal digital am Äquator die Welt umrunden.</b>
-						Das schaffen wir, indem jeder mithilft und Strecken, wie z.B. den täglichen Schulweg, einträgt.
-
-						<!-- TODO Bild vor Schule, Handy in Hand (tippend), Fahrrad angelehnt -->
-					</p>
-
-					<!-- * ✓ Vorige Projekte -->
-					<div id="vorherig-projekte">
-						<p>"Um Die Welt" ist damit das Dritte in einer Reihe von Projekten rund ums Thema Fahrrad
-							fahren.
-							Zuvor freuten wir uns bereits bei unseren ersten Projekten
-							"<a href="https://www.infranken.de/lk/gem/hoechstadtampherzogenaurauch/auf-dem-sattel-in-die-schule-art-5255788">Sternfahrten</a>"
-							und "Fridays for
-							Fahrrad - Bergwacht" über die große Beteiligung und das positive Feedback. Wir hoffen, dass
-							"Um
-							Die Welt" mit deiner Hilfe ein ebenso großer Erfolg wird!</p>
-
-						<!-- TODO Bilder einfügen -->
-					</div>
-
-					<!-- * ✓ Teilnahme -->
-					<p id="teilnahme">
-						<em>Teilnahme</em>
-						<b>Teilnehmen ist sehr einfach.</b> Im nächsten Jahr erhältst du von uns
-						<!-- TODO uns oder Klassenlehrer? --> ein Passwort, mit dem du dich hier anmelden kann. Wenn du
-						dann mit dem Fahrrad eine Strecke gefahren bist
-						<!-- TODO Schulwege und private Strecken... sagen -->, meldest du dich an und gibst Start- und
-						Zieladresse ein. Daraus errechnen wir automatisch die Kilometeranzahl und fügen sie der gesamten
-						Strecke hinzu. Das wars!
-
-						<!-- TODO Formular einfügen, verschönern-->
-					</p>
-
-					<!-- * ✓ Unterstützung -->
-					<p id="unterstützung">
-						<em>Unterstützung</em>
-						<b>Auch wenn du nicht direkt Kilometer sammeln kannst, ist deine
-							Unterstützung wertvoll.</b> Unsere Sponsoren ermöglichen es uns,
-						<!-- TODO was? Geld in guten Händen, ... alles guter Zweck ...? -->... . Ihre Unterstützung
-						hilft <!-- TODO wenn X > 0: hat schon X Menschen in Afrika geholfen --> Bedürftigen in Afrika
-						und gibt uns
-						zusätzliche Motivation.
-
-						<!-- TODO Sponsoren auflisten -->
-						<!-- TODO Unterstützte anzeigen (Bilder): Kinder in Afrika mit Fahrrädern, bessere Infrastruktur, was weiß ich ... -->
-						<!-- https://www.dropbox.com/sh/4tufp3si0jnezdp/AAD4X8z3VN-G5l4nU9tdngCta/World%20Bicycle%20Relief%20Fotoauswahl?dl=0&subfolder_nav_tracking=1 -->
-						<!-- https://www.dropbox.com/sh/24dk6cgjdmxopm0/AADqQyTdjUA2KcgU437UvLtFa?dl=0 -->
-
-						<!--<p>Wir freuen uns über finanzielle Unterstützung in jeder Höhe. ... typisch 1€/gefahrener
-							Kilometer
-							beitragen als Elternteil / was auch immer ...
-							&lt;!&ndash; TODO private Unterstützung ausarbeiten &ndash;&gt;</p>
-						<p>Hilf uns auch, indem du anderen von unserem Vorhaben erzählst. Je mehr aufmerksam wir
-							erreichen,
-							auf desto mehr Sponsoren dürfen wir hoffen</p>
-						<p>- anderen erzählen, - spenden, - sponsern (auch Großeltern, ...), - selber mit dem Fahrrad
-							fahren?, - selber umweltfreundlicher verhalten?</p>-->
-					</p>
-
-					<!-- * ✓ Fazit -->
-					<div id="fazit"> <!-- TODO id == fazit?? -->
-						<p>Irgendwie ein Fazit ... mit Übergang zu P-Seminar-Teilnehmern ... Mit viel Motivation freuen
-							wir
-							uns auf den Start im kommenden Frühling!</p>
-						<img loading="lazy"
-						     src="./img/Gruppe.svg"
-						     alt="" />
-					</div>
-				</div>
+				<include src="html/ansprache.html"></include>
 
 				<include src="html/faq.html"></include>
 
