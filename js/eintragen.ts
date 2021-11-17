@@ -1,4 +1,4 @@
-import Popup from "./popup";
+import type Popup from "./popup.ts";
 import Datenbank from "./firebase/datenbank";
 import {get, onChildAdded, onValue, push, ref, serverTimestamp, set, Unsubscribe} from "firebase/database";
 import Route from "./model/route";
