@@ -35,7 +35,7 @@
 	"browserslist": [
 		"defaults",
 		"last 2 versions",
-		"> 0.1%"
+		"cover 99.5% in DE"
 	],
 	"postcss": {
 		"plugins": {
