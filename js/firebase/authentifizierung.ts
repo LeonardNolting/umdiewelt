@@ -13,20 +13,14 @@ import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
 import Cookie from "../cookie";
 import {eintragenTextSetzen} from "../inhalt/eintragen";
+import global from "../global";
 
 export let auth: Auth
-
-/**
- * angemeldet: User
- * nicht angemeldet: null
- * unbekannt: undefined
- */
-export let user: User | null | undefined
 
 export default () => {
 	auth = getAuth()
 	onAuthStateChanged(auth, newUser => {
-		user = newUser
+		global.user = newUser
 		if (newUser === null) {
 			Cookie.kill("fahrer")
 			eintragenTextSetzen(null)

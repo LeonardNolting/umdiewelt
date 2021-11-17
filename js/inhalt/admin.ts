@@ -4,7 +4,8 @@ import Popup from "../popup";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-import {auth, authentifizieren, user} from "../firebase/authentifizierung";
+import {auth, authentifizieren} from "../firebase/authentifizierung";
+import global from "../global"
 import load from "../load";
 import {adminEmail} from "../konfiguration";
 
@@ -520,8 +521,8 @@ export default async () => {
 	}
 
 	document.getElementById("admin-anmelden").onclick = async () => {
-		if (user !== undefined) {
-			if (user !== null) {
+		if (global.user !== undefined) {
+			if (global.user !== null) {
 				// Muss Teilnehmer sein, sonst könnte nicht auf diesen Knopf geklickt werden -> abmelden
 				await load(signOut(auth))
 			}
@@ -531,7 +532,7 @@ export default async () => {
 			// Sonst halt warten und nochmal probieren...
 			const listener = onAuthStateChanged(auth, newUser => {
 				listener()
-				user = newUser
+				global.user = newUser
 				resolve()
 				Popup.oeffnen(popup)
 			})
