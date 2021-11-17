@@ -1,8 +1,8 @@
 import step from "./step";
-import Cookie from "./cookie";
-import Popup from "./popup";
+import {Cookie} from "./cookie";
+import {Popup} from "./popup";
 
-namespace Cookies {
+export namespace Cookies {
 	const popup = document.getElementById("popup-cookies");
 
 	enum Einstellung {
@@ -92,5 +92,3 @@ namespace Cookies {
 		// TODO
 	}
 }
-
-export default Cookies

@@ -1,6 +1,6 @@
 import step from "./step";
 
-namespace Cookie {
+export namespace Cookie {
 	/**
 	 * Gibt Wert eines Cookies zurück
 	 * @param name Name des Cookies
@@ -58,5 +58,3 @@ namespace Cookie {
 		return document.cookie.length == 0
 	}
 }
-
-export default Cookie

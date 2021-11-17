@@ -1,7 +1,7 @@
 /**
  * Momentan kein Support für mehrere gleichzeitig geöffnete Popups
  */
-namespace Popup {
+export namespace Popup {
 	export const wrapper = document.getElementById("popups")
 	export const hintergrund = document.getElementById("popup-hintergrund")
 	export const popups = Array.from(document.querySelectorAll("#popups > *:not(#popup-hintergrund)")) as HTMLElement[]
@@ -36,5 +36,3 @@ namespace Popup {
 		return popups.find(popup => popup.classList.contains("offen"))
 	}
 }
-
-export default Popup
