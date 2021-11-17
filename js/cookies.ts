@@ -61,41 +61,44 @@ export namespace Cookies {
 			setzen(gespeichert);
 	}
 
+
 	/**
 	 * Öffnet immer ein Popup um Einstellung evtl. zu überdenken
 	 */
-	export const fragen = (abbrechenMoeglich: boolean = false) => new Promise<Einstellung>(resolve => {
-		step("Fragt nach Cookie-Einwilligung")
+	export function fragen(abbrechenMoeglich: boolean = false) {
+		return new Promise<Einstellung>(resolve => {
+			step("Fragt nach Cookie-Einwilligung")
 
-		const button = (
-			einstellung: Einstellung,
-			onclick: (event: MouseEvent) => void = () => {
+			const button = (
+				einstellung: Einstellung,
+				onclick: (event: MouseEvent) => void = () => {
+				}
+			) => {
+				const element = document.getElementById("popup-cookies-" + (einstellung || "abbrechen")) as HTMLButtonElement
+				element.onclick = event => {
+					// Verhindere versehentliches doppeltes Klicken
+					element.disabled = true
+					Popup.schliessen(popup)
+					popup.classList.remove("wichtig", "wird-resetten")
+					onclick(event)
+					element.disabled = false
+					if (einstellung !== null) Cookie.killAll()
+					resolve(setzen(einstellung))
+				}
 			}
-		) => {
-			const element = document.getElementById("popup-cookies-" + (einstellung || "abbrechen")) as HTMLButtonElement
-			element.onclick = event => {
-				// Verhindere versehentliches doppeltes Klicken
-				element.disabled = true
-				Popup.schliessen(popup)
-				popup.classList.remove("wichtig", "wird-resetten")
-				onclick(event)
-				element.disabled = false
-				if (einstellung !== null) Cookie.killAll()
-				resolve(setzen(einstellung))
-			}
-		}
 
-		if (abbrechenMoeglich) button(null)
-		button(Einstellung.ALLE)
-		button(Einstellung.NOTWENDIG)
-		button(Einstellung.KEINE, window.close)
+			if (abbrechenMoeglich) button(null)
+			button(Einstellung.ALLE)
+			button(Einstellung.NOTWENDIG)
+			button(Einstellung.KEINE, window.close)
 
-		if (!abbrechenMoeglich) popup.classList.add("wichtig")
-		if (Cookie.get("cookies")) popup.classList.add("wird-resetten")
+			if (!abbrechenMoeglich) popup.classList.add("wichtig")
+			if (Cookie.get("cookies")) popup.classList.add("wird-resetten")
 
-		// Alles vorbereitet, jetzt öffnen ...
-		Popup.oeffnen(popup)
-	})
+			// Alles vorbereitet, jetzt öffnen ...
+			Popup.oeffnen(popup)
+		});
+	}
 
 	/**
 	 * TODO
