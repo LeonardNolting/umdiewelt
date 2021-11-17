@@ -52,17 +52,17 @@ abstract class Kontrolle {
 		await this.init()
 	}
 
-	protected async abstract init(): Promise<void>
+	protected abstract async init(): Promise<void>
 
-	async abstract destroy(): Promise<void>
+	abstract async destroy(): Promise<void>
 
-	protected async abstract vorbereiten(): Promise<void>
+	protected abstract async vorbereiten(): Promise<void>
 
 	/**
 	 *
 	 * @returns Erfolgsnachricht
 	 */
-	protected async abstract submit(): Promise<string>
+	protected abstract async submit(): Promise<string>
 
 	async ausfuehren(mitWarnung: boolean = true) {
 		if (!this.isInit) return benachrichtigung("Bitte warten Sie noch einen Moment. Die Admin-Kontrollen werden gerade initialisiert.")
