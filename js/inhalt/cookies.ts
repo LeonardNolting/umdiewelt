@@ -1,4 +1,4 @@
-import {Cookies} from "../cookies";
+import Cookies from "../cookies";
 
 export default () => {
 	document.getElementById("cookies").addEventListener("click",

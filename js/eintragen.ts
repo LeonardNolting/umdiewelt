@@ -1,14 +1,14 @@
-import {Popup} from "./popup.ts";
-import {Datenbank} from "./firebase/datenbank";
+import type Popup from "./popup.ts";
+import Datenbank from "./firebase/datenbank";
 import {get, onChildAdded, onValue, push, ref, serverTimestamp, set, Unsubscribe} from "firebase/database";
 import Route from "./model/route";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import benachrichtigung from "./benachrichtigungen/benachrichtigung";
 import {adminEmail} from "./konfiguration";
 import {auth, authentifizieren} from "./firebase/authentifizierung";
-import {Cookie} from "./cookie";
+import Cookie from "./cookie";
 import load from "./load";
-import {Cookies} from "./cookies";
+import Cookies from "./cookies";
 import m from "./formatierung/einheit/m";
 import zahl from "./formatierung/zahl";
 import {eintragenTextSetzen} from "./inhalt/eintragen";

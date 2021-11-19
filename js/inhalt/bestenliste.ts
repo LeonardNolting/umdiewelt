@@ -1,4 +1,4 @@
-import {Datenbank} from "../firebase/datenbank";
+import Datenbank from "../firebase/datenbank";
 import {
 	DataSnapshot,
 	endAt,

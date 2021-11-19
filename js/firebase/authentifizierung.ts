@@ -11,7 +11,7 @@ import step from "../step";
 import {adminEmail} from "../konfiguration";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
-import {Cookie} from "../cookie";
+import Cookie from "../cookie";
 import {eintragenTextSetzen} from "../inhalt/eintragen";
 import global from "../global";
 

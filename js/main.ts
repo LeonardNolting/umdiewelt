@@ -1,6 +1,6 @@
 import firebase from "./firebase/firebase";
 import inhalt from "./inhalt/inhalt";
-import {Cookies} from "./cookies";
+import Cookies from "./cookies";
 import popups from "./popups";
 import browserAktualisierung from "./browserAktualisierung";
 
