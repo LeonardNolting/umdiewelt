@@ -9,25 +9,11 @@ export namespace Cookies {
 		// "as any" erlaubt index access operator (CookieEinstellung[...])
 		// s. https://stackoverflow.com/questions/62215454/how-to-get-enum-key-by-value-in-typescript
 
-		// as any:
-		// ALLE = "alle" as any,
-		// oder:
-		// ALLE = <any>"alle",
-		// aber momentan nicht aktiviert, da feature in neuem compiler von parcel v2 (noch) nicht implementiert
 		ALLE = "alle",
 		NOTWENDIG = "notwendig",
 		KEINE = "keine",
 		UNDEFINED = 0
 	}
-
-	// noinspection TypeScriptValidateTypes
-	/**
-	 * ersetzt temporär diese Syntax:
-	 * `Einstellung[name]`
-	 * (s.o.)
-	 * @param name
-	 */
-	const getEinstellung = name => Object.keys(Einstellung)[Object.values(Einstellung).indexOf(name)]
 
 	export let einstellung: Einstellung = Einstellung.UNDEFINED
 	export let optional = () => einstellung === Einstellung.ALLE
@@ -40,8 +26,8 @@ export namespace Cookies {
 	const setzen = (einstellung: Einstellung) => {
 		if (einstellung === null) return
 		Cookies.einstellung = einstellung
-		if (notwendig()) Cookie.set("cookies", getEinstellung(einstellung))
-		step("Cookie-Einstellung gesetzt: " + getEinstellung(einstellung))
+		if (notwendig()) Cookie.set("cookies", Einstellung[einstellung])
+		step("Cookie-Einstellung gesetzt: " + Einstellung[einstellung])
 		return einstellung
 	}
 
@@ -52,7 +38,7 @@ export namespace Cookies {
 	export const ueberpruefen = async (): Promise<Einstellung> => {
 		step("Überprüft Cookie-Einstellung")
 
-		const gespeichert = (getEinstellung(Cookie.get<string>("cookies")) as Einstellung) || Einstellung.UNDEFINED;
+		const gespeichert = (Einstellung[Cookie.get<string>("cookies")] as Einstellung) || Einstellung.UNDEFINED;
 		return gespeichert === Einstellung.UNDEFINED || gespeichert === Einstellung.KEINE ?
 			// Kein/komischer gespeicherter Wert: fragen
 			fragen() :
