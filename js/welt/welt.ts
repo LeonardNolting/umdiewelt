@@ -39,6 +39,7 @@ export default async () => {
 	const anfangFarbe = 0x111111;
 
 	const container = document.getElementById("welt")
+	const anzeige = document.getElementById("anzeige")
 	const scene = new Scene()
 	const camera = new PerspectiveCamera()
 	const renderer = new WebGLRenderer({antialias: true})
@@ -148,14 +149,32 @@ export default async () => {
 
 	// Resizing
 	const setSize = () => {
-		camera.aspect = container.clientWidth / container.clientHeight
+		const width = anzeige.clientWidth,
+			height = anzeige.clientHeight
+		const size = Math.min(width, height)
+
+		camera.aspect = 1
 		camera.updateProjectionMatrix()
-		renderer.setSize(container.clientWidth, container.clientHeight);
-		kreise.forEach(kreis => kreis.material.resolution = new Vector2(container.clientWidth, container.clientHeight))
+		// renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
+		// const min =
+		renderer.setSize(size, size);
+		kreise.forEach(kreis => kreis.material.resolution = new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight))
+
+		/*camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight
+		camera.updateProjectionMatrix()
+		console.log("resizing: ", renderer.domElement.clientWidth, renderer.domElement.clientHeight)
+		// renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
+		// const min =
+		// renderer.setSize(min, min);
+		kreise.forEach(kreis => kreis.material.resolution = new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight))*/
 	}
+
+	// container.insertBefore(renderer.domElement, container.firstChild)
+	anzeige.append(renderer.domElement)
+
 	setSize()
 	const resizeObserver = new ResizeObserver(setSize)
-	resizeObserver.observe(container, {box: "border-box"})
+	resizeObserver.observe(anzeige, {box: "border-box"})
 
 	// Folge cursor
 	const cursorPosition = {x: 0, y: 0}
@@ -194,8 +213,6 @@ export default async () => {
 	offsetGruppe.rotation.y = anfang
 
 	animate()
-
-	container.insertBefore(renderer.domElement, container.firstChild)
 }
 
 export const aktualisieren = (wert: number) => {

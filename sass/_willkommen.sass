@@ -1,18 +1,50 @@
 section#willkommen
-	height: 80vh
+	//height: 80vh
 	display: flex
 	align-items: center
 	justify-content: center
 	background-color: black
+	width: 100%
 	color: #fff
-	font-weight: 900
+	overflow: hidden
 
 	> h1
 		font-size: 4rem
+		font-weight: 900
 
-	#fakten
-		font-family: Coda, ui-monospace
+	#welt
 		display: flex
-		flex-direction: column
-		.fakt + .fakt
-			margin-top: 1rem
+		align-items: center
+		//height: 100%
+		width: 100%
+		max-width: 60%
+		#anzeige
+			position: relative
+			width: 100%
+			flex-grow: 1
+			height: 80vh
+			display: flex
+			align-items: center
+			justify-content: center
+			canvas
+				position: absolute
+		#fakten
+			font-family: Coda, ui-monospace
+			font-size: 1.2rem
+			display: flex
+			flex-direction: column
+			.fakt + .fakt
+				margin-top: 1rem
+
+	// * Kreis
+	&::before
+		content: ""
+		position: absolute
+		z-index: 1
+		height: var(--kreis-größe)
+		width: var(--kreis-größe)
+		bottom: 0
+		right: 0
+		border: var(--kreis-dicke) #ddd solid
+		border-radius: 50%
+		transform: var(--kreis-position)
