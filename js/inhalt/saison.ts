@@ -9,7 +9,7 @@ import {
 	DatabaseReference,
 	DataSnapshot, onChildRemoved
 } from "firebase/database";
-import Datenbank from "../firebase/datenbank";
+import {Datenbank} from "../firebase/datenbank";
 import m from "../formatierung/einheit/m";
 import {bereiteFaktVor, HTMLDataElementFakt, ladeFakt} from "./fakten";
 import load from "../load";
@@ -118,7 +118,7 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		const status = berechneStatus(saison, laufende, aktive, aktuelle)
 
 		// Container leeren
-		container?.innerHTML = ""
+		if (container != null) container.innerHTML = ""
 
 		// "Wird bald starten..."
 		if (status.zukuenftig) {

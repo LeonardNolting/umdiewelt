@@ -1,10 +1,11 @@
 import {get, onChildAdded, onValue, ref, remove, set, Unsubscribe, update} from "firebase/database";
-import Datenbank from "../firebase/datenbank";
-import Popup from "../popup";
+import {Datenbank} from "../firebase/datenbank";
+import {Popup} from "../popup";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-import {auth, authentifizieren, user} from "../firebase/authentifizierung";
+import {auth, authentifizieren} from "../firebase/authentifizierung";
+import global from "../global"
 import load from "../load";
 import {adminEmail} from "../konfiguration";
 
@@ -51,17 +52,17 @@ abstract class Kontrolle {
 		await this.init()
 	}
 
-	protected async abstract init(): Promise<void>
+	protected abstract async init(): Promise<void>
 
-	async abstract destroy(): Promise<void>
+	abstract async destroy(): Promise<void>
 
-	protected async abstract vorbereiten(): Promise<void>
+	protected abstract async vorbereiten(): Promise<void>
 
 	/**
 	 *
 	 * @returns Erfolgsnachricht
 	 */
-	protected async abstract submit(): Promise<string>
+	protected abstract async submit(): Promise<string>
 
 	async ausfuehren(mitWarnung: boolean = true) {
 		if (!this.isInit) return benachrichtigung("Bitte warten Sie noch einen Moment. Die Admin-Kontrollen werden gerade initialisiert.")
@@ -520,8 +521,8 @@ export default async () => {
 	}
 
 	document.getElementById("admin-anmelden").onclick = async () => {
-		if (user !== undefined) {
-			if (user !== null) {
+		if (global.user !== undefined) {
+			if (global.user !== null) {
 				// Muss Teilnehmer sein, sonst könnte nicht auf diesen Knopf geklickt werden -> abmelden
 				await load(signOut(auth))
 			}
@@ -531,7 +532,7 @@ export default async () => {
 			// Sonst halt warten und nochmal probieren...
 			const listener = onAuthStateChanged(auth, newUser => {
 				listener()
-				user = newUser
+				global.user = newUser
 				resolve()
 				Popup.oeffnen(popup)
 			})

@@ -1,7 +1,7 @@
 /**
  * Momentan kein Support für mehrere gleichzeitig geöffnete Popups
  */
-namespace Popup {
+export namespace Popup {
 	export const wrapper = document.getElementById("popups")
 	export const hintergrund = document.getElementById("popup-hintergrund")
 	export const popups = Array.from(document.querySelectorAll("#popups > *:not(#popup-hintergrund)")) as HTMLElement[]
@@ -21,20 +21,19 @@ namespace Popup {
 	}
 
 	export function alle() {
-		return popups
+		return Popup.popups
 	}
 
 	export function alleSchliessen() {
-		popups.forEach(popup => schliessen(popup))
+		Popup.popups.forEach(popup => schliessen(popup))
 	}
 
 	export function alleGeschlossen() {
-		return !popups.some(popup => popup.classList.contains("offen"))
+		console.log(Popup.popups)
+		return !Popup.popups.some(popup => popup.classList.contains("offen"))
 	}
 
 	export function offenes() {
-		return popups.find(popup => popup.classList.contains("offen"))
+		return Popup.popups.find(popup => popup.classList.contains("offen"))
 	}
 }
-
-export default Popup

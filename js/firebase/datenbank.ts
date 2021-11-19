@@ -118,5 +118,3 @@ export namespace Datenbank {
 		}
 	}
 }
-
-export default Datenbank

@@ -1,0 +1,238 @@
+<div id="popups">
+	<include src="html/popups/quellen.html"></include>
+
+	<include src="html/popups/admin/strecke-loeschen.html"></include>
+	<include src="html/popups/admin/testnachricht.html"></include>
+	<include src="html/popups/admin/saison-loeschen.html"></include>
+	<include src="html/popups/admin/saisonstart.html"></include>
+	<include src="html/popups/admin/saisonende.html"></include>
+	<include src="html/popups/admin/neue-schule.html"></include>
+	<include src="html/popups/admin/neue-klasse.html"></include>
+	<include src="html/popups/admin/neue-saison.html"></include>
+	<include src="html/popups/admin/anmeldung.html"></include>
+
+	<!--* Eintragen Popups -->
+	<form id="popup-eintragen-authentifizierung" class="container">
+		<select title="Schule" name="schule" required></select>
+		<select title="Klasse" name="klasse" required></select>
+
+		<div class="input-button">
+			<input autofocus
+			       name="passwort"
+			       type="password"
+			       minlength=6
+			       title="Passwort eingeben"
+			       placeholder="Passwort..."
+			       required />
+
+			<input type="submit" value="Bestätigen 🔑" name="weiter" />
+		</div>
+
+		<div class="angemeldet-bleiben">
+			<input name="angemeldet-bleiben"
+			       id="eintragen-authentifizierung-angemeldet-bleiben-checkbox"
+			       type="checkbox" />
+			<label for="eintragen-authentifizierung-angemeldet-bleiben-checkbox">Angemeldet bleiben</label>
+		</div>
+
+		<a class="hinweis" href="#faq">Warum benötige ich ein Passwort?</a>
+	</form>
+
+	<form id="popup-eintragen-name" data-schritt="1">
+		<div class="container">
+			<input name="name"
+			       type="text"
+			       placeholder="Vor- und Nachname"
+			       list="eintragen-fahrer"
+			       required
+			       pattern="^[a-zA-Z ,.'-]+$"
+			       autofocus
+			       autocomplete="name" />
+			<datalist id="eintragen-fahrer"></datalist>
+
+			<p class="nachricht" data-reaktion=""></p>
+
+			<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
+		</div>
+		<fieldset class="buttons">
+			<input type="button" name="direkt" value="🔢 Direkt eingeben">
+			<input type="submit" name="berechnen" value="📐 Berechnen">
+		</fieldset>
+	</form>
+
+	<form id="popup-eintragen-name-gegeben" data-schritt="1">
+		<div class="container">
+			<div class="authentifizierung">
+				<div class="info">
+					<p><span>Angemeldet als: </span><span class="name"></span></p>
+					<p class="zusatzinfo">
+						<span class="gruppe"><span class="schule"></span> <span class="klasse"></span></span>
+						<span class="strecke"></span>
+					</p>
+				</div>
+				<button name="abmelden">Abmelden</button>
+			</div>
+
+			<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
+		</div>
+		<fieldset class="buttons">
+			<input type="button" name="direkt" value="🔢 Direkt eingeben">
+			<input type="submit" name="berechnen" value="📐 Berechnen">
+		</fieldset>
+	</form>
+
+	<form id="popup-eintragen-berechnen" data-schritt="2">
+		<div class="container">
+			<div id="eintragen-berechnen-route">
+				<div class="eintragen-suche input-button">
+					<input name="a"
+					       id="eintragen-suche-a"
+					       type="text"
+					       placeholder="Startpunkt"
+					       autofocus
+					       autocomplete="street-address" />
+					<button tabindex="-1">Mein Standort</button>
+				</div>
+				<div class="eintragen-suche input-button">
+					<input name="b"
+					       id="eintragen-suche-b"
+					       type="text"
+					       placeholder="Ankunftspunkt"
+					       value="Gymnasium Höchstadt a. d. Aisch"
+					       autocomplete="street-address" />
+					<button tabindex="-1">Mein Standort</button>
+				</div>
+			</div>
+
+			<div id="eintragen-suche-merken">
+				<input id="eintragen-suche-merken-checkbox"
+				       name="speichern"
+				       type="checkbox"
+				       checked="checked"
+				       tabindex="-1" />
+				<label for="eintragen-suche-merken-checkbox">
+					Merken und nächstes Mal automatisch vorschlagen.
+					<i>Daten sind öffentlich sichtbar. Mehr Informationen im nächsten Schritt.</i>
+				</label>
+			</div>
+
+			<!--<div id="eintragen-berechnen-output">
+				<div>
+					<label for="eintragen-berechnen-strecke">Berechnete Strecke:</label>
+					<output id="eintragen-berechnen-strecke" for="eintragen-suche-a eintragen-suche-b">0m
+					</output>
+				</div>
+				<div>
+					<label for="eintragen-berechnen-gespart">Gespartes CO<sub>2</sub>:</label>
+					<output id="eintragen-berechnen-gespart" for="eintragen-suche-a eintragen-suche-b">0g
+					</output>
+				</div>
+			</div>-->
+
+			<!--<details id="eintragen-karte-knopf">
+				<summary tabindex="-1">Karte anzeigen</summary>
+				<div id="eintragen-karte"></div>
+			</details>-->
+		</div>
+
+		<fieldset class="buttons">
+			<input type="button" value="Zurück" name="zurueck" class="leer" />
+			<input type="submit" value="Weiter" name="weiter" />
+		</fieldset>
+	</form>
+
+	<form id="popup-eintragen-direkt" data-schritt="2">
+		<div class="container">
+			<label for="eintragen-km">Länge in <var>km</var>:</label>
+			<input name="kilometer"
+			       step="1"
+			       id="eintragen-km"
+			       type="number"
+			       min="2"
+			       max="100"
+			       placeholder="z.B. 20"
+			       autofocus
+			       required />
+		</div>
+
+		<fieldset class="buttons">
+			<input type="button" value="Zurück" name="zurueck" class="leer" />
+			<input type="submit" value="Weiter" name="weiter" />
+		</fieldset>
+	</form>
+
+	<form id="popup-eintragen-datenschutz" data-schritt="3">
+		<div class="container">
+			<h3>Datenschutz 🔒</h3>
+			<div id="eintragen-datenschutz-erklaerung">
+				<em>
+					Bei einer Veröffentlichung im Internet können die personenbezogenen Daten
+					(einschließlich Fotos) weltweit von beliebigen Personen abgerufen und gespeichert
+					werden. Die Daten können damit etwa auch über so genannte "Suchmaschinen" aufgefunden
+					werden. Dabei kann nicht ausgeschlossen werden, dass andere Personen oder Unternehmen
+					die Daten mit weiteren im Internet verfügbaren personenbezogenen Daten verknüpfen und
+					damit ein Persönlichkeitsprofil erstellen, die Daten verändern, zu anderen Zwecken
+					verwenden oder an andere Personen weitergeben.
+				</em>
+				<p>Konkret werden folgende Daten für alle öffentlich sichtbar gespeichert:</p>
+				<ul id="eintragen-datenschutz-daten">
+					<li>Name <sup>1</sup> <sup>2</sup>
+					</li>
+					<li>Strecken:
+						<ul>
+							<li>Zeitpunkt der Eintragung <sup>1</sup>
+							</li>
+							<li>Länge <sup>1</sup>
+							</li>
+							<li>falls gewünscht: Start- und Ankunftspunkt <sup>1</sup> <sup>2</sup>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul id="eintragen-datenschutz-fussnoten">
+					<li><sup>1</sup> Diese Information dient zur Anzeige
+						auf der Website.
+					</li>
+					<li><sup>2</sup> Diese Information wird für eine
+						bessere Benutzererfahrung gespeichert, z.B. zur Bereitstellung von
+						Autovervollständigung.
+					</li>
+				</ul>
+			</div>
+
+			<div id="eintragen-datenschutz-zustimmung">
+				<input id="eintragen-datenschutz-zustimmung-checkbox" type="checkbox" required autofocus />
+				<label for="eintragen-datenschutz-zustimmung-checkbox">
+					Ich bin mit der Speicherung und Verarbeitung meiner Daten einverstanden.
+				</label>
+			</div>
+		</div>
+
+		<fieldset class="buttons">
+			<input type="button" value="Zurück" name="zurueck" class="leer" />
+			<input type="submit" value="Speichern" name="weiter" />
+		</fieldset>
+	</form>
+
+	<form id="popup-eintragen-fertig">
+		<div class="container">
+			<h3>Vielen Dank für Ihren Beitrag! 👑</h3>
+			<p>Mit Ihrer Strecke von
+				<output id="eintragen-berechnen-strecke" for="eintragen-suche-a eintragen-suche-b">0m</output>
+				haben Sie
+				<output id="eintragen-berechnen-gespart" for="eintragen-suche-a eintragen-suche-b">0g</output>
+				CO<sub>2</sub> gespart und uns geholfen, ein Stück näher an unser Ziel zu kommen! 💪
+			</p>
+			<h4>Helfen Sie uns weiter!</h4>
+			<p>Falls ... Mögliches weiteres Interesse des Lesers etwas nutzen ... Wie weiter helfen? Spenden?
+				Teilen (Twitter/Facebook...)? Mehr Leute einladen können? ... 📣</p>
+		</div>
+		<fieldset class="buttons">
+			<input type="submit" value="Zurückkehren" name="schliessen" autofocus />
+		</fieldset>
+	</form>
+
+	<include src="html/popups/cookies.html"></include>
+
+	<div id="popup-hintergrund"></div>
+</div>

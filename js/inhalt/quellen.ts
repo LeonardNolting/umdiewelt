@@ -1,5 +1,5 @@
 import quellen from "../quellen";
-import Popup from "../popup";
+import {Popup} from "../popup";
 
 const liste = document.getElementById("quellen-anzeige")
 const popup = document.getElementById("popup-quellen")

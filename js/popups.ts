@@ -1,4 +1,4 @@
-import Popup from "./popup";
+import {Popup} from "./popup";
 
 export default () => {
 	Popup.hintergrund.addEventListener("click", () => {

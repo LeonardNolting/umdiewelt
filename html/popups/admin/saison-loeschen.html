@@ -1,0 +1,30 @@
+<form id="popup-admin-saison-loeschen">
+	<div class="container">
+		<h3>Aktuelle Saison löschen</h3>
+		<div class="hinweis hinweis-gross">
+			<span><b>Diese Aktion lässt sich nicht rückgängig machen.</b> Es werden alle Daten, die in Verbindung mit dieser Saison stehen, gelöscht - als hätte die Saison nie stattgefunden. Daten der letzten Saison lassen sich so nicht wiederherstellen. Gelöscht werden folgende</span>
+			<details>
+				<summary>Daten:</summary>
+				<ul>
+					<li>einzelne Klassen</li>
+					<li>einzelne Teilnehmer</li>
+					<li>einzelne Eintragungen</li>
+					<li>wenige Metadaten</li>
+				</ul>
+			</details>
+		</div>
+		<div class="zustimmung">
+			<input name="zustimmung"
+			       id="admin-saison-loeschen-zustimmung-checkbox"
+			       type="checkbox"
+			       required
+			       autofocus />
+			<label for="admin-saison-loeschen-zustimmung-checkbox">Habe ich verstanden.</label>
+		</div>
+	</div>
+
+	<fieldset class="buttons">
+		<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
+		<input type="submit" value="Saison löschen" name="submit" class="danger" />
+	</fieldset>
+</form>

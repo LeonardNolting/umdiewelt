@@ -1,19 +1,33 @@
 import step from "./step";
-import Cookie from "./cookie";
-import Popup from "./popup";
+import {Cookie} from "./cookie";
+import {Popup} from "./popup";
 
-namespace Cookies {
+export namespace Cookies {
 	const popup = document.getElementById("popup-cookies");
 
 	enum Einstellung {
 		// "as any" erlaubt index access operator (CookieEinstellung[...])
 		// s. https://stackoverflow.com/questions/62215454/how-to-get-enum-key-by-value-in-typescript
 
-		ALLE = <any>"alle",
-		NOTWENDIG = <any>"notwendig",
-		KEINE = <any>"keine",
+		// as any:
+		// ALLE = "alle" as any,
+		// oder:
+		// ALLE = <any>"alle",
+		// aber momentan nicht aktiviert, da feature in neuem compiler von parcel v2 (noch) nicht implementiert
+		ALLE = "alle",
+		NOTWENDIG = "notwendig",
+		KEINE = "keine",
 		UNDEFINED = 0
 	}
+
+	// noinspection TypeScriptValidateTypes
+	/**
+	 * ersetzt temporär diese Syntax:
+	 * `Einstellung[name]`
+	 * (s.o.)
+	 * @param name
+	 */
+	const getEinstellung = name => Object.keys(Einstellung)[Object.values(Einstellung).indexOf(name)]
 
 	export let einstellung: Einstellung = Einstellung.UNDEFINED
 	export let optional = () => einstellung === Einstellung.ALLE
@@ -26,8 +40,8 @@ namespace Cookies {
 	const setzen = (einstellung: Einstellung) => {
 		if (einstellung === null) return
 		Cookies.einstellung = einstellung
-		if (notwendig()) Cookie.set("cookies", Einstellung[einstellung])
-		step("Cookie-Einstellung gesetzt: " + Einstellung[einstellung])
+		if (notwendig()) Cookie.set("cookies", getEinstellung(einstellung))
+		step("Cookie-Einstellung gesetzt: " + getEinstellung(einstellung))
 		return einstellung
 	}
 
@@ -38,7 +52,7 @@ namespace Cookies {
 	export const ueberpruefen = async (): Promise<Einstellung> => {
 		step("Überprüft Cookie-Einstellung")
 
-		const gespeichert = (Einstellung[Cookie.get<string>("cookies")] as Einstellung) || Einstellung.UNDEFINED;
+		const gespeichert = (getEinstellung(Cookie.get<string>("cookies")) as Einstellung) || Einstellung.UNDEFINED;
 		return gespeichert === Einstellung.UNDEFINED || gespeichert === Einstellung.KEINE ?
 			// Kein/komischer gespeicherter Wert: fragen
 			fragen() :
@@ -47,41 +61,44 @@ namespace Cookies {
 			setzen(gespeichert);
 	}
 
+
 	/**
 	 * Öffnet immer ein Popup um Einstellung evtl. zu überdenken
 	 */
-	export const fragen = (abbrechenMoeglich: boolean = false) => new Promise<Einstellung>(resolve => {
-		step("Fragt nach Cookie-Einwilligung")
+	export function fragen(abbrechenMoeglich: boolean = false) {
+		return new Promise<Einstellung>(resolve => {
+			step("Fragt nach Cookie-Einwilligung")
 
-		const button = (
-			einstellung: Einstellung,
-			onclick: (event: MouseEvent) => void = () => {
+			const button = (
+				einstellung: Einstellung,
+				onclick: (event: MouseEvent) => void = () => {
+				}
+			) => {
+				const element = document.getElementById("popup-cookies-" + (einstellung || "abbrechen")) as HTMLButtonElement
+				element.onclick = event => {
+					// Verhindere versehentliches doppeltes Klicken
+					element.disabled = true
+					Popup.schliessen(popup)
+					popup.classList.remove("wichtig", "wird-resetten")
+					onclick(event)
+					element.disabled = false
+					if (einstellung !== null) Cookie.killAll()
+					resolve(setzen(einstellung))
+				}
 			}
-		) => {
-			const element = document.getElementById("popup-cookies-" + (einstellung || "abbrechen")) as HTMLButtonElement
-			element.onclick = event => {
-				// Verhindere versehentliches doppeltes Klicken
-				element.disabled = true
-				Popup.schliessen(popup)
-				popup.classList.remove("wichtig", "wird-resetten")
-				onclick(event)
-				element.disabled = false
-				if (einstellung !== null) Cookie.killAll()
-				resolve(setzen(einstellung))
-			}
-		}
 
-		if (abbrechenMoeglich) button(null)
-		button(Einstellung.ALLE)
-		button(Einstellung.NOTWENDIG)
-		button(Einstellung.KEINE, window.close)
+			if (abbrechenMoeglich) button(null)
+			button(Einstellung.ALLE)
+			button(Einstellung.NOTWENDIG)
+			button(Einstellung.KEINE, window.close)
 
-		if (!abbrechenMoeglich) popup.classList.add("wichtig")
-		if (Cookie.get("cookies")) popup.classList.add("wird-resetten")
+			if (!abbrechenMoeglich) popup.classList.add("wichtig")
+			if (Cookie.get("cookies")) popup.classList.add("wird-resetten")
 
-		// Alles vorbereitet, jetzt öffnen ...
-		Popup.oeffnen(popup)
-	})
+			// Alles vorbereitet, jetzt öffnen ...
+			Popup.oeffnen(popup)
+		});
+	}
 
 	/**
 	 * TODO
@@ -92,5 +109,3 @@ namespace Cookies {
 		// TODO
 	}
 }
-
-export default Cookies

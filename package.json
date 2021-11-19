@@ -16,20 +16,34 @@
 		"three": "^0.132.2"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.14.3",
 		"@fortawesome/fontawesome-free": "^5.15.3",
 		"@googlemaps/js-api-loader": "^1.11.4",
+		"@parcel/transformer-glsl": "^2.0.1",
+		"@parcel/transformer-sass": "^2.0.1",
 		"@types/google.maps": "^3.44.6",
 		"@types/three": "^0.131.0",
+		"autoprefixer": "^10.4.0",
 		"awesome-notifications": "^3.1.1",
 		"firebase": "^9.0.0-beta.2",
 		"glslify-bundle": "^5.1.1",
 		"glslify-deps": "^1.3.2",
-		"parcel-bundler": "1.12.3",
+		"parcel": "^2.0.1",
+		"postcss": "^8.3.11",
+		"postcss-normalize": "^10.0.1",
+		"posthtml-include": "^1.7.2",
+		"sass": "^1.43.4",
 		"three.meshline": "^1.3.0",
 		"typescript": "^4.2.4"
 	},
 	"browserslist": [
-		"last 1 chrome versions"
-	]
+		"defaults",
+		"last 2 versions",
+		"cover 99.5% in DE"
+	],
+	"postcss": {
+		"plugins": {
+			"postcss-normalize": true,
+			"autoprefixer": true
+		}
+	}
 }

@@ -1,17 +1,18 @@
-import Popup from "./popup";
-import Datenbank from "./firebase/datenbank";
+import {Popup} from "./popup.ts";
+import {Datenbank} from "./firebase/datenbank";
 import {get, onChildAdded, onValue, push, ref, serverTimestamp, set, Unsubscribe} from "firebase/database";
 import Route from "./model/route";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import benachrichtigung from "./benachrichtigungen/benachrichtigung";
 import {adminEmail} from "./konfiguration";
-import {auth, authentifizieren, user} from "./firebase/authentifizierung";
-import Cookie from "./cookie";
+import {auth, authentifizieren} from "./firebase/authentifizierung";
+import {Cookie} from "./cookie";
 import load from "./load";
-import Cookies from "./cookies";
+import {Cookies} from "./cookies";
 import m from "./formatierung/einheit/m";
 import zahl from "./formatierung/zahl";
 import {eintragenTextSetzen} from "./inhalt/eintragen";
+import global from "./global"
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
@@ -232,14 +233,14 @@ export class Eintragung {
 		if (this.offen) return
 
 		// Auth state ist schon bekannt
-		if (user !== undefined) {
-			if (user !== null && user.email === adminEmail) {
+		if (global.user !== undefined) {
+			if (global.user !== null && global.user.email === adminEmail) {
 				// Eingelogged aber als Admin...
 				await signOut(auth)
-				user = null // onAuthStateChanged ist evtl. etwas verspätet
+				global.user = null // onAuthStateChanged ist evtl. etwas verspätet
 			}
 
-			if (user === null) {
+			if (global.user === null) {
 				// Muss sich anmelden
 
 				// Vorab vorbereiten, damit Eintragung.laufend und Eintragung.leer gesetzt werden
@@ -271,7 +272,7 @@ export class Eintragung {
 					await this.popupOeffnen(popups.nameGegeben)
 				} else {
 					// Ist schon angemeldet, es fehlt aber der Cookie, weshalb nicht klar ist, bei welcher Klasse der Nutzer angemeldet ist
-					// Nutzer wollte wahrscheinlich angemeldet bleiben, da ja user !== null, deswegen angemeldet bleiben auf checked setzen
+					// Nutzer wollte wahrscheinlich angemeldet bleiben, da ja global.user !== null, deswegen angemeldet bleiben auf checked setzen
 					(popups.authentifizierung.element["angemeldet-bleiben"] as HTMLInputElement).checked = true
 					// TODO schule & klasse herausfinden durch querying -> wird automatisch ausgefüllt
 					// this.schule =
@@ -284,7 +285,7 @@ export class Eintragung {
 			// Sonst halt warten und nochmal probieren...
 			const listener = onAuthStateChanged(auth, newUser => {
 				listener()
-				user = newUser
+				global.user = newUser
 				resolve()
 				this.oeffnen()
 			})
@@ -373,7 +374,7 @@ export class Eintragung {
 
 	async speichern() {
 		if (!this.schule || !this.klasse) throw new Error("Noch nicht angemeldet.")
-		if (!user) throw new Error("Authentifizierung abgelaufen.")
+		if (!global.user) throw new Error("Authentifizierung abgelaufen.")
 		if (!this.name) throw new Error("Name noch nicht eingetragen.")
 		if (!this.meter) throw new Error("Länge noch nicht eingetragen.")
 		if (!this.datenschutz) throw new Error("Datenschutzerklärung wurde noch nicht zugestimmt.")

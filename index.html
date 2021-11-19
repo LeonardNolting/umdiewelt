@@ -12,7 +12,6 @@
 		<meta property="og:url" content="">
 		<meta property="og:image" content="">
 
-		<link rel="manifest" href="site.webmanifest">
 		<link rel="apple-touch-icon" href="icon.png">
 		<!-- Place favicon.ico in the root directory -->
 
@@ -21,170 +20,28 @@
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,400&display=swap"
 		      rel="stylesheet">
 
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/main.css">
+		<!--		<link rel="stylesheet" href="css/normalize.css">-->
+		<link rel="stylesheet" href="sass/main.sass">
+		<!--		<link rel="stylesheet" href="css/main.css">-->
 
 		<meta name="theme-color" content="#fafafa">
 	</head>
 
 	<body>
-		<h2 id="slogan">
-			Auf dem <span class="fahrradweg">Fahr&shy;rad&shy;weg</span> zu mehr <span class="klimaschutz">Klima&shy;schutz</span>.
-		</h2>
-
-		<div id="willkommen">
-			<div id="vorstellung">
-				<div id="welt"></div>
-				<h1 id="name">Um Die Welt</h1>
-			</div>
-			<div id="fakten" class="fakten verspaetet">
-				<data class="fakt" value="0" data-einheit="g" data-bezeichnung="gespart">
-					<span>Ein&shy;ge&shy;spartes CO<sub>2</sub><a href="#quellen" class="sternchen">*</a></span>
-				</data>
-				<data class="fakt bigger" value="0" data-einheit="m" data-bezeichnung="strecke">
-					Zu&shy;rück&shy;ge&shy;legte Strecke
-				</data>
-				<data class="fakt" value="0" data-bezeichnung="fahrer">
-					Betei&shy;lig&shy;te jähr&shy;lich
-				</data>
-			</div>
-		</div>
-
-		<div id="scrollable">
-			<ul id="inhaltsverzeichnis">
-				<li><a href="#willkommen">Anzeige</a></li>
-				<li><a href="#ansprache">Unser Anliegen</a></li>
-				<li><a href="#ablauf">Wie funktioniert's?</a></li>
-				<li><a href="#faq">FAQ</a></li>
-				<!-- Wie kann ich mitmachen? Sind E-Bikes erlaubt? Ich möchte auch so helfen können. -->
-				<li><a href="#saison">Saisons</a></li>
-				<li><a href="#bestenliste">Bestenliste</a></li>
-				<li><a href="#quellen">Quellen</a></li>
-
-				<li class="abseits"><a href="#feed">Feed</a></li>
-
-				<li id="eintragen" class="abseits"><a href="#eintragen"></a></li>
-			</ul>
-			<div id="trennung"></div>
-			<div id="inhalt">
-				<section id="browser-aktualisierung"></section>
-
-				<div class="container max">
-					<div id="ansprache">
-						<h3>Hallo Fahrradfahrer!</h3>
-						<p></p>
-						<p>"Um Die Welt" ist damit das Dritte in einer Reihe von Projekten rund ums Thema Fahrrad fahren
-							und
-							Umweltschutz. <!-- TODO Link zu Zeitungsartikel einfügen -->Zuvor haben wir mit unseren
-							ersten
-							Projekten "Sternfahrten" und "Fridays for Fahrrad - Bergwacht" für ... gesorgt. Wir hoffen,
-							mit
-							eurer Hilfe auch dieses Projekt einen Erfolg werden zu lassen!</p>
-						<h4>So nimmst du teil</h4>
-						<p>Du hast bereits von uns <!-- TODO uns oder Klassenlehrer? --> deine Anmeldedaten mitgeteilt
-							bekommen und kannst dich somit hier <!-- TODO link -->
-							<a href="#eintragen">anmelden</a>.</p>
-						<p>Weißt du deine Daten nicht mehr, frage ... <!-- TODO Klassenlehrer fragen? oder was?--></p>
-						<p>Hast du dich angemeldet, musst du nur noch fleißig in die Pedale treten. Das Eintragen von
-							Strecken ist ganz einfach:
-							<a href="">Lass uns dir zeigen, wie es geht.</a> <!-- TODO Wie? Video? --></p>
-						<h4>Jeder kann helfen</h4>
-						<p>Auch wenn du nicht direkt Kilometer sammeln kannst, ist deine Unterstützung wertvoll.</p>
-						<p>Unsere Sponsoren ermöglichen es uns,
-							<!-- TODO was? Geld in guten Händen, ... alles guter Zweck ...? -->. Ihre Hilfe gibt uns
-							zusätzliche Motivation.</p>
-						<p>Wir freuen uns über finanzielle Unterstützung in jeder Höhe. ... typisch 1€/gefahrener
-							Kilometer
-							beitragen als Elternteil / was auch immer ...
-							<!-- TODO private Unterstützung ausarbeiten --></p>
-						<p>Hilf uns auch, indem du anderen von unserem Vorhaben erzählst. Je mehr aufmerksam wir
-							erreichen,
-							auf desto mehr Sponsoren dürfen wir hoffen</p>
-						<p>- anderen erzählen, - spenden, - sponsern (auch Großeltern, ...), - selber mit dem Fahrrad
-							fahren?, - selber umweltfreundlicher verhalten?</p>
-
-
-						<p>Umwelt problematisch</p>
-						<p>viele Wege</p>
-						<p>möchten zeigen, dass jeder helfen kann</p>
-						<p>haben schon <a href="https://gymnasium-hoechstadt.de">andere Aktionen
-							<!-- TODO tooltip "Am ... initiierte das GH die Sternfahrten *Bild* --></a> gestartet</p>
-						<p>neu: laden alle Schüler der [dynamisch: Schulen] ein, möglichst viele Strecken mit dem
-							Fahrrad
-							zurückzulegen!</p>
-						<p>Natürlich auch Spaß und Zusammenhalt und Schulfamilie und alles ...</p>
-						<p>Erfahren Sie, <a href="#ablauf">wie's funktioniert</a> und was wir dadurch erreichen.</p>
-						<p>Danke an alle Beteiligten!</p>
-					</div>
+		<header>
+			<h2>Um Die Welt</h2>
+		</header>
+		<main>
+			<section id="willkommen">
+				<h1>Hallo Fahrradfahrer!</h1>
+				<div id="welt">
+					<include src="html/fakten.html"></include>
 				</div>
-				<ul id="fahrer" class="horizontal">
-					<li>Leonard Nolting</li>
-					<li>Thomas Nolting</li>
-					<li>Noch Jemand</li>
-					<li>Und Nochjemand</li>
-				</ul>
-				<figure>
-					<!--				<figcaption>Ihr P-Seminar *Name*</figcaption>-->
-					<!--suppress HtmlUnknownAttribute -->
-					<img loading="lazy"
-					     src="./img/Gruppe.svg"
-					     alt="" />
-				</figure>
-				<div class="container max">
-					<div id="ablauf">
-						<h3>Wie's funktioniert:</h3>
-						<div class="schritt">
-							<p>"Mark" fährt heute mit dem Fahrrad zur Schule.</p>
-						</div>
-						<div class="schritt">
-							<p>Dort angekommen trägt er seine Strecke in die Website ein.</p>
-							<p class="hinweis">
-								Zur Aufrechterhaltung der Fairness werden besonders lange Strecken überprüft.
-							</p>
-						</div>
-						<div class="schritt">
-							<p>Für jeden eingetragenen Kilometer spendet uns die Sparkasse 1 Cent 💸</p>
-						</div>
-						<div class="schritt">
-							<p>Zum Saisonende wird das gesammelte Geld an ... gespendet</p>
-							<p>Dort können sich dann Kinder Fahrräder kaufen.</p>
-							<p>So können wir momentan schon x Fahrräder finanzieren!</p>
-							<p>Und ganz nebenbei haben wir dem Klimawandel entgegengewirkt.</p>
-						</div>
-						<div class="fazit">
-							<p>Es lohnt sich also jede eingetragene Strecke!</p>
-							<p><a href="#mitmachen">Erfahre, wie auch DU helfen kannst.</a></p>
-						</div>
-					</div>
+			</section>
+			<section id="inhalt">
+				<include src="html/ansprache.html"></include>
 
-					<div id="faq">
-						<details>
-							<summary>Wie kann ich mitmachen?</summary>
-							<p></p>
-						</details>
-						<details>
-							<summary>Ich kann nicht mitmachen, möchte aber auch so helfen können.</summary>
-							<p></p>
-						</details>
-						<details>
-							<summary>Sind E-Bikes erlaubt?</summary>
-							<p></p>
-						</details>
-						<details>
-							<summary>Wie wird mein Kind im Straßenverkehr geschützt?</summary>
-							<p>Anders als bei unseren vorigen Aktionen, ist diese dezentral organisiert, weshalb keine
-								besondere Aufsicht seitens der Schule geplant ist.</p>
-							<p>Wir empfehlen allerdings dringend, dass Sie sich und ihr Kind mit den
-								<a href="https://www.xn--polizeifrdich-3ob.de/deine-themen/verkehr/fahrradfahrer/">Sicherheitsempfehlungen
-									der Polizei</a> vertraut machen.</p>
-						</details>
-						<details>
-							<summary>Kann man nicht ganz einfach schummeln?</summary>
-							<p>... Goodwill ... keine Gewinne ... zufällige Überprüfungen ... besonders lange Strecken
-								werden überprüft ... Ausschluss bei Schummelversuchen? ...</p>
-						</details>
-					</div>
-				</div>
+				<include src="html/faq.html"></include>
 
 				<div id="saisons-wrapper">
 					<a href="#saison" id="saison"></a>
@@ -193,577 +50,75 @@
 				</div>
 
 				<div id="bestenliste-wrapper" class="container max versteckt">
-					<p id="feed-hinweis" class="wussten-sie-schon">
-						Im <a href="#feed">Feed</a> sehen Sie alle Aktivitäten auf dieser Seite.
+					<p id="instagram" class="wussten-sie-schon"> <!-- alte id: feed-hinweis-->
+						Auf unserem Instagram-Kanal
+						<a href="https://www.instagram.com/one.car.less/"><i>one.car.less</i></a> findest du aktuelle
+						Informationen und viel mehr, z.B. von uns getestete Schulwege.
 					</p>
 					<h3><a href="#bestenliste" id="bestenliste">Aktivste Teilnehmer:</a></h3>
 					<ul id="bestenliste-anzeige"></ul>
 					<div class="keine-teilnehmer">
-						<span>Noch keine Teilnehmer! <a href="#mitmachen">Seien Sie der Erste.</a></span>
+						<span>Noch keine Teilnehmer! <a href="#teilnahme">Seien Sie der Erste.</a></span>
 					</div>
 					<button class="links leer" disabled>Mehr laden</button>
 				</div>
 				<div id="bestenliste-kurve"></div>
+				<!-- TODO Danksagung anpassen, solange noch keine Strecken da sind! -->
+				<a id="danksagung" href="#danksagung"></a>
+				<p id="danksagung1" class="safe">Wir danken allen fleißigen Fahrradfahrern, euer Einsatz ist
+					großartig!</p>
+				<ul id="fahrer" class="horizontal">
+					<li>Leonard Nolting</li>
+					<li>Thomas Nolting</li>
+					<li>Noch Jemand</li>
+					<li>Und Nochjemand</li>
+				</ul>
+				<p id="danksagung2" class="safe">Ein großer Dank geht auch an unsere Schulleitung unter Leitung von OStD
+					Roland Deinzer. Allen voran <!-- TODO Herrn Hipp und restlichem P-Seminar danken --></p>
 
-				<p id="verweis" class="safe">Sehen Sie sich <a href="https://gymnasium-hoechstadt.de/schule/aktuelles/"
-				                                               target="_blank">weitere
+				<p id="verweis" class="safe">Sieh dir <a href="https://gymnasium-hoechstadt.de/schule/aktuelles/"
+				                                         target="_blank">weitere
 					Projekte</a> des Gymnasium
 					Höchstadt an.</p>
+			</section>
+		</main>
 
-				<div class="container">
-					<hr class="admin-exklusive" />
-					<a href="#admin" id="admin"></a>
-					<form id="admin-anzeige" class="verspaetet admin-exklusive">
-						<fieldset disabled>
-							<button name="neue-saison">Neue Saison anlegen</button>
-							<button name="neue-klasse">Klasse eintragen</button>
-							<button name="saisonstart">Saisonstart festlegen/verändern</button>
-							<button name="saisonende">Saisonende festlegen/verändern</button>
-							<button name="saison-loeschen">Aktuelle Saison löschen</button>
-							<button name="strecke-loeschen">Eine Strecke löschen</button>
-							<button name="testnachricht">Testnachricht senden</button>
-							<button name="neue-schule">Schule hinzufügen</button>
-						</fieldset>
-					</form>
+		<footer>
+			<h2 id="slogan">
+				Auf dem <span class="fahrradweg">Fahr&shy;rad&shy;weg</span> zu mehr <span class="klimaschutz">Klima&shy;schutz</span>.
+			</h2>
+			<p id="copyright">&copy; 2021 Leonard Nolting</p>
+			<ul id="links" class="horizontal">
+				<li id="quellen">Quellen</li>
+				<li id="cookies">Cookies</li>
+				<li><a href="#kontakt">Kontakt</a></li>
+				<li id="github">
+					<a href="https://github.com/LeonardNolting/umdiewelt">Quellcode</a>
+				</li>
+				<li id="impressum">
+					<a href="impressum.html">Impressum</a>
+				</li>
+				<li id="datenschutzerklaerung">
+					<a href="datenschutzerklaerung.html">Datenschutz</a>
+				</li>
+				<li id="admin-anmelden" class="nicht-admin-exklusive">
+					<button>Admin</button>
+				</li>
+				<li id="admin-abmelden" class="admin-exklusive">
+					<button>Abmelden</button>
+				</li>
+			</ul>
 
-					<hr />
+			<include src="html/admin.html"></include>
+		</footer>
 
-					<div id="fusszeile">
-						<p id="copyright">&copy; 2021 Leonard Nolting</p>
-						<ul id="links" class="horizontal">
-							<li id="quellen">Quellen</li>
-							<li id="cookies">Cookies</li>
-							<li id="kontakt">
-								<a href="mailto:hip@gy-ho.de?subject=Um%20Die%20Welt:%20">Kontakt</a>
-							</li>
-							<li id="github">
-								<a href="https://github.com/LeonardNolting/umdiewelt">Quellcode</a>
-							</li>
-							<li id="impressum">
-								<a href="impressum.html">Impressum</a>
-							</li>
-							<li id="datenschutzerklaerung">
-								<a href="datenschutzerklaerung.html">Datenschutz</a>
-							</li>
-							<li id="admin-anmelden" class="nicht-admin-exklusive">
-								<button>Admin</button>
-							</li>
-							<li id="admin-abmelden" class="admin-exklusive">
-								<button>Abmelden</button>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+		<include src="html/popups.html"></include>
 
-		<div id="popups">
-			<!-- Quellen -->
-			<div id="popup-quellen">
-				<div class="container">
-					<h3>Quellen</h3>
-					<ul id="quellen-anzeige"></ul>
-
-					<h3>Bilder</h3>
-					<div id="bildquellen-anzeige">
-						<p>
-							Fahrrad-Icons erstellt von
-							<a href="https://www.freepik.com" title="Freepik">Freepik</a>,
-							<a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a>,
-							<a href="" title="ultimatearm">ultimatearm</a> und
-							<a href="" title="Skyclick">Skyclick</a>
-							bereitgestellt auf <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
-						</p>
-						<p>
-							Restliche Icons erstellt von
-							<a href="https://www.freepik.com" title="Freepik">Freepik</a> und
-							<a href="https://www.flaticon.com/authors/dighital" title="Dighital">Dighital</a>
-							bereitgestellt auf <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-						</p>
-						<p>
-							Bild der Erde von
-							<a href="https://visibleearth.nasa.gov/images/73751/july-blue-marble-next-generation-w-topography-and-bathymetry/73753l">
-								Reto Stöckli, NASA Earth Observatory
-							</a> (Juli)
-						</p>
-					</div>
-				</div>
-				<div class="buttons">
-					<button id="popup-quellen-fertig" title="Fertig gelesen">Zurück</button>
-				</div>
-			</div>
-
-			<!-- Admin -->
-			<!-- Strecke löschen -->
-			<form id="popup-admin-strecke-loeschen">
-				<div class="container">
-					<h3>Strecke löschen</h3>
-
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-					<input type="submit" value="Strecke löschen" name="submit" class="danger" />
-				</fieldset>
-			</form>
-
-			<!-- Testnachricht -->
-			<form id="popup-admin-testnachricht">
-				<div class="container">
-					<h3>Testnachricht senden</h3>
-					<input type="text"
-					       autofocus
-					       placeholder="Inhalt"
-					       required
-					       value="Dies ist eine Textnachricht."
-					       name="nachricht" />
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-					<input type="submit" value="Senden" name="submit" />
-				</fieldset>
-			</form>
-
-			<!-- Saison löschen -->
-			<form id="popup-admin-saison-loeschen">
-				<div class="container">
-					<h3>Aktuelle Saison löschen</h3>
-					<div class="hinweis hinweis-gross">
-						<span><b>Diese Aktion lässt sich nicht rückgängig machen.</b> Es werden alle Daten, die in Verbindung mit dieser Saison stehen, gelöscht - als hätte die Saison nie stattgefunden. Daten der letzten Saison lassen sich so nicht wiederherstellen. Gelöscht werden folgende</span>
-						<details>
-							<summary>Daten:</summary>
-							<ul>
-								<li>einzelne Klassen</li>
-								<li>einzelne Teilnehmer</li>
-								<li>einzelne Eintragungen</li>
-								<li>wenige Metadaten</li>
-							</ul>
-						</details>
-					</div>
-					<div class="zustimmung">
-						<input name="zustimmung"
-						       id="admin-saison-loeschen-zustimmung-checkbox"
-						       type="checkbox"
-						       required
-						       autofocus />
-						<label for="admin-saison-loeschen-zustimmung-checkbox">Habe ich verstanden.</label>
-					</div>
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-					<input type="submit" value="Saison löschen" name="submit" class="danger" />
-				</fieldset>
-			</form>
-
-			<!-- Saisonstart -->
-			<form id="popup-admin-saisonstart">
-				<div class="container">
-					<h3>Saisonstart festlegen</h3>
-					<input type="datetime-local"
-					       name="zeit"
-					       required
-					       autofocus />
-					<p class="hinweis">Der Saisonstart darf frühestens in einer Stunde stattfinden und darf nicht weiter
-						als 29 Tage in der Zukunft liegen.</p>
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-					<input type="submit" value="Eintragen" name="submit" />
-				</fieldset>
-			</form>
-
-			<!-- Saisonende -->
-			<form id="popup-admin-saisonende">
-				<div class="container">
-					<h3>Saisonende festlegen</h3>
-					<input type="datetime-local"
-					       name="zeit"
-					       required
-					       autofocus />
-					<p class="hinweis">Das Saisonende darf frühestens in einer Stunde stattfinden und darf nicht weiter
-						als 29 Tage in der Zukunft liegen.</p>
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-					<input type="submit" value="Eintragen" name="submit" />
-				</fieldset>
-			</form>
-
-			<!-- Neue Schule -->
-			<form id="popup-admin-neue-schule">
-				<div class="container">
-					<h3>Neue Schule eintragen</h3>
-					<input type="text"
-					       name="name"
-					       required
-					       placeholder="Name der Schule"
-					       autocapitalize="words"
-					       autocomplete="organization"
-					       autofocus />
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-					<input type="submit" value="Eintragen" name="submit" />
-				</fieldset>
-			</form>
-
-			<!-- Neue Klasse -->
-			<form id="popup-admin-neue-klasse" autocomplete="off">
-				<div class="container">
-					<h3>Neue Klasse eintragen</h3>
-					<select name="schule" required></select>
-					<input type="text" name="name" required placeholder="Name der Klasse" />
-					<input type="email" name="email" required placeholder="E-Mail für das Konto" />
-					<input type="password"
-					       name="password"
-					       minlength="6"
-					       required
-					       placeholder="Passwort für das Konto"
-					       autocomplete="new-password" />
-					<input type="number" name="pot-anzahl-fahrer" required min="1" placeholder="Klassengröße" />
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-					<input type="submit" value="Eintragen" name="submit" />
-				</fieldset>
-			</form>
-
-			<!-- Neue Saison -->
-			<form id="popup-admin-neue-saison">
-				<div class="container">
-					<h3>Neue Saison eintragen</h3>
-					<div class="name">
-						<label for="admin-neue-saison-name">Saisonname:</label>
-						<input name="name" id="admin-neue-saison-name" type="text" disabled required />
-					</div>
-					<p class="hinweis schulen-hinweis">Teilnehmende Schulen können später nicht mehr verändert
-						werden.</p>
-					<ul class="schulen"></ul>
-					<div class="runden">
-						<label for="admin-neue-saison-runden">Anzahl Runden:</label>
-						<input name="runden" id="admin-neue-saison-runden" type="number" min="1" value="1" required />
-					</div>
-					<div class="hinweis hinweis-gross daten-hinweis">
-						<div>
-							<span>Dies löscht alle "aktuellen"</span>
-							<details>
-								<summary>Daten:</summary>
-								<ul>
-									<li>einzelne Klassen</li>
-									<li>einzelne Teilnehmer</li>
-									<li>einzelne Eintragungen</li>
-									<li>wenige Metadaten</li>
-								</ul>
-							</details>
-						</div>
-						<div>
-							<span>Nicht gelöscht werden diese</span>
-							<details>
-								<summary>Daten:</summary>
-								<ul>
-									<li>Allgemeine Daten</li>
-									<li>alte Saisons (inkl. der <em>noch</em> Aktuellen) mitsamt des Zeitraums, der
-										Statistiken
-										und der teilnehmenden Schulen
-									</li>
-									<li>Schulen</li>
-								</ul>
-							</details>
-						</div>
-					</div>
-
-					<div class="zustimmung">
-						<input name="zustimmung"
-						       id="admin-neue-saison-zustimmung-checkbox"
-						       type="checkbox"
-						       required />
-						<label for="admin-neue-saison-zustimmung-checkbox">Habe ich verstanden.</label>
-					</div>
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Abbrechen" name="abbrechen" class="links leer" />
-					<input type="submit" value="Eintragen" name="submit" />
-				</fieldset>
-			</form>
-
-			<!-- Admin-Anmeldung -->
-			<form id="popup-anmelden-admin" class="input-button">
-				<input autofocus
-				       name="passwort"
-				       type="password"
-				       minlength=6
-				       title="Passwort eingeben"
-				       placeholder="Passwort..."
-				       required />
-				<input type="submit" value="Bestätigen 🔑" name="submit" />
-			</form>
-
-			<!--* Eintragen Popups -->
-			<form id="popup-eintragen-authentifizierung" class="container">
-				<select title="Schule" name="schule" required></select>
-				<select title="Klasse" name="klasse" required></select>
-
-				<div class="input-button">
-					<input autofocus
-					       name="passwort"
-					       type="password"
-					       minlength=6
-					       title="Passwort eingeben"
-					       placeholder="Passwort..."
-					       required />
-
-					<input type="submit" value="Bestätigen 🔑" name="weiter" />
-				</div>
-
-				<div class="angemeldet-bleiben">
-					<input name="angemeldet-bleiben"
-					       id="eintragen-authentifizierung-angemeldet-bleiben-checkbox"
-					       type="checkbox" />
-					<label for="eintragen-authentifizierung-angemeldet-bleiben-checkbox">Angemeldet bleiben</label>
-				</div>
-
-				<a class="hinweis" href="#faq">Warum benötige ich ein Passwort?</a>
-			</form>
-
-			<form id="popup-eintragen-name" data-schritt="1">
-				<div class="container">
-					<input name="name"
-					       type="text"
-					       placeholder="Vor- und Nachname"
-					       list="eintragen-fahrer"
-					       required
-					       pattern="^[a-zA-Z ,.'-]+$"
-					       autofocus
-					       autocomplete="name" />
-					<datalist id="eintragen-fahrer"></datalist>
-
-					<p class="nachricht" data-reaktion=""></p>
-
-					<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
-				</div>
-				<fieldset class="buttons">
-					<input type="button" name="direkt" value="🔢 Direkt eingeben">
-					<input type="submit" name="berechnen" value="📐 Berechnen">
-				</fieldset>
-			</form>
-
-			<form id="popup-eintragen-name-gegeben" data-schritt="1">
-				<div class="container">
-					<div class="authentifizierung">
-						<div class="info">
-							<p><span>Angemeldet als: </span><span class="name"></span></p>
-							<p class="zusatzinfo">
-								<span class="gruppe"><span class="schule"></span> <span class="klasse"></span></span>
-								<span class="strecke"></span>
-							</p>
-						</div>
-						<button name="abmelden">Abmelden</button>
-					</div>
-
-					<p>Bitte wählen Sie einen Weg, ihre Strecke einzugeben:</p>
-				</div>
-				<fieldset class="buttons">
-					<input type="button" name="direkt" value="🔢 Direkt eingeben">
-					<input type="submit" name="berechnen" value="📐 Berechnen">
-				</fieldset>
-			</form>
-
-			<form id="popup-eintragen-berechnen" data-schritt="2">
-				<div class="container">
-					<div id="eintragen-berechnen-route">
-						<div class="eintragen-suche input-button">
-							<input name="a"
-							       id="eintragen-suche-a"
-							       type="text"
-							       placeholder="Startpunkt"
-							       autofocus
-							       autocomplete="street-address" />
-							<button tabindex="-1">Mein Standort</button>
-						</div>
-						<div class="eintragen-suche input-button">
-							<input name="b"
-							       id="eintragen-suche-b"
-							       type="text"
-							       placeholder="Ankunftspunkt"
-							       value="Gymnasium Höchstadt a. d. Aisch"
-							       autocomplete="street-address" />
-							<button tabindex="-1">Mein Standort</button>
-						</div>
-					</div>
-
-					<div id="eintragen-suche-merken">
-						<input id="eintragen-suche-merken-checkbox"
-						       name="speichern"
-						       type="checkbox"
-						       checked="checked"
-						       tabindex="-1" />
-						<label for="eintragen-suche-merken-checkbox">
-							Merken und nächstes Mal automatisch vorschlagen.
-							<i>Daten sind öffentlich sichtbar. Mehr Informationen im nächsten Schritt.</i>
-						</label>
-					</div>
-
-					<!--<div id="eintragen-berechnen-output">
-						<div>
-							<label for="eintragen-berechnen-strecke">Berechnete Strecke:</label>
-							<output id="eintragen-berechnen-strecke" for="eintragen-suche-a eintragen-suche-b">0m
-							</output>
-						</div>
-						<div>
-							<label for="eintragen-berechnen-gespart">Gespartes CO<sub>2</sub>:</label>
-							<output id="eintragen-berechnen-gespart" for="eintragen-suche-a eintragen-suche-b">0g
-							</output>
-						</div>
-					</div>-->
-
-					<!--<details id="eintragen-karte-knopf">
-						<summary tabindex="-1">Karte anzeigen</summary>
-						<div id="eintragen-karte"></div>
-					</details>-->
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Zurück" name="zurueck" class="leer" />
-					<input type="submit" value="Weiter" name="weiter" />
-				</fieldset>
-			</form>
-
-			<form id="popup-eintragen-direkt" data-schritt="2">
-				<div class="container">
-					<label for="eintragen-km">Länge in <var>km</var>:</label>
-					<input name="kilometer"
-					       step="1"
-					       id="eintragen-km"
-					       type="number"
-					       min="2"
-					       max="100"
-					       placeholder="z.B. 20"
-					       autofocus
-					       required />
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Zurück" name="zurueck" class="leer" />
-					<input type="submit" value="Weiter" name="weiter" />
-				</fieldset>
-			</form>
-
-			<form id="popup-eintragen-datenschutz" data-schritt="3">
-				<div class="container">
-					<h3>Datenschutz 🔒</h3>
-					<div id="eintragen-datenschutz-erklaerung">
-						<em>
-							Bei einer Veröffentlichung im Internet können die personenbezogenen Daten
-							(einschließlich Fotos) weltweit von beliebigen Personen abgerufen und gespeichert
-							werden. Die Daten können damit etwa auch über so genannte "Suchmaschinen" aufgefunden
-							werden. Dabei kann nicht ausgeschlossen werden, dass andere Personen oder Unternehmen
-							die Daten mit weiteren im Internet verfügbaren personenbezogenen Daten verknüpfen und
-							damit ein Persönlichkeitsprofil erstellen, die Daten verändern, zu anderen Zwecken
-							verwenden oder an andere Personen weitergeben.
-						</em>
-						<p>Konkret werden folgende Daten für alle öffentlich sichtbar gespeichert:</p>
-						<ul id="eintragen-datenschutz-daten">
-							<li>Name <sup>1</sup> <sup>2</sup>
-							</li>
-							<li>Strecken:
-								<ul>
-									<li>Zeitpunkt der Eintragung <sup>1</sup>
-									</li>
-									<li>Länge <sup>1</sup>
-									</li>
-									<li>falls gewünscht: Start- und Ankunftspunkt <sup>1</sup> <sup>2</sup>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<ul id="eintragen-datenschutz-fussnoten">
-							<li><sup>1</sup> Diese Information dient zur Anzeige
-								auf der Website.
-							</li>
-							<li><sup>2</sup> Diese Information wird für eine
-								bessere Benutzererfahrung gespeichert, z.B. zur Bereitstellung von
-								Autovervollständigung.
-							</li>
-						</ul>
-					</div>
-
-					<div id="eintragen-datenschutz-zustimmung">
-						<input id="eintragen-datenschutz-zustimmung-checkbox" type="checkbox" required autofocus />
-						<label for="eintragen-datenschutz-zustimmung-checkbox">
-							Ich bin mit der Speicherung und Verarbeitung meiner Daten einverstanden.
-						</label>
-					</div>
-				</div>
-
-				<fieldset class="buttons">
-					<input type="button" value="Zurück" name="zurueck" class="leer" />
-					<input type="submit" value="Speichern" name="weiter" />
-				</fieldset>
-			</form>
-
-			<form id="popup-eintragen-fertig">
-				<div class="container">
-					<h3>Vielen Dank für Ihren Beitrag! 👑</h3>
-					<p>Mit Ihrer Strecke von
-						<output id="eintragen-berechnen-strecke" for="eintragen-suche-a eintragen-suche-b">0m</output>
-						haben Sie
-						<output id="eintragen-berechnen-gespart" for="eintragen-suche-a eintragen-suche-b">0g</output>
-						CO<sub>2</sub> gespart und uns geholfen, ein Stück näher an unser Ziel zu kommen! 💪
-					</p>
-					<h4>Helfen Sie uns weiter!</h4>
-					<p>Falls ... Mögliches weiteres Interesse des Lesers etwas nutzen ... Wie weiter helfen? Spenden?
-						Teilen (Twitter/Facebook...)? Mehr Leute einladen können? ... 📣</p>
-				</div>
-				<fieldset class="buttons">
-					<input type="submit" value="Zurückkehren" name="schliessen" autofocus />
-				</fieldset>
-			</form>
-
-			<div id="popup-cookies">
-				<div class="container">
-					<h3>Cookies 🍪</h3>
-					<h4 class="hinweis">Achtung! Das Ändern der Cookie-Einstellungen führt zur Löschung aller
-						bestehenden Cookies.</h4>
-					<p>
-						Wir brauchen folgende Cookies, damit die Seite geladen werden kann ...
-					</p>
-					<p>
-						Detailliertere Beschreibung:
-					</p>
-					<p class="versteckt">
-						Tolle Beschreibung...
-					</p>
-					<button class="striche striche-kurz"
-					        onclick="this.previousElementSibling.classList.remove('versteckt')">Weiterlesen ▼
-					</button>
-				</div>
-				<div class="buttons">
-					<button id="popup-cookies-abbrechen" title="Nichts ändern." class="links leer">Abbrechen
-					</button>
-					<button id="popup-cookies-keine" title="Wird die Seite schließen." class="links leer">Ablehnen
-					</button>
-					<button id="popup-cookies-notwendig" title="Die Seite wird funktionieren.">Notwendige akzeptieren
-					</button>
-					<button id="popup-cookies-alle" title="Trägt zu voller Funktionalität bei." autofocus>Alle
-						akzeptieren
-					</button>
-				</div>
-			</div>
-
-			<div id="popup-hintergrund"></div>
-		</div>
-
-		<script src="js/vendor/modernizr-3.11.2.min.js"></script>
+		<script src="js/vendor/modernizr-3.11.2.min.js" type="module"></script>
 		<script src="js/plugins.js"></script>
 
-		<script src="js/main.ts"></script>
+		<!-- TODO in head verschieben?-->
+		<script src="js/main.ts" type="module"></script>
 
 		<!-- TODO -->
 		<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
