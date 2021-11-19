@@ -21,18 +21,19 @@ export namespace Popup {
 	}
 
 	export function alle() {
-		return popups
+		return Popup.popups
 	}
 
 	export function alleSchliessen() {
-		popups.forEach(popup => schliessen(popup))
+		Popup.popups.forEach(popup => schliessen(popup))
 	}
 
 	export function alleGeschlossen() {
-		return !popups.some(popup => popup.classList.contains("offen"))
+		console.log(Popup.popups)
+		return !Popup.popups.some(popup => popup.classList.contains("offen"))
 	}
 
 	export function offenes() {
-		return popups.find(popup => popup.classList.contains("offen"))
+		return Popup.popups.find(popup => popup.classList.contains("offen"))
 	}
 }
