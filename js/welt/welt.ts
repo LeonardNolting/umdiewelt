@@ -158,6 +158,7 @@ export default async () => {
 		// renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 		// const min =
 		renderer.setSize(size, size);
+		document.documentElement.style.setProperty("--erde-größe", size + "px")
 		kreise.forEach(kreis => kreis.material.resolution = new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight))
 
 		/*camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight
