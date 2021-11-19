@@ -8,11 +8,10 @@ import {
 	TextureLoader, Vector2,
 	WebGLRenderer
 } from "three";
-
-const weltVertex = new URL("../../shaders/welt/vertex.glsl", import.meta.url).toString()
-const weltFragment = new URL("../../shaders/welt/fragment.glsl", import.meta.url).toString()
-const atmosphaereVertex = new URL("../../shaders/atmosphaere/vertex.glsl", import.meta.url).toString()
-const atmosphaereFragment = new URL("../../shaders/atmosphaere/fragment.glsl", import.meta.url).toString()
+import weltVertex from "../../shaders/welt/vertex.glsl";
+import weltFragment from "../../shaders/welt/fragment.glsl";
+import atmosphaereVertex from "../../shaders/atmosphaere/vertex.glsl";
+import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
 import texture from "../../img/earth.png"
 // noinspection TypeScriptCheckImport
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
