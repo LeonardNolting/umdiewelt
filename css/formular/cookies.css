@@ -1,6 +1,6 @@
 #popup-cookies {
 	--erweitern-zeit: .2s;
-	font-size: calc(var(--grund-schrift-groesse) * 1.1);
+	font-size: calc(var(--grund-schriftgröße) * 1.1);
 }
 
 #popup-cookies .versteckt, #popup-cookies p:not(.versteckt) + button {

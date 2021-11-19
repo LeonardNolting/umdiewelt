@@ -1,10 +1,41 @@
 @import "sanitize.css/*.css"
 
 \:root
-	--font-family: Montserrat, sans-serif
-	--grund-schrift-groesse: calc(.8vmin + 8px)
+	--schriftart: Montserrat, sans-serif
+	--grund-schriftgröße: calc(.8vmin + 8px)
+
+	--farbe-primär: rgb(194, 220, 98)
+	// von Schulwebsite
+	--farbe-sekundär: #5b99d3
 
 html, body
 	min-height: 100%
-	font-family: var(--font-family)
-	font-size: var(--grund-schrift-groesse)
+	font-family: var(--schriftart)
+	font-size: var(--grund-schriftgröße)
+
+html
+	&[data-progress]
+		cursor: progress
+	&[data-wait]
+		cursor: wait
+		:not([data-wait-immune])
+			pointer-events: none
+		[data-wait-immune], [data-wait-immune] *
+			pointer-events: initial
+			cursor: default !important
+			&[onclick]
+				cursor: pointer
+
+[onclick], [href], details > summary, button:not(:disabled), input[type=button]:not(:disabled)
+	cursor: pointer
+
+.info
+	cursor: help
+
+a
+	color: var(--farbe-primär)
+
+@import "header"
+@import "willkommen"
+@import "popups"
+@import "admin"

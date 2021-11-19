@@ -1,9 +1,9 @@
 html, body {
 	min-height: 100%;
-	--font-family: Montserrat, sans-serif;
-	font-family: var(--font-family);
-	--grund-schrift-groesse: calc(.8vmin + 8px);
-	font-size: var(--grund-schrift-groesse);
+	--schriftart: Montserrat, sans-serif;
+	font-family: var(--schriftart);
+	--grund-schriftgröße: calc(.8vmin + 8px);
+	font-size: var(--grund-schriftgröße);
 }
 
 body {
