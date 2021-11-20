@@ -5,7 +5,6 @@ section#willkommen
 	justify-content: center
 	background-color: black
 	width: 100%
-	color: #fff
 	overflow: hidden
 
 	> h1
@@ -13,6 +12,7 @@ section#willkommen
 		font-weight: 900
 		position: relative
 		z-index: 1
+		color: #fff
 
 	#welt
 		display: flex
@@ -35,10 +35,12 @@ section#willkommen
 				width: var(--erde-größe) !important
 				background-color: black
 		#fakten
-			font-family: Coda, ui-monospace
-			font-size: 1.2rem
+			font-family: "Roboto Slab", ui-monospace
+			font-size: 1rem
 			display: flex
 			flex-direction: column
+			.fakt
+				color: #bbb
 			.fakt + .fakt
 				margin-top: 1rem
 
