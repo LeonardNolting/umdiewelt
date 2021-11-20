@@ -16,9 +16,11 @@ import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
 const texture = new URL(
-	'../../img/earth.png?as=webp',
+	'../../img/earth.jpg?as=webp&height=1350&quality=50',
 	import.meta.url
 ).toString();
+
+// console.log(texture)
 
 export default async () => {
 	const radius = 6
