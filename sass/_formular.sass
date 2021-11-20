@@ -1,0 +1,85 @@
+form
+	display: flex
+
+fieldset
+	margin: 0
+	padding: 0
+	border: none
+
+input, button, select
+	--border-color: gray
+	--border-radius: 6px
+	border: 2px solid var(--border-color)
+	outline: none
+	padding: 0.4rem 0.6rem
+	border-radius: var(--border-radius)
+
+input::placeholder
+	color: #999
+
+input:invalid
+	--border-color: darkred
+
+input:focus, select:focus
+	--border-color: dodgerblue
+
+input[type=button], input[type=submit], button
+	--color-primary: steelblue
+	--color-secondary: white
+	outline: none
+	background: var(--color-primary)
+	border-color: transparent
+	border-radius: var(--border-radius)
+	color: var(--color-secondary)
+	&:hover, &:focus
+		--color-primary: dodgerblue
+	&:disabled
+		--color-primary: #ccc
+		cursor: default
+	&.danger
+		--color-primary: #c40000
+		font-weight: bold
+	&.leer
+		background: transparent
+		color: var(--color-primary)
+		text-decoration: underline
+	&.allein
+		font-size: smaller
+		padding: 0
+
+.input-button
+	display: flex
+	> input
+		border-radius: var(--border-radius) 0 0 var(--border-radius)
+		border-right: none
+	> input[type=button], > button, > input[type=submit]
+		border-left: none
+		border-radius: 0 var(--border-radius) var(--border-radius) 0
+		/* doofer spalt ... */
+		margin-left: -4px
+
+.buttons
+	display: flex
+	flex-direction: row
+	border-top: 1px solid #555
+	padding: .6rem
+	/*justify-content: flex-end*/
+	justify-content: flex-start
+	.links + :not(.links), :first-child:not(.links)
+		margin-left: auto
+	.links:first-child
+		margin-left: 0
+
+	input + input, button + button
+		margin-left: .4rem
+
+input[type=checkbox] + label
+	padding-left: .4rem
+
+input[type=checkbox]
+	cursor: pointer
+
+label
+	cursor: pointer
+	&:focus-within > input[type=checkbox]
+		color: #0d3349
