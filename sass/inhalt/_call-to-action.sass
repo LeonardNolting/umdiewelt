@@ -1,0 +1,60 @@
+#call-to-action
+	--border: 2px solid #777
+	--farbe-glow: #00183d
+	--farbe-glow-2: #2a0093
+	--farbe-glow-3: #0f0059
+	border-top: var(--border)
+	border-bottom: var(--border)
+	display: flex
+	flex-direction: row
+	align-items: stretch
+	overflow: hidden
+	background-color: black
+	color: #ddd
+	section
+		display: flex
+		flex-direction: column
+		flex-basis: 0
+		flex-grow: 1
+		padding: 2rem
+		position: relative
+		font-size: 1.4rem
+		//font-weight: 700
+		h3
+			width: 100%
+			font-weight: 900
+			margin: 0 0 1.6rem
+			font-size: 2rem
+		&:not(:nth-child(2))
+			z-index: 1
+			color: #ccc
+			h3
+				margin-top: 1.4rem
+		&:nth-child(1)
+			text-align: right
+			h3
+				padding-right: 1rem
+		&:nth-child(2)
+			text-align: center
+			background-color: var(--farbe-glow)
+			box-shadow: 0 0 6rem 6rem var(--farbe-glow), 0 0 8rem 7rem var(--farbe-glow-2), 0 0 10rem 10rem var(--farbe-glow-3)
+			h3
+				color: #fff
+		&:nth-child(3)
+			text-align: left
+			h3
+				padding-left: 1rem
+		&#call-andere-projekte
+			> a:last-of-type
+				display: inline-flex
+				flex-grow: 1
+				svg
+					max-width: 16rem
+					margin: 2rem auto 0
+		&#call-teilnahme
+			p:last-of-type
+				font-size: 80%
+			p + p
+				margin-top: 1rem
+	section + section
+		border-left: var(--border)
