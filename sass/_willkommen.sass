@@ -91,3 +91,15 @@ section#willkommen
 		border: var(--kreis-dicke) white solid
 		border-radius: 50%
 		transform: var(--kreis-position)
+
+@media (max-width: 1024px)
+	section#willkommen
+		flex-direction: column
+		> h1
+			margin-bottom: 0
+		#welt
+			width: 100%
+			#anzeige
+				height: 74vh
+		&::before
+			display: none
