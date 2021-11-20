@@ -12,9 +12,13 @@ import weltVertex from "../../shaders/welt/vertex.glsl";
 import weltFragment from "../../shaders/welt/fragment.glsl";
 import atmosphaereVertex from "../../shaders/atmosphaere/vertex.glsl";
 import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
-import texture from "../../img/earth.png"
 // noinspection TypeScriptCheckImport
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
+
+const texture = new URL(
+	'../../img/earth.png?as=webp',
+	import.meta.url
+).toString();
 
 export default async () => {
 	const radius = 6
