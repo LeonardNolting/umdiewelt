@@ -48,13 +48,14 @@ section#willkommen
 					content: attr(value) attr(data-einheit)
 					position: absolute
 					transform: translateX(-100%)
-					margin-left: calc(-1 * var(--schriftgröße))
+					margin-left: calc(-.6 * var(--schriftgröße))
 					display: flex
 					font-size: var(--schriftgröße)
 					text-transform: initial
 					justify-content: center
 					white-space: nowrap
-					font-family: Georgia, Times, "Times New Roman", serif
+					//font-family: Georgia, Times, "Times New Roman", serif
+					font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace
 					@include emoji-cursor(😱)
 				&:nth-child(1)::before
 					@include emoji-cursor(👍)
