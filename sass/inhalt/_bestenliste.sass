@@ -1,0 +1,286 @@
+#bestenliste-wrapper
+	--gap-vertical: .2rem
+	--gap-track-inhalt-max: 2.6rem
+	--gap-track-inhalt: 2.4rem
+	--gap-fahrrad-inhalt: 0.6rem
+	--height: 4rem
+	--strecke-breite: 2.8rem
+	--track-hoehe: calc(var(--height) * 3 / 7)
+	--rang-breite-max: calc(var(--height) * 2 / 3)
+	--rang-breite: calc(var(--height) / 2)
+	--padding: var(--container-padding)
+	--general-margin-left: calc(var(--gap-track-inhalt-max) * 2 + var(--strecke-breite) + var(--padding) + var(--rang-breite-max))
+	--margin: calc(var(--height) / 2)
+	--kleine-box-margin-left: 24%
+	--große-box-margin-left: calc(1 * var(--rang-breite-max) * 1.4)
+	--transition-dauer: .4s
+	position: relative
+	max-width: 100%
+	//noinspection CssInvalidPropertyValue
+	overflow-y: clip
+	&.versteckt
+		display: none
+	> .wussten-sie-schon
+		margin-left: var(--große-box-margin-left)
+		/*z-index: -1;*/
+		background: none
+		position: relative
+		&::after
+			content: ""
+			width: 100%
+			height: 100%
+			top: 0
+			left: 0
+			position: absolute
+			z-index: -1
+			background: var(--background)
+	> h3, > button, > .keine-teilnehmer
+		--padding: 1.4rem
+		/*z-index: 1;*/
+		/*position: relative;*/
+		margin: 0 0 0 calc(var(--große-box-margin-left) + 1.6rem) !important
+	> h3
+		padding: var(--padding) 0 calc(var(--padding) - .8rem) 0
+		font-size: 1.8rem
+		> a::before
+			display: none
+	> button
+		--padding: 1.4rem
+		padding: calc(var(--padding) - .6rem) 0 var(--padding) 0
+		font-size: 1.3rem
+	.keine-teilnehmer #bestenliste-anzeige, &:not(.keine-teilnehmer) .keine-teilnehmer
+		display: none
+	&::before, &::after
+		content: ""
+		position: absolute
+		width: 100vw
+		transform: translateX(-100%)
+		background: var(--background)
+		box-shadow: 0 0 20px -1px #1b1e20bd
+
+		background-repeat: no-repeat
+		background-position: 100% 100%
+	&::before
+		--background: #c2cdd8
+		--background2: #acb9c4
+		background-image: linear-gradient(-45deg, var(--background2), var(--background2) 50%, var(--background) 50%, var(--background))
+		background-size: 60vmin 60vmin
+		/* 45deg -> gleiche Höhe wie Breite */
+		height: 100%
+		margin-left: var(--große-box-margin-left)
+	&::after
+		--einschnitt: calc(var(--margin) * 1.9)
+		height: calc(100% - 2 * var(--einschnitt))
+		margin-top: var(--einschnitt)
+		margin-right: 0
+		--background: #a1b1c1
+		--background2: #91a3b1
+		background-image: linear-gradient(-40deg, var(--background2), var(--background2) 40%, var(--background) 40%, var(--background))
+		z-index: -1
+		width: calc(24% + var(--general-margin-left))
+		margin-left: 24%
+		opacity: 1
+		left: 0
+
+#bestenliste-kurve
+	z-index: 2
+	pointer-events: none
+	min-width: 3rem
+	height: 13.33333vw
+	margin-top: -13.33333vw
+	min-height: 1rem
+	background-image: url('data:image/svg+xml;utf8,<svg viewBox= "0 0 48 16" xmlns= "http://www.w3.org/2000/svg" ><path d= "m 0,0 v 16 h 48 c -23,0 -48,0 -48,-16 z" style= "stroke:none;fill:white;" /></svg>')
+	background-repeat: no-repeat
+	background-size: contain
+	width: 100%
+
+
+#bestenliste-anzeige
+	--anzahl: 0
+	display: flex
+	flex-direction: column
+	height: calc(var(--anzahl) * (var(--gap-vertical) + var(--height)) - var(--gap-vertical))
+	margin: 0 0 0 var(--general-margin-left)
+	padding: 0
+	position: relative
+	user-select: none
+	cursor: default
+	li
+		--left: calc(var(--prozent) * 1%)
+		--top: calc((var(--gap-vertical) + var(--height)) * (var(--rang) - 1))
+		--translate-x: calc(-1% * var(--prozent))
+
+		list-style: none
+		height: var(--height)
+		min-height: var(--height)
+		width: 100%
+		--prozent: 0
+		--rang: 0
+		order: var(--rang)
+		/* Reihenfolge unabhängig vom DOM beeinflussen */
+
+		display: flex
+		align-items: center
+		position: absolute
+		margin-top: var(--top)
+		transition-timing-function: ease-in-out
+		transition-duration: var(--transition-dauer)
+		transition-property: margin-top, border-width
+
+		--background: #555
+		--background-lighter: #656565
+		--background-darker: #242424
+
+		--url: rgba(0, 0, 0, 0)
+
+		// * Eingekreiste Zahl (Rang)
+		&::before
+			/* Kann nicht var(...) in content benutzen, aber counter(...) */
+			/* https://stackoverflow.com/questions/40164169/css-variables-custom-properties-in-pseudo-element-content-property */
+			counter-reset: rang var(--rang)
+			content: counter(rang)
+
+			position: absolute
+			top: calc(var(--height) / 2)
+			left: 0
+			display: flex
+			align-items: center
+			justify-content: center
+			z-index: 1
+			transform: translateX(-50%) translateY(-50%)
+			margin-left: calc(-2 * var(--gap-track-inhalt-max) - var(--strecke-breite) - var(--padding) - var(--rang-breite-max) / 2)
+			width: var(--rang-breite)
+			height: var(--rang-breite)
+			background: white
+			border-radius: 50%
+			border: 3px solid var(--background-darker)
+			font-family: monospace
+			background: var(--background-lighter)
+			color: var(--background-darker)
+			box-shadow: 0 0 6px -4px #222 inset, 0 0 8px -4px #000
+			text-shadow: 0 0 2px #22222299
+			font-weight: bold
+			font-size: calc(var(--rang-breite) / 2)
+			transition-timing-function: ease-in-out
+			transition-duration: var(--transition-dauer)
+			transition-property: width, height, font-size, margin-left, border-color, background, color
+
+		// * Eingekreiste Zahl onhover vergrößern
+		&:hover::before
+			transform: translateX(-50%) translateY(-50%) scale(1.1)
+
+		// * Name und Schule
+		.inhalt
+			position: absolute
+			height: var(--height)
+			min-height: var(--height)
+			left: var(--left)
+			transition-timing-function: ease-in-out
+			transition-duration: var(--transition-dauer)
+			transition-property: left, transform, font-size
+			transition-delay: calc(var(--transition-dauer) / 2)
+			transform: translateX(var(--translate-x))
+
+			white-space: nowrap
+
+			font-size: 1.2rem
+
+			display: flex
+			flex-wrap: wrap
+			align-items: center
+			align-content: center
+
+			// * Fahrrad-Icon
+			&::before
+				content: ""
+				position: absolute
+				align-content: center
+				align-items: center
+				justify-content: center
+				justify-items: center
+
+				transform: translateX(-50%)
+
+				margin-left: calc(-1 * var(--gap-track-inhalt))
+
+				z-index: 1
+
+				height: 100%
+				/* kann benutzt werden, damit Fahrräder sich nicht berühren bei --gap-vertical: 0 */
+				width: calc((var(--gap-track-inhalt) - var(--gap-fahrrad-inhalt)) * 2)
+				transition-timing-function: ease-in-out
+				transition-duration: var(--transition-dauer)
+				transition-property: width, margin-left
+
+				background: center / contain no-repeat var(--url)
+			// * Track (Balken) und Streckenanzeige
+			&::after
+				content: attr(data-strecke)
+				font-size: .95rem
+				color: white
+				padding-right: var(--gap-track-inhalt)
+				display: flex
+				justify-content: flex-end
+				align-items: center
+
+				height: var(--track-hoehe)
+				left: 0
+				background-color: #999
+				position: absolute
+				border-radius: 100px
+				width: 100vw
+				transform: translateX(-100%)
+				margin-left: calc(-1 * var(--gap-track-inhalt))
+				transition-timing-function: ease-in-out
+				transition-duration: var(--transition-dauer)
+				transition-property: height, padding-right, margin-left, font-size, background-image
+
+				background-image: linear-gradient(135deg, var(--background) 48%, var(--background-lighter), var(--background) 52%)
+				background-size: 200% 100%
+
+				animation: shine 6s linear infinite
+				animation-delay: calc(.5s * var(--rang))
+
+				box-shadow: 0 0 16px 1px rgba(0, 0, 0, .2) inset, 0 0 16px 1px rgba(0, 0, 0, .2)
+
+		// * Erste 3 Einträge:größer
+		&.gold, &.silber, &.bronze
+			--track-hoehe: calc(var(--height) / 2)
+			--rang-breite: var(--rang-breite-max)
+			--gap-track-inhalt: var(--gap-track-inhalt-max)
+			&::before
+				border-width: 4px
+			.inhalt
+				font-size: 1.3rem
+			&::after
+				font-size: 1.2rem
+		&.gold
+			--background: #ffd700
+			--background-lighter: #ffea83
+			--background-darker: #ac9100
+
+		&.silber
+			--background: #999
+			--background-lighter: #a9a9a9
+			--background-darker: #797979
+
+		&.bronze
+			--background: #bf8970
+			--background-lighter: #b89e90
+			--background-darker: #926c56
+
+		.name, .schule
+			color: #000
+			text-shadow: 0 0 16px #aaa
+		.name
+			font-weight: bold
+			margin-right: .4rem
+		.schule
+			font-style: italic
+
+// * Unauffällig Bewegung reinbringen
+@keyframes shine
+	from
+		background-position: 100%
+	to
+		background-position: 0
