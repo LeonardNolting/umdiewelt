@@ -35,7 +35,6 @@ section#willkommen
 				width: var(--erde-größe) !important
 				background-color: black
 		#fakten
-			font-family: "Roboto Slab", ui-monospace
 			font-size: 1rem
 			display: flex
 			flex-direction: column
@@ -46,7 +45,7 @@ section#willkommen
 				flex-direction: row
 				align-items: center
 				&::before
-					--schriftgröße: 1.4rem
+					--schriftgröße: 1.6rem
 					content: attr(value) attr(data-einheit)
 					position: absolute
 					transform: translateX(-100%)
@@ -56,6 +55,7 @@ section#willkommen
 					text-transform: initial
 					justify-content: center
 					white-space: nowrap
+					font-family: Georgia, Times, "Times New Roman", serif
 			.fakt + .fakt
 				margin-top: 1rem
 
