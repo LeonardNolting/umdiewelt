@@ -6,6 +6,7 @@ section#willkommen
 	background-color: black
 	width: 100%
 	overflow: hidden
+	padding: 2rem
 
 	> h1
 		font-size: 4rem
@@ -17,15 +18,11 @@ section#willkommen
 	#welt
 		display: flex
 		align-items: center
-		//height: 100%
-		width: 100%
-		max-width: 60%
-		padding: 2rem
 		#anzeige
 			position: relative
-			width: 100%
 			flex-grow: 1
-			height: 80vh
+			height: 82vh
+			width: 50vw
 			display: flex
 			align-items: center
 			justify-content: center
@@ -38,6 +35,8 @@ section#willkommen
 			font-size: 1rem
 			display: flex
 			flex-direction: column
+			min-width: 12rem
+			margin-left: 4rem
 			.fakt
 				color: #bbb
 				cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😱</text></svg>") 16 0, auto
