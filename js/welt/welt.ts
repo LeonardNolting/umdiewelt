@@ -38,6 +38,7 @@ export default async () => {
 	const anfangBreite = fortschrittBreite;
 	const anfangFarbe = 0x111111;
 
+	const wrapper = document.querySelector("header")
 	const container = document.getElementById("welt")
 	const anzeige = document.getElementById("anzeige")
 	const scene = new Scene()
@@ -201,7 +202,7 @@ export default async () => {
 				document.body.classList.remove("moving");
 			}
 		}
-		container.addEventListener("mousedown", listener.down)
+		wrapper.addEventListener("mousedown", listener.down)
 		addEventListener("mouseup", listener.up)
 	}
 
