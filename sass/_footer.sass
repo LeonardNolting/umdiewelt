@@ -4,7 +4,6 @@ footer
 	font-size: 1.2rem
 	position: sticky
 	bottom: 0
-	border-bottom: .4rem solid var(--farbe-primär)
 	> *
 		width: 100%
 	#slogan
@@ -27,6 +26,7 @@ footer
 		display: flex
 		justify-content: space-between
 		align-items: center
+		border-bottom: .4rem solid var(--farbe-primär)
 		#copyright
 			margin-right: 1rem
 		#links
@@ -44,4 +44,20 @@ footer
 				width: 1.6rem
 				display: inline-block
 				text-align: center
+	#admin-anzeige
+		--gap: .4rem
+		> fieldset
+			display: flex
+			flex-wrap: wrap
+			margin: calc(-1 * var(--gap))
+			justify-content: space-between
+			> button
+				margin: var(--gap)
+				flex-basis: 0
+				flex-grow: 1
+				font-size: 1.2rem
+				&:not(.erlaubt)
+					cursor: default
+					user-select: none
+					--color-primary: #ccc
 	//margin-top: -1px
