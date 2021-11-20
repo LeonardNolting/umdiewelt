@@ -27,6 +27,7 @@ footer
 		justify-content: space-between
 		align-items: center
 		border-bottom: .4rem solid var(--farbe-primär)
+		position: relative
 		#copyright
 			margin-right: 1rem
 		#links
@@ -44,6 +45,17 @@ footer
 				width: 1.6rem
 				display: inline-block
 				text-align: center
+		&::before
+			content: ""
+			position: absolute
+			width: 50%
+			height: 0.4rem
+			background: linear-gradient(90deg, transparent, dodgerblue 20%, dodgerblue 80%, transparent)
+			top: 0
+			left: 50%
+			transform: translate(-50%, -50%)
+			z-index: 1
+			border-radius: 50%
 	#admin-anzeige
 		--gap: .4rem
 		> fieldset
