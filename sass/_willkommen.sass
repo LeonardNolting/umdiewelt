@@ -103,23 +103,10 @@ section#willkommen
 			width: 100%
 			text-align: center
 		#welt
+			flex-direction: column
 			width: 100%
 			#anzeige
 				height: 68vh
-		&::before
-			display: none
-
-@media (max-width: 924px)
-	section#willkommen #welt #anzeige
-		height: 64vh
-
-@media (max-width: 1024px)
-	section#willkommen
-		&::after
-			display: none
-		#welt
-			flex-direction: column
-			#anzeige
 				width: 100%
 			#fakten
 				flex-direction: row
@@ -138,6 +125,14 @@ section#willkommen
 				.fakt + .fakt
 					margin-top: 0
 					margin-left: 1rem
+		&::before
+			display: none
+		&::after
+			display: none
+
+@media (max-width: 924px)
+	section#willkommen #welt #anzeige
+		height: 64vh
 
 @media (max-width: 500px)
 	section#willkommen #welt #anzeige
