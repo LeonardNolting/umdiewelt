@@ -26,16 +26,23 @@ footer
 		display: flex
 		justify-content: space-between
 		align-items: center
+		//flex-wrap: wrap
 		border-bottom: .4rem solid var(--farbe-primär)
 		position: relative
 		#copyright
 			margin-right: 1rem
+			white-space: nowrap
 		#links
 			display: flex
 			margin: 0
 			align-items: center
+			flex-wrap: wrap
+			padding: 0
 			li
 				list-style: none
+				display: flex
+				flex-wrap: nowrap
+				align-items: center
 				a
 					color: inherit
 					&:not(:hover)
@@ -45,6 +52,7 @@ footer
 				width: 1.6rem
 				display: inline-block
 				text-align: center
+				margin-top: -1px
 		&::before
 			content: ""
 			position: absolute
@@ -71,4 +79,17 @@ footer
 					cursor: default
 					user-select: none
 					--color-primary: #ccc
-	//margin-top: -1px
+
+@media (max-width: 1000px)
+	footer
+		#fußzeile, #fußzeile #links
+			flex-direction: column
+		#fußzeile
+			#copyright
+				margin-right: 0
+				margin-bottom: .8rem
+			#links li
+				+ li
+					margin-top: .4rem
+				&::before
+					display: none !important
