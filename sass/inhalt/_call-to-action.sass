@@ -58,3 +58,22 @@
 				margin-top: 1.3rem
 	section + section
 		border-left: var(--border)
+
+@media (max-width: 1000px)
+	#call-to-action
+		flex-direction: column
+		section
+			text-align: left !important
+			&:nth-child(2)
+				order: 1
+			&:nth-child(1)
+				order: 2
+				border-top: var(--border)
+			&:nth-child(3)
+				order: 3
+				border-top: var(--border)
+			h3
+				padding: 0 0 1rem !important
+				margin: 0 !important
+		section + section
+			border-left: none
