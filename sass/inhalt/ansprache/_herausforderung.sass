@@ -5,9 +5,15 @@
 		z-index: 1
 	//transform: rotate(-1deg)
 	&::after
+		--breite-bürgersteig: 12vw
 		content: ""
 		width: 200%
-		height: .4vw
+		height: 2.4rem
 		background: black
 		transform: rotate(-18.5deg)
-		margin-top: calc(-6vw)
+		margin-top: calc(-6.2rem - var(--breite-bürgersteig))
+		// TODO rem zu vw umrechnen
+		background: linear-gradient(0deg, white, black)
+		border-top: var(--breite-bürgersteig) solid gray
+		box-sizing: content-box
+		border-top-right-radius: 82%
