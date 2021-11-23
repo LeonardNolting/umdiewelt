@@ -40,9 +40,20 @@ html
 	cursor: help
 
 a
-	color: var(--farbe-primär)
-	&.fußnote
-		text-decoration: none
+	color: var(--farbe-sekundär)
+	text-decoration: none
+	position: relative
+	&:not(.fußnote)::before
+		content: ""
+		width: 100%
+		position: absolute
+		bottom: -.2rem
+		height: .1rem
+		background-color: currentColor
+	// TODO gap: bei hover ersichtlich, dass nicht immer auf Link
+	&.weiter::after
+		content: "→"
+		margin-left: .4rem
 
 p
 	margin: 0
