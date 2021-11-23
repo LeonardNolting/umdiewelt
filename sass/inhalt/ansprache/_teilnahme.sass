@@ -1,19 +1,21 @@
 #teilnahme
-	#schritte
+	display: flex
+	flex-direction: row
+	align-items: center
+	img
+		max-width: 100%
+		margin-right: -36vw
+		margin-left: -16vw
+	.text
+		height: 100%
+		background-color: #ccc
+		padding: var(--padding)
+		min-height: 30vw
+		//transform: translateY(-10%)
+		margin-top: -6vw
 		display: flex
 		flex-direction: column
-		align-items: flex-start
-		--zahl-schriftgröße: 3rem
-		--zahl-gap: 1rem
-		> p
-			line-height: var(--zahl-schriftgröße)
-			//display: inline-flex
-			//align-items: flex-end
-			margin-left: calc(var(--zahl-schriftgröße) + var(--zahl-gap))
-			text-align: left
-			&::before
-				content: attr(data-schritt) "."
-				margin-left: calc(-1 * var(--zahl-gap))
-				position: absolute
-				transform: translateX(-100%)
-				font-size: var(--zahl-schriftgröße)
+		p:last-of-type
+			flex-grow: 1
+			display: flex
+			align-items: center
