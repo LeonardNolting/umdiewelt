@@ -41,16 +41,9 @@ html
 
 a
 	color: var(--farbe-sekundär)
-	text-decoration: none
 	position: relative
-	&:not(.fußnote)::before
-		content: ""
-		width: 100%
-		position: absolute
-		bottom: -.2rem
-		height: .1rem
-		background-color: currentColor
-	// TODO gap: bei hover ersichtlich, dass nicht immer auf Link
+	&.fußnote
+		text-decoration: none
 	&.weiter::after
 		content: "→"
 		margin-left: .4rem
