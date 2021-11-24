@@ -18,9 +18,13 @@
 	background-image: linear-gradient(-65deg, transparent var(--erste-border-start), var(--color-border) var(--erste-border-start), var(--color-border) var(--erste-border-ende), var(--color-light) var(--erste-border-ende)), linear-gradient(-50deg, var(--color-light) var(--zweite-border-start), var(--color-border) var(--zweite-border-start), var(--color-border) var(--zweite-border-ende), var(--color-dark) var(--zweite-border-ende))
 
 	color: #eee
-	box-shadow: 0 32px 32px -32px black inset, 0 -32px 32px -32px black inset, 0 0 12px 4px #777
+	box-shadow: 0 1rem 1rem -1rem black inset, 0 -1rem 1rem -1rem black inset, 0 -.4rem 1.6rem -.2rem black
+	// , 0 0 12px 4px #777
 	--dreieck-hoehe: 2vh
 	min-height: var(--dreieck-hoehe)
+
+	position: relative
+	z-index: 1
 
 	.schulen
 		display: flex
