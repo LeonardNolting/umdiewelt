@@ -7,10 +7,11 @@
 		margin-right: -36vw
 		margin-left: -16vw
 	.text
-		height: 100%
-		background-color: #ccc
+		//--farbe-hintergrund: 204, 204, 204 // #ccc
+		$farbe-hintergrund: #ccc
+		background-color: $farbe-hintergrund
 		padding: var(--padding)
-		min-height: 30vw
+		padding-bottom: 0
 		//transform: translateY(-10%)
 		margin-top: -6vw
 		display: flex
@@ -28,10 +29,10 @@
 			position: relative
 			&::before
 				position: absolute
-				content: "ℹ Die Saison beginnt erst im nächsten Jahr!"
+				content: "🛈 Strecken können erst nach Beginn im nächsten Jahr eingetragen werden."
 				width: calc(100% + 2 * var(--border-width))
 				height: calc(100% + 2 * var(--border-width))
-				background-image: linear-gradient(to bottom, transparent, #ddd)
+				background-image: linear-gradient(to bottom, transparentize($farbe-hintergrund, .8), $farbe-hintergrund 80%)
 				border-radius: var(--border-radius)
 				margin: calc(-1 * var(--border-width))
 				display: flex
