@@ -1,11 +1,25 @@
 #spenden
-	--füllen-gap: 3vw
+	--fill-top: 28vw
+	--fill-bottom: 3vw
 	background-color: black
 	display: flex
 	flex-direction: column
 	align-items: center
 	color: white
-	margin-bottom: calc(-1 * var(--füllen-gap))
-	padding-bottom: calc(var(--füllen-gap) + var(--padding))
-	#sponsoren:empty
-		display: none
+	padding: var(--padding)
+	margin-top: calc(-1 * var(--fill-top))
+	padding-top: calc(var(--fill-top) + var(--padding))
+	margin-bottom: calc(-1 * var(--fill-bottom))
+	padding-bottom: calc(var(--fill-bottom) + var(--padding))
+	#sponsoren
+		display: flex
+		flex-direction: row
+		align-items: center
+		justify-content: center
+		margin: 0
+		li
+			list-style: none
+			+ li
+				margin-left: var(--padding)
+		&:empty
+			display: none
