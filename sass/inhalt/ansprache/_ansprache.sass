@@ -4,7 +4,11 @@
 	flex-direction: column
 	--padding: calc(1rem + 3vmin)
 	h3
-		margin: 0
+		font-size: 3rem
+		font-style: normal
+		line-height: 3rem
+		text-transform: uppercase
+		margin: 0 0 calc(2 / 3 * var(--padding))
 	#ziel, #sternfahrten, #projekt
 		min-height: 30vh
 		display: flex
@@ -15,13 +19,6 @@
 			text-align: center
 		b
 			display: block
-	#ziel, #teilnahme
-		h3
-			font-size: 3rem
-			font-style: normal
-			line-height: 3rem
-			text-transform: uppercase
-			margin-bottom: calc(2 / 3 * var(--padding))
 
 @import "motto"
 @import "ziel"
