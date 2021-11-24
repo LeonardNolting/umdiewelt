@@ -15,6 +15,15 @@ section#willkommen
 		position: relative
 		z-index: 1
 		color: #fff
+		&::after
+			width: 0.2rem
+			content: ""
+			height: var(--erde-größe)
+			background: white
+			top: 200%
+			left: 45%
+			transform: translateX(-50%)
+			position: absolute
 
 	#welt
 		display: flex
