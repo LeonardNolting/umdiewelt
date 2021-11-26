@@ -1,0 +1,29 @@
+#spenden
+	$tint: rgba(0, 0, 0, .2)
+	--fill-top: 28vw
+	--fill-bottom: 4vw
+	display: flex
+	flex-direction: column
+	align-items: center
+	color: white
+	padding: var(--padding)
+	margin-top: calc(-1 * var(--fill-top))
+	padding-top: calc(var(--fill-top) + var(--padding))
+	margin-bottom: calc(-1 * var(--fill-bottom))
+	padding-bottom: calc(var(--fill-bottom) + var(--padding) + 24vw)
+
+	//background: linear-gradient(to bottom, red, transparent) left calc(100% - 3280/4928 * 100vw) / 100% 10%, linear-gradient(to top right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), bottom center / contain url("../img/World Bicycle Relief/Familie.jpg"), black
+	background: linear-gradient(to bottom, rgba(0, 0, 0, .4) calc(100% - 30vw), transparent calc(100% - 24vw)), radial-gradient(closest-corner circle at bottom center, transparent calc(100% - 9vw), rgba(0, 0, 0, .3)), linear-gradient($tint, $tint), bottom center / contain no-repeat url("../img/World Bicycle Relief/Familie tinted.png"), linear-gradient(to right, #002b49, #324657)
+	//background: linear-gradient(to top right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), bottom center / contain url("../img/World Bicycle Relief/Fahrradweg_60_80.webp"), skyblue
+	#sponsoren
+		display: flex
+		flex-direction: row
+		align-items: center
+		justify-content: center
+		margin: 0
+		li
+			list-style: none
+			+ li
+				margin-left: var(--padding)
+		&:empty
+			display: none
