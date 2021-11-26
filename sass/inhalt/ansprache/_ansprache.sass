@@ -2,8 +2,14 @@
 	width: 100%
 	display: flex
 	flex-direction: column
-	#ziel, #herausforderung, #teilnahme, #unterstützung, #fazit
-		min-height: 30vh
+	--padding: calc(1rem + 3vmin)
+	h3
+		font-size: 3rem
+		font-style: normal
+		line-height: 3rem
+		text-transform: uppercase
+		margin: 0 0 calc(2 / 3 * var(--padding))
+	#ziel, #sternfahrten, #projekt
 		display: flex
 		flex-direction: column
 		align-items: center
@@ -14,7 +20,9 @@
 			display: block
 
 @import "motto"
-@import "herausforderung"
-@import "vorherige-projekte"
+@import "ziel"
+@import "sternfahrten"
+@import "projekt"
 @import "teilnahme"
-@import "fazit"
+@import "spenden"
+@import "schluss"

@@ -18,7 +18,7 @@
 	max-width: 100%
 	//noinspection CssInvalidPropertyValue
 	overflow-y: clip
-	&.versteckt
+	&.versteckt, &.versteckt + #bestenliste-kurve
 		display: none
 	> .wussten-sie-schon
 		margin-left: var(--große-box-margin-left)
@@ -50,6 +50,8 @@
 		font-size: 1.3rem
 	.keine-teilnehmer #bestenliste-anzeige, &:not(.keine-teilnehmer) .keine-teilnehmer
 		display: none
+		+ #bestenliste-kurve
+			display: none
 	&::before, &::after
 		content: ""
 		position: absolute

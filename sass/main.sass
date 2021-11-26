@@ -40,9 +40,13 @@ html
 	cursor: help
 
 a
-	color: var(--farbe-primär)
+	color: var(--farbe-sekundär)
+	position: relative
 	&.fußnote
 		text-decoration: none
+	&.weiter::after
+		content: "→"
+		margin-left: .4rem
 
 p
 	margin: 0

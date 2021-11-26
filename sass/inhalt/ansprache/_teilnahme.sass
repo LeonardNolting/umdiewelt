@@ -1,19 +1,53 @@
 #teilnahme
-	#schritte
+	display: flex
+	flex-direction: row
+	align-items: center
+	position: relative
+	z-index: 1
+	margin-bottom: -4vw
+	margin-top: -2.8vw
+	img
+		max-width: 100%
+		margin-right: -36vw
+		margin-left: -16vw
+	.text
+		$farbe-hintergrund: #eee
+		background-color: $farbe-hintergrund
+		padding: var(--padding)
+		padding-bottom: 0
+		//transform: translateY(-10%)
+		margin-top: -6vw
 		display: flex
 		flex-direction: column
-		align-items: flex-start
-		--zahl-schriftgröße: 3rem
-		--zahl-gap: 1rem
-		> p
-			line-height: var(--zahl-schriftgröße)
-			//display: inline-flex
-			//align-items: flex-end
-			margin-left: calc(var(--zahl-schriftgröße) + var(--zahl-gap))
-			text-align: left
+		border-radius: 1rem 0 0 1rem
+		box-shadow: 0 0 1.6rem .2rem #333
+		border: .2rem solid #555
+		border-right: none
+
+		--farbe-grenze: #ccc
+		--grenze-ende: 90%
+		--grenze-start: calc(var(--grenze-ende) - 0.6%)
+		background-image: linear-gradient(-54deg, transparent var(--grenze-start), var(--farbe-grenze) var(--grenze-start), var(--farbe-grenze) var(--grenze-ende), var(--farbe-primär) var(--grenze-ende))
+
+		p:last-of-type
+			flex-grow: 1
+			display: flex
+			align-items: center
+		form
+			--border-width: .2rem
+			--border-radius: 1rem
+			min-height: 10rem
+			border-radius: var(--border-radius)
+			border: var(--border-width) solid #999
+			position: relative
 			&::before
-				content: attr(data-schritt) "."
-				margin-left: calc(-1 * var(--zahl-gap))
 				position: absolute
-				transform: translateX(-100%)
-				font-size: var(--zahl-schriftgröße)
+				content: "🛈 Strecken können erst nach Beginn im nächsten Jahr eingetragen werden."
+				width: calc(100% + 2 * var(--border-width))
+				height: calc(100% + 2 * var(--border-width))
+				background-image: linear-gradient(to bottom, transparentize($farbe-hintergrund, .8), $farbe-hintergrund 80%)
+				border-radius: var(--border-radius)
+				margin: calc(-1 * var(--border-width))
+				display: flex
+				align-items: center
+				justify-content: center

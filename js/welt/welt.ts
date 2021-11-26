@@ -15,12 +15,18 @@ import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
 // noinspection TypeScriptCheckImport
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
-const texture = new URL(
-	'../../img/earth.jpg?as=webp&height=1350&quality=50',
+// Experimental / non-standard
+// noinspection TypeScriptUnresolvedVariable
+const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+// noinspection TypeScriptUnresolvedVariable
+const type = connection?.type;
+const texture = (type === "cellular" ? new URL(
+	"../../img/earth.jpg?as=webp&height=1350&quality=50",
 	import.meta.url
-).toString();
-
-// console.log(texture)
+) : new URL(
+	"../../img/earth.jpg?as=webp&height=1350&quality=100",
+	import.meta.url
+)).toString();
 
 export default async () => {
 	const radius = 6
