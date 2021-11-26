@@ -1,4 +1,5 @@
 #spenden
+	$tint: rgba(0, 0, 0, .2)
 	--fill-top: 28vw
 	--fill-bottom: 4vw
 	display: flex
@@ -12,12 +13,9 @@
 	padding-bottom: calc(var(--fill-bottom) + var(--padding))
 
 	//background: linear-gradient(to bottom, red, transparent) left calc(100% - 3280/4928 * 100vw) / 100% 10%, linear-gradient(to top right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), bottom center / contain url("../img/World Bicycle Relief/Familie.jpg"), black
-	background: top center / 100vw 56vw linear-gradient(to right, red, red), bottom center / 100vw 44vw radial-gradient(closest-corner circle at center 100%, transparent 30%, red), bottom center / contain url("../img/World Bicycle Relief/Familie_komprimiert.png"), linear-gradient(to right, #004860, #4B7B88)
+	background: linear-gradient(to bottom, rgba(0, 0, 0, .4) 60%, transparent 75%), radial-gradient(closest-corner circle at bottom center, transparent 80%, rgba(0, 0, 0, .2)), linear-gradient($tint, $tint), bottom center / contain no-repeat url("../img/World Bicycle Relief/Familie tinted.png"), linear-gradient(to right, #004860, #4B7B88)
 	//background: linear-gradient(to top right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), bottom center / contain url("../img/World Bicycle Relief/Fahrradweg_60_80.webp"), skyblue
-	//background-size: contain
-	//background-position: bottom center
 	min-height: 88vw
-	background-repeat: no-repeat
 	#sponsoren
 		display: flex
 		flex-direction: row
