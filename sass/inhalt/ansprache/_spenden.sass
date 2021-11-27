@@ -15,11 +15,14 @@
 	//background: linear-gradient(to bottom, red, transparent) left calc(100% - 3280/4928 * 100vw) / 100% 10%, linear-gradient(to top right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), bottom center / contain url("../img/World Bicycle Relief/Familie.jpg"), black
 	background: linear-gradient(to bottom, rgba(0, 0, 0, .4) calc(100% - 30vw), transparent calc(100% - 24vw)), radial-gradient(closest-corner circle at bottom center, transparent calc(100% - 9vw), rgba(0, 0, 0, .3)), linear-gradient($tint, $tint), bottom center / contain no-repeat url("../img/World Bicycle Relief/Familie tinted komprimiert.webp"), linear-gradient(to right, #002b49, #324657)
 	//background: linear-gradient(to top right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), bottom center / contain url("../img/World Bicycle Relief/Fahrradweg_60_80.webp"), skyblue
-	img
-		max-width: 28rem
-		aspect-ratio: 1503 / 524
-		margin-top: -4rem
-		margin-bottom: 4rem
+	a
+		--padding: 2rem
+		margin-top: calc(-4rem - var(--padding))
+		margin-bottom: calc(4rem - var(--padding))
+		padding: var(--padding)
+		> img
+			max-width: 28rem
+			aspect-ratio: 1503 / 524
 	div
 		display: flex
 		flex-direction: column
