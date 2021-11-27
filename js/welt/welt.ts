@@ -24,7 +24,7 @@ const texture = (type === "cellular" ? new URL(
 	"../../img/earth.jpg?as=webp&height=1350&quality=50",
 	import.meta.url
 ) : new URL(
-	"../../img/earth.jpg?as=webp&height=1350&quality=100",
+	"../../img/earth.jpg?as=webp&height=1350&quality=90",
 	import.meta.url
 )).toString();
 
