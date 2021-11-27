@@ -21,10 +21,10 @@ const connection = navigator.connection || navigator.mozConnection || navigator.
 // noinspection TypeScriptUnresolvedVariable
 const type = connection?.type;
 const texture = (type === "cellular" ? new URL(
-	"../../img/earth.jpg?as=webp&height=1350&quality=50",
+	"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=50",
 	import.meta.url
 ) : new URL(
-	"../../img/earth.jpg?as=webp&height=1350&quality=90",
+	"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=90",
 	import.meta.url
 )).toString();
 
