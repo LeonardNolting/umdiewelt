@@ -1,2 +1,35 @@
 #ziel
 	padding: var(--padding)
+	//position: relative
+	//&::before
+	//	position: absolute
+	//	content: ""
+	//	width: calc(100% - 2 * var(--padding))
+	//	height: .2rem
+	//	top: calc(1.4rem + var(--padding))
+	//	background: linear-gradient(to right, transparent, firebrick 10%, firebrick 90%, transparent)
+	background: center var(--padding) / 100% 4rem no-repeat linear-gradient(to bottom, #ddd, transparent)
+	h3
+		--gap: 1.6rem
+		--höhe: .4rem
+		--gradient-transition: 10%
+		width: 100%
+		text-align: center
+		position: relative
+		display: flex
+		align-items: center
+		transform: translateY(-50%)
+		font-size: 3.2rem
+		&::before, &::after
+			content: ""
+			//position: absolute
+			width: 100%
+			height: var(--höhe)
+		&::before
+			background: linear-gradient(to right, transparent, var(--farbe-primär) var(--gradient-transition))
+			margin-right: var(--gap)
+			border-radius: 50% 0 0 50%
+		&::after
+			background: linear-gradient(to left, transparent, var(--farbe-primär) var(--gradient-transition))
+			margin-left: var(--gap)
+			border-radius: 0 50% 50% 0

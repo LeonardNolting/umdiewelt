@@ -1,4 +1,30 @@
 #sternfahrten
 	padding: var(--padding)
-	img
-		max-width: 50%
+	overflow: hidden
+	contain: paint
+	$gap: 4rem
+	picture
+		padding: $gap
+		position: relative
+		img
+			--border-color: #111
+			border: .4rem solid var(--border-color)
+			background: var(--border-color)
+			box-shadow: 0 0 4rem 1rem #0a3050
+			border-radius: 2rem
+			width: 60vw
+			aspect-ratio: calc(2776 / 2082)
+			contain: strict
+		&::before
+			content: ""
+			position: absolute
+			height: 100%
+			width: 100%
+			margin: -$gap
+	figcaption
+		margin-top: 2.4rem - $gap
+		font-size: 1.4rem
+		font-weight: bold
+		color: #777
+		text-shadow: 0 0 1rem white
+		text-align: center
