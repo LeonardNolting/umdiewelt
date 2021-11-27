@@ -15,18 +15,10 @@ import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
 // noinspection TypeScriptCheckImport
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
 
-// Experimental / non-standard
-// noinspection TypeScriptUnresolvedVariable
-const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-// noinspection TypeScriptUnresolvedVariable
-const type = connection?.type;
-const texture = (type === "cellular" ? new URL(
-	"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=50",
+const texture = new URL(
+	"../../img/Erde/Erde vereinfacht.jpg?as=webp&height=675&quality=20",
 	import.meta.url
-) : new URL(
-	"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=90",
-	import.meta.url
-)).toString();
+).toString();
 
 export default async () => {
 	const radius = 6
@@ -227,6 +219,28 @@ export default async () => {
 	offsetGruppe.rotation.y = anfang
 
 	animate()
+
+	// Größere Textur nachladen
+	// Experimental / non-standard
+	// noinspection TypeScriptUnresolvedVariable
+	const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+	// noinspection TypeScriptUnresolvedVariable
+	const type = connection?.type;
+	welt.material = new ShaderMaterial({
+		vertexShader: weltVertex,
+		fragmentShader: weltFragment,
+		uniforms: {
+			globeTexture: {
+				value: new TextureLoader().load((type === "cellular" ? new URL(
+					"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=50",
+					import.meta.url
+				) : new URL(
+					"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=90",
+					import.meta.url
+				)).toString())
+			}
+		}
+	})
 }
 
 export const aktualisieren = (wert: number) => {
