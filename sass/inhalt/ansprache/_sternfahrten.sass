@@ -1,13 +1,15 @@
 #sternfahrten
 	padding: var(--padding)
+	overflow: hidden
+	contain: paint
 	$gap: 4rem
 	picture
 		padding: $gap
 		position: relative
-		overflow: hidden
-		contain: paint
 		img
-			border: .4rem solid #111
+			--border-color: #111
+			border: .4rem solid var(--border-color)
+			background: var(--border-color)
 			box-shadow: 0 0 4rem 1rem #0a3050
 			border-radius: 2rem
 			width: 60vw
