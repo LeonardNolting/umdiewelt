@@ -236,6 +236,7 @@ export default function welt() {
 			let tween: Tween | undefined
 			const options = {passive: true}
 			const last: { x: number | undefined, y: number | undefined } = {x: undefined, y: undefined}
+			let scrolling: boolean | undefined = undefined
 			const listener = {
 				down: () => {
 					addEventListener("mousemove", listener.mouseMove, options);
@@ -249,21 +250,31 @@ export default function welt() {
 				},
 				move: (movementX: number, movementY: number, divisor: number) => {
 					bewegenGruppe.rotation.y += movementX / divisor
-					bewegenGruppe.rotation.x += movementY / 2000
+					bewegenGruppe.rotation.x += movementY / (divisor * 5)
 					if (tween) tween.kill()
 				},
 				mouseMove: (event: MouseEvent) => listener.move(event.movementX, event.movementY, 400),
 				touchMove: (event: TouchEvent) => {
-					event.preventDefault()
 					const newX = event.touches[0].pageX;
 					const newY = event.touches[0].pageY;
-					listener.move(newX - last.x, newY - last.y, 200)
-					last.x = newX
-					last.y = newY
+					const movementX = newX - last.x;
+					const movementY = newY - last.y;
+					if (scrolling === undefined && Math.abs(movementY) > Math.abs(movementX)) {
+						scrolling = true
+						removeEventListener("touchmove", listener.touchMove)
+						return
+					} else {
+						scrolling = false
+						event.preventDefault()
+						listener.move(movementX, movementY, 200)
+						last.x = newX
+						last.y = newY
+					}
 				},
 				up: () => {
 					removeEventListener("mousemove", listener.mouseMove);
 					removeEventListener("touchmove", listener.touchMove)
+					scrolling = undefined
 					document.body.classList.remove("moving");
 					tween = gsap.to(bewegenGruppe.rotation, {
 						x: 0,
