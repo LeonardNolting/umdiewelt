@@ -46,11 +46,6 @@
 		"last 2 versions",
 		"cover 95% in DE"
 	],
-	"compressors": {
-		"*.{html,css,js,svg,map}": [
-			"@parcel/compressor-gzip"
-		]
-	},
 	"postcss": {
 		"plugins": {
 			"postcss-normalize": true,
