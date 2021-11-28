@@ -19,6 +19,8 @@ jobs:
                 run: npm ci
             -   name: Bauen
                 run: npm run build --if-present
+            -   name: .htaccess übernehmen
+                run: cp .htaccess dist
 
             -   name: Hochladen
                 uses: garygrossgarten/github-action-scp@release
