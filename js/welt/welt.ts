@@ -223,7 +223,9 @@ export default function welt() {
 
 		// Folge cursor
 		const cursorPosition = {x: 0, y: 0}
+		let mussFolgen = false
 		addEventListener('mousemove', event => {
+			mussFolgen = true
 			// 1 bzw. -1 an den Ecken von container
 			cursorPosition.x = ((event.clientX - container.offsetLeft) / container.clientWidth) * 2 - 1.5
 			cursorPosition.y = -((event.clientY - container.offsetTop) / container.clientHeight) * 2 + 1
@@ -260,7 +262,7 @@ export default function welt() {
 		function animate() {
 			requestAnimationFrame(animate)
 			renderer.render(scene, camera)
-			gsap.to(folgenGruppe.rotation, {
+			if (mussFolgen) gsap.to(folgenGruppe.rotation, {
 				y: cursorPosition.x / 12,
 				x: -cursorPosition.y / 12,
 				duration: 2
