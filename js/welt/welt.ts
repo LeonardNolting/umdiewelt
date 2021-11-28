@@ -72,6 +72,7 @@ export default function welt() {
 			})
 		)
 		offsetGruppe.add(welt)
+		resolve(texture)
 
 		// region Bessere Textur nachladen
 		// Experimental / non-standard
@@ -86,17 +87,18 @@ export default function welt() {
 			"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=90",
 			import.meta.url
 		)).toString()
-		welt.material = new ShaderMaterial({
-			vertexShader: weltVertex,
-			fragmentShader: weltFragment,
-			uniforms: {
-				globeTexture: {
-					value: new TextureLoader().load(url)
+		new TextureLoader().load(url, texture => {
+			welt.material = new ShaderMaterial({
+				vertexShader: weltVertex,
+				fragmentShader: weltFragment,
+				uniforms: {
+					globeTexture: {
+						value: texture
+					}
 				}
-			}
+			})
 		})
 		// endregion
-		resolve(texture)
 	}))
 	// endregion
 
