@@ -9,15 +9,17 @@ import load from "./load";
 import {Eintragung} from "./eintragen";
 import welt from "./welt/welt";
 
+const anzeigen = welt()
+
 document.addEventListener("DOMContentLoaded", async () => {
 	wait()
+	await anzeigen()
 	browserAktualisierung()
 	popups()
 	await Cookies.ueberpruefen()
 
 	await load((async () => {
 		// await maps() // TODO erst wenn autocomplete/distance matrix benötigt wird
-		await welt()
 		await inhalt()
 		await firebase()
 		await Eintragung.vorbereiten()
