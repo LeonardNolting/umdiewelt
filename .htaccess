@@ -964,46 +964,46 @@ ServerSignature Off
 #     keep the default behavior regarding .gz files.
 #     https://httpd.apache.org/docs/current/mod/mod_mime.html#removetype
 
-<IfModule mod_headers.c>
+# <IfModule mod_headers.c>
 
-    RewriteCond %{HTTP:Accept-Encoding} gzip
-    RewriteCond %{REQUEST_FILENAME}\.gz -f
-    RewriteRule \.(css|ics|js|json|html|svg)$ %{REQUEST_URI}.gz [L]
+#     RewriteCond %{HTTP:Accept-Encoding} gzip
+#     RewriteCond %{REQUEST_FILENAME}\.gz -f
+#     RewriteRule \.(css|ics|js|json|html|svg)$ %{REQUEST_URI}.gz [L]
 
-    # Prevent mod_deflate double gzip
-    RewriteRule \.gz$ - [E=no-gzip:1]
+#     # Prevent mod_deflate double gzip
+#     RewriteRule \.gz$ - [E=no-gzip:1]
 
-    <FilesMatch "\.gz$">
+#     <FilesMatch "\.gz$">
 
-        # Serve correct content types
-        <IfModule mod_mime.c>
-            # (1)
-            RemoveType gz
+#         # Serve correct content types
+#         <IfModule mod_mime.c>
+#             # (1)
+#             RemoveType gz
 
-            # Serve correct content types
-            AddType text/css              css.gz
-            AddType text/calendar         ics.gz
-            AddType text/javascript       js.gz
-            AddType application/json      json.gz
-            AddType text/html             html.gz
-            AddType image/svg+xml         svg.gz
+#             # Serve correct content types
+#             AddType text/css              css.gz
+#             AddType text/calendar         ics.gz
+#             AddType text/javascript       js.gz
+#             AddType application/json      json.gz
+#             AddType text/html             html.gz
+#             AddType image/svg+xml         svg.gz
 
-            # Serve correct content charset
-            AddCharset utf-8 .css.gz \
-                             .ics.gz \
-                             .js.gz \
-                             .json.gz
-        </IfModule>
+#             # Serve correct content charset
+#             AddCharset utf-8 .css.gz \
+#                              .ics.gz \
+#                              .js.gz \
+#                              .json.gz
+#         </IfModule>
 
-        # Force proxies to cache gzipped and non-gzipped files separately
-        Header append Vary Accept-Encoding
+#         # Force proxies to cache gzipped and non-gzipped files separately
+#         Header append Vary Accept-Encoding
 
-    </FilesMatch>
+#     </FilesMatch>
 
-    # Serve correct encoding type
-    AddEncoding gzip .gz
+#     # Serve correct encoding type
+#     AddEncoding gzip .gz
 
-</IfModule>
+# </IfModule>
 
 # ----------------------------------------------------------------------
 # | Content transformation                                             |
