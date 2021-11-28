@@ -950,40 +950,6 @@ ServerSignature Off
 # | GZip pre-compressed content                                        |
 # ----------------------------------------------------------------------
 
-<Files *.js.gz>
-    AddType "text/javascript" .gz
-    AddEncoding gz .gz
-</Files>
-<Files *.css.gz>
-    AddType "text/css" .gz
-    AddEncoding gz .gz
-</Files>
-<Files *.svg.gz>
-    AddType "image/svg+xml" .gz
-    AddEncoding gz .gz
-</Files>
-<Files *.html.gz>
-    AddType "text/html" .gz
-    AddEncoding gz .gz
-</Files>
-<Files *.map.gz>
-    AddType "application/json" .gz
-    AddEncoding gz .gz
-</Files>
-
-# Turn on mod_rewrite
-RewriteEngine On
-
-# Serve pre-compressed Brotli assets
-RewriteCond %{HTTP:Accept-Encoding} br
-RewriteCond %{REQUEST_FILENAME}.br -f
-RewriteRule ^(.*)$ $1.br [L]
-
-# Serve pre-compressed gzip assets
-RewriteCond %{HTTP:Accept-Encoding} gzip
-RewriteCond %{REQUEST_FILENAME}.gz -f
-RewriteRule ^(.*)$ $1.gz [L]
-
 # Serve gzip compressed CSS, JS, HTML, SVG, ICS, and JSON files if they exist
 # and if the client accepts gzip encoding.
 #
