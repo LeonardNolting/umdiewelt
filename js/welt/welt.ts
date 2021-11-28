@@ -84,7 +84,7 @@ export default function welt() {
 			"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=50",
 			import.meta.url
 		) : new URL(
-			"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=90",
+			"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=80",
 			import.meta.url
 		)).toString()
 		new TextureLoader().load(url, texture => {
