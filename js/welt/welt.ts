@@ -14,6 +14,8 @@ import atmosphaereVertex from "../../shaders/atmosphaere/vertex.glsl";
 import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
 // noinspection TypeScriptCheckImport
 import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
+import {gsap} from "gsap"
+import Tween = gsap.core.Tween;
 
 // TODO in Konfiguration auslagern
 const radius = 6
@@ -225,22 +227,29 @@ export default function welt() {
 			// 1 bzw. -1 an den Ecken von container
 			cursorPosition.x = ((event.clientX - container.offsetLeft) / container.clientWidth) * 2 - 1.5
 			cursorPosition.y = -((event.clientY - container.offsetTop) / container.clientHeight) * 2 + 1
-			folgenGruppe.rotation.y = cursorPosition.x / 10
-			folgenGruppe.rotation.x = -cursorPosition.y / 10
 		})
 
 		// Bewegen
 		{
+			let tween: Tween | undefined
 			const options = {passive: true}
 			const listener = {
 				down: () => {
 					addEventListener("mousemove", listener.move, options);
 					document.body.classList.add("moving");
 				},
-				move: (event: MouseEvent) => bewegenGruppe.rotation.y += event.movementX / 300,
+				move: (event: MouseEvent) => {
+					bewegenGruppe.rotation.y += event.movementX / 400
+					bewegenGruppe.rotation.x += event.movementY / 2000
+					if (tween) tween.kill()
+				},
 				up: () => {
 					removeEventListener("mousemove", listener.move);
 					document.body.classList.remove("moving");
+					tween = gsap.to(bewegenGruppe.rotation, {
+						x: 0,
+						duration: 1.2,
+					})
 				}
 			}
 			wrapper.addEventListener("mousedown", listener.down)
@@ -251,6 +260,11 @@ export default function welt() {
 		function animate() {
 			requestAnimationFrame(animate)
 			renderer.render(scene, camera)
+			gsap.to(folgenGruppe.rotation, {
+				y: cursorPosition.x / 12,
+				x: -cursorPosition.y / 12,
+				duration: 2
+			})
 		}
 
 		animate()
