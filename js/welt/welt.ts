@@ -22,6 +22,7 @@ const radius = 6
 const segments = 50
 const atmosphaereScale = 1.02
 const anfang = -Math.PI / 2 - .2
+const anfangOffset = Math.PI / 20
 const wegFarbe = 0xffffff;
 const wegBreite = 8;
 const wegAbstand = 1;
@@ -50,7 +51,7 @@ export default function welt() {
 	const folgenGruppe = new Group()
 	const bewegenGruppe = new Group()
 	const offsetGruppe = new Group()
-	offsetGruppe.rotation.y = anfang
+	offsetGruppe.rotation.y = anfang + anfangOffset
 	folgenGruppe.add(bewegenGruppe)
 	bewegenGruppe.add(offsetGruppe)
 	scene.add(folgenGruppe)
@@ -270,6 +271,10 @@ export default function welt() {
 		}
 
 		animate()
+		gsap.to(offsetGruppe.rotation, {
+			y: anfang,
+			duration: 2
+		})
 	}
 }
 
