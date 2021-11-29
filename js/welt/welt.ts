@@ -18,11 +18,24 @@ import {gsap} from "gsap"
 import Tween = gsap.core.Tween;
 
 // TODO in Konfiguration auslagern
+
+/**
+ * Jeder touch-Bewegungs-Vektor wird mit Faktor multipliziert
+ */
+const touchFaktor = 2
+/**
+ * Jeder maus-Bewegungs-Vektor wird mit Faktor multipliziert
+ */
+const mouseFaktor = 1
 const radius = 6
 const segments = 50
 const atmosphaereScale = 1.02
 const anfang = -Math.PI / 2 - .2
-const anfangOffset = Math.PI / 20
+/**
+ * Anfängliche Bewegung
+ * matchMedia-Idee: https://stackoverflow.com/a/52854585/11485145
+ */
+const anfangOffset = Math.PI / 20 * (window.matchMedia("(any-hover: none)").matches ? touchFaktor : mouseFaktor)
 const wegFarbe = 0xffffff;
 const wegBreite = 8;
 const wegAbstand = 1;
@@ -249,12 +262,12 @@ export default function welt() {
 					last.y = event.touches[0].pageY
 					listener.down()
 				},
-				move: (movementX: number, movementY: number, divisor: number) => {
-					bewegenGruppe.rotation.y += movementX / divisor
-					bewegenGruppe.rotation.x += movementY / (divisor * 5)
+				move: (movementX: number, movementY: number, faktor: number) => {
+					bewegenGruppe.rotation.y += movementX * faktor / (400)
+					bewegenGruppe.rotation.x += movementY * faktor / (400 * 5)
 					if (tween) tween.kill()
 				},
-				mouseMove: (event: MouseEvent) => listener.move(event.movementX, event.movementY, 400),
+				mouseMove: (event: MouseEvent) => listener.move(event.movementX, event.movementY, mouseFaktor),
 				touchMove: (event: TouchEvent) => {
 					const newX = event.touches[0].pageX;
 					const newY = event.touches[0].pageY;
@@ -267,7 +280,7 @@ export default function welt() {
 					} else {
 						scrolling = false
 						event.preventDefault()
-						listener.move(movementX, movementY, 200)
+						listener.move(movementX, movementY, touchFaktor)
 						last.x = newX
 						last.y = newY
 					}
