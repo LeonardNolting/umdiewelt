@@ -4,7 +4,14 @@
 	align-items: center
 	padding: 8rem 4rem
 	font-size: 1.4rem
+	text-align: center
 	#fahrer
-		display: none
+		overflow: hidden
+		&:empty
+			//display: none
+			height: 0
+			visibility: hidden
+			contain: strict
+			margin: 1rem 0
 	//#verweis::before
 
