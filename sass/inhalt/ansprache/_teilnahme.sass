@@ -35,6 +35,9 @@
 		--grenze-start: calc(var(--grenze-ende) - 0.6%)
 		background-image: linear-gradient(-54deg, transparent var(--grenze-start), var(--farbe-grenze) var(--grenze-start), var(--farbe-grenze) var(--grenze-ende), var(--farbe-primär) var(--grenze-ende))
 
+		ol
+			margin: 2rem 0
+
 		p:last-of-type
 			flex-grow: 1
 			display: flex
@@ -58,4 +61,53 @@
 				align-items: center
 				justify-content: center
 				padding: var(--padding)
+				text-align: center
+
+@media (max-width: 1400px)
+	#teilnahme
+		flex-direction: column
+		margin-bottom: 0
+		--shift: -22vw
+		--fill-top: 28vw
+		--gap-top: calc(-1 * var(--fill-top) + 1 / 6 * var(--shift))
+		img
+			margin-left: var(--shift)
+			width: calc(100vw - var(--shift))
+			margin-right: 0
+			position: relative
+			z-index: 1
+		.text
+			margin-top: var(--gap-top)
+			max-width: unset
+			border-left: 0
+			border-top: none
+			border-radius: 0
+			background-image: none
+			box-shadow: none
+			h3
+				margin-top: calc(-1 / 3 * var(--gap-top))
+			h3, b
+				text-align: right
+			ol
+				margin-top: calc(-1 / 3 * var(--gap-top) - 2vw)
+	//b
+	//	text-align: center
+	#spenden
+		--fill-top: 0 !important
+		.einleitung > a:first-of-type
+			margin-top: 0 !important
+			padding-top: 0 !important
+
+@media (max-width: 600px)
+	#teilnahme
+		--shift: 0vw
+		align-items: flex-start
+		overflow: hidden
+		img
+			width: 124vw
+		.text
+			padding-top: var(--fill-top)
+			h3
+				margin-top: -2vw
+			h3, b
 				text-align: center
