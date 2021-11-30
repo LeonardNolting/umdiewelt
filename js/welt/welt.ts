@@ -22,7 +22,7 @@ import Tween = gsap.core.Tween;
 /**
  * Jeder touch-Bewegungs-Vektor wird mit Faktor multipliziert
  */
-const touchFaktor = 2
+const touchFaktor = 3
 /**
  * Jeder maus-Bewegungs-Vektor wird mit Faktor multipliziert
  */
