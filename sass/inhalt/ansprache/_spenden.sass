@@ -1,5 +1,6 @@
 #spenden
 	$tint: rgba(0, 0, 0, .2)
+	--farbe-theme: #ed1c24
 	--fill-top: 28vw
 	--fill-bottom: 4vw
 	display: flex
@@ -56,3 +57,15 @@
 				margin-left: var(--padding)
 		&:empty
 			display: none
+	button
+		background-color: var(--farbe-theme)
+		border-radius: 0
+		color: #fff
+		text-transform: uppercase
+		padding: .4rem 1rem
+		font-family: sans-serif
+		margin-top: 2rem
+	:where(:not(button)) > a
+		color: var(--farbe-theme)
+		margin-bottom: 2rem
+		margin-top: 1rem
