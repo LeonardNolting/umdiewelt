@@ -1,19 +1,23 @@
 import {
-	AdditiveBlending, BackSide, BufferAttribute, Group,
-	Mesh, Path,
+	AdditiveBlending,
+	BackSide,
+	Group,
+	Mesh,
+	Path,
 	PerspectiveCamera,
 	Scene,
 	ShaderMaterial,
-	SphereGeometry, Texture,
-	TextureLoader, Vector2,
+	SphereGeometry,
+	Texture,
+	TextureLoader,
+	Vector2,
 	WebGLRenderer
 } from "three";
 import weltVertex from "../../shaders/welt/vertex.glsl";
 import weltFragment from "../../shaders/welt/fragment.glsl";
 import atmosphaereVertex from "../../shaders/atmosphaere/vertex.glsl";
 import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
-// noinspection TypeScriptCheckImport
-import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
+import {MeshLine, MeshLineMaterial} from 'meshline';
 import {gsap} from "gsap"
 import Tween = gsap.core.Tween;
 
@@ -37,16 +41,18 @@ const anfang = -Math.PI / 2 - .2
  */
 const anfangOffset = Math.PI / 20 * (window.matchMedia("(any-hover: none)").matches ? touchFaktor : mouseFaktor)
 const wegFarbe = 0xffffff;
-const wegBreite = 8;
-const wegAbstand = 1;
-const wegStartWinkel = Math.PI / 2
+const wegBreite = .1;
+const wegAbstand = .1;
+const wegStartWinkel = -.2
 const wegEndWinkel = wegStartWinkel - 2 * Math.PI
-const fortschritt = .1
-const fortschrittFarbe = 0x71c31e
+// let fortschritt: number | undefined = undefined
+let fortschritt = 90
+const fortschrittFarbe = 0xC2DC62
 const fortschrittBreite = wegBreite * 1.5
-const fortschrittAbstand = wegAbstand + .15;
+const fortschrittAbstand = wegAbstand + wegBreite;
 const fortschrittStartWinkel = wegStartWinkel
-const fortschrittEndWinkel = fortschrittStartWinkel - fortschritt * (2 * Math.PI)
+const fortschrittEndWinkel = fortschrittStartWinkel - fortschritt / 360 * (2 * Math.PI)
+let fortschrittKannAngezeigtWerden = false
 const hoehe = 16;
 const anfangLaenge = .05;
 const anfangAbstand = fortschrittAbstand
@@ -151,11 +157,12 @@ export default function welt() {
 		breite: number,
 		positions: number[] = [],
 		anzeigen: boolean = true
-	): MeshLine => {
+	): Mesh<MeshLine, MeshLineMaterial> => {
 		const line = new MeshLine()
 		line.setPoints(positions)
 
 		const material = new MeshLineMaterial({
+			resolution: undefined,
 			color: farbe,
 			lineWidth: breite
 			/*side: BackSide,
@@ -163,36 +170,24 @@ export default function welt() {
 		});
 
 		const mesh = new Mesh(line, material)
-		bewegenGruppe.add(mesh)
+		offsetGruppe.add(mesh)
 		return mesh
 	}
-	/*const zeichneKreis = (kreis: Line2, positions: number[]) => {
-		kreis.geometry.setPositions(positions)
+	const zeichneKreis = (kreis: Mesh<MeshLine, MeshLineMaterial>, positions: number[]) => {
+		kreis.geometry.setPoints(positions)
 		kreis.geometry.attributes["position"].needsUpdate = true
-
-	}*/
+	}
 
 	// Weg
 	const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
-	const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
-// const wegKreis = kreis(wegFarbe, wegBreite, wegPositions, false)
-
-// zeichneKreis(wegKreis, wegPositions.slice(0, 6))
-
-	let i = 6; // zwei Punkte müssen mindestens gegeben sein
-	const wegInterval = setInterval(() => {
-		// zeichneKreis(wegKreis, wegPositions.slice(0, i))
-
-		if (i === wegPositions.length) clearInterval(wegInterval)
-		i += 3
-	}, 20)
-	// kreise.push(wegKreis)
+	// const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
+	const wegKreis = kreis(wegFarbe, wegBreite, [], false)
+	kreise.push(wegKreis)
 
 	// Fortschritt
-	/*const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
+	const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
 	const fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite)
 	kreise.push(fortschrittKreis)
-	setSize()*/
 
 	// Anfang
 	// const anfangKreis = kreis(anfangFarbe, anfangBreite, positions(anfangAbstand, anfangLaenge, -anfangLaenge, segments, (x, y) => [0, y, x]))
@@ -319,6 +314,37 @@ export default function welt() {
 			y: anfang,
 			duration: 2
 		})
+
+		setTimeout(() => {
+			zeichneKreis(wegKreis, weg.slice(0, 6))
+
+			let i = 6; // zwei Punkte müssen mindestens gegeben sein
+			const wegInterval = setInterval(() => {
+				zeichneKreis(wegKreis, weg.slice(0, i))
+
+				if (i === weg.length) {
+					clearInterval(wegInterval)
+
+					zeichneKreis(fortschrittKreis, [])
+					i = 0;
+					const fortschrittTimeout = 16
+					const fortschrittSchritt = 3
+					const fortschrittInterval = setInterval(() => {
+						zeichneKreis(fortschrittKreis, fortschrittPositions.slice(0, i))
+
+						if (i === fortschrittPositions.length) clearInterval(fortschrittInterval)
+						i += fortschrittSchritt
+					}, fortschrittTimeout)
+
+					gsap.to(offsetGruppe.rotation, {
+						y: fortschrittEndWinkel - Math.PI / 2,
+						duration: fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000,
+						ease: "power1.in"
+					})
+				}
+				i += 3
+			}, 10)
+		}, 1500)
 	}
 }
 
