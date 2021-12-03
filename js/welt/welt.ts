@@ -176,16 +176,6 @@ export default function welt() {
 	const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
 	// const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
 	const wegKreis = kreis(wegFarbe, wegBreite, [], false)
-
-	zeichneKreis(wegKreis, weg.slice(0, 6))
-
-	let i = 6; // zwei Punkte müssen mindestens gegeben sein
-	const wegInterval = setInterval(() => {
-		zeichneKreis(wegKreis, weg.slice(0, i))
-
-		if (i === weg.length) clearInterval(wegInterval)
-		i += 3
-	}, 10)
 	kreise.push(wegKreis)
 
 	// Fortschritt
@@ -234,6 +224,16 @@ export default function welt() {
 		setSize()
 		const resizeObserver = new ResizeObserver(setSize)
 		resizeObserver.observe(anzeige, {box: "border-box"})
+
+		zeichneKreis(wegKreis, weg.slice(0, 6))
+
+		let i = 6; // zwei Punkte müssen mindestens gegeben sein
+		const wegInterval = setInterval(() => {
+			zeichneKreis(wegKreis, weg.slice(0, i))
+
+			if (i === weg.length) clearInterval(wegInterval)
+			i += 3
+		}, 10)
 
 		// Folge cursor
 		const cursorPosition = {x: 0, y: 0}
