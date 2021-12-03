@@ -327,12 +327,20 @@ export default function welt() {
 
 					zeichneKreis(fortschrittKreis, [])
 					i = 0;
+					const fortschrittTimeout = 16
+					const fortschrittSchritt = 3
 					const fortschrittInterval = setInterval(() => {
 						zeichneKreis(fortschrittKreis, fortschrittPositions.slice(0, i))
 
 						if (i === fortschrittPositions.length) clearInterval(fortschrittInterval)
-						i += 3
-					}, 10)
+						i += fortschrittSchritt
+					}, fortschrittTimeout)
+
+					gsap.to(offsetGruppe.rotation, {
+						y: fortschrittEndWinkel - Math.PI / 2,
+						duration: fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000,
+						ease: "power1.in"
+					})
 				}
 				i += 3
 			}, 10)
