@@ -39,8 +39,7 @@ const anfangOffset = Math.PI / 20 * (window.matchMedia("(any-hover: none)").matc
 const wegFarbe = 0xffffff;
 const wegBreite = .1;
 const wegAbstand = .1;
-const wegStartWinkel = Math.PI / 2
-// const wegStartWinkel = anfang
+const wegStartWinkel = -.2
 const wegEndWinkel = wegStartWinkel - 2 * Math.PI
 const fortschritt = .1
 const fortschrittFarbe = 0x71c31e
@@ -208,7 +207,7 @@ export default function welt() {
 			});
 
 			const mesh = new Mesh(line, material)
-			bewegenGruppe.add(mesh)
+			offsetGruppe.add(mesh)
 			return mesh
 		}
 		const zeichneKreis = (kreis: Mesh<MeshLine, MeshLineMaterial>, positions: number[]) => {
