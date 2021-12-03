@@ -164,7 +164,7 @@ export default function welt() {
 		const material = new MeshLineMaterial({
 			resolution: undefined,
 			color: farbe,
-			lineWidth: wegBreite
+			lineWidth: breite
 			/*side: BackSide,
 			blending: AdditiveBlending*/
 		});
