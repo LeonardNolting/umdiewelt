@@ -218,20 +218,18 @@ export default function welt() {
 
 		// Weg
 		const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
-		const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
+		// const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
 		const wegKreis = kreis(wegFarbe, wegBreite, [], false)
 
-
-		zeichneKreis(wegKreis, weg)
-		/*zeichneKreis(wegKreis, wegPositions.slice(0, 6))
+		zeichneKreis(wegKreis, weg.slice(0, 6))
 
 		let i = 6; // zwei Punkte müssen mindestens gegeben sein
 		const wegInterval = setInterval(() => {
-			zeichneKreis(wegKreis, wegPositions.slice(0, i))
+			zeichneKreis(wegKreis, weg.slice(0, i))
 
-			if (i === wegPositions.length) clearInterval(wegInterval)
+			if (i === weg.length) clearInterval(wegInterval)
 			i += 3
-		}, 10)*/
+		}, 10)
 		kreise.push(wegKreis)
 
 		setSize()
