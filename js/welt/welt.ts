@@ -13,7 +13,7 @@ import weltFragment from "../../shaders/welt/fragment.glsl";
 import atmosphaereVertex from "../../shaders/atmosphaere/vertex.glsl";
 import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
 // noinspection TypeScriptCheckImport
-import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'three.meshline';
+import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'meshline';
 import {gsap} from "gsap"
 import Tween = gsap.core.Tween;
 
@@ -37,9 +37,10 @@ const anfang = -Math.PI / 2 - .2
  */
 const anfangOffset = Math.PI / 20 * (window.matchMedia("(any-hover: none)").matches ? touchFaktor : mouseFaktor)
 const wegFarbe = 0xffffff;
-const wegBreite = 8;
-const wegAbstand = 1;
+const wegBreite = .1;
+const wegAbstand = .1;
 const wegStartWinkel = Math.PI / 2
+// const wegStartWinkel = anfang
 const wegEndWinkel = wegStartWinkel - 2 * Math.PI
 const fortschritt = .1
 const fortschrittFarbe = 0x71c31e
@@ -135,59 +136,6 @@ export default function welt() {
 	// region Weg & Fortschritt
 	const kreise = []
 
-	const positions = (
-		abstand: number,
-		start: number = 0,
-		ende: number = 2 * Math.PI,
-		anzahlSegmente: number = segments,
-		map: (x: number, y: number) => [number, number, number] = (x, y) => [x, 0, y],
-	) => new Path()
-		.absarc(0, 0, radius + abstand, start, ende, true)
-		.getPoints(anzahlSegmente)
-		.flatMap(({x, y}) => map(x, y))
-
-	const kreis = (
-		farbe: number,
-		breite: number,
-		positions: number[] = [],
-		anzeigen: boolean = true
-	): MeshLine => {
-		const line = new MeshLine()
-		line.setPoints(positions)
-
-		const material = new MeshLineMaterial({
-			color: farbe,
-			lineWidth: breite
-			/*side: BackSide,
-			blending: AdditiveBlending*/
-		});
-
-		const mesh = new Mesh(line, material)
-		bewegenGruppe.add(mesh)
-		return mesh
-	}
-	/*const zeichneKreis = (kreis: Line2, positions: number[]) => {
-		kreis.geometry.setPositions(positions)
-		kreis.geometry.attributes["position"].needsUpdate = true
-
-	}*/
-
-	// Weg
-	const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
-	const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
-// const wegKreis = kreis(wegFarbe, wegBreite, wegPositions, false)
-
-// zeichneKreis(wegKreis, wegPositions.slice(0, 6))
-
-	let i = 6; // zwei Punkte müssen mindestens gegeben sein
-	const wegInterval = setInterval(() => {
-		// zeichneKreis(wegKreis, wegPositions.slice(0, i))
-
-		if (i === wegPositions.length) clearInterval(wegInterval)
-		i += 3
-	}, 20)
-	// kreise.push(wegKreis)
-
 	// Fortschritt
 	/*const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
 	const fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite)
@@ -230,6 +178,61 @@ export default function welt() {
 
 		// container.insertBefore(renderer.domElement, container.firstChild)
 		anzeige.append(renderer.domElement)
+
+		const positions = (
+			abstand: number,
+			start: number = 0,
+			ende: number = 2 * Math.PI,
+			anzahlSegmente: number = segments,
+			map: (x: number, y: number) => [number, number, number] = (x, y) => [x, 0, y],
+		) => new Path()
+			.absarc(0, 0, radius + abstand, start, ende, true)
+			.getPoints(anzahlSegmente)
+			.flatMap(({x, y}) => map(x, y))
+
+		const kreis = (
+			farbe: number,
+			breite: number,
+			positions: number[] = [],
+			anzeigen: boolean = true
+		): Mesh<MeshLine, MeshLineMaterial> => {
+			const line = new MeshLine()
+			line.setPoints(positions)
+
+			const material = new MeshLineMaterial({
+				resolution: new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight),
+				color: farbe,
+				lineWidth: wegBreite
+				/*side: BackSide,
+				blending: AdditiveBlending*/
+			});
+
+			const mesh = new Mesh(line, material)
+			bewegenGruppe.add(mesh)
+			return mesh
+		}
+		const zeichneKreis = (kreis: Mesh<MeshLine, MeshLineMaterial>, positions: number[]) => {
+			kreis.geometry.setPoints(positions)
+			kreis.geometry.attributes["position"].needsUpdate = true
+		}
+
+		// Weg
+		const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
+		const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
+		const wegKreis = kreis(wegFarbe, wegBreite, [], false)
+
+
+		zeichneKreis(wegKreis, weg)
+		/*zeichneKreis(wegKreis, wegPositions.slice(0, 6))
+
+		let i = 6; // zwei Punkte müssen mindestens gegeben sein
+		const wegInterval = setInterval(() => {
+			zeichneKreis(wegKreis, wegPositions.slice(0, i))
+
+			if (i === wegPositions.length) clearInterval(wegInterval)
+			i += 3
+		}, 10)*/
+		kreise.push(wegKreis)
 
 		setSize()
 		const resizeObserver = new ResizeObserver(setSize)
