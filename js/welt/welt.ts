@@ -320,7 +320,18 @@ export default function welt() {
 			const wegInterval = setInterval(() => {
 				zeichneKreis(wegKreis, weg.slice(0, i))
 
-				if (i === weg.length) clearInterval(wegInterval)
+				if (i === weg.length) {
+					clearInterval(wegInterval)
+
+					zeichneKreis(fortschrittKreis, [])
+					i = 0;
+					const fortschrittInterval = setInterval(() => {
+						zeichneKreis(fortschrittKreis, fortschrittPositions.slice(0, i))
+
+						if (i === fortschrittPositions.length) clearInterval(fortschrittInterval)
+						i += 3
+					}, 10)
+				}
 				i += 3
 			}, 10)
 		}, 1500)
