@@ -183,10 +183,9 @@ export default function welt() {
 	kreise.push(wegKreis)
 
 	// Fortschritt
-	/*const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
+	const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
 	const fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite)
 	kreise.push(fortschrittKreis)
-	setSize()*/
 
 	// Anfang
 	// const anfangKreis = kreis(anfangFarbe, anfangBreite, positions(anfangAbstand, anfangLaenge, -anfangLaenge, segments, (x, y) => [0, y, x]))
