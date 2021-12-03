@@ -1,19 +1,23 @@
 import {
-	AdditiveBlending, BackSide, BufferAttribute, Group,
-	Mesh, Path,
+	AdditiveBlending,
+	BackSide,
+	Group,
+	Mesh,
+	Path,
 	PerspectiveCamera,
 	Scene,
 	ShaderMaterial,
-	SphereGeometry, Texture,
-	TextureLoader, Vector2,
+	SphereGeometry,
+	Texture,
+	TextureLoader,
+	Vector2,
 	WebGLRenderer
 } from "three";
 import weltVertex from "../../shaders/welt/vertex.glsl";
 import weltFragment from "../../shaders/welt/fragment.glsl";
 import atmosphaereVertex from "../../shaders/atmosphaere/vertex.glsl";
 import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
-// noinspection TypeScriptCheckImport
-import {MeshLine, MeshLineMaterial, MeshLineRaycast} from 'meshline';
+import {MeshLine, MeshLineMaterial} from 'meshline';
 import {gsap} from "gsap"
 import Tween = gsap.core.Tween;
 
