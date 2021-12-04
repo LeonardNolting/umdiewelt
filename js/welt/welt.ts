@@ -340,8 +340,8 @@ export default function welt() {
 
 					gsap.to(offsetGruppe.rotation, {
 						y: fortschrittEndWinkel - Math.PI / 2,
-						duration: fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000,
-						ease: "power1.in"
+						duration: fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000 * 1.5,
+						ease: "power2.inOut"
 					})
 				}
 				i += 3
