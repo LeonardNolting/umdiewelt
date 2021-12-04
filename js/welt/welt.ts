@@ -77,63 +77,51 @@ export default function welt() {
 
 	// region Welt
 	// let welt
-	const welt = new Mesh(
-		new SphereGeometry(radius, segments, segments),
-		new ShaderMaterial({
-			vertexShader: weltVertex,
-			fragmentShader: weltFragment,
-			uniforms: {
-				globeTexture: {
-					value: undefined
-				}
-			}
-		})
-	)
-	offsetGruppe.add(welt)
-
-	const texture = new Promise<Texture>(resolve => {
-		document.addEventListener("DOMContentLoaded", () => {
-			new TextureLoader().load((document.querySelector("body > img") as HTMLImageElement).currentSrc, texture => {
-				welt.material = new ShaderMaterial({
-					vertexShader: weltVertex,
-					fragmentShader: weltFragment,
-					uniforms: {
-						globeTexture: {
-							value: texture
-						}
+	const texture = new Promise<Texture>(resolve => new TextureLoader().load(new URL(
+		"../../img/Erde/Erde vereinfacht.jpg?as=webp&height=675&quality=20",
+		import.meta.url
+	).toString(), texture => {
+		const welt = new Mesh(
+			new SphereGeometry(radius, segments, segments),
+			new ShaderMaterial({
+				vertexShader: weltVertex,
+				fragmentShader: weltFragment,
+				uniforms: {
+					globeTexture: {
+						value: texture
 					}
-				})
+				}
+			})
+		)
+		offsetGruppe.add(welt)
+		resolve(texture)
 
-				resolve(texture)
-
-				// region Bessere Textur nachladen
-				// Experimental / non-standard
-				// noinspection TypeScriptUnresolvedVariable
-				const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-				// noinspection TypeScriptUnresolvedVariable
-				const type = connection?.type;
-				const url = (type === "cellular" ? new URL(
-					"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=50",
-					import.meta.url
-				) : new URL(
-					"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=80",
-					import.meta.url
-				)).toString()
-				new TextureLoader().load(url, texture => {
-					welt.material = new ShaderMaterial({
-						vertexShader: weltVertex,
-						fragmentShader: weltFragment,
-						uniforms: {
-							globeTexture: {
-								value: texture
-							}
-						}
-					})
-				})
-				// endregion
-			});
+		// region Bessere Textur nachladen
+		// Experimental / non-standard
+		// noinspection TypeScriptUnresolvedVariable
+		const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+		// noinspection TypeScriptUnresolvedVariable
+		const type = connection?.type;
+		const url = (type === "cellular" ? new URL(
+			"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=50",
+			import.meta.url
+		) : new URL(
+			"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=80",
+			import.meta.url
+		)).toString()
+		new TextureLoader().load(url, texture => {
+			welt.material = new ShaderMaterial({
+				vertexShader: weltVertex,
+				fragmentShader: weltFragment,
+				uniforms: {
+					globeTexture: {
+						value: texture
+					}
+				}
+			})
 		})
-	})
+		// endregion
+	}))
 	// endregion
 
 	// region Atmosphäre
@@ -207,7 +195,7 @@ export default function welt() {
 	// endregion
 
 	return async function () {
-		// await texture
+		await texture
 
 		const wrapper = document.querySelector("header")
 		const container = document.getElementById("welt")
