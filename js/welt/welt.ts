@@ -34,7 +34,7 @@ const mouseFaktor = 1
 const radius = 6
 const segments = 50
 const atmosphaereScale = 1.02
-const anfang = -Math.PI / 2 - .2
+const anfang = -Math.PI / 2 - .15
 /**
  * Anfängliche Bewegung
  * matchMedia-Idee: https://stackoverflow.com/a/52854585/11485145
@@ -43,7 +43,7 @@ const anfangOffset = Math.PI / 20 * (window.matchMedia("(any-hover: none)").matc
 const wegFarbe = 0xffffff;
 const wegBreite = .1;
 const wegAbstand = .1;
-const wegStartWinkel = -.2
+const wegStartWinkel = -.15
 const wegEndWinkel = wegStartWinkel - 2 * Math.PI
 // let fortschritt: number | undefined = undefined
 let fortschritt = 90
@@ -236,8 +236,10 @@ export default function welt() {
 		addEventListener('mousemove', event => {
 			mussFolgen = true
 			// 1 bzw. -1 an den Ecken von container
-			cursorPosition.x = ((event.clientX - container.offsetLeft) / container.clientWidth) * 2 - 1.5
-			cursorPosition.y = -((event.clientY - container.offsetTop) / container.clientHeight) * 2 + 1
+			// cursorPosition.x = ((event.clientX - container.offsetLeft) / container.clientWidth) * 2 - 1.5
+			// cursorPosition.y = -((event.clientY - container.offsetTop) / container.clientHeight) * 2 + 1
+			cursorPosition.x = (event.clientX / innerWidth - .5) * 4
+			cursorPosition.y = -(event.clientY / innerHeight - .5) * 2
 		})
 
 		// Bewegen
@@ -338,8 +340,8 @@ export default function welt() {
 
 					gsap.to(offsetGruppe.rotation, {
 						y: fortschrittEndWinkel - Math.PI / 2,
-						duration: fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000,
-						ease: "power1.in"
+						duration: fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000 * 1.5,
+						ease: "power2.inOut"
 					})
 				}
 				i += 3
