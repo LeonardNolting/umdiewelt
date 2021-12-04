@@ -34,7 +34,7 @@ const mouseFaktor = 1
 const radius = 6
 const segments = 50
 const atmosphaereScale = 1.02
-const anfang = -Math.PI / 2 - .2
+const anfang = -Math.PI / 2 - .15
 /**
  * Anfängliche Bewegung
  * matchMedia-Idee: https://stackoverflow.com/a/52854585/11485145
@@ -43,7 +43,7 @@ const anfangOffset = Math.PI / 20 * (window.matchMedia("(any-hover: none)").matc
 const wegFarbe = 0xffffff;
 const wegBreite = .1;
 const wegAbstand = .1;
-const wegStartWinkel = -.2
+const wegStartWinkel = -.15
 const wegEndWinkel = wegStartWinkel - 2 * Math.PI
 // let fortschritt: number | undefined = undefined
 let fortschritt = 90
