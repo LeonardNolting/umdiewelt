@@ -236,8 +236,10 @@ export default function welt() {
 		addEventListener('mousemove', event => {
 			mussFolgen = true
 			// 1 bzw. -1 an den Ecken von container
-			cursorPosition.x = ((event.clientX - container.offsetLeft) / container.clientWidth) * 2 - 1.5
-			cursorPosition.y = -((event.clientY - container.offsetTop) / container.clientHeight) * 2 + 1
+			// cursorPosition.x = ((event.clientX - container.offsetLeft) / container.clientWidth) * 2 - 1.5
+			// cursorPosition.y = -((event.clientY - container.offsetTop) / container.clientHeight) * 2 + 1
+			cursorPosition.x = (event.clientX / innerWidth - .5) * 4
+			cursorPosition.y = -(event.clientY / innerHeight - .5) * 2
 		})
 
 		// Bewegen
