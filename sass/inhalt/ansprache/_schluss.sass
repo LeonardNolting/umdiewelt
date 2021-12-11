@@ -41,6 +41,12 @@
 		contain: strict
 		aspect-ratio: 3200 / 1260
 		margin-bottom: -.4vw
-		@media (max-width: 800px)
+	@media (max-width: 800px)
+		img, svg
 			width: 124vw
 			margin-right: -6vw
+		&::after
+			width: 110%
+			height: calc(44vw + var(--offset))
+			transform-origin: top center
+			transform: rotate(-1deg)
