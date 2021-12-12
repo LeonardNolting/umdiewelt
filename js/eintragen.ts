@@ -112,7 +112,7 @@ const popups = {
 					const schule = childSnap.key
 					schulen.add(new Option(schule, schule))
 				})
-				if (this.schule) schulen.value = this.schule
+				if (eintragung.schule) schulen.value = eintragung.schule
 				else if (schulen.value) klassenFuellen(schulen.value)
 			})
 		})
