@@ -36,32 +36,18 @@
 		background-image: linear-gradient(-54deg, transparent var(--grenze-start), var(--farbe-grenze) var(--grenze-start), var(--farbe-grenze) var(--grenze-ende), var(--farbe-primär) var(--grenze-ende))
 
 		ol
-			margin: 2rem 0
+			margin: 2rem 0 0
 
 		p:last-of-type
 			flex-grow: 1
 			display: flex
 			align-items: center
-		form
-			--border-width: .2rem
-			--border-radius: 1rem
-			min-height: 10rem
-			border-radius: var(--border-radius)
-			border: var(--border-width) solid #999
-			position: relative
-			&::before
-				position: absolute
-				content: "🛈 Strecken können erst nach Beginn im nächsten Jahr eingetragen werden."
-				width: calc(100% + 2 * var(--border-width))
-				height: calc(100% + 2 * var(--border-width))
-				background-image: linear-gradient(to bottom, transparentize($farbe-hintergrund, .8), $farbe-hintergrund 80%)
-				border-radius: var(--border-radius)
-				margin: calc(-1 * var(--border-width))
-				display: flex
-				align-items: center
-				justify-content: center
-				padding: var(--padding)
-				text-align: center
+		#eintragen
+			margin: 2rem auto
+			&:not(.erlaubt)
+				cursor: default
+				user-select: none
+				--color-primary: #ccc
 
 @media (max-width: 1400px)
 	#teilnahme
