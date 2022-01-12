@@ -1,19 +1,33 @@
 #projekt
 	--fill-bottom: 20vw
-	padding: var(--padding) var(--padding) calc(var(--fill-bottom) + var(--padding))
-	margin-bottom: calc(-1 * var(--fill-bottom))
+	padding: calc(2 * var(--padding)) var(--padding) calc(var(--fill-bottom) + .5 * var(--padding)) calc(var(--padding) + 2.4rem)
+	margin: 0 auto calc(-1 * var(--fill-bottom))
+	//background: #eee
 	display: flex
-	flex-direction: column
-	background: #eee
-	p + p
-		margin-top: .4rem
-	em
-		font-size: 200%
-		font-weight: bold
-		font-style: normal
-		margin: 1rem 0
-		display: inline-block
-		font-family: var(--schriftart-id)
-		text-transform: uppercase
-	//p:nth-child(2)
-	//	font-size: 160%
+	position: relative
+	max-width: 800px
+	.streifen
+		//margin-right: 2rem
+		left: 0
+		//transform: translateX(-50%)
+		height: 100%
+		width: 2.4rem
+		top: 0
+		//background: var(--farbe-primär)
+		background: linear-gradient(to bottom, white, var(--farbe-primär) 24%)
+		position: absolute
+	.text
+		display: flex
+		flex-direction: column
+		p + p
+			margin-top: .4rem
+		em
+			font-size: 200%
+			font-weight: bold
+			font-style: normal
+			margin: 1rem 0
+			display: inline-block
+			font-family: var(--schriftart-id)
+			text-transform: uppercase
+		//p:nth-child(2)
+		//	font-size: 160%
