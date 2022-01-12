@@ -16,6 +16,17 @@
 		//background: var(--farbe-primär)
 		background: linear-gradient(to bottom, white, var(--farbe-primär) 24%)
 		position: absolute
+		&::before
+			position: absolute
+			content: ""
+			height: 1px
+			width: 1px
+			border-radius: 50%
+			bottom: calc(16% + 8vw)
+			left: -4vw
+			box-shadow: 0 0 8rem 8rem var(--farbe-primär)
+			opacity: .5
+			z-index: -1
 	.text
 		display: flex
 		flex-direction: column
