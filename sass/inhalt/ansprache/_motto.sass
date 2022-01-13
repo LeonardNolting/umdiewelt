@@ -57,3 +57,12 @@
 	em
 		font-weight: bold
 		font-style: normal
+	@media (max-width: 720px)
+		#autos, #fahrraeder
+			flex-direction: column
+			p
+				margin-left: 0
+				margin-right: 0
+				margin-top: var(--gap)
+		#fahrraeder
+			flex-direction: column-reverse
