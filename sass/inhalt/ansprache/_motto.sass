@@ -1,19 +1,43 @@
 #motto
-	//font-weight: bold
-	//color: #555
 	display: flex
 	flex-direction: column
-	//align-items: center
-	//text-align: center
-	padding: var(--padding)
+	//padding: var(--padding)
+	#autos, #fahrraeder
+		font-size: 200%
+		--padding: 6rem
+		p
+			font-weight: bold
+			em
+				margin-left: .8rem
+	#autos
+		display: flex
+		align-items: center
+		padding: var(--padding) var(--padding) 0 0
+		--height: 16vw
+		picture
+			img
+				height: var(--height)
+			margin-left: calc(var(--height) * -4 / 3)
+		p
+			margin-left: calc(var(--padding) * 2)
+			margin-top: calc(var(--height) / -4)
+			em
+				color: darkred
+		//picture::before
+		//	content: "test"
 	p
 		//margin: 0 auto
 		display: inline-flex
 		align-items: center
 		//line-height: 1.4rem
-		+ p
-			margin-top: 1rem
+
+		//+ p
+		//	margin-top: 1rem
 	em
+		font-weight: bold
+		font-style: normal
+	> p > em
+		margin-left: .6rem
 		//margin-right: 4rem
 
 		//margin-right: 1rem
@@ -28,6 +52,3 @@
 		//padding: .4rem 1.2rem .7rem
 		//border: 1px solid #999
 		//border-radius: 500px
-		font-weight: bold
-		font-style: normal
-		margin-left: .6rem
