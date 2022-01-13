@@ -1,8 +1,11 @@
 #motto
 	display: flex
 	flex-direction: column
+	contain: paint
 	//padding: var(--padding)
 	#autos, #fahrraeder
+		display: flex
+		align-items: center
 		font-size: 200%
 		--padding: 6rem
 		p
@@ -10,8 +13,6 @@
 			em
 				margin-left: .8rem
 	#autos
-		display: flex
-		align-items: center
 		padding: var(--padding) var(--padding) 0 0
 		--height: 16vw
 		picture
@@ -25,6 +26,18 @@
 				color: darkred
 		//picture::before
 		//	content: "test"
+	#fahrraeder
+		padding: var(--padding) 0 0 var(--padding)
+		justify-content: flex-end
+		--height: 20vw
+		picture
+			img
+				height: var(--height)
+			margin-right: calc(-2 / 3 * var(--height))
+		p
+			margin-right: calc(var(--padding) * 2)
+			em
+				color: darkgreen
 	p
 		//margin: 0 auto
 		display: inline-flex
