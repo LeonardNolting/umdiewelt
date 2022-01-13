@@ -18,6 +18,9 @@
 		align-items: center
 		font-size: 200%
 		--padding: calc(1rem + 4vw)
+		--height: calc(4rem + 12vw)
+		--gap: calc(var(--padding) * 1.6)
+
 		position: relative
 		p
 			font-weight: bold
@@ -26,7 +29,6 @@
 	#autos
 		padding: var(--padding) var(--padding) 0 0
 		--aspect-ratio: 2080 / 815
-		--height: 16vw
 		--width: calc(var(--aspect-ratio) * var(--height))
 		--hide: calc(var(--height) * -4 / 3)
 		picture
@@ -41,7 +43,7 @@
 			bottom: calc(var(--height) / 3.7)
 			transform: translateY(25%)
 		p
-			margin-left: calc(var(--padding) * 2)
+			margin-left: var(--gap)
 			margin-top: calc(var(--height) / -4)
 			em
 				color: darkred
@@ -50,13 +52,12 @@
 	#fahrraeder
 		padding-left: var(--padding)
 		justify-content: flex-end
-		--height: 20vw
 		picture
 			img
-				height: var(--height)
-			margin-right: calc(-2 / 3 * var(--height))
+				height: calc(1.25 * var(--height))
+			margin-right: calc(-2 / 3 * 1.25 * var(--height))
 		p
-			margin-right: calc(var(--padding) * 2)
+			margin-right: var(--gap)
 			em
 				color: darkgreen
 	//p
