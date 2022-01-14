@@ -4,13 +4,6 @@
 	contain: paint
 	background-size: 40px 40px
 	background-image: linear-gradient(to right, grey 1px, transparent 1px), linear-gradient(to bottom, grey 1px, transparent 1px)
-	&::after
-		position: absolute
-		content: ""
-		height: 100%
-		width: 100%
-		background: radial-gradient(ellipse at 38% 22%, white 29%, transparent), radial-gradient(ellipse at 62% 78%, white 29%, transparent), linear-gradient(0deg, transparent, transparent)
-		z-index: -1
 	#autos, #fahrraeder
 		display: flex
 		align-items: center
@@ -22,6 +15,16 @@
 		position: relative
 		p
 			font-weight: bold
+		&::before
+			content: ""
+			position: absolute
+			z-index: -1
+			height: 80%
+			width: 80%
+			background: white
+			box-shadow: 0 0 14rem 14rem white
+			border-radius: 50%
+			margin: 0 calc(var(--hide) / -2)
 	#autos
 		padding: var(--padding) var(--padding) 0 0
 		--aspect-ratio: 2080 / 815
@@ -47,10 +50,11 @@
 		padding-left: var(--padding)
 		margin-bottom: var(--padding)
 		justify-content: flex-end
+		--hide: calc(-2 / 3 * 1.25 * var(--height))
 		picture
 			img
 				height: calc(1.25 * var(--height))
-			margin-right: calc(-2 / 3 * 1.25 * var(--height))
+			margin-right: var(--hide)
 		p
 			margin-right: var(--gap)
 			em
