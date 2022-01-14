@@ -105,21 +105,25 @@
 			content: ""
 			position: absolute
 			height: 100%
-			width: 60%
+			//width: 60%
 			top: 0
 			border-top-right-radius: var(--border-radius)
-			transform: translateX(calc(-50% + .3rem))
+			//transform: translateX(calc(-50% + .3rem))
+			left: 0
+			--correction: .3rem
 		&::before
 			margin-top: calc(1 * var(--width))
-			margin-right: calc(1 * var(--width))
+			//margin-right: calc(1 * var(--width))
 			background: white
 			z-index: 1
 			border-top-right-radius: calc(var(--border-radius) - var(--width))
+			width: calc(50% + var(--correction) - var(--width) / 2)
 		&::after
 			//margin-top: calc(-.5 * var(--width))
-			margin-right: calc(-1 * var(--width))
+			//margin-right: calc(-1 * var(--width))
 			//background: var(--farbe-sekundär)
 			background: linear-gradient(110deg, var(--farbe-tertiär), var(--farbe-sekundär))
+			width: calc(50% + var(--correction) + var(--width) / 2)
 
 			////background: red
 			//border: 2rem solid var(--farbe-sekundär)
