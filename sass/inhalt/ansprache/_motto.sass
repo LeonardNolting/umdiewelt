@@ -73,7 +73,8 @@
 		align-items: center
 		position: relative
 		//padding: var(--padding)
-		--width: 1rem
+		--width: 2rem
+		--border-radius: 3.2rem
 		.text
 			padding: .6rem
 			margin: calc(var(--padding) * 2) 0 calc(var(--padding) * 1.5)
@@ -82,6 +83,7 @@
 			flex-direction: column
 			align-items: center
 			position: relative
+			z-index: 1
 			p
 				//display: block
 				line-height: .82
@@ -90,17 +92,29 @@
 					font-size: 92%
 				&.car
 					font-size: 108%
-		&::before
+		&::before, &::after
 			content: ""
 			position: absolute
 			height: 100%
-			width: 100%
-			//background: red
-			transform: translateX(calc(-50% + .8rem + .5 * var(--width)))
-			border: 2rem solid var(--farbe-sekundär)
-			border-bottom: none
+			width: 60%
 			top: 0
-			border-top-right-radius: 3.2rem
+			border-top-right-radius: var(--border-radius)
+			transform: translateX(calc(-50% + .3rem))
+		&::before
+			margin-top: calc(1 * var(--width))
+			margin-right: calc(1 * var(--width))
+			background: white
+			z-index: 1
+			border-top-right-radius: calc(var(--border-radius) - var(--width))
+		&::after
+			//margin-top: calc(-.5 * var(--width))
+			margin-right: calc(-1 * var(--width))
+			//background: var(--farbe-sekundär)
+			background: linear-gradient(110deg, var(--farbe-tertiär), var(--farbe-sekundär))
+
+			////background: red
+			//border: 2rem solid var(--farbe-sekundär)
+			//border-bottom: none
 	@media (max-width: 720px)
 		#autos, #fahrraeder
 			font-size: 150%
