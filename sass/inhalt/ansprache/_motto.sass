@@ -45,6 +45,7 @@
 				color: darkred
 	#fahrraeder
 		padding-left: var(--padding)
+		margin-bottom: var(--padding)
 		justify-content: flex-end
 		picture
 			img
@@ -57,6 +58,45 @@
 	em
 		font-weight: bold
 		font-style: normal
+	#one-car-less
+		text-transform: uppercase
+		font-weight: 900
+		font-size: 250%
+		color: black
+		font-family: var(--schriftart-id)
+		display: flex
+		flex-direction: column
+		align-items: center
+		position: relative
+		//padding: var(--padding)
+		--width: 1rem
+		.text
+			padding: .6rem
+			margin: calc(var(--padding) * 2) 0 calc(var(--padding) * 1.5)
+			background: white
+			display: flex
+			flex-direction: column
+			align-items: center
+			position: relative
+			p
+				//display: block
+				line-height: .82
+				background: white
+				&.less
+					font-size: 92%
+				&.car
+					font-size: 108%
+		&::before
+			content: ""
+			position: absolute
+			height: 100%
+			width: 100%
+			//background: red
+			transform: translateX(calc(-50% + .8rem + .5 * var(--width)))
+			border: 2rem solid var(--farbe-sekundär)
+			border-bottom: none
+			top: 0
+			border-top-right-radius: 3.2rem
 	@media (max-width: 720px)
 		#autos, #fahrraeder
 			font-size: 150%
