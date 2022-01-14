@@ -68,6 +68,25 @@
 		&::before
 			--shift: calc(-1 * var(--hide))
 			transform: translateX(var(--shift))
+		&::after
+			position: absolute
+			content: ""
+			//background: red
+			--color: rgba(0, 40, 96, 0.8)
+			// #0a3050 #0e2231
+			background: var(--color)
+			box-shadow: 0 0 16rem 6rem var(--color), 5rem 3rem 12rem 4rem #003ba9
+			z-index: 1
+			will-change: top, left, transform
+			--time: 1s
+			transition: top var(--time) ease, left var(--time) linear, transform var(--time) ease
+			top: calc(-0 * var(--height))
+			left: calc(-1.8 * var(--hide))
+		&.gesehen
+			&::after
+				top: calc(var(--height) * 1.5)
+				left: calc(100vw - (-2.2 * var(--hide)))
+				transform: rotate(180deg)
 	em
 		font-weight: bold
 		font-style: normal
