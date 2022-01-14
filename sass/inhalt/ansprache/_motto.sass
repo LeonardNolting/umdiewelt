@@ -72,10 +72,10 @@
 			position: absolute
 			content: ""
 			//background: red
-			--color: rgba(0, 40, 96, 0.8)
+			--color: rgba(0, 67, 96, 0.6)
 			// #0a3050 #0e2231
 			background: var(--color)
-			box-shadow: 0 0 16rem 6rem var(--color), 5rem 3rem 12rem 4rem #003ba9
+			box-shadow: 0 0 12rem 5rem var(--color), 5rem 3rem 9rem 3rem #0055a999
 			z-index: 1
 			will-change: top, left, transform
 			--time: 1s
@@ -84,9 +84,9 @@
 			left: calc(-1.8 * var(--hide))
 		&.gesehen
 			&::after
-				top: calc(var(--height) * 1.5)
-				left: calc(100vw - (-2.2 * var(--hide)))
-				transform: rotate(180deg)
+				top: calc(var(--height) * 1.1)
+				left: calc(100vw - (-2.4 * var(--hide)))
+				transform: rotate(20deg)
 	em
 		font-weight: bold
 		font-style: normal
