@@ -7,6 +7,7 @@
 	#autos, #fahrraeder
 		display: flex
 		align-items: center
+		justify-content: center
 		font-size: 200%
 		--padding: calc(1rem + 4vw)
 		--height: calc(4rem + 12vw)
@@ -19,12 +20,13 @@
 			content: ""
 			position: absolute
 			z-index: -1
-			height: 80%
-			width: 80%
-			background: white
-			box-shadow: 0 0 14rem 14rem white
-			border-radius: 50%
-			margin: 0 calc(var(--hide) / -2)
+			height: 177%
+			width: 171%
+			//background: red
+			background: radial-gradient(closest-side, white 70%, transparent)
+			//box-shadow: 0 0 14rem 14rem red
+			//border-radius: 50%
+			//margin: 0 calc(var(--hide) / -2)
 	#autos
 		padding: var(--padding) var(--padding) 0 0
 		--aspect-ratio: 2080 / 815
@@ -44,13 +46,17 @@
 		p
 			margin-left: var(--gap)
 			margin-top: calc(var(--height) / -4)
+			margin-right: auto
 			em
 				color: darkred
+		&::before
+			transform: translateX(var(--hide))
 	#fahrraeder
 		padding-left: var(--padding)
 		margin-bottom: var(--padding)
-		justify-content: flex-end
 		--hide: calc(-2 / 3 * 1.25 * var(--height))
+		p
+			margin-left: auto
 		picture
 			img
 				height: calc(1.25 * var(--height))
@@ -59,6 +65,9 @@
 			margin-right: var(--gap)
 			em
 				color: darkgreen
+		&::before
+			--shift: calc(-1 * var(--hide))
+			transform: translateX(var(--shift))
 	em
 		font-weight: bold
 		font-style: normal
