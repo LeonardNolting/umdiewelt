@@ -124,7 +124,7 @@
 					font-size: 92%
 				&.car
 					font-size: 108%
-		&::before, &::after
+		#linie, #linie::before
 			content: ""
 			position: absolute
 			height: 100%
@@ -134,23 +134,38 @@
 			//transform: translateX(calc(-50% + .3rem))
 			left: 0
 			--correction: .3rem
-		&::before
+		#linie::before
 			margin-top: calc(1 * var(--width))
 			//margin-right: calc(1 * var(--width))
 			background: white
-			z-index: 1
 			border-top-right-radius: calc(var(--border-radius) - var(--width))
-			width: calc(50% + var(--correction) - var(--width) / 2)
-		&::after
+			width: calc(100% - var(--width))
+		#linie
 			//margin-top: calc(-.5 * var(--width))
 			//margin-right: calc(-1 * var(--width))
 			//background: var(--farbe-sekundär)
 			background: linear-gradient(110deg, var(--farbe-tertiär), var(--farbe-sekundär))
 			width: calc(50% + var(--correction) + var(--width) / 2)
+			display: flex
+			align-items: center
 
 			////background: red
 			//border: 2rem solid var(--farbe-sekundär)
 			//border-bottom: none
+			&::after
+				position: absolute
+				content: ""
+				height: 160%
+				width: 2rem
+				//background: red
+				background: linear-gradient(90deg, transparent, #ffffff77, transparent)
+				z-index: 1
+				transform: rotate(45deg)
+				left: -30%
+				transition: left 2s linear
+				will-change: left
+			&.gesehen::after
+				left: 130%
 	@media (max-width: 720px)
 		#autos, #fahrraeder
 			font-size: 150%
