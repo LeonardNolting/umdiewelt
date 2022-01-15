@@ -57,7 +57,11 @@
 		--hide: calc(-2 / 3 * 1.25 * var(--height))
 		p
 			margin-left: auto
+			opacity: 0
+			transition: opacity 2.2s ease
 		picture
+			transform: translateX(100%)
+			transition: transform 2s ease-out
 			img
 				height: calc(1.25 * var(--height))
 			margin-right: var(--hide)
@@ -72,19 +76,23 @@
 			position: absolute
 			content: ""
 			//background: red
-			--color: rgba(0, 67, 96, 0.6)
+			--color: rgba(0, 67, 96, 0.4)
 			// #0a3050 #0e2231
 			background: var(--color)
 			--scale: 1
-			box-shadow: 0 0 12rem 5rem var(--color), 5rem 3rem 9rem 3rem #0055a999
+			box-shadow: 0 0 16rem 5rem var(--color), 5rem 3rem 12rem 3rem #0055a977
 			z-index: 1
 			will-change: top, left, transform
-			--time: 1s
-			transition: top var(--time) ease, left var(--time) linear, transform var(--time) ease
+			--time: 2s
+			transition: top var(--time) ease, left var(--time) ease-in, transform var(--time) ease
 			top: calc(-0 * var(--height))
 			left: calc(-1.8 * var(--hide))
 			transform: scale(var(--scale))
 		&.gesehen
+			p
+				opacity: 1
+			picture
+				transform: translateX(0)
 			&::after
 				top: calc(var(--height) * 1.1)
 				left: calc(100vw - (-2.4 * var(--hide)))
