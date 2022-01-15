@@ -206,6 +206,21 @@
 				width: 100%
 		&.gesehen #linie::after
 			left: 160%
+	.sternfahrten
+		position: relative
+		display: flex
+		align-items: center
+		justify-content: center
+		> picture
+			width: 100%
+			img
+				width: 100%
+		&::before
+			content: ""
+			position: absolute
+			height: 100%
+			width: 100%
+			background: radial-gradient(closest-side, transparent, white)
 	@media (max-width: 720px)
 		#autos, #fahrraeder
 			font-size: 150%
