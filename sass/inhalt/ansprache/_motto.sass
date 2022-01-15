@@ -28,7 +28,8 @@
 			//border-radius: 50%
 			//margin: 0 calc(var(--hide) / -2)
 	#autos
-		padding: var(--padding) var(--padding) 0 0
+		padding-top: var(--padding)
+		padding-right: var(--padding)
 		--aspect-ratio: 2080 / 815
 		--width: calc(var(--aspect-ratio) * var(--height))
 		--hide: calc(var(--height) * -4 / 3)
@@ -182,6 +183,9 @@
 		#fahrraeder::after
 			--scale: .5
 	@media (max-width: 520px)
+		#autos, #fahrraeder
+			padding-top: var(--padding)
+			padding-bottom: var(--padding)
 		#fahrraeder::after
 			display: none
 	@media (max-width: 360px)
