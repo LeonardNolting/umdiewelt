@@ -179,6 +179,14 @@
 				will-change: left
 		&.gesehen #linie::after
 			left: 160%
+		&::after
+			content: ""
+			position: absolute
+			height: 2rem
+			width: 100%
+			bottom: 0
+			background: linear-gradient(to bottom, transparent, white)
+			z-index: 2
 	.sternfahrten
 		display: flex
 		flex-direction: column
@@ -186,15 +194,7 @@
 		justify-content: center
 		background: white
 		position: relative
-		&::before
-			content: ""
-			position: absolute
-			height: 2rem
-			width: 100%
-			top: 0
-			transform: translateY(-100%)
-			background: linear-gradient(to bottom, transparent, white)
-			z-index: 2
+		overflow: hidden
 		> picture
 			position: relative
 			margin-top: -14vw
