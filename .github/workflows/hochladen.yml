@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - master
+            - vorschau
 
 jobs:
     build:
@@ -22,13 +23,29 @@ jobs:
             -   name: .htaccess übernehmen
                 run: cp .htaccess dist
 
-            -   name: Hochladen
-                uses: garygrossgarten/github-action-scp@release
+            -   name: Branch-Namen herausfinden (vorschau/master)
+                shell: bash
+                run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+                id: branch
+
+            -   name: Remote directory herausfinden
+                uses: haya14busa/action-cond@v1
+                id: remote
                 with:
-                    local: "dist"
-                    remote: "./"
-                    host: ${{ secrets.HOST }}
-                    port: ${{ secrets.PORT }}
-                    username: ${{ secrets.USER }}
-                    password: ${{ secrets.PASSWORD }}
-                    rmRemote: true
+                    cond: ${{ steps.branch.outputs.branch == 'vorschau' }}
+                    if_true: "./vorschau"
+                    if_false: "./"
+
+            -   name: Remote directory loggen
+                run: echo ${{ steps.remote.outputs.value }}
+
+#            -   name: Hochladen
+#                uses: garygrossgarten/github-action-scp@release
+#                with:
+#                    local: "dist"
+#                    remote: ${{ steps.remote.outputs.value }}
+#                    host: ${{ secrets.HOST }}
+#                    port: ${{ secrets.PORT }}
+#                    username: ${{ secrets.USER }}
+#                    password: ${{ secrets.PASSWORD }}
+#                    # rmRemote: true
