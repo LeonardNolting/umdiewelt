@@ -32,22 +32,22 @@ jobs:
                 uses: haya14busa/action-cond@v1
                 id: remote
                 with:
-                    cond: ${{ steps.branch.outputs.branch == 'vorschau' }}
-                    if_true: "./vorschau"
-                    if_false: "./"
+                    cond: ${{ steps.branch.outputs.branch == 'master' }}
+                    if_true: "./"
+                    if_false: "./vorschau"
 
-            -   name: Remote directory loggen
+            -   name: Branch und remote loggen
                 run: |
-                    echo ${{ steps.remote.outputs.value }}
-                    echo ${{ steps.branch.outputs.branch }}
+                    echo "Aktueller branch ist ${{ steps.branch.outputs.branch }}"
+                    echo "Lade in Ordner ${{ steps.remote.outputs.value }} hoch"
 
-#            -   name: Hochladen
-#                uses: garygrossgarten/github-action-scp@release
-#                with:
-#                    local: "dist"
-#                    remote: ${{ steps.remote.outputs.value }}
-#                    host: ${{ secrets.HOST }}
-#                    port: ${{ secrets.PORT }}
-#                    username: ${{ secrets.USER }}
-#                    password: ${{ secrets.PASSWORD }}
-#                    # rmRemote: true
+            -   name: Hochladen
+                uses: garygrossgarten/github-action-scp@release
+                with:
+                    local: "dist"
+                    remote: ${{ steps.remote.outputs.value }}
+                    host: ${{ secrets.HOST }}
+                    port: ${{ secrets.PORT }}
+                    username: ${{ secrets.USER }}
+                    password: ${{ secrets.PASSWORD }}
+                    rmRemote: true
