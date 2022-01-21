@@ -102,11 +102,6 @@
 		font-weight: bold
 		font-style: normal
 	#one-car-less
-		text-transform: uppercase
-		font-weight: 900
-		font-size: 250%
-		color: black
-		font-family: var(--schriftart-id)
 		display: flex
 		flex-direction: column
 		align-items: center
@@ -118,15 +113,21 @@
 		box-shadow: 0 0 2rem 1rem white
 		padding-bottom: 2rem
 		z-index: 1
-		.text
-			padding: .6rem
-			margin: calc(var(--padding) * 2) 0 calc(var(--padding) * 1.5)
+		.text, .beschreibung
 			background: white
 			display: flex
 			flex-direction: column
 			align-items: center
 			position: relative
 			z-index: 1
+			padding: .6rem
+		.text
+			margin-top: calc(var(--padding) * 2)
+			font-size: 250%
+			text-transform: uppercase
+			font-weight: 900
+			color: black
+			font-family: var(--schriftart-id)
 			p
 				//display: block
 				line-height: .82
@@ -135,6 +136,10 @@
 					font-size: 92%
 				&.car
 					font-size: 108%
+		.beschreibung
+			margin-bottom: calc(var(--padding) * 1.5)
+			font-size: 120%
+
 		#linie, #linie::before
 			content: ""
 			position: absolute
