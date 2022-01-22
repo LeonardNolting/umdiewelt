@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await anzeigen()
 	browserAktualisierung()
 	popups()
-	await Cookies.ueberpruefen()
+	// * Es werden keine weiteren Cookies gespeichert, neben denen von der Schulhomepage. Ein Cookie-Hinweis ist deshalb nicht nötig.
+	// await Cookies.ueberpruefen()
 
 	await load((async () => {
 		// await maps() // TODO erst wenn autocomplete/distance matrix benötigt wird
