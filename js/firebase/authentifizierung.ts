@@ -11,7 +11,7 @@ import step from "../step";
 import {adminEmail} from "../konfiguration";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
-import Cookie from "../cookie";
+import Storage from "../storage";
 import {eintragenTextSetzen} from "../inhalt/eintragen";
 import global from "../global";
 
@@ -22,7 +22,7 @@ export default () => {
 	onAuthStateChanged(auth, newUser => {
 		global.user = newUser
 		if (newUser === null) {
-			Cookie.kill("fahrer")
+			Storage.kill("fahrer")
 			eintragenTextSetzen(null)
 		}
 		step(newUser ? "Angemeldet als " + (newUser.email === adminEmail ? "Admin" : "Teilnehmer") : "Abgemeldet")

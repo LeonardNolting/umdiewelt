@@ -1,5 +1,5 @@
 import step from "./step";
-import Cookie from "./cookie";
+import Storage from "./storage";
 import Popup from "./popup";
 
 namespace Cookies {
@@ -26,7 +26,7 @@ namespace Cookies {
 	const setzen = (einstellung: Einstellung) => {
 		if (einstellung === null) return
 		Cookies.einstellung = einstellung
-		if (notwendig()) Cookie.set("cookies", Einstellung[einstellung])
+		if (notwendig()) Storage.set("cookies", Einstellung[einstellung])
 		step("Cookie-Einstellung gesetzt: " + Einstellung[einstellung])
 		return einstellung
 	}
@@ -38,7 +38,7 @@ namespace Cookies {
 	export const ueberpruefen = async (): Promise<Einstellung> => {
 		step("Überprüft Cookie-Einstellung")
 
-		const gespeichert = (Einstellung[Cookie.get<string>("cookies")] as Einstellung) || Einstellung.UNDEFINED;
+		const gespeichert = (Einstellung[Storage.get<string>("cookies")] as Einstellung) || Einstellung.UNDEFINED;
 		return gespeichert === Einstellung.UNDEFINED || gespeichert === Einstellung.KEINE ?
 			// Kein/komischer gespeicherter Wert: fragen
 			fragen() :
@@ -66,7 +66,7 @@ namespace Cookies {
 				popup.classList.remove("wichtig", "wird-resetten")
 				onclick(event)
 				element.disabled = false
-				if (einstellung !== null) Cookie.killAll()
+				if (einstellung !== null) Storage.killAll()
 				resolve(setzen(einstellung))
 			}
 		}
@@ -77,7 +77,7 @@ namespace Cookies {
 		button(Einstellung.KEINE, window.close)
 
 		if (!abbrechenMoeglich) popup.classList.add("wichtig")
-		if (Cookie.get("cookies")) popup.classList.add("wird-resetten")
+		if (Storage.get("cookies")) popup.classList.add("wird-resetten")
 
 		// Alles vorbereitet, jetzt öffnen ...
 		Popup.oeffnen(popup)

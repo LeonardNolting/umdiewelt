@@ -1,6 +1,6 @@
 import step from "./step";
 
-namespace Cookie {
+namespace Storage {
 	/**
 	 * Gibt Wert eines Cookies zurück
 	 * @param name Name des Cookies
@@ -43,4 +43,4 @@ namespace Cookie {
 	}
 }
 
-export default Cookie
+export default Storage

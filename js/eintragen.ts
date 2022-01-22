@@ -6,7 +6,7 @@ import {onAuthStateChanged, signOut} from "firebase/auth";
 import benachrichtigung from "./benachrichtigungen/benachrichtigung";
 import {adminEmail} from "./konfiguration";
 import {auth, authentifizieren} from "./firebase/authentifizierung";
-import Cookie from "./cookie";
+import Storage from "./storage";
 import load from "./load";
 import Cookies from "./cookies";
 import m from "./formatierung/einheit/m";
@@ -328,7 +328,7 @@ export class Eintragung {
 		this.name = name
 		// Wenn der Fahrer schon existiert, ruhig jetzt schon speichern - aber sonst erst beim wirklichen Eintragen der Strecke auch den Fahrer erstellen, damit nicht ungenutzte Fahrer erstellt werden
 		this.fahrer = fahrer || (name === undefined ? undefined : await fahrerBekommen(this.schule, this.klasse, name))
-		if (this.angemeldetBleiben && this.fahrer) Cookie.set("fahrer", this.fahrer, false);
+		if (this.angemeldetBleiben && this.fahrer) Storage.set("fahrer", this.fahrer, false);
 
 		// Name-gegeben Popup anpassen
 		const popup = popups.nameGegeben.element;
@@ -381,7 +381,7 @@ export class Eintragung {
 
 		if (!this.fahrer) {
 			this.fahrer = await fahrerErstellen(this.schule, this.klasse, this.name)
-			if (this.angemeldetBleiben) Cookie.set("fahrer", this.fahrer, false)
+			if (this.angemeldetBleiben) Storage.set("fahrer", this.fahrer, false)
 		}
 		const strecke = await streckeErstellen(this.fahrer, this.meter)
 
@@ -409,7 +409,7 @@ export class Eintragung {
 	static leer: boolean | undefined = undefined
 
 	static get fahrerAusCookie() {
-		return Cookie.get<string>("fahrer", false)
+		return Storage.get<string>("fahrer", false)
 	}
 
 	static async vorbereiten() {
