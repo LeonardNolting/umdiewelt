@@ -50,4 +50,4 @@ jobs:
                     port: ${{ secrets.PORT }}
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
-                    rmRemote: true
+                    # rmRemote: true
