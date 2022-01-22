@@ -8,8 +8,7 @@ namespace Cookie {
 	 * @return wert bzw. undefined wenn Cookie nicht vorhanden
 	 */
 	export function get<T>(name: string, json = true): T | undefined {
-		const matches = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)'),
-			wert = matches ? matches[2] : null;
+		const wert = localStorage.getItem(name);
 		if (wert === null) return undefined;
 		return (json ? JSON.parse(wert) : wert) as T;
 	}
@@ -23,7 +22,7 @@ namespace Cookie {
 	 */
 	export function set(name: string, wert: any, json = true, maxAge = 31536000) {
 		wert = json ? JSON.stringify(wert) : wert;
-		document.cookie = `${name}=${wert}; max-age=${maxAge}`;
+		localStorage.setItem(name, wert)
 	}
 
 	/**
@@ -31,7 +30,7 @@ namespace Cookie {
 	 * @param name Name des Cookies
 	 */
 	export function kill(name) {
-		document.cookie = `${name}=; expires=Sun, 24 Dec 0000 18:42:00 GMT`;
+		localStorage.removeItem(name)
 		step("Cookie '" + name + "' gelöscht")
 	}
 
@@ -39,23 +38,8 @@ namespace Cookie {
 	 * Löscht alle Cookies
 	 */
 	export function killAll() {
-		const cookies = document.cookie.split(";");
-
-		for (let i = 0; i < cookies.length; i++) {
-			const cookie = cookies[i],
-				eqPos = cookie.indexOf("="),
-				name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-			kill(name);
-		}
-
-		step(cookies.length + " Cookies gelöscht")
-	}
-
-	/**
-	 * Gibt zurück, ob min. ein Cookie existiert
-	 */
-	export function empty(): boolean {
-		return document.cookie.length == 0
+		localStorage.clear()
+		step("Cookies gelöscht")
 	}
 }
 
