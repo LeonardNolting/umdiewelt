@@ -28,9 +28,9 @@
 #
 #         Header set Access-Control-Allow-Origin "subdomain.example.com"
 
-# <IfModule mod_headers.c>
-#     Header set Access-Control-Allow-Origin "*"
-# </IfModule>
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
 
 # ----------------------------------------------------------------------
 # | Cross-origin images                                                |
