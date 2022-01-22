@@ -183,6 +183,7 @@ Options -MultiViews
     AddType image/bmp                                   bmp
     AddType image/svg+xml                               svg svgz
     AddType image/webp                                  webp
+    AddType image/jpeg									jpeg jpg jpe JPG
     AddType video/mp4                                   f4v f4p m4v mp4
     AddType video/ogg                                   ogv
     AddType video/webm                                  webm
