@@ -20,6 +20,7 @@ import atmosphaereFragment from "../../shaders/atmosphaere/fragment.glsl";
 import {MeshLine, MeshLineMaterial} from 'meshline';
 import {gsap} from "gsap"
 import Tween = gsap.core.Tween;
+import {HTMLDataElementFakt, zeigeFaktAn} from "../inhalt/fakten";
 
 // TODO in Konfiguration auslagern
 
@@ -339,11 +340,14 @@ export default function welt() {
 						i += fortschrittSchritt
 					}, fortschrittTimeout)
 
+					let zeit = fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000 * 1.5;
 					gsap.to(offsetGruppe.rotation, {
 						y: fortschrittEndWinkel - Math.PI / 2,
-						duration: fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000 * 1.5,
+						duration: zeit,
 						ease: "power2.inOut"
 					})
+					document.getElementById("fakten").querySelectorAll("data")
+						.forEach((data: HTMLDataElementFakt) => zeigeFaktAn(data, Math.max(zeit, 600)))
 				}
 				i += 3
 			}, 10)

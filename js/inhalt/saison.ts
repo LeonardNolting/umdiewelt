@@ -11,7 +11,7 @@ import {
 } from "firebase/database";
 import Datenbank from "../firebase/datenbank";
 import m from "../formatierung/einheit/m";
-import {bereiteFaktVor, HTMLDataElementFakt, ladeFakt} from "./fakten";
+import {bereiteFaktVor, HTMLDataElementFakt, ladeFakt, zeigeFaktAn} from "./fakten";
 import load from "../load";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
@@ -153,6 +153,7 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 					const wert = snap.val() || 0;
 					const berechnet = berechnen(wert);
 					ladeFakt(data, berechnet)
+					zeigeFaktAn(data);
 					callback(wert, berechnet)
 				}
 				const faktRef = child(saisonRef, name)
@@ -162,11 +163,12 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 				return data
 			}
 
-			div.append(
+			const fakten = [
 				fakt("strecke", "Zu&shy;rück&shy;ge&shy;legte Strecke", wert => m(wert)),
 				fakt("anzahlFahrer", "Teil&shy;nehmer"),
 				fakt("anzahlStrecken", "Ein&shy;ge&shy;tragene Strecken")
-			)
+			]
+			div.append(...fakten)
 
 			container.appendChild(div)
 		}

@@ -7,29 +7,17 @@ export interface HTMLDataElementFakt extends HTMLDataElement {
 		valide: boolean
 		anzahlNachkommastellen: number
 	}
-	gesehen: boolean
 	dataset: {
 		bezeichnung?: string
 		einheit: string
 	}
 }
 
-const observer = new IntersectionObserver((eintraege, observer) => {
-	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
-		const data = eintrag.target as HTMLDataElementFakt;
-		if (window.scrollY === 0) addEventListener("scroll", () => zeigeFaktAn(data), {once: true})
-		else zeigeFaktAn(data)
-	})
-}, {
-	rootMargin: '0px',
-	threshold: 1.0
-})
-
 /**
  * Bereitet das Anzeigen eines Fakts vor
  * @param fakt
  */
-export const bereiteFaktVor = (fakt: HTMLDataElement) => observer.observe(fakt);
+export const bereiteFaktVor = (fakt: HTMLDataElement) => {}
 
 /**
  * Bereitet das Anzeigen von Fakten vor
@@ -37,10 +25,7 @@ export const bereiteFaktVor = (fakt: HTMLDataElement) => observer.observe(fakt);
  */
 export const bereiteFaktenVor = (...fakten: HTMLDataElement[]) => fakten.forEach(bereiteFaktVor)
 
-function zeigeFaktAn(data: HTMLDataElementFakt) {
-	data.gesehen = true
-	observer.unobserve(data)
-
+export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600) {
 	if (!data.wert) return
 
 	const set = (value: string, einheit: string = "") => {
@@ -53,7 +38,6 @@ function zeigeFaktAn(data: HTMLDataElementFakt) {
 	const {wert, einheit = ""} = data.wert.berechnet,
 		setWert = (wert: number) =>
 			set(zahl(wert, data.wert.anzahlNachkommastellen, 0).toString(), einheit),
-		zeit = 600,
 		fps = 50,
 		anzahlSchritte = Math.ceil(Math.min(wert * 2, zeit * fps / 1000));
 
@@ -103,10 +87,5 @@ export function ladeFakt(bezeichnung: string | HTMLDataElementFakt, berechnet: {
 	const data = typeof bezeichnung === "string" ?
 		document.querySelector("[data-bezeichnung='" + bezeichnung + "']") as HTMLDataElementFakt :
 		bezeichnung
-	data.wert = {
-		berechnet: berechnet,
-		valide,
-		anzahlNachkommastellen
-	}
-	if (data.gesehen) zeigeFaktAn(data)
+	data.wert = {berechnet, valide, anzahlNachkommastellen}
 }
