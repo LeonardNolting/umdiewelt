@@ -18,12 +18,12 @@
 	--große-box-margin-left: calc(1 * var(--rang-breite-max) * 1.4)
 	--transition-dauer: .4s
 	position: relative
-	max-width: 100%
+	//max-width: 100%
 	//noinspection CssInvalidPropertyValue
 	overflow-y: clip
 	&.versteckt, &.versteckt + #bestenliste-kurve
 		display: none
-	> .wussten-sie-schon
+	> .wusstest-du-schon
 		margin-left: var(--große-box-margin-left)
 		/*z-index: -1;*/
 		background: none
@@ -45,8 +45,11 @@
 	> h3
 		padding: var(--padding) 0 calc(var(--padding) - .8rem) 0
 		font-size: 1.8rem
-		> a::before
-			display: none
+		> a
+			color: currentColor
+			text-decoration: none
+			&::before
+				display: none
 	> button
 		--padding: 1.4rem
 		padding: calc(var(--padding) - .6rem) 0 var(--padding) 0

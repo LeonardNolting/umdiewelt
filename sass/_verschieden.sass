@@ -1,2 +1,19 @@
 @mixin emoji-cursor($emoji)
 	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>#{$emoji}</text></svg>") 16 0, auto
+
+
+.wusstest-du-schon
+	padding: 1.6rem
+	width: 100%
+	--background: center/cover no-repeat linear-gradient(-45deg, transparent 10%, #e0e3e5 30%, #f0f0f0f0 30%)
+	background: var(--background)
+	font-size: 1.2rem
+	position: relative
+	overflow: hidden
+	cursor: help
+
+.wusstest-du-schon::before
+	content: "💡 Wusstest du schon?"
+	font-weight: bold
+	color: #888
+	margin-right: .6rem
