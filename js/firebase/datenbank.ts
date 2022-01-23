@@ -51,10 +51,8 @@ export namespace Datenbank {
 			onValue(ref(datenbank, "allgemein/strecke"), async snap => {
 				const strecke = snap.val() || 0
 
-				// ladeFakt("strecke", m(strecke))
-				ladeFakt("strecke", m(0))
-				// ladeFakt("gespart", kg(co2(strecke)), true, 3)
-				ladeFakt("gespart", kg(co2(0)), true, 3)
+				ladeFakt("strecke", m(strecke))
+				ladeFakt("gespart", kg(co2(strecke)), true, 3)
 			})
 		}
 
@@ -68,9 +66,7 @@ export namespace Datenbank {
 
 				const wert = anzahlFahrer / anzahlHistorischeSaisons
 				const valide = anzahlHistorischeSaisons !== 0;
-
-				// ladeFakt("fahrer", {wert}, valide, 0)
-				ladeFakt("fahrer", {wert: 0}, valide, 0)
+				ladeFakt("fahrer", {wert}, valide, 0)
 			}
 
 			onValue(ref(datenbank, "anzahlFahrer"), snap => {
