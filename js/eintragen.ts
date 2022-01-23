@@ -226,6 +226,8 @@ export class Eintragung {
 	}
 
 	async oeffnen() {
+		return benachrichtigung("Es können aktuell keine Eintragungen vorgenommen werden.")
+
 		// Abbrechen falls schon eine Eintragung offen
 		if (!!Eintragung.offen) return
 
