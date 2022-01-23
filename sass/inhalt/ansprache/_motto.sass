@@ -1,33 +1,233 @@
 #motto
-	//font-weight: bold
-	//color: #555
 	display: flex
 	flex-direction: column
-	//align-items: center
-	//text-align: center
-	padding: var(--padding)
-	p
-		//margin: 0 auto
-		display: inline-flex
+	contain: paint
+	background-size: 6vmin 6vmin
+	background-image: linear-gradient(to right, grey 1px, transparent 1px), linear-gradient(to bottom, grey 1px, transparent 1px)
+	#autos, #fahrraeder
+		display: flex
 		align-items: center
-		//line-height: 1.4rem
-		+ p
-			margin-top: 1rem
-	em
-		//margin-right: 4rem
+		justify-content: center
+		font-size: 200%
+		--padding: calc(1rem + 4vw)
+		--height: calc(4rem + 12vw)
+		--gap: calc(var(--padding) * 1.6)
 
-		//margin-right: 1rem
-		//font-size: 3.6rem
-		//line-height: 2.8rem
-		//font-family: sans-serif
-		//font-style: normal
-		////text-transform: uppercase
-		//font-weight: 900
-		//color: #ccc
-		////text-shadow: 0 0 2rem #0068d5, 0 0 3rem #006708
-		//padding: .4rem 1.2rem .7rem
-		//border: 1px solid #999
-		//border-radius: 500px
+		position: relative
+		p
+			font-weight: bold
+		&::before
+			content: ""
+			position: absolute
+			z-index: -1
+			height: 177%
+			width: 171%
+			//background: red
+			background: radial-gradient(closest-side, white 70%, transparent)
+			//box-shadow: 0 0 14rem 14rem red
+			//border-radius: 50%
+			//margin: 0 calc(var(--hide) / -2)
+	#autos
+		padding-top: var(--padding)
+		padding-right: var(--padding)
+		--aspect-ratio: 2080 / 815
+		--width: calc(var(--aspect-ratio) * var(--height))
+		--hide: calc(var(--height) * -4 / 3)
+		picture
+			img
+				height: var(--height)
+				aspect-ratio: var(--aspect-ratio)
+			margin-left: var(--hide)
+		video
+			position: absolute
+			width: 25%
+			margin-left: calc(0.965 * var(--width) + var(--hide))
+			bottom: calc(var(--height) / 3.7)
+			transform: translateY(25%)
+		p
+			margin-left: var(--gap)
+			margin-top: calc(var(--height) / -4)
+			margin-right: auto
+			em
+				color: darkred
+		&::before
+			transform: translateX(var(--hide))
+	#fahrraeder
+		padding-left: var(--padding)
+		margin-bottom: var(--padding)
+		--hide: calc(-2 / 3 * 1.25 * var(--height))
+		p
+			margin-left: auto
+			opacity: 0
+			transition: opacity 2.2s ease
+		picture
+			transform: translateX(100%)
+			transition: transform 2s ease-out
+			img
+				height: calc(1.25 * var(--height))
+			margin-right: var(--hide)
+		p
+			margin-right: var(--gap)
+			em
+				color: darkgreen
+		&::before
+			--shift: calc(-1 * var(--hide))
+			transform: translateX(var(--shift))
+		&::after
+			position: absolute
+			content: ""
+			//background: red
+			--color: rgba(0, 67, 96, 0.4)
+			// #0a3050 #0e2231
+			background: var(--color)
+			--scale: 1
+			box-shadow: 0 0 16rem 5rem var(--color), 5rem 3rem 12rem 3rem #0055a977
+			z-index: 1
+			will-change: top, left, transform
+			--time: 2s
+			transition: top var(--time) ease, left var(--time) ease-in, transform var(--time) ease
+			top: calc(-0 * var(--height))
+			left: calc(-1.8 * var(--hide))
+			transform: scale(var(--scale))
+		&.gesehen
+			p
+				opacity: 1
+			picture
+				transform: translateX(0)
+			&::after
+				top: calc(var(--height) * 1.1)
+				left: calc(100vw - (-2.4 * var(--hide)))
+				transform: rotate(20deg) scale(var(--scale))
+	em
 		font-weight: bold
 		font-style: normal
-		margin-left: .6rem
+	#one-car-less
+		display: flex
+		flex-direction: column
+		align-items: center
+		position: relative
+		//padding: var(--padding)
+		--width: 2rem
+		--border-radius: 3.2rem
+		background: linear-gradient(45deg, white 50%, #ffffff99 80%, white)
+		box-shadow: 0 0 2rem 1rem white
+		padding-bottom: 2rem
+		z-index: 1
+		.text, .beschreibung
+			background: white
+			display: flex
+			flex-direction: column
+			align-items: center
+			position: relative
+			z-index: 1
+			padding: .6rem
+		.text
+			margin-top: calc(var(--padding) * 2)
+			font-size: 250%
+			text-transform: uppercase
+			font-weight: 900
+			color: black
+			font-family: var(--schriftart-id)
+			p
+				//display: block
+				line-height: .82
+				background: white
+				&.less
+					font-size: 92%
+				&.car
+					font-size: 108%
+		.beschreibung
+			margin-bottom: calc(var(--padding) * 1.5)
+			font-size: 120%
+
+		#linie, #linie::before
+			content: ""
+			position: absolute
+			height: 100%
+			//width: 60%
+			top: 0
+			border-top-right-radius: var(--border-radius)
+			//transform: translateX(calc(-50% + .3rem))
+			left: 0
+			--correction: .3rem
+		#linie::before
+			margin-top: calc(1 * var(--width))
+			//margin-right: calc(1 * var(--width))
+			background: white
+			border-top-right-radius: calc(var(--border-radius) - var(--width))
+			width: calc(100% - var(--width))
+		#linie
+			//margin-top: calc(-.5 * var(--width))
+			//margin-right: calc(-1 * var(--width))
+			//background: var(--farbe-sekundär)
+			background: linear-gradient(110deg, var(--farbe-tertiär), var(--farbe-sekundär))
+			width: calc(50% + var(--correction) + var(--width) / 2)
+			display: flex
+			align-items: center
+			overflow: hidden
+
+			////background: red
+			//border: 2rem solid var(--farbe-sekundär)
+			//border-bottom: none
+			&::after
+				position: absolute
+				content: ""
+				height: 160%
+				width: 2rem
+				//background: red
+				background: linear-gradient(90deg, transparent, #ffffff77, transparent)
+				z-index: 1
+				transform: rotate(45deg)
+				left: -60%
+				transition: left 1.6s linear
+				transition-delay: 2.4s
+				will-change: left
+		&.gesehen #linie::after
+			left: 160%
+		&::after
+			content: ""
+			position: absolute
+			height: 2rem
+			width: 100%
+			bottom: 0
+			background: linear-gradient(to bottom, transparent, white)
+			z-index: 2
+	.sternfahrten
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: center
+		background: white
+		position: relative
+		overflow: hidden
+		> picture
+			position: relative
+			margin-top: -14vw
+			img
+				max-width: 100%
+			&::before
+				content: ""
+				position: absolute
+				height: 100%
+				width: 100%
+				background: radial-gradient(closest-side at 50% 58%, rgba(255, 255, 255, 0) 50%, white 80%)
+		h3
+			text-transform: uppercase
+			font-size: 250%
+			margin-top: -4vw
+			position: relative
+			z-index: 3
+	@media (max-width: 720px)
+		#autos, #fahrraeder
+			font-size: 150%
+		#fahrraeder::after
+			--scale: .5
+	@media (max-width: 520px)
+		#autos, #fahrraeder
+			padding-top: var(--padding)
+			padding-bottom: var(--padding)
+		#fahrraeder::after
+			display: none
+	@media (max-width: 360px)
+		#autos, #fahrraeder
+			font-size: 120%
