@@ -97,7 +97,7 @@ const popups = {
 			klassen.listener?.()
 			klassen.listener = onChildAdded(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), snap => {
 				const klasse = snap.key
-				const standard = schule === this.schule && klasse === this.klasse
+				const standard = schule === eintragung.schule && klasse === eintragung.klasse
 				klassen.add(new Option(klasse, klasse, standard, standard))
 			})
 		}
