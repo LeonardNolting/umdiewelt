@@ -10,7 +10,8 @@ export interface HTMLDataElementFakt extends HTMLDataElement {
 	dataset: {
 		bezeichnung?: string
 		einheit: string
-	}
+	},
+	angezeigt: boolean
 }
 
 /**
@@ -25,8 +26,10 @@ export const bereiteFaktVor = (fakt: HTMLDataElement) => {}
  */
 export const bereiteFaktenVor = (...fakten: HTMLDataElement[]) => fakten.forEach(bereiteFaktVor)
 
-export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600) {
+export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600, vorherigerWert: number = 0) {
 	if (!data.wert) return
+
+	vorherigerWert = vorherigerWert || 0
 
 	const set = (value: string, einheit: string = "") => {
 		data.value = value
@@ -36,10 +39,11 @@ export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600) {
 	if (!data.wert.valide) return set("N/A")
 
 	const {wert, einheit = ""} = data.wert.berechnet,
+		differenz = wert - vorherigerWert,
 		setWert = (wert: number) =>
 			set(zahl(wert, data.wert.anzahlNachkommastellen, 0).toString(), einheit),
-		fps = 50,
-		anzahlSchritte = Math.ceil(Math.min(wert * 2, zeit * fps / 1000));
+		fps = 30,
+		anzahlSchritte = Math.ceil(Math.min(differenz * 2, zeit * fps / 1000));
 
 	if (anzahlSchritte < 1) {
 		clearInterval(data.interval)
@@ -47,12 +51,14 @@ export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600) {
 		return
 	}
 
-	const schritt = wert / anzahlSchritte,
+	const schritt = differenz / anzahlSchritte,
 		intervalTime = zeit / anzahlSchritte;
 
 	let i = anzahlSchritte - 1
+	if (data.interval) clearInterval(data.interval)
+	data.angezeigt = true
 	data.interval = setInterval(() => {
-		setWert(wert - schritt * i)
+		setWert(vorherigerWert + differenz - schritt * i)
 		i--
 		if (i < 0) clearInterval(data.interval)
 	}, intervalTime)
@@ -87,5 +93,7 @@ export function ladeFakt(bezeichnung: string | HTMLDataElementFakt, berechnet: {
 	const data = typeof bezeichnung === "string" ?
 		document.querySelector("[data-bezeichnung='" + bezeichnung + "']") as HTMLDataElementFakt :
 		bezeichnung
+	const vorherigerWert = data.wert?.berechnet.wert
 	data.wert = {berechnet, valide, anzahlNachkommastellen}
+	if (data.angezeigt) zeigeFaktAn(data, 600, vorherigerWert)
 }

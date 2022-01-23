@@ -21,6 +21,7 @@ import {MeshLine, MeshLineMaterial} from 'meshline';
 import {gsap} from "gsap"
 import Tween = gsap.core.Tween;
 import {HTMLDataElementFakt, zeigeFaktAn} from "../inhalt/fakten";
+import {umfang} from "../konfiguration";
 
 // TODO in Konfiguration auslagern
 
@@ -46,20 +47,97 @@ const wegBreite = .1;
 const wegAbstand = .1;
 const wegStartWinkel = -.15
 const wegEndWinkel = wegStartWinkel - 2 * Math.PI
-// let fortschritt: number | undefined = undefined
-// let fortschritt = 90
-let fortschritt = 0
+let wegAngezeigt = false
+let weg
+let wegKreis
+
+export const daten: {
+	strecke: number | null,
+	beteiligte: number | null
+} = {strecke: null, beteiligte: null}
+
 const fortschrittFarbe = 0xC2DC62
 const fortschrittBreite = wegBreite * 2
 const fortschrittAbstand = wegAbstand + wegBreite;
 const fortschrittStartWinkel = wegStartWinkel
-const fortschrittEndWinkel = fortschrittStartWinkel - fortschritt / 360 * (2 * Math.PI)
-let fortschrittKannAngezeigtWerden = false
+let fortschritt
+let fortschrittKreis
 const hoehe = 16;
 const anfangLaenge = .05;
 const anfangAbstand = fortschrittAbstand
 const anfangBreite = fortschrittBreite;
 const anfangFarbe = 0x111111;
+
+let folgenGruppe
+let bewegenGruppe
+let offsetGruppe
+
+const zeichneKreis = (kreis: Mesh<MeshLine, MeshLineMaterial>, positions: number[]) => {
+	kreis.geometry.setPoints(positions)
+	kreis.geometry.attributes["position"].needsUpdate = true
+}
+
+const positions = (
+	abstand: number,
+	start: number = 0,
+	ende: number = 2 * Math.PI,
+	anzahlSegmente: number = segments,
+	map: (x: number, y: number) => [number, number, number] = (x, y) => [x, 0, y],
+) => new Path()
+	.absarc(0, 0, radius + abstand, start, ende, true)
+	.getPoints(anzahlSegmente)
+	.flatMap(({x, y}) => map(x, y))
+
+const kreis = (
+	farbe: number,
+	breite: number,
+	positions: number[] = [],
+	anzeigen: boolean = true
+): Mesh<MeshLine, MeshLineMaterial> => {
+	const line = new MeshLine()
+	line.setPoints(positions)
+
+	const material = new MeshLineMaterial({
+		resolution: undefined,
+		color: farbe,
+		lineWidth: breite
+		/*side: BackSide,
+		blending: AdditiveBlending*/
+	});
+
+	const mesh = new Mesh(line, material)
+	offsetGruppe.add(mesh)
+	return mesh
+}
+
+export function aktualisieren() {
+	if (daten.beteiligte === null || daten.strecke === null || !wegAngezeigt) return
+
+	const fortschrittEndWinkel = fortschrittStartWinkel - (daten.strecke / umfang * 360) / 360 * (2 * Math.PI)
+
+	fortschritt = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
+	fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite)
+
+	zeichneKreis(fortschrittKreis, [])
+	let i = 0;
+	const fortschrittTimeout = 16
+	const fortschrittSchritt = 3
+	const fortschrittInterval = setInterval(() => {
+		zeichneKreis(fortschrittKreis, fortschritt.slice(0, i))
+
+		if (i === fortschritt.length) clearInterval(fortschrittInterval)
+		i += fortschrittSchritt
+	}, fortschrittTimeout)
+
+	let zeit = fortschritt.length / fortschrittSchritt * fortschrittTimeout / 1000 * 1.5;
+	gsap.to(offsetGruppe.rotation, {
+		y: fortschrittEndWinkel - Math.PI / 2,
+		duration: zeit,
+		ease: "power2.inOut"
+	})
+	document.getElementById("fakten").querySelectorAll("data")
+		.forEach((data: HTMLDataElementFakt) => zeigeFaktAn(data, Math.max(zeit * 1000, 600)))
+}
 
 export default function welt() {
 	const scene = new Scene()
@@ -69,9 +147,9 @@ export default function welt() {
 	const renderer = new WebGLRenderer({antialias: true})
 	renderer.setPixelRatio(devicePixelRatio)
 
-	const folgenGruppe = new Group()
-	const bewegenGruppe = new Group()
-	const offsetGruppe = new Group()
+	folgenGruppe = new Group()
+	bewegenGruppe = new Group()
+	offsetGruppe = new Group()
 	offsetGruppe.rotation.y = anfang + anfangOffset
 	folgenGruppe.add(bewegenGruppe)
 	bewegenGruppe.add(offsetGruppe)
@@ -141,55 +219,11 @@ export default function welt() {
 	// endregion
 
 	// region Weg & Fortschritt
-	const kreise = []
-
-	const positions = (
-		abstand: number,
-		start: number = 0,
-		ende: number = 2 * Math.PI,
-		anzahlSegmente: number = segments,
-		map: (x: number, y: number) => [number, number, number] = (x, y) => [x, 0, y],
-	) => new Path()
-		.absarc(0, 0, radius + abstand, start, ende, true)
-		.getPoints(anzahlSegmente)
-		.flatMap(({x, y}) => map(x, y))
-
-	const kreis = (
-		farbe: number,
-		breite: number,
-		positions: number[] = [],
-		anzeigen: boolean = true
-	): Mesh<MeshLine, MeshLineMaterial> => {
-		const line = new MeshLine()
-		line.setPoints(positions)
-
-		const material = new MeshLineMaterial({
-			resolution: undefined,
-			color: farbe,
-			lineWidth: breite
-			/*side: BackSide,
-			blending: AdditiveBlending*/
-		});
-
-		const mesh = new Mesh(line, material)
-		offsetGruppe.add(mesh)
-		return mesh
-	}
-	const zeichneKreis = (kreis: Mesh<MeshLine, MeshLineMaterial>, positions: number[]) => {
-		kreis.geometry.setPoints(positions)
-		kreis.geometry.attributes["position"].needsUpdate = true
-	}
 
 	// Weg
-	const weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
+	weg = positions(wegAbstand, wegStartWinkel, wegEndWinkel);
 	// const wegPositions = [...weg.slice(0, 3), ...weg.slice(0, 3).map(position => position + 0.00001), ...weg.slice(3, weg.length)]
-	const wegKreis = kreis(wegFarbe, wegBreite, [], false)
-	kreise.push(wegKreis)
-
-	// Fortschritt
-	const fortschrittPositions = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
-	const fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite)
-	kreise.push(fortschrittKreis)
+	wegKreis = kreis(wegFarbe, wegBreite, [], false)
 
 	// Anfang
 	// const anfangKreis = kreis(anfangFarbe, anfangBreite, positions(anfangAbstand, anfangLaenge, -anfangLaenge, segments, (x, y) => [0, y, x]))
@@ -213,8 +247,10 @@ export default function welt() {
 			// renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 			// const min =
 			renderer.setSize(size, size);
-			document.documentElement.style.setProperty("--erde-größe", size + "px")
-			kreise.forEach(kreis => kreis.material.resolution = new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight))
+			document.documentElement.style.setProperty("--erde-größe", size + "px");
+			[wegKreis, fortschrittKreis].forEach(kreis => {
+				if (kreis) kreis.material.resolution = new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
+			})
 
 			/*camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight
 			camera.updateProjectionMatrix()
@@ -328,33 +364,11 @@ export default function welt() {
 
 				if (i === weg.length) {
 					clearInterval(wegInterval)
-
-					zeichneKreis(fortschrittKreis, [])
-					i = 0;
-					const fortschrittTimeout = 16
-					const fortschrittSchritt = 3
-					const fortschrittInterval = setInterval(() => {
-						zeichneKreis(fortschrittKreis, fortschrittPositions.slice(0, i))
-
-						if (i === fortschrittPositions.length) clearInterval(fortschrittInterval)
-						i += fortschrittSchritt
-					}, fortschrittTimeout)
-
-					let zeit = fortschrittPositions.length / fortschrittSchritt * fortschrittTimeout / 1000 * 1.5;
-					gsap.to(offsetGruppe.rotation, {
-						y: fortschrittEndWinkel - Math.PI / 2,
-						duration: zeit,
-						ease: "power2.inOut"
-					})
-					document.getElementById("fakten").querySelectorAll("data")
-						.forEach((data: HTMLDataElementFakt) => zeigeFaktAn(data, Math.max(zeit, 600)))
+					wegAngezeigt = true
+					aktualisieren()
 				}
 				i += 3
 			}, 10)
 		}, 1500)
 	}
-}
-
-export const aktualisieren = (wert: number) => {
-
 }

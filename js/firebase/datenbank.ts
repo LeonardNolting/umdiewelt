@@ -7,7 +7,7 @@ import m from "../formatierung/einheit/m";
 import kg from "../formatierung/einheit/kg";
 import co2 from "../co2";
 import bestenliste from "../inhalt/bestenliste";
-import {aktualisieren} from "../welt/welt";
+import {aktualisieren, daten} from "../welt/welt";
 
 export namespace Datenbank {
 	export let datenbank: Database
@@ -27,60 +27,31 @@ export namespace Datenbank {
 		export function lesen() {
 			step("Liest Datenbank");
 
-			fortschritt()
-			globaleStrecke()
-			beteiligteJaehrlich()
+			onValue(ref(datenbank, "allgemein/saisons/aktiv"), async snap => {
+				const saison = snap.val()
+				fortschritt(saison)
+				beteiligte(saison)
+			})
 			saisonAuswahl()
 			bestenliste()
 		}
 
-		function fortschritt() {
-			onValue(ref(datenbank, "allgemein/saisons/aktiv"), async snap => {
-				const saison = snap.val()
-				const wert: number = saison === 0 ? 0 : await new Promise(resolve => {
-					onValue(
-						ref(datenbank, "allgemein/saisons/details/" + saison + "/strecke"),
-						snap => resolve(snap.val() || 0)
-					)
-				})
-				aktualisieren(wert)
+		function fortschritt(saison: string | null) {
+			onValue(ref(datenbank, "allgemein/saisons/details/" + saison + "/strecke"), snap => {
+				// daten.strecke = snap.val() || 0
+				daten.strecke = 0
+				ladeFakt("strecke", m(daten.strecke))
+				ladeFakt("gespart", kg(co2(daten.strecke)), true, 2)
+				aktualisieren()
 			})
 		}
 
-		async function globaleStrecke() {
-			onValue(ref(datenbank, "allgemein/strecke"), async snap => {
-				const strecke = snap.val() || 0
-
-				// ladeFakt("strecke", m(strecke))
-				ladeFakt("strecke", m(0))
-				// ladeFakt("gespart", kg(co2(strecke)), true, 3)
-				ladeFakt("gespart", kg(co2(0)), true, 3)
-			})
-		}
-
-		async function beteiligteJaehrlich() {
-			let anzahlFahrer = undefined,
-				anzahlHistorischeSaisons = undefined
-
-			const probieren = () => {
-				// Schon fertig geladen?
-				if (anzahlFahrer === undefined || anzahlHistorischeSaisons === undefined) return
-
-				const wert = anzahlFahrer / anzahlHistorischeSaisons
-				const valide = anzahlHistorischeSaisons !== 0;
-
-				// ladeFakt("fahrer", {wert}, valide, 0)
-				ladeFakt("fahrer", {wert: 0}, valide, 0)
-			}
-
-			onValue(ref(datenbank, "anzahlFahrer"), snap => {
-				anzahlFahrer = snap.val() || 0
-				probieren()
-			})
-
-			onValue(ref(datenbank, "allgemein/saisons/anzahlHistorisch"), snap => {
-				anzahlHistorischeSaisons = snap.val() || 0
-				probieren()
+		function beteiligte(saison: string | null) {
+			onValue(ref(datenbank, "allgemein/saisons/details/" + saison + "/anzahlFahrer"), snap => {
+				// daten.beteiligte = snap.val() || 0
+				daten.beteiligte = 0
+				ladeFakt("fahrer", {wert: daten.beteiligte}, true, 0)
+				aktualisieren()
 			})
 		}
 
