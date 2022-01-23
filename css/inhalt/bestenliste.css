@@ -37,14 +37,14 @@
 	display: none;
 }
 
-#bestenliste-wrapper > .wussten-sie-schon {
+#bestenliste-wrapper > .wusstest-du-schon {
 	margin-left: var(--große-box-margin-left);
 	/*z-index: -1;*/
 	background: none;
 	position: relative;
 }
 
-#bestenliste-wrapper > .wussten-sie-schon::after {
+#bestenliste-wrapper > .wusstest-du-schon::after {
 	content: "";
 	width: 100%;
 	height: 100%;

@@ -1,4 +1,4 @@
-.wussten-sie-schon {
+.wusstest-du-schon {
 	padding: 1.6rem;
 	width: 100%;
 	--background: center/cover no-repeat linear-gradient(-45deg, transparent 10%, #e0e3e5 30%, #f0f0f0f0 30%);
@@ -9,7 +9,7 @@
 	cursor: help;
 }
 
-.wussten-sie-schon::before {
+.wusstest-du-schon::before {
 	content: "💡 Wussten Sie schon?";
 	font-weight: bold;
 	color: #888;
