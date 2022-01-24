@@ -1,5 +1,4 @@
 import quellen from "./quellen";
-import {bereiteFaktenVor as fakten} from "./fakten";
 import step from "../step";
 import cookies from "./cookies";
 import admin from "./admin";
@@ -26,7 +25,6 @@ export default async () => {
 	document.querySelectorAll("#inhalt .verspaetet").forEach(element => observer.observe(element))
 
 	cookies()
-	fakten(...document.getElementById("fakten").querySelectorAll("data"))
 	quellen()
 	eintragen()
 	await admin()

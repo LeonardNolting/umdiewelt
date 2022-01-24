@@ -14,18 +14,6 @@ export interface HTMLDataElementFakt extends HTMLDataElement {
 	angezeigt: boolean
 }
 
-/**
- * Bereitet das Anzeigen eines Fakts vor
- * @param fakt
- */
-export const bereiteFaktVor = (fakt: HTMLDataElement) => {}
-
-/**
- * Bereitet das Anzeigen von Fakten vor
- * @param fakten
- */
-export const bereiteFaktenVor = (...fakten: HTMLDataElement[]) => fakten.forEach(bereiteFaktVor)
-
 export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600, vorherigerWert: number = 0) {
 	if (!data.wert) return
 
