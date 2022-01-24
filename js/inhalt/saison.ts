@@ -11,7 +11,7 @@ import {
 } from "firebase/database";
 import Datenbank from "../firebase/datenbank";
 import m from "../formatierung/einheit/m";
-import {bereiteFaktVor, HTMLDataElementFakt, ladeFakt, zeigeFaktAn} from "./fakten";
+import {HTMLDataElementFakt, ladeFakt, zeigeFaktAn} from "./fakten";
 import load from "../load";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
@@ -146,8 +146,6 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 				const data = document.createElement("data") as HTMLDataElementFakt
 				data.innerHTML = html
 				data.classList.add("fakt")
-
-				bereiteFaktVor(data)
 
 				const ladeFaktUndCallback = (snap: DataSnapshot) => {
 					const wert = snap.val() || 0;
