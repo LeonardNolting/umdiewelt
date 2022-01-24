@@ -27,5 +27,5 @@ export default async () => {
 	cookies()
 	quellen()
 	eintragen()
-	await admin()
+	admin()
 }
