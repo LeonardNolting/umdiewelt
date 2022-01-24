@@ -12,11 +12,10 @@ import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth, authentifizieren} from "../firebase/authentifizierung";
 import Popup from "../popup";
 import global from "../global";
-import {adminPopup} from "../inhalt/admin";
 import {adminEmail} from "../konfiguration";
 
 const popup = document.getElementById("popup-anmelden-admin") as HTMLFormElement
-const submit = adminPopup["submit"]
+const submit = popup["submit"]
 
 const kontrollen = [
 	new NeueSaisonKontrolle(),
@@ -29,17 +28,19 @@ const kontrollen = [
 	new StreckeLoeschenKontrolle()
 ]
 
-export const aktivieren = async () => {
+const aktivieren = async () => {
 	document.body.classList.add("admin")
 	await Promise.all(kontrollen.map(kontrolle => kontrolle.initialisieren()))
 	Kontrolle.fieldset.disabled = false
 }
 
-export const deaktivieren = () => {
+const deaktivieren = () => {
 	document.body.classList.remove("admin")
 }
 
 export const oeffnen = async () => {
+	vorbereiten()
+
 	if (global.user !== undefined) {
 		if (global.user !== null) {
 			// Muss Teilnehmer sein, sonst könnte nicht auf diesen Knopf geklickt werden -> abmelden
@@ -58,7 +59,7 @@ export const oeffnen = async () => {
 }
 
 let vorbereitet = false
-export const vorbereiten = () => {
+const vorbereiten = () => {
 	if (vorbereitet) return
 	vorbereitet = true
 
@@ -83,5 +84,3 @@ export const vorbereiten = () => {
 	document.getElementById("admin-abmelden").onclick = () => load(signOut(auth).then(deaktivieren))
 	Kontrolle.form.onsubmit = event => event.preventDefault()
 }
-
-export { Kontrolle }
