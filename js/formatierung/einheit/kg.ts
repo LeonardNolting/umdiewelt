@@ -4,7 +4,7 @@ export default (wert: number): { wert: number, einheit: string } => {
 		einheit: "g"
 	}; else if (Math.abs(wert) >= 2000) return {
 		wert: wert / 1000,
-		einheit: "Tonnen"
+		einheit: "t"
 	}; else return {
 		wert, einheit: "kg"
 	}
