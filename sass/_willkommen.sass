@@ -58,6 +58,10 @@ section#willkommen
 					//font-family: Georgia, Times, "Times New Roman", serif
 					font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace
 					@include emoji-cursor(😱)
+				&:not([data-einheit])::before
+					content: attr(value) attr(data-si-einheit)
+				&:not([data-si-einheit])::before
+					content: attr(value)
 				&:nth-child(1)::before
 					@include emoji-cursor(👍)
 				&:nth-child(3)::before

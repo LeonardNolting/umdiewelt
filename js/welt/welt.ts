@@ -51,7 +51,7 @@ let wegAngezeigt = false
 let weg
 let wegKreis
 
-export const daten: {
+export let daten: {
 	strecke: number | null,
 	beteiligte: number | null
 } = {strecke: null, beteiligte: null}

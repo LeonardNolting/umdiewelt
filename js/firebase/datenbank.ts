@@ -38,11 +38,12 @@ export namespace Datenbank {
 
 		function fortschritt(saison: string | null) {
 			onValue(ref(datenbank, "allgemein/saisons/details/" + saison + "/strecke"), snap => {
-				// daten.strecke = snap.val() || 0
-				daten.strecke = 0
+				// const neueDaten = {...daten, strecke: snap.val() || 0}
+				const neueDaten = {...daten, strecke: 0}
 				ladeFakt("strecke", m(daten.strecke))
-				ladeFakt("gespart", kg(co2(daten.strecke)), true, 2)
+				ladeFakt("gespart", co2(daten.strecke), true, 2)
 				aktualisieren()
+				daten = neueDaten
 			})
 		}
 

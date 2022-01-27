@@ -1,30 +1,29 @@
-import zahl from "../formatierung/zahl";
+import einheiten, { zahl } from "../formatierung/einheiten";
 
 export interface HTMLDataElementFakt extends HTMLDataElement {
 	interval: number
-	wert?: {
-		berechnet: { wert: number, einheit?: string }
-		valide: boolean
-		anzahlNachkommastellen: number
-	}
 	dataset: {
 		bezeichnung?: string
+		siEinheit: string
 		einheit: string
+		anzahlNachkommastellen: string
 	},
 	angezeigt: boolean
 }
 
-export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600, vorherigerWert: number = 0) {
-	if (!data.wert) return
+HTMLDataElement.prototype.test = () => {
 
-	vorherigerWert = vorherigerWert || 0
+}
+
+export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600, neu: { wert: number, einheit?: string }, alt: { wert: number, einheit?: string } = {wert: 0}) {
+	// if (!data.wert) return
+
+	// vorherigerWert = vorherigerWert || 0
 
 	const set = (value: string, einheit: string = "") => {
 		data.value = value
-		data.dataset.einheit = einheit
+		data.dataset.siEinheit = einheit
 	}
-
-	if (!data.wert.valide) return set("N/A")
 
 	const {wert, einheit = ""} = data.wert.berechnet,
 		differenz = wert - vorherigerWert,
@@ -56,32 +55,35 @@ export function zeigeFaktAn(data: HTMLDataElementFakt, zeit: number = 600, vorhe
  * Zeigt einen Fakt an
  * @param data
  * @param berechnet
+ * @param alt
  * @param valide
  * @param anzahlNachkommastellen
  */
-export function ladeFakt(data: HTMLDataElementFakt, berechnet: { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1)
+export function ladeFakt(data: HTMLDataElementFakt, berechnet: { wert: number, einheit?: string }, alt: { wert: number, einheit?: string } = {wert: 0}, anzahlNachkommastellen: number = 1)
 
 /**
  * Zeigt einen Fakt an
  * @param bezeichnung
  * @param berechnet
+ * @param alt
  * @param valide
  * @param anzahlNachkommastellen
  */
-export function ladeFakt(bezeichnung: string, berechnet: { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1)
+export function ladeFakt(bezeichnung: string, berechnet: { wert: number, einheit?: string }, alt: { wert: number, einheit?: string } = {wert: 0}, anzahlNachkommastellen: number = 1)
 
 /**
  * Zeigt einen Fakt an
  * @param bezeichnung
- * @param berechnet
+ * @param neu
+ * @param alt
  * @param valide
  * @param anzahlNachkommastellen
  */
-export function ladeFakt(bezeichnung: string | HTMLDataElementFakt, berechnet: { wert: number, einheit?: string }, valide: boolean = true, anzahlNachkommastellen: number = 1) {
+export function ladeFakt(bezeichnung: string | HTMLDataElementFakt, neu: { wert: number, einheit?: string }, alt: { wert: number, einheit?: string } = {wert: 0}, anzahlNachkommastellen: number = 1) {
 	const data = typeof bezeichnung === "string" ?
 		document.querySelector("[data-bezeichnung='" + bezeichnung + "']") as HTMLDataElementFakt :
 		bezeichnung
-	const vorherigerWert = data.wert?.berechnet.wert
-	data.wert = {berechnet, valide, anzahlNachkommastellen}
-	if (data.angezeigt) zeigeFaktAn(data, 600, vorherigerWert)
+	// const vorherigerWert = data.wert?.berechnet.wert
+	// data.wert = {berechnet: neu,  anzahlNachkommastellen}
+	if (data.angezeigt) zeigeFaktAn(data, 600, neu, alt)
 }
