@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"browser-update": "^3.3.30",
-		"three": "^0.129.0"
+		"three": "^0.137.0"
 	},
 	"devDependencies": {
 		"@fortawesome/fontawesome-free": "^5.15.3",
