@@ -470,7 +470,7 @@ export class Eintragung {
 		})
 	}
 
-	static async berechnen(placeId1: string, placeId2: string): Promise<number> {
+	static async berechnen(placeId1: string, placeId2: string): Promise<number | null> {
 		return new Promise<number>(resolve => {
 			this.distanceMatrixService.getDistanceMatrix({
 				origins: [{placeId: placeId1}],
@@ -479,7 +479,9 @@ export class Eintragung {
 				unitSystem: google.maps.UnitSystem.METRIC
 			}, (response) => {
 				if (response === null) throw new Error("Antwort von distance matrix war null")
-				resolve(response.rows[0].elements[0].distance.value)
+				const distance = response.rows[0].elements[0].distance
+				if (!distance) resolve(null)
+				resolve(distance.value)
 			})
 		})
 	}
@@ -488,7 +490,7 @@ export class Eintragung {
 		this.berechnenPlace(element, autocomplete)
 	}
 
-	async berechnen() {
+	async berechnen(): Promise<number | null> {
 		const place1 = Eintragung.berechnenPlace(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft)
 		if (place1 === null) return null
 		const place2 = Eintragung.berechnenPlace(Eintragung.berechnenStart, Eintragung.autocompleteStart)
