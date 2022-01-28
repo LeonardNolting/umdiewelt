@@ -480,10 +480,7 @@ export class Eintragung {
 			}, (response) => {
 				if (response === null) throw new Error("Antwort von distance matrix war null")
 				const distance = response.rows[0].elements[0].distance
-				if (!distance) {
-					resolve(null)
-					benachrichtigung("Kann Distanz nicht berechnen. Bitte überprüfe deine Eingaben.")
-				}
+				if (!distance) resolve(null)
 				resolve(distance.value)
 			})
 		})
@@ -493,7 +490,7 @@ export class Eintragung {
 		this.berechnenPlace(element, autocomplete)
 	}
 
-	async berechnen() {
+	async berechnen(): Promise<number | null> {
 		const place1 = Eintragung.berechnenPlace(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft)
 		if (place1 === null) return null
 		const place2 = Eintragung.berechnenPlace(Eintragung.berechnenStart, Eintragung.autocompleteStart)
