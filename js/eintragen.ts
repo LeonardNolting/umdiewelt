@@ -15,6 +15,8 @@ import {eintragenTextSetzen} from "./inhalt/eintragen";
 import global from "./global"
 import maps from "./maps";
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
+import Autocomplete = google.maps.places.Autocomplete;
+import PlaceResult = google.maps.places.PlaceResult;
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
@@ -459,9 +461,8 @@ export class Eintragung {
 		}
 	}
 
-	static berechnenPlace(element: HTMLInputElement, autocomplete: google.maps.places.Autocomplete) {
+	static berechnenPlace(element: HTMLInputElement, place: PlaceResult) {
 		if (!element.value) return null
-		const place = autocomplete.getPlace()
 		element.classList[place.geometry ? "remove" : "add"]("invalid")
 		if (!place.geometry) return null
 		return place.place_id
@@ -491,13 +492,29 @@ export class Eintragung {
 	}
 
 	static placeChanged(element: HTMLInputElement, autocomplete: google.maps.places.Autocomplete) {
-		this.berechnenPlace(element, autocomplete)
+		const place = autocomplete.getPlace()
+		this.berechnenPlace(element, place)
+		const anderesAutocomplete: Autocomplete = autocomplete === Eintragung.autocompleteStart ? Eintragung.autocompleteAnkunft : Eintragung.autocompleteStart
+		if (!element.value) {
+			anderesAutocomplete.setBounds({east: 180, west: -180, north: 90, south: -90})
+		} else {
+			/**
+			 * 1 Breitengrad entspricht 111km
+			 */
+			const number = .5
+			anderesAutocomplete.setBounds({
+				north: place.geometry.location.lat + number,
+				south: place.geometry.location.lat - number,
+				east: place.geometry.location.lng + number,
+				west: place.geometry.location.lng - number,
+			})
+		}
 	}
 
 	async berechnen(): Promise<number | null> {
-		const place1 = Eintragung.berechnenPlace(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft)
+		const place1 = Eintragung.berechnenPlace(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft.getPlace())
 		if (place1 === null) return null
-		const place2 = Eintragung.berechnenPlace(Eintragung.berechnenStart, Eintragung.autocompleteStart)
+		const place2 = Eintragung.berechnenPlace(Eintragung.berechnenStart, Eintragung.autocompleteStart.getPlace())
 		if (place2 === null) return null
 
 		return await Eintragung.berechnen(place1, place2)
