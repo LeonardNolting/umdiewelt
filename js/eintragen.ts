@@ -14,6 +14,7 @@ import zahl from "./formatierung/zahl";
 import {eintragenTextSetzen} from "./inhalt/eintragen";
 import global from "./global"
 import maps from "./maps";
+import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
@@ -180,10 +181,13 @@ const popups = {
 	}, async () => {
 		await maps()
 		Eintragung.distanceMatrixService = new google.maps.DistanceMatrixService()
-		const fields = ["place_id", "geometry"]
-		Eintragung.autocompleteStart = new google.maps.places.Autocomplete(Eintragung.berechnenStart as HTMLInputElement, {fields})
+		const options: AutocompleteOptions = {
+			fields: ["place_id", "geometry"],
+			types: ["address"]
+		}
+		Eintragung.autocompleteStart = new google.maps.places.Autocomplete(Eintragung.berechnenStart as HTMLInputElement, options)
 		Eintragung.autocompleteStart.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenStart, Eintragung.autocompleteStart))
-		Eintragung.autocompleteAnkunft = new google.maps.places.Autocomplete(Eintragung.berechnenAnkunft as HTMLInputElement, {fields})
+		Eintragung.autocompleteAnkunft = new google.maps.places.Autocomplete(Eintragung.berechnenAnkunft as HTMLInputElement, options)
 		Eintragung.autocompleteAnkunft.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft))
 		/*(document.getElementById("eintragen-karte-knopf") as HTMLDetailsElement)
 			.addEventListener("toggle", () => new google.maps.Map(document.getElementById("eintragen-karte"), {
