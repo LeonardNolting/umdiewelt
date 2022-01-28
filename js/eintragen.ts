@@ -190,7 +190,6 @@ const popups = {
 		}
 		const number = .5
 		Eintragung.autocompleteStart = new google.maps.places.Autocomplete(Eintragung.berechnenStart as HTMLInputElement, options)
-		Eintragung.autocompleteStart.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenStart, Eintragung.autocompleteStart))
 		Eintragung.autocompleteAnkunft = new google.maps.places.Autocomplete(Eintragung.berechnenAnkunft as HTMLInputElement, {
 			...options,
 			bounds: {
@@ -199,8 +198,12 @@ const popups = {
 				east: koordinaten.hoechstadt.lng + number,
 				west: koordinaten.hoechstadt.lng - number,
 			}
+		});
+		[[Eintragung.autocompleteStart, Eintragung.berechnenStart], [Eintragung.autocompleteAnkunft, Eintragung.berechnenAnkunft]].forEach(([autocomplete, element]) => {
+			const placeChanged = () => Eintragung.placeChanged(element as HTMLInputElement, autocomplete as Autocomplete);
+			(autocomplete as Autocomplete).addListener("place_changed", placeChanged)
+			element.addEventListener("change", placeChanged)
 		})
-		Eintragung.autocompleteAnkunft.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft))
 		/*(document.getElementById("eintragen-karte-knopf") as HTMLDetailsElement)
 			.addEventListener("toggle", () => new google.maps.Map(document.getElementById("eintragen-karte"), {
 				center: koordinaten.hoechstadt,
