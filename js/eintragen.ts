@@ -24,6 +24,12 @@ const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(r
 	}, {onlyOnce: true})
 })
 
+const adresseVonSchule = (schule: string) => new Promise<string>(resolve => {
+	onValue(ref(Datenbank.datenbank, `allgemein/schulen/details/${schule}/adresse`), snap => {
+		resolve(snap.val())
+	}, {onlyOnce: true})
+})
+
 type PopupInfo = {
 	element: HTMLFormElement,
 	vorbereiten: (eintragung: Eintragung, element: HTMLFormElement) => void,
@@ -80,13 +86,16 @@ const popups = {
 		weiter: async (eintragung, element) => {
 			const data = Object.fromEntries(["schule", "klasse", "passwort"].map(it => [it, element[it].value])) as { schule: string, klasse: string, passwort: string }
 			const email = await emailVonKlasse(data.schule, data.klasse)
+			const adresse = adresseVonSchule(data.schule)
 
 			eintragung.angemeldetBleiben = Cookies.optional() && (element["angemeldet-bleiben"] as HTMLInputElement).checked
 			await authentifizieren(email, data.passwort, eintragung.angemeldetBleiben)
 				.then(() => {
 					eintragung.authentifizierungSetzen(data.schule, data.klasse)
-					Eintragung.berechnenStart.value = data.schule
-					eintragung.popupOeffnen(popups.name)
+					adresse.then(adresse => {
+						if (adresse) Eintragung.berechnenStart.value = adresse
+						eintragung.popupOeffnen(popups.name)
+					})
 				})
 		}
 	}, (eintragung, element) => new Promise(resolve => {

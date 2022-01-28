@@ -1,4 +1,4 @@
-import {ref, set} from "firebase/database";
+import {ref, set, update} from "firebase/database";
 import Datenbank from "../../firebase/datenbank";
 import Kontrolle from "./kontrolle";
 
@@ -16,7 +16,11 @@ export default class NeueSchuleKontrolle extends Kontrolle {
 
 	protected async submit(): Promise<string> {
 		const name = this.element("name").value;
-		return set(ref(Datenbank.datenbank, "allgemein/schulen/liste/" + name), true)
+		const adresse = this.element("adresse").value;
+		const updates = []
+		updates[`allgemein/schulen/liste/${name}`] = true
+		updates[`allgemein/schulen/details/${name}/adresse`] = adresse
+		return update(ref(Datenbank.datenbank), updates)
 			.then(() => "Neue Schule erstellt 👍")
 	}
 
