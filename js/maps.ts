@@ -5,5 +5,5 @@ import {apiSchluessel as apiKey, region, sprache as language, version} from "./k
 export default () => {
 	step("Lädt Google Maps")
 
-	return new Loader({apiKey, version, language, region}).load()
+	return new Loader({apiKey, version, language, region, libraries: ["places"]}).load()
 }
