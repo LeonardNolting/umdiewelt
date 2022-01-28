@@ -4,7 +4,7 @@ import {get, onChildAdded, onValue, push, ref, serverTimestamp, set, Unsubscribe
 import Route from "./model/route";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import benachrichtigung from "./benachrichtigungen/benachrichtigung";
-import {adminEmail} from "./konfiguration";
+import {adminEmail, koordinaten} from "./konfiguration";
 import {auth, authentifizieren} from "./firebase/authentifizierung";
 import Storage from "./storage";
 import load from "./load";
@@ -85,6 +85,7 @@ const popups = {
 			await authentifizieren(email, data.passwort, eintragung.angemeldetBleiben)
 				.then(() => {
 					eintragung.authentifizierungSetzen(data.schule, data.klasse)
+					Eintragung.berechnenStart.value = data.schule
 					eintragung.popupOeffnen(popups.name)
 				})
 		}
@@ -187,9 +188,18 @@ const popups = {
 			fields: ["place_id", "geometry"],
 			types: ["address"]
 		}
+		const number = .5
 		Eintragung.autocompleteStart = new google.maps.places.Autocomplete(Eintragung.berechnenStart as HTMLInputElement, options)
 		Eintragung.autocompleteStart.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenStart, Eintragung.autocompleteStart))
-		Eintragung.autocompleteAnkunft = new google.maps.places.Autocomplete(Eintragung.berechnenAnkunft as HTMLInputElement, options)
+		Eintragung.autocompleteAnkunft = new google.maps.places.Autocomplete(Eintragung.berechnenAnkunft as HTMLInputElement, {
+			...options,
+			bounds: {
+				north: koordinaten.hoechstadt.lat + number,
+				south: koordinaten.hoechstadt.lat - number,
+				east: koordinaten.hoechstadt.lng + number,
+				west: koordinaten.hoechstadt.lng - number,
+			}
+		})
 		Eintragung.autocompleteAnkunft.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft))
 		/*(document.getElementById("eintragen-karte-knopf") as HTMLDetailsElement)
 			.addEventListener("toggle", () => new google.maps.Map(document.getElementById("eintragen-karte"), {
