@@ -13,6 +13,7 @@ import m from "./formatierung/einheit/m";
 import zahl from "./formatierung/zahl";
 import {eintragenTextSetzen} from "./inhalt/eintragen";
 import global from "./global"
+import maps from "./maps";
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
@@ -171,8 +172,19 @@ const popups = {
 			await eintragung.nameSetzen(undefined)
 			eintragung.optionSetzen(undefined)
 		},
-		weiter: (eintragung, element) => eintragung.meterSetzen(1000) // TODO berechnete meter benutzen
-	}, () => {
+		weiter: async (eintragung, element) => {
+			const meter = await eintragung.berechnen()
+			if (meter === null) return benachrichtigung("Kann Strecke nicht berechnen. Bitte überprüfe deine Eingaben.")
+			eintragung.meterSetzen(meter)
+		}
+	}, async () => {
+		await maps()
+		Eintragung.distanceMatrixService = new google.maps.DistanceMatrixService()
+		const fields = ["place_id", "geometry"]
+		Eintragung.autocompleteStart = new google.maps.places.Autocomplete(Eintragung.berechnenStart as HTMLInputElement, {fields})
+		Eintragung.autocompleteStart.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenStart, Eintragung.autocompleteStart))
+		Eintragung.autocompleteAnkunft = new google.maps.places.Autocomplete(Eintragung.berechnenAnkunft as HTMLInputElement, {fields})
+		Eintragung.autocompleteAnkunft.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft))
 		/*(document.getElementById("eintragen-karte-knopf") as HTMLDetailsElement)
 			.addEventListener("toggle", () => new google.maps.Map(document.getElementById("eintragen-karte"), {
 				center: koordinaten.hoechstadt,
@@ -225,14 +237,31 @@ export class Eintragung {
 		Eintragung.eintragungen.push(this)
 	}
 
+	static distanceMatrixService
+
+	/**
+	 * Wird gesetzt beim Vorbereiten von `popups.berechnen`
+	 */
+	static autocompleteStart
+
+	/**
+	 * Wird gesetzt beim Vorbereiten von `popups.berechnen`
+	 */
+	static autocompleteAnkunft
+
+	static berechnenStart = document.getElementById("eintragen-suche-a") as HTMLInputElement
+	static berechnenAnkunft = document.getElementById("eintragen-suche-b") as HTMLInputElement
+
 	async oeffnen() {
-		return benachrichtigung("Es können aktuell keine Eintragungen vorgenommen werden.")
+		// return benachrichtigung("Es können aktuell keine Eintragungen vorgenommen werden.")
 
 		// Abbrechen falls schon eine Eintragung offen
 		if (!!Eintragung.offen) return
 
 		// Ist ja schon offen ...
 		if (this.offen) return
+
+		this.vorbereiten()
 
 		// Auth state ist schon bekannt
 		if (global.user !== undefined) {
@@ -292,6 +321,10 @@ export class Eintragung {
 				this.oeffnen()
 			})
 		}))
+	}
+
+	vorbereiten() {
+		Eintragung.berechnenReset()
 	}
 
 	schliessen() {
@@ -420,6 +453,48 @@ export class Eintragung {
 			const {name} = await datenVonFahrerBekommen(fahrerAusCookie)
 			eintragenTextSetzen(name)
 		}
+	}
+
+	static berechnenPlace(element: HTMLInputElement, autocomplete: google.maps.places.Autocomplete) {
+		if (!element.value) return null
+		const place = autocomplete.getPlace()
+		element.classList[place.geometry ? "remove" : "add"]("invalid")
+		if (!place.geometry) return null
+		return place.place_id
+	}
+
+	static berechnenReset() {
+		[this.berechnenStart, this.berechnenAnkunft].forEach(element => {
+			element.value = ""
+			element.classList.remove("invalid")
+		})
+	}
+
+	static async berechnen(placeId1: string, placeId2: string): Promise<number> {
+		return new Promise<number>(resolve => {
+			this.distanceMatrixService.getDistanceMatrix({
+				origins: [{placeId: placeId1}],
+				destinations: [{placeId: placeId2}],
+				travelMode: google.maps.TravelMode.BICYCLING,
+				unitSystem: google.maps.UnitSystem.METRIC
+			}, (response) => {
+				if (response === null) throw new Error("Antwort von distance matrix war null")
+				resolve(response.rows[0].elements[0].distance.value)
+			})
+		})
+	}
+
+	static placeChanged(element: HTMLInputElement, autocomplete: google.maps.places.Autocomplete) {
+		this.berechnenPlace(element, autocomplete)
+	}
+
+	async berechnen() {
+		const place1 = Eintragung.berechnenPlace(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft)
+		if (place1 === null) return null
+		const place2 = Eintragung.berechnenPlace(Eintragung.berechnenStart, Eintragung.autocompleteStart)
+		if (place2 === null) return null
+
+		return await Eintragung.berechnen(place1, place2)
 	}
 }
 
