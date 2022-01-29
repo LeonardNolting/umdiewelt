@@ -17,9 +17,9 @@ export default class NeueSchuleKontrolle extends Kontrolle {
 	protected async submit(): Promise<string> {
 		const name = this.element("name").value;
 		const adresse = this.element("adresse").value;
-		const updates = []
-		updates[`allgemein/schulen/liste/${name}`] = true
+		const updates = {}
 		updates[`allgemein/schulen/details/${name}/adresse`] = adresse
+		updates[`allgemein/schulen/liste/${name}`] = true
 		return update(ref(Datenbank.datenbank), updates)
 			.then(() => "Neue Schule erstellt 👍")
 	}
