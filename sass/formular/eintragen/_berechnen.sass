@@ -13,13 +13,19 @@
 		.eintragen-suche
 			flex-grow: 1
 			display: flex
+			flex-direction: column
 			button::before
 				content: "📍"
 				margin-right: 6px
 			input
-				width: 0
 				flex-grow: 1
 				min-width: 100px
+				width: 100%
+				&:not(.invalid) + .warnung
+					display: none
+			.warnung
+				color: darkred
+				margin-top: .2rem
 			+ .eintragen-suche
 				margin-top: .4rem
 
