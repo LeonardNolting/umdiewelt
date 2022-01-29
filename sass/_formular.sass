@@ -1,5 +1,8 @@
+@import "formular/eintragen/eintragen"
+
 form
 	display: flex
+	flex-direction: column
 
 fieldset
 	margin: 0
@@ -58,6 +61,8 @@ input[type=button], input[type=submit], button
 		border-radius: 0 var(--border-radius) var(--border-radius) 0
 		/* doofer spalt ... */
 		margin-left: -4px
+	> :not(input[type=button]):not(button):not(input[type=submit])
+		flex-grow: 1
 
 .buttons
 	display: flex
