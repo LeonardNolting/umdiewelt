@@ -1,8 +1,10 @@
 body.popup
 	overflow-y: hidden
+	&.popup-wichtig #popup-hintergrund
+		cursor: not-allowed
 
-body.popup.popup-wichtig #popup-hintergrund
-	cursor: not-allowed
+body:not(.popup) #popups
+	display: none
 
 #popups
 	position: fixed
@@ -15,70 +17,62 @@ body.popup.popup-wichtig #popup-hintergrund
 	justify-content: center
 	overflow: hidden
 
-body:not(.popup) #popups
-	display: none
+	#popup-hintergrund
+		--farbe: rgba(0, 0, 0, 100)
+		--zeit: .3s
+		--groesse: 150vmax
+		position: absolute
+		/*height: 100vmax*/
+		/*width: 100vmax*/
+		height: var(--groesse)
+		width: var(--groesse)
+		background-color: var(--farbe)
+		box-shadow: 0 0 32px 32px var(--farbe)
+		z-index: 20
 
-#popup-hintergrund
-	--farbe: rgba(0, 0, 0, 100)
-	--zeit: .3s
-	--groesse: 150vmax
-	position: absolute
-	/*height: 100vmax*/
-	/*width: 100vmax*/
-	height: var(--groesse)
-	width: var(--groesse)
-	background-color: var(--farbe)
-	box-shadow: 0 0 32px 32px var(--farbe)
-	z-index: 20
+		opacity: 0.2
+		transform: scale(0)
+		border-radius: 50%
 
-	opacity: 0.2
-	transform: scale(0)
-	border-radius: 50%
+	// Jedes Popup
+	> *:not(#popup-hintergrund)
+		position: absolute
+		background-color: white
+		box-shadow: 0 0 16px 4px #333
+		border-radius: .8rem
+		z-index: 30
+		margin: 1rem
+		transition: opacity .2s ease-in-out
+		&:not(.offen)
+			opacity: 0
+			display: none
+		&.offen ~ #popup-hintergrund
+			transition: opacity calc(var(--zeit)) ease-in, transform var(--zeit) linear, border-radius var(--zeit) linear var(--zeit)
+			display: initial
+			border-radius: 0
+			transform: scale(1)
+			opacity: .4
 
-#popups > *:not(#popup-hintergrund).offen ~ #popup-hintergrund
-	transition: opacity calc(var(--zeit)) ease-in, transform var(--zeit) linear, border-radius var(--zeit) linear var(--zeit)
-	display: initial
-	border-radius: 0
-	transform: scale(1)
-	opacity: .4
+	h3
+		--margin-bottom: 1.4rem
+		margin-bottom: var(--margin-bottom)
+		position: relative
+		margin-right: auto
+		margin-top: 0
+		&::after
+			content: ''
+			position: absolute
+			height: 4px
+			display: block
+			background: steelblue
+			width: 60%
+			margin-top: calc((var(--margin-bottom) - 0.2rem) / 2)
+			transform: translateY(-50%)
+			border-radius: 500px
 
-/* Jedes popup */
-#popups > *:not(#popup-hintergrund)
-	position: absolute
-	background-color: white
-	box-shadow: 0 0 16px 4px #333
-	border-radius: .8rem
-	z-index: 30
-	margin: 1rem
-
-	opacity: 0
-	display: none
-	transition: opacity .2s ease-in-out
-
-#popups h3
-	--margin-bottom: 1.4rem
-	margin-bottom: var(--margin-bottom)
-	position: relative
-	margin-right: auto
-
-#popups h3::after
-	content: ''
-	position: absolute
-	height: 4px
-	display: block
-	background: steelblue
-	width: 60%
-	margin-top: calc((var(--margin-bottom) - 0.2rem) / 2)
-	transform: translateY(-50%)
-	border-radius: 500px
-/* hoher Wert für maximale Rundung */
-
-#popups .container
-	padding: 1rem
-	display: flex
-	flex-direction: column
-	max-width: 700px
-
-#popups > *:not(#popup-hintergrund).offen
-	display: initial
-	opacity: 1
+	.container
+		padding: 1rem
+		display: flex
+		flex-direction: column
+		max-width: 700px
+		width: unset

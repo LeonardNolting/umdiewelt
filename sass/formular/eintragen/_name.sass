@@ -1,0 +1,14 @@
+#popup-eintragen-name
+	p
+		margin: .8rem 0 0
+		&.nachricht
+			margin-top: 0.2rem
+			font-style: italic
+			font-size: 95%
+			margin-bottom: -0.2rem
+			&:empty
+				display: none
+			&[data-reaktion]::after
+				content: attr(data-reaktion)
+				font-style: normal
+				margin-left: 4px
