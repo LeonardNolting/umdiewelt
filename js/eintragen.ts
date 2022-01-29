@@ -158,9 +158,9 @@ const popups = {
 							snap => resolve(snap.val()),
 							{onlyOnce: true}))
 						const anzahlStreckenFormatiert = anzahlStrecken === 1 ? "eine Strecke" : anzahlStrecken + " Strecken"
-						return [`Sie haben bereits ${anzahlStreckenFormatiert} eingetragen`, "😎"]
+						return [`Du hast bereits ${anzahlStreckenFormatiert} eingetragen`, "😎"]
 					})() :
-					["Sie tragen ihre erste Strecke ein", "😊"]
+					["Du trägst deine erste Strecke ein", "😊"]
 			) : ["", ""]
 
 			const anzeige = element.querySelector("p.nachricht") as HTMLParagraphElement
