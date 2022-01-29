@@ -185,7 +185,7 @@ const popups = {
 			await eintragung.nameSetzen(undefined)
 			eintragung.optionSetzen(undefined)
 		},
-		weiter: async (eintragung, element) => {
+		weiter: async (eintragung) => {
 			const meter = await eintragung.berechnen()
 			if (meter === null) return benachrichtigung("Kann Strecke nicht berechnen. Bitte überprüfe deine Eingaben.")
 			eintragung.meterSetzen(meter)
@@ -446,7 +446,7 @@ export class Eintragung {
 			this.fahrer = await fahrerErstellen(this.schule, this.klasse, this.name)
 			if (this.angemeldetBleiben) Storage.set("fahrer", this.fahrer, false)
 		}
-		const strecke = await streckeErstellen(this.fahrer, this.meter)
+		/*const strecke =*/ await streckeErstellen(this.fahrer, this.meter)
 
 		/*if (route) {
 			// TODO überlegen: sind immer beide Orte gegeben? entsprechend spezifisch/orte updaten...
@@ -497,16 +497,22 @@ export class Eintragung {
 		})
 	}
 
-	static async berechnen(placeId1: string, placeId2: string): Promise<number | null> {
+	static async berechnen(
+		origin: string | google.maps.LatLng | google.maps.LatLngLiteral | google.maps.Place,
+		destination: string | google.maps.LatLng | google.maps.LatLngLiteral | google.maps.Place
+	): Promise<number | null> {
 		return new Promise<number>(resolve => {
 			this.distanceMatrixService.getDistanceMatrix({
-				origins: [{placeId: placeId1}],
-				destinations: [{placeId: placeId2}],
+				origins: [origin],
+				destinations: [destination],
 				travelMode: google.maps.TravelMode.BICYCLING,
 				unitSystem: google.maps.UnitSystem.METRIC
 			}, (response) => {
 				if (response === null) throw new Error("Antwort von distance matrix war null")
-				const distance = response.rows[0].elements[0].distance
+
+				const element = response.rows[0].elements[0];
+				if (element.status !== "OK") resolve(null)
+				const distance = element.distance
 				if (!distance) resolve(null)
 				resolve(distance.value)
 			})
@@ -537,11 +543,16 @@ export class Eintragung {
 
 	async berechnen(): Promise<number | null> {
 		const placeId1 = Eintragung.berechnenPlace(Eintragung.berechnenStart, Eintragung.autocompleteStart.getPlace())
-		if (placeId1 === null) return null
 		const placeId2 = Eintragung.berechnenPlace(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft.getPlace())
-		if (placeId2 === null) return null
-
-		return await Eintragung.berechnen(placeId1, placeId2)
+		if (placeId1 === null || placeId2 === null) {
+			const start = Eintragung.berechnenStart.value
+			const ankunft = Eintragung.berechnenAnkunft.value
+			if (start !== "" && ankunft !== "") {
+				return Eintragung.berechnen(start, ankunft)
+			} else return null
+		} else {
+			return Eintragung.berechnen({placeId: placeId1}, {placeId: placeId2})
+		}
 	}
 }
 
@@ -588,4 +599,4 @@ const streckeErstellen = (fahrer: string, strecke: number) => push(
 	{fahrer, strecke, zeitpunkt: serverTimestamp()}
 ).then(({key}) => key)
 
-const routeErstellen = (strecke: string, route: Route) => set(ref(Datenbank.datenbank, "spezifisch/routen/" + strecke), route)
+// const routeErstellen = (strecke: string, route: Route) => set(ref(Datenbank.datenbank, "spezifisch/routen/" + strecke), route)
