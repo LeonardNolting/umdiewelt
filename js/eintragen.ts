@@ -4,7 +4,7 @@ import {get, onChildAdded, onValue, push, ref, serverTimestamp, set, Unsubscribe
 import Route from "./model/route";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import benachrichtigung from "./benachrichtigungen/benachrichtigung";
-import {adminEmail} from "./konfiguration";
+import {adminEmail, koordinaten} from "./konfiguration";
 import {auth, authentifizieren} from "./firebase/authentifizierung";
 import Storage from "./storage";
 import load from "./load";
@@ -14,9 +14,20 @@ import zahl from "./formatierung/zahl";
 import {eintragenTextSetzen} from "./inhalt/eintragen";
 import global from "./global"
 import maps from "./maps";
+import AutocompleteOptions = google.maps.places.AutocompleteOptions;
+import Autocomplete = google.maps.places.Autocomplete;
+import PlaceResult = google.maps.places.PlaceResult;
+import co2 from "./co2";
+import kg from "./formatierung/einheit/kg";
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
+		resolve(snap.val())
+	}, {onlyOnce: true})
+})
+
+const adresseVonSchule = (schule: string) => new Promise<string>(resolve => {
+	onValue(ref(Datenbank.datenbank, `allgemein/schulen/details/${schule}/adresse`), snap => {
 		resolve(snap.val())
 	}, {onlyOnce: true})
 })
@@ -77,12 +88,16 @@ const popups = {
 		weiter: async (eintragung, element) => {
 			const data = Object.fromEntries(["schule", "klasse", "passwort"].map(it => [it, element[it].value])) as { schule: string, klasse: string, passwort: string }
 			const email = await emailVonKlasse(data.schule, data.klasse)
+			const adresse = adresseVonSchule(data.schule)
 
 			eintragung.angemeldetBleiben = Cookies.optional() && (element["angemeldet-bleiben"] as HTMLInputElement).checked
 			await authentifizieren(email, data.passwort, eintragung.angemeldetBleiben)
 				.then(() => {
 					eintragung.authentifizierungSetzen(data.schule, data.klasse)
-					eintragung.popupOeffnen(popups.name)
+					adresse.then(adresse => {
+						if (adresse) Eintragung.berechnenStart.value = adresse
+						eintragung.popupOeffnen(popups.name)
+					})
 				})
 		}
 	}, (eintragung, element) => new Promise(resolve => {
@@ -145,9 +160,9 @@ const popups = {
 							snap => resolve(snap.val()),
 							{onlyOnce: true}))
 						const anzahlStreckenFormatiert = anzahlStrecken === 1 ? "eine Strecke" : anzahlStrecken + " Strecken"
-						return [`Sie haben bereits ${anzahlStreckenFormatiert} eingetragen`, "😎"]
+						return [`Du hast bereits ${anzahlStreckenFormatiert} eingetragen`, "😎"]
 					})() :
-					["Sie tragen ihre erste Strecke ein", "😊"]
+					["Du trägst deine erste Strecke ein", "😊"]
 			) : ["", ""]
 
 			const anzeige = element.querySelector("p.nachricht") as HTMLParagraphElement
@@ -172,7 +187,7 @@ const popups = {
 			await eintragung.nameSetzen(undefined)
 			eintragung.optionSetzen(undefined)
 		},
-		weiter: async (eintragung, element) => {
+		weiter: async (eintragung) => {
 			const meter = await eintragung.berechnen()
 			if (meter === null) return benachrichtigung("Kann Strecke nicht berechnen. Bitte überprüfe deine Eingaben.")
 			eintragung.meterSetzen(meter)
@@ -180,11 +195,26 @@ const popups = {
 	}, async () => {
 		await maps()
 		Eintragung.distanceMatrixService = new google.maps.DistanceMatrixService()
-		const fields = ["place_id", "geometry"]
-		Eintragung.autocompleteStart = new google.maps.places.Autocomplete(Eintragung.berechnenStart as HTMLInputElement, {fields})
-		Eintragung.autocompleteStart.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenStart, Eintragung.autocompleteStart))
-		Eintragung.autocompleteAnkunft = new google.maps.places.Autocomplete(Eintragung.berechnenAnkunft as HTMLInputElement, {fields})
-		Eintragung.autocompleteAnkunft.addListener("place_changed", () => Eintragung.placeChanged(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft))
+		const options: AutocompleteOptions = {
+			fields: ["place_id", "geometry"],
+			types: ["address"]
+		}
+		const number = .5
+		Eintragung.autocompleteStart = new google.maps.places.Autocomplete(Eintragung.berechnenStart as HTMLInputElement, options)
+		Eintragung.autocompleteAnkunft = new google.maps.places.Autocomplete(Eintragung.berechnenAnkunft as HTMLInputElement, {
+			...options,
+			bounds: {
+				north: koordinaten.hoechstadt.lat + number,
+				south: koordinaten.hoechstadt.lat - number,
+				east: koordinaten.hoechstadt.lng + number,
+				west: koordinaten.hoechstadt.lng - number,
+			}
+		});
+		[[Eintragung.autocompleteStart, Eintragung.berechnenStart], [Eintragung.autocompleteAnkunft, Eintragung.berechnenAnkunft]].forEach(([autocomplete, element]) => {
+			const placeChanged = () => Eintragung.placeChanged(element as HTMLInputElement, autocomplete as Autocomplete);
+			(autocomplete as Autocomplete).addListener("place_changed", placeChanged)
+			element.addEventListener("change", placeChanged)
+		})
 		/*(document.getElementById("eintragen-karte-knopf") as HTMLDetailsElement)
 			.addEventListener("toggle", () => new google.maps.Map(document.getElementById("eintragen-karte"), {
 				center: koordinaten.hoechstadt,
@@ -386,7 +416,11 @@ export class Eintragung {
 	}
 
 	meterSetzen(wert: number) {
-		this.meter = wert
+		this.meter = wert;
+		const mBerechnet = m(wert);
+		const co2Berechnet = kg(co2(wert));
+		(document.getElementById("eintragen-berechnen-strecke") as HTMLOutputElement).value = zahl(mBerechnet.wert, 1) + mBerechnet.einheit;
+		(document.getElementById("eintragen-berechnen-gespart") as HTMLOutputElement).value = zahl(co2Berechnet.wert, 1) + co2Berechnet.einheit;
 		this.popupOeffnen(wert !== undefined ? popups.datenschutz : popups[this.option])
 	}
 
@@ -418,7 +452,7 @@ export class Eintragung {
 			this.fahrer = await fahrerErstellen(this.schule, this.klasse, this.name)
 			if (this.angemeldetBleiben) Storage.set("fahrer", this.fahrer, false)
 		}
-		const strecke = await streckeErstellen(this.fahrer, this.meter)
+		/*const strecke =*/ await streckeErstellen(this.fahrer, this.meter)
 
 		/*if (route) {
 			// TODO überlegen: sind immer beide Orte gegeben? entsprechend spezifisch/orte updaten...
@@ -455,11 +489,10 @@ export class Eintragung {
 		}
 	}
 
-	static berechnenPlace(element: HTMLInputElement, autocomplete: google.maps.places.Autocomplete) {
+	static berechnenPlace(element: HTMLInputElement, place: PlaceResult) {
 		if (!element.value) return null
-		const place = autocomplete.getPlace()
-		element.classList[place.geometry ? "remove" : "add"]("invalid")
-		if (!place.geometry) return null
+		element.classList[place && place.geometry ? "remove" : "add"]("invalid")
+		if (!place || !place.geometry) return null
 		return place.place_id
 	}
 
@@ -470,16 +503,22 @@ export class Eintragung {
 		})
 	}
 
-	static async berechnen(placeId1: string, placeId2: string): Promise<number | null> {
+	static async berechnen(
+		origin: string | google.maps.LatLng | google.maps.LatLngLiteral | google.maps.Place,
+		destination: string | google.maps.LatLng | google.maps.LatLngLiteral | google.maps.Place
+	): Promise<number | null> {
 		return new Promise<number>(resolve => {
 			this.distanceMatrixService.getDistanceMatrix({
-				origins: [{placeId: placeId1}],
-				destinations: [{placeId: placeId2}],
+				origins: [origin],
+				destinations: [destination],
 				travelMode: google.maps.TravelMode.BICYCLING,
 				unitSystem: google.maps.UnitSystem.METRIC
 			}, (response) => {
 				if (response === null) throw new Error("Antwort von distance matrix war null")
-				const distance = response.rows[0].elements[0].distance
+
+				const element = response.rows[0].elements[0];
+				if (element.status !== "OK") resolve(null)
+				const distance = element.distance
 				if (!distance) resolve(null)
 				resolve(distance.value)
 			})
@@ -487,16 +526,39 @@ export class Eintragung {
 	}
 
 	static placeChanged(element: HTMLInputElement, autocomplete: google.maps.places.Autocomplete) {
-		this.berechnenPlace(element, autocomplete)
+		const place = autocomplete.getPlace()
+		const placeId = this.berechnenPlace(element, place)
+		if (placeId !== null) {
+			const anderesAutocomplete: Autocomplete = autocomplete === Eintragung.autocompleteStart ? Eintragung.autocompleteAnkunft : Eintragung.autocompleteStart
+			if (!element.value) {
+				anderesAutocomplete.setBounds({east: 180, west: -180, north: 90, south: -90})
+			} else {
+				/**
+				 * 1 Breitengrad entspricht 111km
+				 */
+				const number = .5
+				anderesAutocomplete.setBounds({
+					north: place.geometry.location.lat() + number,
+					south: place.geometry.location.lat() - number,
+					east: place.geometry.location.lng() + number,
+					west: place.geometry.location.lng() - number,
+				})
+			}
+		}
 	}
 
 	async berechnen(): Promise<number | null> {
-		const place1 = Eintragung.berechnenPlace(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft)
-		if (place1 === null) return null
-		const place2 = Eintragung.berechnenPlace(Eintragung.berechnenStart, Eintragung.autocompleteStart)
-		if (place2 === null) return null
-
-		return await Eintragung.berechnen(place1, place2)
+		const placeId1 = Eintragung.berechnenPlace(Eintragung.berechnenStart, Eintragung.autocompleteStart.getPlace())
+		const placeId2 = Eintragung.berechnenPlace(Eintragung.berechnenAnkunft, Eintragung.autocompleteAnkunft.getPlace())
+		if (placeId1 === null || placeId2 === null) {
+			const start = Eintragung.berechnenStart.value
+			const ankunft = Eintragung.berechnenAnkunft.value
+			if (start !== "" && ankunft !== "") {
+				return Eintragung.berechnen(start, ankunft)
+			} else return null
+		} else {
+			return Eintragung.berechnen({placeId: placeId1}, {placeId: placeId2})
+		}
 	}
 }
 
@@ -543,4 +605,4 @@ const streckeErstellen = (fahrer: string, strecke: number) => push(
 	{fahrer, strecke, zeitpunkt: serverTimestamp()}
 ).then(({key}) => key)
 
-const routeErstellen = (strecke: string, route: Route) => set(ref(Datenbank.datenbank, "spezifisch/routen/" + strecke), route)
+// const routeErstellen = (strecke: string, route: Route) => set(ref(Datenbank.datenbank, "spezifisch/routen/" + strecke), route)
