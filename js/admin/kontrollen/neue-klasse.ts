@@ -61,5 +61,16 @@ export default class NeueKlasseKontrolle extends Kontrolle {
 			ref(Datenbank.datenbank, "allgemein/saisons/details/" + aktuell + "/schulen/liste"),
 			snap => this.element("schule").append(new Option(snap.key, snap.key))
 		)
+
+		this.element("generieren").addEventListener("click", () => {
+			this.element("password").value = NeueKlasseKontrolle.passwortGenerieren()
+		})
+	}
+
+	private static zifferGenerieren(): number {
+		return Math.floor(Math.random() * 10)
+	}
+	private static passwortGenerieren(): string {
+		return "UDW-" + this.zifferGenerieren() + this.zifferGenerieren() + "-" + this.zifferGenerieren() + this.zifferGenerieren() + "-" + this.zifferGenerieren()
 	}
 }
