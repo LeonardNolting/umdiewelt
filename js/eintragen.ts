@@ -17,6 +17,8 @@ import maps from "./maps";
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 import Autocomplete = google.maps.places.Autocomplete;
 import PlaceResult = google.maps.places.PlaceResult;
+import co2 from "./co2";
+import kg from "./formatierung/einheit/kg";
 
 const emailVonKlasse = (schule: string, klasse: string) => new Promise<string>(resolve => {
 	onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/email"), snap => {
@@ -414,7 +416,11 @@ export class Eintragung {
 	}
 
 	meterSetzen(wert: number) {
-		this.meter = wert
+		this.meter = wert;
+		const mBerechnet = m(wert);
+		const co2Berechnet = kg(co2(wert));
+		(document.getElementById("eintragen-berechnen-strecke") as HTMLOutputElement).value = zahl(mBerechnet.wert, 1) + mBerechnet.einheit;
+		(document.getElementById("eintragen-berechnen-gespart") as HTMLOutputElement).value = zahl(co2Berechnet.wert, 1) + co2Berechnet.einheit;
 		this.popupOeffnen(wert !== undefined ? popups.datenschutz : popups[this.option])
 	}
 
