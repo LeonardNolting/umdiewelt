@@ -32,9 +32,9 @@
 		justify-content: space-evenly
 
 		.schule
-			max-width: 1000px
+			max-width: 360px
 			flex-basis: 0
-			flex-grow: .5
+			flex-grow: .6
 			display: flex
 			flex-direction: column
 			align-items: center
@@ -52,13 +52,31 @@
 			.jahre
 				display: flex
 				flex-wrap: wrap
-				margin: 0
+				margin-bottom: 0
 				padding: 0
 				li
 					list-style: none
 					display: flex
 					+ li
 						padding-left: 1rem
+			h3
+				margin: 0
+				text-align: center
+				font-size: 1.6rem
+			> * + *
+				margin-top: 1rem
+			.angefeuert
+				margin-top: .4rem
+			.klassen
+				width: 100%
+				td + td
+					padding-left: 1rem
+				td
+					text-align: center
+					&:first-child
+						text-align: left
+					&:last-child
+						text-align: right
 			&[data-schule="Gymnasium Höchstadt"]
 				background-position: bottom
 				background-repeat: no-repeat
