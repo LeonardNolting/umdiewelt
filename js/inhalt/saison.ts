@@ -1,18 +1,20 @@
 import {
 	child,
-	onValue,
-	ref,
-	update,
+	DatabaseReference,
+	DataSnapshot,
+	get,
 	increment,
 	onChildAdded,
-	get,
-	DatabaseReference,
-	DataSnapshot, onChildRemoved
+	onChildRemoved,
+	onValue,
+	ref,
+	update
 } from "firebase/database";
 import Datenbank from "../firebase/datenbank";
 import m from "../formatierung/einheit/m";
 import {HTMLDataElementFakt, ladeFakt, zeigeFaktAn} from "./fakten";
 import load from "../load";
+import zahl from "../formatierung/zahl";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
 const lis = () => Array.from(saisonAuswahl.children) as HTMLLIElement[];
@@ -249,16 +251,34 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 							const td = tr.insertCell()
 							td.textContent = klasse
 						}
-						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/strecke"), snap => {
-							const wert = snap.val() || 0
+						// * Strecke
+						{
 							const td = tr.insertCell()
-							td.textContent = wert
-						})
-						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/anzahlStrecken"), snap => {
-							const wert = snap.val() || 0
+							onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/strecke"), snap => {
+								const wert = snap.val() || 0
+								const meter = m(wert);
+								td.textContent = zahl(meter.wert, 0) + meter.einheit
+							})
+						}
+						// * Beteiligung
+						{
 							const td = tr.insertCell()
-							td.textContent = wert
-						})
+							let anzahlFahrer, potAnzahlFahrer
+							const probieren = () => {
+								if (anzahlFahrer === undefined || potAnzahlFahrer === undefined) return
+								if (potAnzahlFahrer < anzahlFahrer) return console.error("In Klasse " + klasse + " der Schule " + schule + " gibt es mehr Fahrer als möglich sind. (" + anzahlFahrer + "/" + potAnzahlFahrer + ")")
+								const wert = potAnzahlFahrer === 0 ? 0 : (anzahlFahrer / potAnzahlFahrer)
+								td.textContent = Math.round(wert * 100) + "%"
+							}
+							onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/anzahlFahrer"), snap => {
+								anzahlFahrer = snap.val() || 0
+								probieren()
+							})
+							onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/potAnzahlFahrer"), snap => {
+								potAnzahlFahrer = snap.val() || 0
+								probieren()
+							})
+						}
 					})
 					onChildRemoved(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), ({key: klasse}) =>
 						Array.from(table.rows).find(row => row.dataset.klasse === klasse).remove())
