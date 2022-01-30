@@ -177,9 +177,32 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		}
 
 		// Countdowns...
-		// TODO neue Zeitenstruktur
 		if (zeit.start && zeit.start > jetzt) {
-			// TODO
+			const p = document.createElement("p")
+			p.classList.add("countdown", "start")
+			const differenz = (zeit.start - jetzt) / 1000
+			if (60 * 60 * 24 > differenz) {
+				let timer = differenz, stunden, minuten, sekunden
+				const interval = setInterval(function () {
+					sekunden = timer
+					stunden = Math.floor(sekunden / 3600)
+					sekunden %= 3600
+					minuten = Math.floor(sekunden / 60)
+					sekunden = Math.floor(sekunden % 60)
+
+					minuten = minuten < 10 ? "0" + minuten : minuten
+					sekunden = sekunden < 10 ? "0" + sekunden : sekunden
+
+					p.textContent = `${stunden}:${minuten}:${sekunden}`
+
+					if (timer === 0) clearInterval(interval)
+					timer--
+				}, 1000);
+				p.classList.add("monospace")
+			} else {
+				p.textContent = `Start in ${differenz / 3600 / 24} Tagen`
+			}
+			container.append(p)
 		}
 		if (zeit.ende && zeit.ende > jetzt) {
 			// TODO
