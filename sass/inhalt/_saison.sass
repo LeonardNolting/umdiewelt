@@ -71,6 +71,16 @@
 				margin-top: .4rem
 			.klassen
 				width: 100%
+				max-height: 160px
+				display: block
+				overflow-y: auto
+				scrollbar-width: none
+
+				&::-webkit-scrollbar
+					display: none
+				tbody
+					display: table
+					width: 100%
 				td + td
 					padding-left: 1rem
 				td
