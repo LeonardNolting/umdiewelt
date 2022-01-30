@@ -122,9 +122,11 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		// Container leeren
 		container?.innerHTML = ""
 
-		// "Wird bald starten..."
 		if (status.zukuenftig) {
-
+			const p = document.createElement("p")
+			p.classList.add("hinweis-zukuenftig")
+			p.textContent = "Wird bald starten..."
+			container.append(p)
 		}
 
 		// Fakten...
