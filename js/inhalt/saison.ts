@@ -301,18 +301,12 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 			const div = document.createElement("div")
 			div.classList.add("mitmachen")
 
-			div.append(...Object.entries({
-				erklaerung:
-					"Du willst mit deiner Klasse auch teilnehmen?<wbr>" +
-					"Bitte fragt euren Klassenlehrer/eure Klassenlehrerin, ob er/sie mit Herrn Hipp Kontakt aufnehmen kann.",
-				hinweis:
-					"In dieser Saison können nur Klassen der oben gezeigten Schulen teilnehmen. <a href='#mitmachen'>Mehr Informationen</a>"
-			}).map(([name, html]) => {
+			{
 				const p = document.createElement("p")
-				p.classList.add(name)
-				p.innerHTML = html
-				return p
-			}))
+				p.classList.add("hinweis")
+				p.textContent = "Teilnahme ist auf die oben gezeigten Schulen beschränkt."
+				div.append(p)
+			}
 
 			container.append(div)
 		}
