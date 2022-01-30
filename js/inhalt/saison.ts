@@ -128,7 +128,7 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		// Fakten...
 		if (!status.zukuenftig) {
 			const div = document.createElement("div")
-			div.classList.add("fakten", "horizontal")
+			div.classList.add("fakten", "horizontal", "container")
 
 			const fakt = (
 				name: string,
