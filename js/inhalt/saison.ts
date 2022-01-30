@@ -240,7 +240,7 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 				}
 
 				// TODO Klassen
-				if (status.aktuell) {
+				if (status.laufend) {
 					const table = document.createElement("table")
 					table.classList.add("klassen")
 
