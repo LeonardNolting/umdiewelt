@@ -150,7 +150,7 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 				const ladeFaktUndCallback = (snap: DataSnapshot) => {
 					const wert = snap.val() || 0;
 					const berechnet = berechnen(wert);
-					ladeFakt(data, berechnet)
+					ladeFakt(data, berechnet, true, 0)
 					zeigeFaktAn(data);
 					callback(wert, berechnet)
 				}
