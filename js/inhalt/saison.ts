@@ -130,7 +130,8 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		}
 
 		// Fakten...
-		if (!status.zukuenftig) {
+		// if (!status.zukuenftig) {
+		if (status.laufend || status.historisch) {
 			const div = document.createElement("div")
 			div.classList.add("fakten", "horizontal", "container")
 
