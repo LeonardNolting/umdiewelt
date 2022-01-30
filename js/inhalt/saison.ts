@@ -225,18 +225,18 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 							})
 						}
 						schuleContainer.append(button)
+
+						const em = document.createElement("em")
+						em.classList.add("angefeuert")
+						const output = document.createElement("output")
+						em.append(output, "x angefeuert")
+
+						onValue(child(schuleRef, "angefeuert"), snap => {
+							output.textContent = snap.val() || 0
+						})
+
+						schuleContainer.append(em)
 					}
-
-					const em = document.createElement("em")
-					em.classList.add("angefeuert")
-					const output = document.createElement("output")
-					em.append(output, "x angefeuert")
-
-					onValue(child(schuleRef, "angefeuert"), snap => {
-						output.textContent = snap.val() || 0
-					})
-
-					schuleContainer.append(em)
 				}
 
 				// TODO Klassen
