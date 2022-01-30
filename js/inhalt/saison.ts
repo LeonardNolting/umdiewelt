@@ -176,11 +176,11 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 			container.appendChild(div)
 		}
 
-		// Countdowns...
-		if (zeit.start && zeit.start > jetzt) {
+		const countdown = (typ: "start" | "ende") => {
 			const p = document.createElement("p")
-			p.classList.add("countdown", "start")
-			const differenz = (zeit.start - jetzt) / 1000
+			p.classList.add("countdown", typ)
+			p.dataset.typ = typ
+			const differenz = (zeit[typ] - jetzt) / 1000
 			if (60 * 60 * 24 > differenz) {
 				let timer = differenz, stunden, minuten, sekunden
 				const interval = setInterval(function () {
@@ -200,13 +200,13 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 				}, 1000);
 				p.classList.add("monospace")
 			} else {
-				p.textContent = `Start in ${differenz / 3600 / 24} Tagen`
+				p.textContent = `${typ.charAt(0).toUpperCase() + typ.substr(1)} in ${differenz / 3600 / 24} Tagen`
 			}
 			container.append(p)
 		}
-		if (zeit.ende && zeit.ende > jetzt) {
-			// TODO
-		}
+		// Countdowns...
+		if (zeit.start && zeit.start > jetzt) countdown("start")
+		if (zeit.ende && zeit.ende > jetzt) countdown("ende")
 
 		// Schulen...
 		{
