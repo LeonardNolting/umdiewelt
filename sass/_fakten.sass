@@ -1,0 +1,49 @@
+@mixin fakten-horizontal
+	flex-direction: row
+	justify-content: space-between
+	width: 100%
+	.fakt
+		flex-direction: column
+		font-size: 1.4rem
+		text-align: center
+		flex-basis: 0
+		flex-grow: 1
+		&::before
+			position: relative
+			transform: none
+			margin-left: 0
+		.fakt + .fakt
+			margin-top: 0
+			margin-left: 1rem
+
+.fakten
+	font-size: 1rem
+	display: flex
+	flex-direction: column
+	.fakt
+		color: #bbb
+		display: flex
+		flex-direction: row
+		align-items: center
+		&::before
+			--schriftgröße: 1.6em
+			content: attr(value) attr(data-einheit)
+			position: absolute
+			transform: translateX(-100%)
+			margin-left: calc(-.6 * var(--schriftgröße))
+			display: flex
+			font-size: var(--schriftgröße)
+			text-transform: initial
+			justify-content: center
+			white-space: nowrap
+			//font-family: Georgia, Times, "Times New Roman", serif
+			font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace
+			@include emoji-cursor(😱)
+		&:nth-child(1)::before
+			@include emoji-cursor(👍)
+		&:nth-child(3)::before
+			@include emoji-cursor(😍)
+		.fakt + .fakt
+			margin-top: 1rem
+	&.horizontal
+		@include fakten-horizontal
