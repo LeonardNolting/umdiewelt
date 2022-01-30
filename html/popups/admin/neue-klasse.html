@@ -4,12 +4,15 @@
 		<select name="schule" required></select>
 		<input type="text" name="name" required placeholder="Name der Klasse" />
 		<input type="email" name="email" required placeholder="E-Mail für das Konto" />
-		<input type="password"
-		       name="password"
-		       minlength="6"
-		       required
-		       placeholder="Passwort für das Konto"
-		       autocomplete="new-password" />
+		<div class="passwort input-button">
+			<input type="text"
+			       name="password"
+			       minlength="6"
+			       required
+			       placeholder="Passwort für das Konto"
+			       autocomplete="new-password" />
+			<button name="generieren">⟳</button>
+		</div>
 		<input type="number" name="pot-anzahl-fahrer" required min="1" placeholder="Klassengröße" />
 	</div>
 
