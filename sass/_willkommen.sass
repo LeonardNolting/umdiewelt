@@ -34,36 +34,7 @@ section#willkommen
 				width: var(--erde-größe) !important
 				background-color: black
 		#fakten
-			font-size: 1rem
-			display: flex
-			flex-direction: column
 			margin-left: 8rem
-
-			.fakt
-				color: #bbb
-				display: flex
-				flex-direction: row
-				align-items: center
-				&::before
-					--schriftgröße: 1.6em
-					content: attr(value) attr(data-einheit)
-					position: absolute
-					transform: translateX(-100%)
-					margin-left: calc(-.6 * var(--schriftgröße))
-					display: flex
-					font-size: var(--schriftgröße)
-					text-transform: initial
-					justify-content: center
-					white-space: nowrap
-					//font-family: Georgia, Times, "Times New Roman", serif
-					font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace
-					@include emoji-cursor(😱)
-				&:nth-child(1)::before
-					@include emoji-cursor(👍)
-				&:nth-child(3)::before
-					@include emoji-cursor(😍)
-			.fakt + .fakt
-				margin-top: 1rem
 
 	&::before
 		--farbe-glow-2: #005dd5
@@ -111,24 +82,8 @@ section#willkommen
 				height: 68vh
 				width: 100%
 			#fakten
-				flex-direction: row
 				margin-left: 0
-				justify-content: space-between
-				width: 100%
-				.fakt
-					flex-direction: column
-					font-size: 1.4rem
-					text-align: center
-					flex-basis: 0
-					flex-grow: 1
-					&::before
-						position: relative
-						transform: none
-						margin-left: 0
-				//font-size: 2em
-				.fakt + .fakt
-					margin-top: 0
-					margin-left: 1rem
+				@include fakten-horizontal
 		&::before
 			display: none
 		&::after

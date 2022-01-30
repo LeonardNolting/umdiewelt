@@ -1,18 +1,20 @@
 import {
 	child,
-	onValue,
-	ref,
-	update,
+	DatabaseReference,
+	DataSnapshot,
+	get,
 	increment,
 	onChildAdded,
-	get,
-	DatabaseReference,
-	DataSnapshot, onChildRemoved
+	onChildRemoved,
+	onValue,
+	ref,
+	update
 } from "firebase/database";
 import Datenbank from "../firebase/datenbank";
 import m from "../formatierung/einheit/m";
 import {HTMLDataElementFakt, ladeFakt, zeigeFaktAn} from "./fakten";
 import load from "../load";
+import zahl from "../formatierung/zahl";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
 const lis = () => Array.from(saisonAuswahl.children) as HTMLLIElement[];
@@ -120,15 +122,18 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		// Container leeren
 		container?.innerHTML = ""
 
-		// "Wird bald starten..."
 		if (status.zukuenftig) {
-
+			const p = document.createElement("p")
+			p.classList.add("hinweis-zukuenftig")
+			p.textContent = "Wird bald starten..."
+			container.append(p)
 		}
 
 		// Fakten...
-		if (!status.zukuenftig) {
+		// if (!status.zukuenftig) {
+		if (status.laufend || status.historisch) {
 			const div = document.createElement("div")
-			div.classList.add("fakten")
+			div.classList.add("fakten", "horizontal", "container")
 
 			const fakt = (
 				name: string,
@@ -150,7 +155,7 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 				const ladeFaktUndCallback = (snap: DataSnapshot) => {
 					const wert = snap.val() || 0;
 					const berechnet = berechnen(wert);
-					ladeFakt(data, berechnet)
+					ladeFakt(data, berechnet, true, 0)
 					zeigeFaktAn(data);
 					callback(wert, berechnet)
 				}
@@ -171,14 +176,37 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 			container.appendChild(div)
 		}
 
+		const countdown = (typ: "start" | "ende") => {
+			const p = document.createElement("p")
+			p.classList.add("countdown", typ)
+			p.dataset.typ = typ
+			const differenz = (zeit[typ] - jetzt) / 1000
+			if (60 * 60 * 24 > differenz) {
+				let timer = differenz, stunden, minuten, sekunden
+				const interval = setInterval(function () {
+					sekunden = timer
+					stunden = Math.floor(sekunden / 3600)
+					sekunden %= 3600
+					minuten = Math.floor(sekunden / 60)
+					sekunden = Math.floor(sekunden % 60)
+
+					minuten = minuten < 10 ? "0" + minuten : minuten
+					sekunden = sekunden < 10 ? "0" + sekunden : sekunden
+
+					p.textContent = `${stunden}:${minuten}:${sekunden}`
+
+					if (timer === 0) clearInterval(interval)
+					timer--
+				}, 1000);
+				p.classList.add("monospace")
+			} else {
+				p.textContent = `${typ.charAt(0).toUpperCase() + typ.substr(1)} in ${differenz / 3600 / 24} Tagen`
+			}
+			container.append(p)
+		}
 		// Countdowns...
-		// TODO neue Zeitenstruktur
-		if (zeit.start && zeit.start > jetzt) {
-			// TODO
-		}
-		if (zeit.ende && zeit.ende > jetzt) {
-			// TODO
-		}
+		if (zeit.start && zeit.start > jetzt) countdown("start")
+		if (zeit.ende && zeit.ende > jetzt) countdown("ende")
 
 		// Schulen...
 		{
@@ -223,22 +251,22 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 							})
 						}
 						schuleContainer.append(button)
+
+						const em = document.createElement("em")
+						em.classList.add("angefeuert")
+						const output = document.createElement("output")
+						em.append(output, "x angefeuert")
+
+						onValue(child(schuleRef, "angefeuert"), snap => {
+							output.textContent = snap.val() || 0
+						})
+
+						schuleContainer.append(em)
 					}
-
-					const em = document.createElement("em")
-					em.classList.add("angefeuert")
-					const output = document.createElement("output")
-					em.append(output, "x angefeuert")
-
-					onValue(child(schuleRef, "angefeuert"), snap => {
-						output.textContent = snap.val() || 0
-					})
-
-					schuleContainer.append(em)
 				}
 
 				// TODO Klassen
-				if (status.aktuell) {
+				if (status.laufend) {
 					const table = document.createElement("table")
 					table.classList.add("klassen")
 
@@ -249,16 +277,34 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 							const td = tr.insertCell()
 							td.textContent = klasse
 						}
-						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/strecke"), snap => {
-							const wert = snap.val() || 0
+						// * Strecke
+						{
 							const td = tr.insertCell()
-							td.textContent = wert
-						})
-						onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/anzahlStrecken"), snap => {
-							const wert = snap.val() || 0
+							onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/strecke"), snap => {
+								const wert = snap.val() || 0
+								const meter = m(wert);
+								td.textContent = zahl(meter.wert, 0) + meter.einheit
+							})
+						}
+						// * Beteiligung
+						{
 							const td = tr.insertCell()
-							td.textContent = wert
-						})
+							let anzahlFahrer, potAnzahlFahrer
+							const probieren = () => {
+								if (anzahlFahrer === undefined || potAnzahlFahrer === undefined) return
+								if (potAnzahlFahrer < anzahlFahrer) return console.error("In Klasse " + klasse + " der Schule " + schule + " gibt es mehr Fahrer als möglich sind. (" + anzahlFahrer + "/" + potAnzahlFahrer + ")")
+								const wert = potAnzahlFahrer === 0 ? 0 : (anzahlFahrer / potAnzahlFahrer)
+								td.textContent = Math.round(wert * 100) + "%"
+							}
+							onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/anzahlFahrer"), snap => {
+								anzahlFahrer = snap.val() || 0
+								probieren()
+							})
+							onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/potAnzahlFahrer"), snap => {
+								potAnzahlFahrer = snap.val() || 0
+								probieren()
+							})
+						}
 					})
 					onChildRemoved(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), ({key: klasse}) =>
 						Array.from(table.rows).find(row => row.dataset.klasse === klasse).remove())
@@ -281,18 +327,12 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 			const div = document.createElement("div")
 			div.classList.add("mitmachen")
 
-			div.append(...Object.entries({
-				erklaerung:
-					"Du willst mit deiner Klasse auch teilnehmen?<wbr>" +
-					"Bitte fragt euren Klassenlehrer/eure Klassenlehrerin, ob er/sie mit Herrn Hipp Kontakt aufnehmen kann.",
-				hinweis:
-					"In dieser Saison können nur Klassen der oben gezeigten Schulen teilnehmen. <a href='#mitmachen'>Mehr Informationen</a>"
-			}).map(([name, html]) => {
+			{
 				const p = document.createElement("p")
-				p.classList.add(name)
-				p.innerHTML = html
-				return p
-			}))
+				p.classList.add("hinweis")
+				p.textContent = "Teilnahme ist auf die oben gezeigten Schulen beschränkt."
+				div.append(p)
+			}
 
 			container.append(div)
 		}
