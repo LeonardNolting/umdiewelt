@@ -245,7 +245,12 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 						const button = document.createElement("button")
 						button.classList.add("anfeuern")
 						button.textContent = "🔥 Anfeuern"
+						let timeout
 						button.onclick = () => {
+							button.disabled = true
+							if (timeout) clearTimeout(timeout)
+							timeout = setTimeout(() => button.disabled = false, 3000)
+
 							update(schuleRef, {
 								"angefeuert": increment(1)
 							})
