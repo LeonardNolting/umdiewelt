@@ -26,6 +26,9 @@
 	position: relative
 	z-index: 1
 
+	&.leer
+		display: none
+
 	.schulen
 		display: flex
 		justify-content: space-evenly
@@ -66,6 +69,9 @@
 				margin-top: 1rem
 			.anfeuern
 				background-color: #41a9ffaa
+				&[disabled]
+					background-color: #ccc
+					opacity: .6
 			.angefeuert
 				margin-top: .4rem
 			.klassen
@@ -129,9 +135,8 @@
 						font-size: 60%
 						line-height: .6
 						color: #999
-			.mitmachen
-				.hinweis
-					text-align: center
+			.hinweis-teilnahme
+				text-align: center
 
 	#saison-auswahl
 		display: flex

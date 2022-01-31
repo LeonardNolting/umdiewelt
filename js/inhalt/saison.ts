@@ -17,12 +17,14 @@ import load from "../load";
 import zahl from "../formatierung/zahl";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
+const saisonsWrapper = document.getElementById("saisons-wrapper")
 const lis = () => Array.from(saisonAuswahl.children) as HTMLLIElement[];
 const li = (saison: string, elements: HTMLLIElement[] = lis()) => elements.find(li => li.textContent === saison)
 
 
 export const bieteSaisonZurAuswahlAn = (saison: string) => {
 	if (li(saison)) return
+	saisonsWrapper.classList.remove("leer")
 	const neuesLi = document.createElement("li")
 	neuesLi.textContent = saison
 	neuesLi.onclick = () => waehleSaisonAus(saison)
@@ -245,7 +247,12 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 						const button = document.createElement("button")
 						button.classList.add("anfeuern")
 						button.textContent = "🔥 Anfeuern"
+						let timeout
 						button.onclick = () => {
+							button.disabled = true
+							if (timeout) clearTimeout(timeout)
+							timeout = setTimeout(() => button.disabled = false, 3000)
+
 							update(schuleRef, {
 								"angefeuert": increment(1)
 							})
@@ -324,17 +331,10 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		}
 
 		if (!status.historisch) {
-			const div = document.createElement("div")
-			div.classList.add("mitmachen")
-
-			{
-				const p = document.createElement("p")
-				p.classList.add("hinweis")
-				p.textContent = "Teilnahme ist auf die oben gezeigten Schulen beschränkt."
-				div.append(p)
-			}
-
-			container.append(div)
+			const p = document.createElement("p")
+			p.classList.add("hinweis-teilnahme")
+			p.textContent = "Teilnahme ist auf die oben gezeigten Schulen beschränkt."
+			container.append(p)
 		}
 	}
 
