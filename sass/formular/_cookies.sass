@@ -1,0 +1,27 @@
+#popup-cookies
+	font-size: calc(var(--grund-schriftgröße) * 1.1)
+	p
+		margin: 0
+		+ p, + button
+			margin-top: .8rem
+		+ button
+			border: none
+			outline: none
+			padding: 0
+			background: none
+	h3
+		margin-bottom: 1rem
+	.buttons > button
+		display: flex
+		justify-content: center
+	&.wichtig .buttons > button#popup-cookies-abbrechen
+		display: none
+		+ button
+			margin-left: 0
+	.hinweis
+		margin-top: 0
+		font-size: 90%
+		margin-bottom: 1rem
+		color: orange
+	&:not(.wird-resetten) .hinweis
+		display: none
