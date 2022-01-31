@@ -74,7 +74,7 @@ namespace Cookies {
 		if (abbrechenMoeglich) button(null)
 		button(Einstellung.ALLE)
 		button(Einstellung.NOTWENDIG)
-		button(Einstellung.KEINE, window.close)
+		button(Einstellung.KEINE, () => history.back())
 
 		if (!abbrechenMoeglich) popup.classList.add("wichtig")
 		if (Storage.get("cookies")) popup.classList.add("wird-resetten")
