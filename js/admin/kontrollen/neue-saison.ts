@@ -84,8 +84,10 @@ export default class NeueSaisonKontrolle extends Kontrolle {
 				potAnzahlFahrer: parseInt(li.potAnzahlFahrerInput.value)
 			}))
 
-		if (teilnehmendeSchulen.length === 0)
-			return benachrichtigung("Bitte wählen Sie mindestens eine Schule aus.", BenachrichtigungsLevel.INFO)
+		if (teilnehmendeSchulen.length === 0) {
+			benachrichtigung("Bitte wählen Sie mindestens eine Schule aus.", BenachrichtigungsLevel.INFO)
+			return false
+		}
 
 		this.schulenListener()
 

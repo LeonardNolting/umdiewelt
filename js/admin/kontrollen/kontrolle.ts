@@ -52,10 +52,12 @@ export default abstract class Kontrolle {
 	protected abstract async vorbereiten(): Promise<void>
 
 	/**
-	 *
-	 * @returns Erfolgsnachricht
+	 * Rückgabewert:
+	 * - String: Erfolgsnachricht
+	 * - true: erfolgreich, Popup schließen usw.
+	 * - false: nicht erfolgreich, Popup nicht schließen usw.
 	 */
-	protected abstract async submit(): Promise<string>
+	protected abstract async submit(): Promise<string | boolean>
 
 	async ausfuehren(mitWarnung: boolean = true) {
 		if (!this.isInit) return benachrichtigung("Bitte warten Sie noch einen Moment. Die Admin-Kontrollen werden gerade initialisiert.")
@@ -75,10 +77,11 @@ export default abstract class Kontrolle {
 			event.preventDefault()
 			if (!this.erlaubt) return // normalerweise schon vorher Popup geschlossen (s. set erlaubt)
 			this.submit()
-				.then(erfolgsnachricht => {
+				.then(value => {
+					if (value === false) return
 					Popup.schliessen(this.popup)
 					this.popup.reset()
-					benachrichtigung(erfolgsnachricht, BenachrichtigungsLevel.ERFOLG)
+					if (typeof value === "string") benachrichtigung(value, BenachrichtigungsLevel.ERFOLG)
 				})
 				.catch(reason => {
 					console.error(reason)
