@@ -258,7 +258,8 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 							})
 						}
 						schuleContainer.append(button)
-
+					}
+					if (status.laufend || status.historisch) {
 						const em = document.createElement("em")
 						em.classList.add("angefeuert")
 						const output = document.createElement("output")
