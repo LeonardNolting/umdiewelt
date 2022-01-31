@@ -331,17 +331,10 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		}
 
 		if (!status.historisch) {
-			const div = document.createElement("div")
-			div.classList.add("mitmachen")
-
-			{
-				const p = document.createElement("p")
-				p.classList.add("hinweis")
-				p.textContent = "Teilnahme ist auf die oben gezeigten Schulen beschränkt."
-				div.append(p)
-			}
-
-			container.append(div)
+			const p = document.createElement("p")
+			p.classList.add("hinweis-teilnahme")
+			p.textContent = "Teilnahme ist auf die oben gezeigten Schulen beschränkt."
+			container.append(p)
 		}
 	}
 
