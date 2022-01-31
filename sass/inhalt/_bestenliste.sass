@@ -295,3 +295,14 @@
 		background-position: 100%
 	to
 		background-position: 0
+
+@media (max-width: 320px)
+	#bestenliste-anzeige
+		li
+			--prozent: 100 !important
+			.inhalt
+				&::before
+					display: none
+				&::after
+					padding-right: 1rem
+					margin-left: -1rem
