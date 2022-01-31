@@ -17,12 +17,14 @@ import load from "../load";
 import zahl from "../formatierung/zahl";
 
 export const saisonAuswahl = document.getElementById("saison-auswahl")
+const saisonsWrapper = document.getElementById("saisons-wrapper")
 const lis = () => Array.from(saisonAuswahl.children) as HTMLLIElement[];
 const li = (saison: string, elements: HTMLLIElement[] = lis()) => elements.find(li => li.textContent === saison)
 
 
 export const bieteSaisonZurAuswahlAn = (saison: string) => {
 	if (li(saison)) return
+	saisonsWrapper.classList.remove("leer")
 	const neuesLi = document.createElement("li")
 	neuesLi.textContent = saison
 	neuesLi.onclick = () => waehleSaisonAus(saison)
