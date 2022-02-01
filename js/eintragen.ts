@@ -99,6 +99,8 @@ const popups = {
 						eintragung.popupOeffnen(popups.name)
 					})
 				})
+				.catch(() => {
+				})
 		}
 	}, (eintragung, element) => new Promise(resolve => {
 		const schulen = element["schule"] as HTMLSelectElement
@@ -452,7 +454,8 @@ export class Eintragung {
 			this.fahrer = await fahrerErstellen(this.schule, this.klasse, this.name)
 			if (this.angemeldetBleiben) Storage.set("fahrer", this.fahrer, false)
 		}
-		/*const strecke =*/ await streckeErstellen(this.fahrer, this.meter)
+		/*const strecke =*/
+		await streckeErstellen(this.fahrer, this.meter)
 
 		/*if (route) {
 			// TODO überlegen: sind immer beide Orte gegeben? entsprechend spezifisch/orte updaten...
