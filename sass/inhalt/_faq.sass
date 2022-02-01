@@ -1,11 +1,27 @@
 #faq
 	padding: var(--padding)
-	padding-bottom: 0
+	--gap: calc(6 * var(--padding))
+	--strasse-breite: .4rem
+	margin-bottom: var(--strasse-breite)
+	padding-bottom: var(--gap)
+	background-size: contain
+	background-repeat: no-repeat
+	background-position: bottom
+	background-image: url("../img/Hintergrund/family-riding-bikes-city-park/5243 zugeschnitten.jpg?as=webp&width=1920&quality=80")
+	&::after
+		content: ""
+		height: var(--strasse-breite)
+		width: 100%
+		background: #4a5b74
+		position: absolute
+		left: 0
+		margin-top: calc(6 * var(--padding))
 	details
 		padding: 1rem
 		margin: .4rem
 		border: 1px solid #999
 		border-radius: .4rem
+		background: #ffffff99
 		+ details
 			margin-top: 0
 		&[open] > summary
