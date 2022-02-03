@@ -10,6 +10,11 @@
 		flex-direction: column
 		padding: 0
 		margin: 0.4rem 0
+		&:empty::before
+			content: "Keine Schulen verfügbar"
+			color: darkred
+			font-weight: bold
+			margin: 1rem 0
 		> li
 			padding: 0.6rem
 			list-style: none
