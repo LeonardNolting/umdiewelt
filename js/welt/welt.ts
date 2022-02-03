@@ -1,7 +1,7 @@
 import {
 	AdditiveBlending,
 	BackSide,
-	Group,
+	Group, Material,
 	Mesh,
 	Path,
 	PerspectiveCamera,
@@ -156,12 +156,12 @@ export default function welt() {
 	scene.add(folgenGruppe)
 
 	// region Welt
-	// let welt
+	let welt: Mesh | undefined
 	const texture = new Promise<Texture>(resolve => new TextureLoader().load(new URL(
 		"../../img/Erde/Erde vereinfacht.jpg?as=webp&height=675&quality=20",
 		import.meta.url
 	).toString(), texture => {
-		const welt = new Mesh(
+		welt = new Mesh(
 			new SphereGeometry(radius, segments, segments),
 			new ShaderMaterial({
 				vertexShader: weltVertex,
@@ -171,7 +171,7 @@ export default function welt() {
 						value: texture
 					}
 				}
-			})
+			}),
 		)
 		offsetGruppe.add(welt)
 		resolve(texture)
@@ -349,10 +349,17 @@ export default function welt() {
 			})
 		}
 
+		welt.visible = false
+		atmosphaere.visible = false
 		animate()
+		const zeit = 200
+		setTimeout(() => {
+			welt.visible = true
+			atmosphaere.visible = true
+		}, zeit)
 		gsap.to(offsetGruppe.rotation, {
 			y: anfang,
-			duration: 2
+			duration: 2 + zeit / 1000
 		})
 
 		setTimeout(() => {
