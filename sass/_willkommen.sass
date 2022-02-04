@@ -1,3 +1,12 @@
+@mixin randomKasten
+	width: (random(30) + 12) * 1vmax
+	height: (random(30) + 12) * 1vmax
+	//transform: translate((random(120) - 10) * 1%, (random(120) - 10) * 1%) rotate((random(360)) * 1deg)
+	transform: rotate((random(360)) * 1deg)
+	top: (random(120) - 15) * 1%
+	left: (random(120) - 15) * 1%
+	opacity: random()
+
 section#willkommen
 	//height: 80vh
 	display: flex
@@ -12,11 +21,48 @@ section#willkommen
 
 	.hintergrund
 		position: absolute
-		width: 200%
-		height: 200%
-		left: -50%
-		top: -50%
+		width: 100%
+		height: 100%
 		z-index: 0
+		display: flex
+		justify-content: center
+		align-items: center
+		filter: blur(120px)
+		.kasten
+			background: #861151
+			position: absolute
+			@for $i from 1 through 6
+				&:nth-child(#{$i})
+					@include randomKasten
+					animation: infinite kasten#{$i} (random(60) + 80) * 1s
+					animation-delay: random(5) * 1s
+					opacity: 0
+					@keyframes kasten#{$i}
+						#{random(5)}%
+							@include randomKasten
+							opacity: 0
+						#{random(5) + 10}%
+							opacity: 1
+						#{random(5) + 20}%
+							@include randomKasten
+							opacity: 0
+						#{random(5) + 30}%
+							opacity: 1
+						#{random(5) + 40}%
+							@include randomKasten
+							opacity: 0
+						#{random(5) + 50}%
+							opacity: 1
+						#{random(5) + 60}%
+							@include randomKasten
+							opacity: 0
+						#{random(5) + 70}%
+							opacity: 1
+						#{random(5) + 80}%
+							@include randomKasten
+							opacity: 0
+						#{random(5) + 90}%
+							opacity: 1
 
 	.text
 		display: flex
@@ -77,6 +123,7 @@ section#willkommen
 		// , inset 0 -12px 12px 36px var(--farbe-glow-2)
 		opacity: .4
 		z-index: 1
+		display: none
 
 	// * Kreis
 	&::after
