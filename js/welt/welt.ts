@@ -144,7 +144,8 @@ export default function welt() {
 	const camera = new PerspectiveCamera()
 	camera.position.z = hoehe
 	camera.aspect = 1
-	const renderer = new WebGLRenderer({antialias: true})
+	const renderer = new WebGLRenderer({antialias: true, alpha: true})
+	// renderer.setClearColor(0x000000, 0)
 	renderer.setPixelRatio(devicePixelRatio)
 
 	folgenGruppe = new Group()
