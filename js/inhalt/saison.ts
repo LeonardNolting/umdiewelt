@@ -182,15 +182,15 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 			const p = document.createElement("p")
 			p.classList.add("countdown", typ)
 			p.dataset.typ = typ
-			const differenz = (zeit[typ] - jetzt) / 1000
+			const differenz = Math.floor((zeit[typ] - jetzt) / 1000)
 			if (60 * 60 * 24 > differenz) {
 				let timer = differenz, stunden, minuten, sekunden
 				const interval = setInterval(function () {
 					sekunden = timer
-					stunden = Math.floor(sekunden / 3600)
+					stunden = sekunden / 3600
 					sekunden %= 3600
-					minuten = Math.floor(sekunden / 60)
-					sekunden = Math.floor(sekunden % 60)
+					minuten = sekunden / 60
+					sekunden = sekunden % 60
 
 					minuten = minuten < 10 ? "0" + minuten : minuten
 					sekunden = sekunden < 10 ? "0" + sekunden : sekunden
@@ -258,7 +258,8 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 							})
 						}
 						schuleContainer.append(button)
-
+					}
+					if (status.laufend || status.historisch) {
 						const em = document.createElement("em")
 						em.classList.add("angefeuert")
 						const output = document.createElement("output")

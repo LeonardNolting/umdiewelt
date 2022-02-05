@@ -144,7 +144,8 @@ export default function welt() {
 	const camera = new PerspectiveCamera()
 	camera.position.z = hoehe
 	camera.aspect = 1
-	const renderer = new WebGLRenderer({antialias: true})
+	const renderer = new WebGLRenderer({antialias: true, alpha: true})
+	// renderer.setClearColor(0x000000, 0)
 	renderer.setPixelRatio(devicePixelRatio)
 
 	folgenGruppe = new Group()
@@ -247,7 +248,8 @@ export default function welt() {
 			// renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 			// const min =
 			renderer.setSize(size, size);
-			document.documentElement.style.setProperty("--erde-größe", size + "px");
+			document.documentElement.style.setProperty("--erde-größe", size + "px")
+			container.classList.add("geladen");
 			[wegKreis, fortschrittKreis].forEach(kreis => {
 				if (kreis) kreis.material.resolution = new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 			})

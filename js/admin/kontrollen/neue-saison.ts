@@ -1,4 +1,4 @@
-import {get, onChildAdded, onValue, ref, Unsubscribe, update} from "firebase/database";
+import {limitToLast, onChildAdded, onValue, orderByKey, query, ref, Unsubscribe, update} from "firebase/database";
 import Datenbank from "../../firebase/datenbank";
 import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
@@ -30,9 +30,16 @@ export default class NeueSaisonKontrolle extends Kontrolle {
 
 	protected async vorbereiten() {
 		let jahr = new Date().getFullYear()
-		// Wenn noch in demselben Jahr, in dem eine Saison beendet wurde, eine Neue gestartet wird, soll diese für das nächste Jahr sein.
-		// TODO nicht `get` benutzen
-		while ((await get(ref(Datenbank.datenbank, "allgemein/saisons/liste/" + jahr))).exists()) jahr++
+		// * Wenn noch in demselben Jahr, in dem eine Saison beendet wurde, eine Neue gestartet wird, soll diese für das nächste Jahr sein.
+		let jahrGesetzt = false
+		onValue(query(ref(Datenbank.datenbank, "allgemein/saisons/liste"), orderByKey(), limitToLast(1)), snap => {
+			if (jahrGesetzt) {
+				this.erlaubt = false
+				return
+			}
+			if (snap.val()) jahr = snap.val()
+			jahrGesetzt = true
+		})
 		this.nameInput.value = jahr.toString()
 
 		this.schulenUl.innerHTML = ""
@@ -84,8 +91,10 @@ export default class NeueSaisonKontrolle extends Kontrolle {
 				potAnzahlFahrer: parseInt(li.potAnzahlFahrerInput.value)
 			}))
 
-		if (teilnehmendeSchulen.length === 0)
-			return benachrichtigung("Bitte wählen Sie mindestens eine Schule aus.", BenachrichtigungsLevel.INFO)
+		if (teilnehmendeSchulen.length === 0) {
+			benachrichtigung("Bitte wählen Sie mindestens eine Schule aus.", BenachrichtigungsLevel.INFO)
+			return false
+		}
 
 		this.schulenListener()
 

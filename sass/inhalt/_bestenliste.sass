@@ -8,16 +8,16 @@
 	--track-hoehe: calc(var(--height) * 3 / 7)
 	--rang-breite-max: calc(var(--height) * 2 / 3)
 	--rang-breite: calc(var(--height) / 2)
-	--padding: var(--container-padding)
+	--padding: 1rem
 	--general-margin-left: calc(var(--gap-track-inhalt-max) * 2 + var(--strecke-breite) + var(--padding) + var(--rang-breite-max))
 	--margin: calc(var(--height) / 2)
 	--kleine-box-margin-left: 24%
 	--große-box-margin-left: calc(1 * var(--rang-breite-max) * 1.4)
 	--transition-dauer: .4s
 	position: relative
-	//max-width: 100%
 	//noinspection CssInvalidPropertyValue
 	overflow-y: clip
+	padding: 0 var(--padding)
 	&.versteckt, &.versteckt + #bestenliste-kurve
 		display: none
 	> .wusstest-du-schon
@@ -73,19 +73,22 @@
 		/* 45deg -> gleiche Höhe wie Breite */
 		height: 100%
 		margin-left: var(--große-box-margin-left)
-	&::after
-		--einschnitt: calc(var(--margin) * 1.9)
-		height: calc(100% - 2 * var(--einschnitt))
-		margin-top: var(--einschnitt)
-		margin-right: 0
-		--background: #a1b1c1
-		--background2: #91a3b1
-		background-image: linear-gradient(-40deg, var(--background2), var(--background2) 40%, var(--background) 40%, var(--background))
-		z-index: -1
-		width: calc(24% + var(--general-margin-left))
-		margin-left: 24%
-		opacity: 1
-		left: 0
+	//&::after
+	//	--einschnitt: calc(var(--margin) * 1.9)
+	//	--einschnitt-top: calc(var(--einschnitt) + 8rem)
+	//	--einschnitt-bottom: var(--einschnitt)
+	//	height: calc(100% - var(--einschnitt-top) - var(--einschnitt-bottom))
+	//	margin-top: var(--einschnitt-top)
+	//	margin-right: 0
+	//	--background: #a1b1c1
+	//	--background2: #91a3b1
+	//	background-image: linear-gradient(-40deg, var(--background2), var(--background2) 40%, var(--background) 40%, var(--background))
+	//	z-index: -1
+	//	width: calc(24% + var(--general-margin-left))
+	//	margin-left: 24%
+	//	opacity: 1
+	//	left: 0
+	//	top: 0
 
 #bestenliste-kurve
 	z-index: 2
@@ -98,7 +101,7 @@
 	background-repeat: no-repeat
 	background-size: contain
 	width: 100%
-
+	position: relative
 
 #bestenliste-anzeige
 	--anzahl: 0
@@ -289,3 +292,14 @@
 		background-position: 100%
 	to
 		background-position: 0
+
+@media (max-width: 320px)
+	#bestenliste-anzeige
+		li
+			--prozent: 100 !important
+			.inhalt
+				&::before
+					display: none
+				&::after
+					padding-right: 1rem
+					margin-left: -1rem

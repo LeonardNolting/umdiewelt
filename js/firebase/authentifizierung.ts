@@ -34,7 +34,7 @@ export async function authentifizieren(email: string, passwort: string, angemeld
 	try {
 		await signInWithEmailAndPassword(auth, email, passwort);
 	} catch (error) {
-		if (error.code === "auth/wrong-password") benachrichtigung("Falsches Passwort. Bitte versuchen Sie es erneut.", BenachrichtigungsLevel.WARNUNG)
+		if (error.code === "auth/wrong-password") benachrichtigung("Falsches Passwort. Bitte erneut versuchen.", BenachrichtigungsLevel.WARNUNG)
 		else benachrichtigung("Konnte nicht anmelden: " + error.code + " " + error.message, BenachrichtigungsLevel.ALARM)
 		throw error;
 	}
