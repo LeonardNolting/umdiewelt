@@ -235,8 +235,12 @@ export default function welt() {
 		await texture
 
 		const wrapper = document.querySelector("header")
+		const hintergrund = (wrapper.getElementsByClassName("hintergrund")[0] as HTMLElement)
 		const container = document.getElementById("welt")
 		const anzeige = document.getElementById("anzeige")
+
+		// Hintergrund
+		hintergrund.style.setProperty("--random", Math.random().toString())
 
 		// Resizing
 		const setSize = () => {
