@@ -32,7 +32,8 @@
 
 @function randomRandom($random: random())
 	$value: calc(var(--random) + #{$random} - 1)
-	@return calc(max($value, -1 * $value))
+	$value2: calc(.5 - var(--random))
+	@return calc(max($value, -1 * $value) / (max($value2, -1 * $value2) + .5))
 
 section#willkommen
 	//height: 80vh
