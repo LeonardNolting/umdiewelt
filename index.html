@@ -64,6 +64,11 @@
 					<include src="html/fakten.html"></include>
 				</div>
 				<div class="hintergrund">
+					<script>
+						const hintergrund = document.querySelector("#willkommen > .hintergrund")
+						hintergrund.style.setProperty("--x", ((Math.round(Math.random()) - 0.5) * 2).toString())
+						hintergrund.style.setProperty("--y", ((Math.round(Math.random()) - 0.5) * 2).toString())
+					</script>
 					<div class="kasten"></div>
 					<div class="kasten"></div>
 					<div class="kasten"></div>

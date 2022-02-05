@@ -235,13 +235,8 @@ export default function welt() {
 		await texture
 
 		const wrapper = document.querySelector("header")
-		const hintergrund = (wrapper.getElementsByClassName("hintergrund")[0] as HTMLElement)
 		const container = document.getElementById("welt")
 		const anzeige = document.getElementById("anzeige")
-
-		// Hintergrund
-		hintergrund.style.setProperty("--x", ((Math.round(Math.random()) - 0.5) * 2).toString())
-		hintergrund.style.setProperty("--y", ((Math.round(Math.random()) - 0.5) * 2).toString())
 
 		// Resizing
 		const setSize = () => {
@@ -253,7 +248,8 @@ export default function welt() {
 			// renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 			// const min =
 			renderer.setSize(size, size);
-			document.documentElement.style.setProperty("--erde-größe", size + "px");
+			document.documentElement.style.setProperty("--erde-größe", size + "px")
+			container.classList.add("geladen");
 			[wegKreis, fortschrittKreis].forEach(kreis => {
 				if (kreis) kreis.material.resolution = new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 			})
