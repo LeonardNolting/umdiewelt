@@ -1,21 +1,22 @@
 #projekt
 	--fill-bottom: 20vw
-	padding: calc(2 * var(--padding)) var(--padding) calc(var(--fill-bottom) + .5 * var(--padding)) calc(var(--padding) + 4.4rem)
+	padding: calc(2 * var(--padding)) var(--padding) calc(var(--fill-bottom) + .5 * var(--padding))
 	margin: 0 auto calc(-1 * var(--fill-bottom))
 	//background: #eee
 	display: flex
 	position: relative
 	max-width: 800px
-	.streifen
-		//margin-right: 2rem
-		left: 2rem
-		//transform: translateX(-50%)
+	justify-content: center
+	.linie
+		content: ""
+		position: absolute
 		height: 100%
-		width: 2.4rem
+		--correction: .3rem
+		margin-left: calc(var(--correction) * 2)
+		width: 2rem
 		top: 0
 		//background: var(--farbe-primär)
-		background: linear-gradient(to bottom, white, var(--farbe-primär) 24%)
-		position: absolute
+		background: linear-gradient(to bottom, var(--farbe-sekundär), var(--farbe-primär) 50%) // 24%)
 		&::before
 			position: absolute
 			content: ""
@@ -30,13 +31,21 @@
 	.text
 		display: flex
 		flex-direction: column
+		align-items: center
+		font-size: 120%
+		text-align: center
+		> *
+			z-index: 1
+			background: white
 		p + p
-			margin-top: .4rem
-		em
+			padding-top: .4rem
+		.name
+			line-height: 0.82
+			padding: 0.6rem
 			font-size: calc(150% + 2.4vw)
 			font-weight: 900
 			font-style: normal
-			margin: 1rem 0
+			margin: 3.2rem 0
 			display: inline-block
 			font-family: var(--schriftart-id)
 			text-transform: uppercase

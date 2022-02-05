@@ -141,7 +141,7 @@
 			font-size: 120%
 			text-align: center
 
-		#linie, #linie::before
+		.linie, .linie::before
 			content: ""
 			position: absolute
 			height: 100%
@@ -151,13 +151,13 @@
 			//transform: translateX(calc(-50% + .3rem))
 			left: 0
 			--correction: .3rem
-		#linie::before
+		.linie::before
 			margin-top: calc(1 * var(--width))
 			//margin-right: calc(1 * var(--width))
 			background: white
 			border-top-right-radius: calc(var(--border-radius) - var(--width))
 			width: calc(100% - var(--width))
-		#linie
+		.linie
 			//margin-top: calc(-.5 * var(--width))
 			//margin-right: calc(-1 * var(--width))
 			//background: var(--farbe-sekundär)
@@ -183,7 +183,7 @@
 				transition: left 1.6s linear
 				transition-delay: 2.4s
 				will-change: left
-		&.gesehen #linie::after
+		&.gesehen .linie::after
 			left: 160%
 		&::after
 			content: ""
@@ -201,6 +201,7 @@
 		background: white
 		position: relative
 		overflow: hidden
+		margin: 0
 		> picture
 			position: relative
 			margin-top: -14vw
@@ -212,12 +213,11 @@
 				height: 100%
 				width: 100%
 				background: radial-gradient(closest-side at 50% 58%, rgba(255, 255, 255, 0) 50%, white 80%)
-		h3
-			text-transform: uppercase
-			font-size: 250%
+		figcaption
 			margin-top: -4vw
 			position: relative
 			z-index: 3
+			font-size: 120%
 	@media (max-width: 720px)
 		#autos, #fahrraeder
 			font-size: 150%
