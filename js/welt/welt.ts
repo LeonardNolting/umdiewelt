@@ -235,6 +235,7 @@ export default function welt() {
 		await texture
 
 		const wrapper = document.querySelector("header")
+		const section = document.getElementById("willkommen")
 		const container = document.getElementById("welt")
 		const anzeige = document.getElementById("anzeige")
 
@@ -280,6 +281,14 @@ export default function welt() {
 			// cursorPosition.y = -((event.clientY - container.offsetTop) / container.clientHeight) * 2 + 1
 			cursorPosition.x = (event.clientX / innerWidth - .5) * 4
 			cursorPosition.y = -(event.clientY / innerHeight - .5) * 2
+
+			gsap.to(section, {
+				'--x': cursorPosition.x / 2,
+				'--y': cursorPosition.y,
+				duration: 2
+			})
+			document.documentElement.style.setProperty("--cursor-x", cursorPosition.x.toString())
+			document.documentElement.style.setProperty("--cursor-y", cursorPosition.y.toString())
 		})
 
 		// Bewegen
