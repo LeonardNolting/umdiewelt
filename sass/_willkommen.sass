@@ -1,31 +1,33 @@
 @use "sass:math"
 
-@mixin randomKasten($width, $height, $top, $left)
-	//transform: translateX(calc(#{$left} * 100vw + (1 - #{$left}) * -200%)) translateY(calc(#{$top} * (var(--erde-größe) + 4rem) + (1 - #{$top}) * -200%)) rotate((random(360)) * 1deg) scaleX($width * random(1) + 1) scaleY($height * random(1) + 1)
-	transform: translateX(calc(#{$left} * 100vw + (1 - #{$left}) * -200%)) translateY(calc(#{$top} * (var(--erde-größe) + 4rem) + (1 - #{$top}) * -200%)) scaleX($width * 2) scaleY($height * 2)
+@mixin randomKasten($width, $height, $top, $left, $rotation)
+	transform: translateX(calc(#{$left} * 100vw + (1 - #{$left}) * -200%)) translateY(calc(#{$top} * (var(--erde-größe) + 4rem) + (1 - #{$top}) * -200%)) rotate($rotation * 360 * 1deg) scaleX($width * 2) scaleY($height * 2)
+	//transform: translateX(calc(#{$left} * 100vw + (1 - #{$left}) * -200%)) translateY(calc(#{$top} * (var(--erde-größe) + 4rem) + (1 - #{$top}) * -200%)) scaleX($width * 2) scaleY($height * 2)
 
 @mixin kastenKeyframes($start, $duration)
 	$oldWidth: random()
 	$oldHeight: random()
 	$oldTop: random()
 	$oldLeft: random()
+	$oldRotation: random()
 
 	$newWidth: random()
 	$newHeight: random()
 	$newTop: random()
 	$newLeft: random()
+	$newRotation: random()
 
 	$mid: $start + math.div($duration, 2)
 	$end: $start + $duration
 
 	#{$start}%
-		@include randomKasten($oldWidth, $oldHeight, $oldTop, $oldLeft)
+		@include randomKasten($oldWidth, $oldHeight, $oldTop, $oldLeft, $oldRotation)
 		opacity: 0
 	#{$mid}%
-		@include randomKasten($oldWidth + (math.div($newWidth - $oldWidth, 2)), $oldHeight + (math.div($newHeight - $oldHeight, 2)), $oldTop + (math.div($newTop - $oldTop, 2)), $oldLeft + (math.div($newLeft - $oldLeft, 2)))
+		@include randomKasten($oldWidth + (math.div($newWidth - $oldWidth, 2)), $oldHeight + (math.div($newHeight - $oldHeight, 2)), $oldTop + (math.div($newTop - $oldTop, 2)), $oldLeft + (math.div($newLeft - $oldLeft, 2)), $oldRotation + (math.div($newRotation - $oldRotation, 2)))
 		opacity: math.div(random(), 2) + .5
 	#{$end}%
-		@include randomKasten($newWidth, $newHeight, $newTop, $newLeft)
+		@include randomKasten($newWidth, $newHeight, $newTop, $newLeft, $newRotation)
 		opacity: 0
 
 section#willkommen
@@ -46,33 +48,29 @@ section#willkommen
 		width: 100%
 		height: 100%
 		z-index: 0
-		//filter: blur(120px)
+		filter: blur(80px)
 		.kasten
-			background: #500a32
+			background: #7e1253
 			position: absolute
 			top: 0
 			left: 0
-			width: 24 * 1vmax
-			height: 24 * 1vmax
+			width: 32vmax
+			height: 32vmax
 			opacity: 0
+			transform: none
 			@for $i from 1 through 6
 				&:nth-child(#{$i})
-					//border-radius: random(50) * 1%
+					border-radius: random(50) * 1%
 					animation: infinite kasten#{$i} (random(60) + 80) * 1s linear both
+
 					animation-delay: random(5) * 1s
 					@keyframes kasten#{$i}
-						1%
-							opacity: 0
-						@include kastenKeyframes(2, 25)
-						26%
-							opacity: 0
-						@include kastenKeyframes(27, 50)
-						51%
-							opacity: 0
-						@include kastenKeyframes(52, 75)
-						76%
-							opacity: 0
-						@include kastenKeyframes(77, 100)
+						@include kastenKeyframes(0, 19)
+						@include kastenKeyframes(20, 19)
+						@include kastenKeyframes(40, 19)
+						@include kastenKeyframes(60, 19)
+						@include kastenKeyframes(80, 19)
+
 						//@include kastenKeyframes(5, 25)
 						//@include kastenKeyframes(30, 60)
 						//@include kastenKeyframes(65, 78)
