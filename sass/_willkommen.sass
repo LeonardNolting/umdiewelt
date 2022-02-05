@@ -5,17 +5,17 @@
 	//transform: translateX(calc(#{$left} * 100vw + (1 - #{$left}) * -200%)) translateY(calc(#{$top} * (var(--erde-größe) + 4rem) + (1 - #{$top}) * -200%)) scaleX($width * 2) scaleY($height * 2)
 
 @mixin kastenKeyframes($start, $duration)
-	$oldWidth: randomRandom()
-	$oldHeight: randomRandom()
-	$oldTop: randomRandom()
-	$oldLeft: randomRandom()
-	$oldRotation: randomRandom()
+	$oldWidth: random()
+	$oldHeight: random()
+	$oldTop: random()
+	$oldLeft: random()
+	$oldRotation: random()
 
-	$newWidth: randomRandom()
-	$newHeight: randomRandom()
-	$newTop: randomRandom()
-	$newLeft: randomRandom()
-	$newRotation: randomRandom()
+	$newWidth: random()
+	$newHeight: random()
+	$newTop: random()
+	$newLeft: random()
+	$newRotation: random()
 
 	$mid: $start + math.div($duration, 2)
 	$end: $start + $duration
@@ -24,16 +24,11 @@
 		@include randomKasten($oldWidth, $oldHeight, $oldTop, $oldLeft, $oldRotation)
 		opacity: 0
 	#{$mid}%
-		@include randomKasten(calc(#{$oldWidth} + ((#{$newWidth} - #{$oldWidth}) / 2)), calc(#{$oldHeight} + ((#{$newHeight} - #{$oldHeight}) / 2)), calc(#{$oldTop} + ((#{$newTop} - #{$oldTop}) / 2)), calc(#{$oldLeft} + ((#{$newLeft} - #{$oldLeft}) / 2)), calc(#{$oldRotation} + ((#{$newRotation} - #{$oldRotation}) / 2)))
+		@include randomKasten($oldWidth + (math.div($newWidth - $oldWidth, 2)), $oldHeight + (math.div($newHeight - $oldHeight, 2)), $oldTop + (math.div($newTop - $oldTop, 2)), $oldLeft + (math.div($newLeft - $oldLeft, 2)), $oldRotation + (math.div($newRotation - $oldRotation, 2)))
 		opacity: math.div(random(), 2) + .5
 	#{$end}%
 		@include randomKasten($newWidth, $newHeight, $newTop, $newLeft, $newRotation)
 		opacity: 0
-
-@function randomRandom($random: random())
-	$value: calc(var(--random) + #{$random} - 1)
-	$value2: calc(.5 - var(--random))
-	@return calc(max($value, -1 * $value) / (max($value2, -1 * $value2) + .5))
 
 section#willkommen
 	//height: 80vh
@@ -54,7 +49,7 @@ section#willkommen
 		height: 100%
 		z-index: 0
 		filter: blur(80px)
-		--random: .5
+		transform: scaleX(var(--x)) scaleY(var(--y))
 		.kasten
 			background: #7e1253
 			position: absolute

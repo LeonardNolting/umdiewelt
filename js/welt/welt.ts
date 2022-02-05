@@ -240,7 +240,8 @@ export default function welt() {
 		const anzeige = document.getElementById("anzeige")
 
 		// Hintergrund
-		hintergrund.style.setProperty("--random", Math.random().toString())
+		hintergrund.style.setProperty("--x", ((Math.round(Math.random()) - 0.5) * 2).toString())
+		hintergrund.style.setProperty("--y", ((Math.round(Math.random()) - 0.5) * 2).toString())
 
 		// Resizing
 		const setSize = () => {
