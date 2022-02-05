@@ -91,22 +91,16 @@ section#willkommen
 		position: relative
 		color: #fff
 		P
-			font-size: 1.4rem
-			//font-family: var(--schriftart-id)
+			font-size: 1.6rem
 			font-weight: bold
-		.um-die-welt::after
-			content: "40.000km"
-			font-weight: bold
-			font-family: var(--schriftart-id)
-			font-size: 3rem
-			opacity: .4
-			color: #00b0e8
-			position: absolute
-			top: 100%
+			color: #ddd
+			+ p
+				margin-top: 1rem
 		h1
 			font-size: 4rem
 			font-weight: 900
 			position: relative
+			margin-bottom: 1.2rem
 
 	#welt
 		display: flex
@@ -169,6 +163,7 @@ section#willkommen
 			width: 100%
 			h1
 				text-align: center
+				margin-top: 0
 		#welt
 			flex-direction: column
 			width: 100%
@@ -192,11 +187,17 @@ section#willkommen
 		height: 50vh
 
 @media (max-width: 380px)
-	section#willkommen .text h1
-		font-size: 3.6rem
+	section#willkommen .text
+		h1
+			font-size: 3.6rem
+		p
+			font-size: 1.4rem
 //#welt #anzeige
 //	height: 39vh
 
 @media (max-width: 320px)
-	section#willkommen .text h1
-		font-size: 3rem
+	section#willkommen .text
+		h1
+			font-size: 3rem
+		p
+			font-size: 1.2rem
