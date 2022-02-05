@@ -287,8 +287,8 @@ export default function welt() {
 				'--y': cursorPosition.y,
 				duration: 2
 			})
-			document.documentElement.style.setProperty("--cursor-x", cursorPosition.x.toString())
-			document.documentElement.style.setProperty("--cursor-y", cursorPosition.y.toString())
+			// document.documentElement.style.setProperty("--cursor-x", cursorPosition.x.toString())
+			// document.documentElement.style.setProperty("--cursor-y", cursorPosition.y.toString())
 		})
 
 		// Bewegen
