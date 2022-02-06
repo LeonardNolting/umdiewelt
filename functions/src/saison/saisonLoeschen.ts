@@ -10,7 +10,7 @@ export const saisonLoeschen = functions.region(region).database.ref("allgemein/s
 		{
 			const aktiv = (await datenbank.ref("allgemein/saisons/aktiv").get()).val()
 			if (aktiv === saison) {
-				const saisons = Object.keys((await datenbank.ref("allgemein/saisons/liste").get()).val())
+				const saisons = Object.keys((await datenbank.ref("allgemein/saisons/liste").get()).val() || {})
 				await datenbank.ref("allgemein/saisons/aktiv").set(saisons[saisons.length - 1] || null)
 			}
 		}
