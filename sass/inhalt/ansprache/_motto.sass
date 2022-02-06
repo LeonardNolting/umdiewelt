@@ -142,6 +142,7 @@
 			text-align: center
 			max-width: 600px
 			padding: 0 var(--padding)
+			z-index: 2
 			p + p
 				padding-top: .6rem
 
@@ -183,12 +184,12 @@
 				background: linear-gradient(90deg, transparent, #ffffff77, transparent)
 				z-index: 1
 				transform: rotate(45deg)
-				left: -60%
+				left: -110%
 				transition: left 1.6s linear
 				transition-delay: 2.4s
 				will-change: left
 		&.gesehen .linie::after
-			left: 190%
+			left: 210%
 		&::after
 			content: ""
 			position: absolute
