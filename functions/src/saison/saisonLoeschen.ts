@@ -35,6 +35,9 @@ export const saisonLoeschen = functions.region(region).database.ref("allgemein/s
 			await Promise.all(promises)
 		}
 
+		// * Details
+		updates["allgemein/saisons/details/" + saison] = null
+
 		try {
 			await datenbank.ref().update(updates)
 
