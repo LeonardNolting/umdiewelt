@@ -5,35 +5,26 @@ import * as admin from "firebase-admin";
 export const saisonLoeschen = functions.region(region).database.ref("allgemein/saisons/liste/{saison}")
 	.onDelete(async (snap, context) => {
 		const saison = context.params.saison
+		const updates: { [ref: string]: any } = {}
+		const aktiv = (await datenbank.ref("allgemein/saisons/aktiv").get()).val() === saison
 
-		// Aktiv
-		{
-			const aktiv = (await datenbank.ref("allgemein/saisons/aktiv").get()).val()
-			if (aktiv === saison) {
-				const saisons = Object.keys((await datenbank.ref("allgemein/saisons/liste").get()).val() || {})
-				await datenbank.ref("allgemein/saisons/aktiv").set(saisons[saisons.length - 1] || null)
-			}
+		// * Aktiv
+		if (aktiv) {
+			const saisons = Object.keys((await datenbank.ref("allgemein/saisons/liste").get()).val() || {})
+			updates["allgemein/saisons/aktiv"] = saisons[saisons.length - 1] || null
 		}
 
-		// Fakten
-		{
-			const updates: { [ref: string]: any } = {}
-			await Promise.all(["strecke", "anzahlStrecken", "anzahlFahrer"].map(async fakt => {
-				const saisonWert = (await datenbank.ref("allgemein/saisons/details/" + saison + "/" + fakt).get()).val()
-				updates[fakt] = admin.database.ServerValue.increment(-saisonWert)
-			}))
-			await datenbank.ref("allgemein").update(updates)
-		}
+		// * Fakten
+		await Promise.all(["strecke", "anzahlStrecken", "anzahlFahrer"].map(async fakt => {
+			const saisonWert = (await datenbank.ref("allgemein/saisons/details/" + saison + "/" + fakt).get()).val()
+			updates["allgemein/" + fakt] = admin.database.ServerValue.increment(-saisonWert)
+		}))
 
-		// Teilnehmende Schulen
-		{
-			const teilnehmendeSchulen = Object.keys((await datenbank.ref("allgemein/saisons/details/" + saison + "/schulen/liste").get()).val())
-			const updates: { [ref: string]: any } = {}
-			await Promise.all(teilnehmendeSchulen.map(schule => updates[schule + "/saisons/liste/" + saison] = null))
-			await datenbank.ref("allgemein/schulen/details").update(updates)
-		}
+		// * Teilnehmende Schulen
+		const teilnehmendeSchulen = Object.keys((await datenbank.ref("allgemein/saisons/details/" + saison + "/schulen/liste").get()).val())
+		teilnehmendeSchulen.map(schule => updates["allgemein/schulen/details/" + schule + "/saisons/liste/" + saison] = null)
 
-		// Klassen (Accounts)
+		// * Klassen (Accounts)
 		{
 			const promises: Promise<any>[] = []
 			await datenbank.ref("spezifisch/klassen/details").get().then(schulenSnap => schulenSnap.forEach(schuleSnap => {
@@ -44,18 +35,21 @@ export const saisonLoeschen = functions.region(region).database.ref("allgemein/s
 			await Promise.all(promises)
 		}
 
-		// Aktuell, laufend, anzahl
-		{
-			const aktuell = (await datenbank.ref("allgemein/saisons/laufend").get()).val()
-			if (aktuell == saison) {
-				// vor spezifisch, damit nicht andere Cloud Functions probieren die Fakten überall anzupassen...
-				await datenbank.ref("allgemein/saisons").update({
-					aktuell: null,
-					laufend: null
-				})
-				await datenbank.ref("spezifisch").remove()
-			} else await datenbank.ref("allgemein/saisons/anzahlHistorisch").set(admin.database.ServerValue.increment(-1))
+		try {
+			await datenbank.ref().update(updates)
 
-			await datenbank.ref("allgemein/saisons/anzahl").set(admin.database.ServerValue.increment(-1))
+			// * Aktuell, laufend, spezifisch, anzahl
+			try {
+				await datenbank.ref().update({
+					"allgemein/saisons/aktuell": null,
+					"allgemein/saisons/laufend": null,
+					"spezifisch": null,
+					"allgemein/saisons/anzahl": admin.database.ServerValue.increment(-1),
+				})
+			} catch (e) {
+				console.log("Saison löschen hat nicht funktioniert: Es fehlen folgende Änderungen: aktuell = null; laufend = null; spezifisch = null; saisons/anzahl -= 1;")
+			}
+		} catch (e) {
+			console.log("Saison löschen hat nicht funktioniert: Keine Änderungen vorgenommen.")
 		}
 	})
