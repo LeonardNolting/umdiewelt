@@ -25,15 +25,11 @@ export const saisonLoeschen = functions.region(region).database.ref("allgemein/s
 		teilnehmendeSchulen.map(schule => updates["allgemein/schulen/details/" + schule + "/saisons/liste/" + saison] = null)
 
 		// * Klassen (Accounts)
-		{
-			const promises: Promise<any>[] = []
-			await datenbank.ref("spezifisch/klassen/details").get().then(schulenSnap => schulenSnap.forEach(schuleSnap => {
-				schuleSnap.forEach(klasseSnap => {
-					promises.push(klasseSnap.ref.remove())
-				})
-			}))
-			await Promise.all(promises)
-		}
+		await datenbank.ref("spezifisch/klassen/details").get().then(schulenSnap => schulenSnap.forEach(schuleSnap => {
+			schuleSnap.forEach(klasseSnap => {
+				updates[`spezifisch/klassen/details/${(schuleSnap.key)}/${(klasseSnap.key)}`] = null
+			})
+		}))
 
 		// * Details
 		updates["allgemein/saisons/details/" + saison] = null
