@@ -144,7 +144,8 @@ export default function welt() {
 	const camera = new PerspectiveCamera()
 	camera.position.z = hoehe
 	camera.aspect = 1
-	const renderer = new WebGLRenderer({antialias: true})
+	const renderer = new WebGLRenderer({antialias: true, alpha: true})
+	// renderer.setClearColor(0x000000, 0)
 	renderer.setPixelRatio(devicePixelRatio)
 
 	folgenGruppe = new Group()
@@ -234,6 +235,7 @@ export default function welt() {
 		await texture
 
 		const wrapper = document.querySelector("header")
+		const section = document.getElementById("willkommen")
 		const container = document.getElementById("welt")
 		const anzeige = document.getElementById("anzeige")
 
@@ -247,7 +249,8 @@ export default function welt() {
 			// renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 			// const min =
 			renderer.setSize(size, size);
-			document.documentElement.style.setProperty("--erde-größe", size + "px");
+			document.documentElement.style.setProperty("--erde-größe", size + "px")
+			container.classList.add("geladen");
 			[wegKreis, fortschrittKreis].forEach(kreis => {
 				if (kreis) kreis.material.resolution = new Vector2(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 			})
@@ -278,6 +281,14 @@ export default function welt() {
 			// cursorPosition.y = -((event.clientY - container.offsetTop) / container.clientHeight) * 2 + 1
 			cursorPosition.x = (event.clientX / innerWidth - .5) * 4
 			cursorPosition.y = -(event.clientY / innerHeight - .5) * 2
+
+			gsap.to(section, {
+				'--x': cursorPosition.x,
+				'--y': cursorPosition.y,
+				duration: 2
+			})
+			// document.documentElement.style.setProperty("--cursor-x", cursorPosition.x.toString())
+			// document.documentElement.style.setProperty("--cursor-y", cursorPosition.y.toString())
 		})
 
 		// Bewegen

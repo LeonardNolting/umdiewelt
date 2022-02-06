@@ -17,16 +17,24 @@
 	&::before
 		//width: 130%
 		aspect-ratio: 4
-		background: #fff8e6
-		box-shadow: inset 0 0 1rem 0.2rem white, 0 0 0.4rem 0 #999
+		//box-shadow: inset 0 0 1rem 0.2rem white, 0 0 0.4rem 0 #999
+		box-shadow: inset 0 0 1rem 0.2rem white, 0 0 0.4rem 0 #999, inset 0 0 12rem 12rem #ffffffcc
+		background-size: 100vmax
+		background-position: top center
+		background-repeat: no-repeat
+		filter: contrast(0.5) brightness(1.3)
+		//background-image: url(https://img.freepik.com/vektoren-kostenlos/weisser-abstrakter-hintergrund_23-2148833155.jpg?size=626&ext=jpg)
+		//background-image: url(https://image.freepik.com/vektoren-kostenlos/weisser-abstrakter-hintergrund_23-2148812993.jpg)
+		background-image: url(../img/Hintergrund/schluss/4844434.jpg?as=webp&quality=90&width=1920)
 	&::after
 		--offset: 30vw
 		width: 95%
 		bottom: calc(-1 * var(--offset))
-		height: calc(36vw + var(--offset))
+		height: calc(34vw + var(--offset))
 		//background-color: #11203b
 		//background: linear-gradient(90deg, #11203b, #074381)
-		background: var(--farbe-sekundär)
+		background: linear-gradient(to right, var(--farbe-tertiär) 30%, var(--farbe-sekundär) 50%)
+		//background: var(--farbe-sekundär)
 		box-shadow: inset 0 0 1rem -.4rem rgba(0, 0, 0, .5), 0 0 .6rem .2rem #999
 	> *:first-child
 		margin-top: 5vw
