@@ -285,7 +285,7 @@ export class Eintragung {
 	static berechnenAnkunft = document.getElementById("eintragen-suche-b") as HTMLInputElement
 
 	async oeffnen() {
-		// return benachrichtigung("Es können aktuell keine Eintragungen vorgenommen werden.")
+		return benachrichtigung("Es können aktuell keine Eintragungen vorgenommen werden.")
 
 		// Abbrechen falls schon eine Eintragung offen
 		if (!!Eintragung.offen) return
