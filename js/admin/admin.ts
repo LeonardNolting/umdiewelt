@@ -1,6 +1,6 @@
 import NeueSaisonKontrolle from "./kontrollen/neue-saison";
 import SaisonstartKontrolle from "./kontrollen/zeit/start";
-import NeueKlasseKontrolle from "./kontrollen/neue-klasse";
+import NeueKlassenKontrolle from "./kontrollen/neue-klassen";
 import NeueSchuleKontrolle from "./kontrollen/neue-schule";
 import SaisonendeKontrolle from "./kontrollen/zeit/ende";
 import SaisonLoeschenKontrolle from "./kontrollen/saison-loeschen";
@@ -19,7 +19,7 @@ const submit = popup["submit"]
 
 const kontrollen = [
 	new NeueSaisonKontrolle(),
-	new NeueKlasseKontrolle(),
+	new NeueKlassenKontrolle(),
 	new NeueSchuleKontrolle(),
 	new SaisonstartKontrolle(),
 	new SaisonendeKontrolle(),
