@@ -275,8 +275,14 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 
 				// TODO Klassen
 				if (status.laufend) {
-					const table = document.createElement("table")
-					table.classList.add("klassen")
+					const table = document.createElement("table"),
+						head = table.createTHead(),
+					headRow = head.insertRow()
+					table.classList.add("klassen");
+					["Klasse", "Strecke", "Beteiligung"].forEach(label => {
+						const cell = headRow.insertCell();
+						cell.textContent = label
+					})
 
 					onChildAdded(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), ({key: klasse}) => {
 						const tr = table.insertRow()
