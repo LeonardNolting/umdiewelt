@@ -12,7 +12,7 @@ export const meldeStrecke = functions.region(region).database.ref("spezifisch/st
 		const name = (await fahrer.child("name").get()).val()
 		const strecke: number = snap.child("strecke").val()
 		const streckeKmFormatiert = Math.round(strecke / 100) / 10
-		if (strecke > 50000) {
+		if (strecke > 100_000) {
 			await admin.firestore().collection("mail").add({
 				to: "hip@gy-ho.de",
 				message: {
