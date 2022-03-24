@@ -78,6 +78,7 @@ const vorbereiten = () => {
 				popup["passwort"].value = ""
 				aktivieren()
 			})
+			.catch(() => (popup["passwort"] as HTMLInputElement).focus())
 			.finally(() => submit.disabled = false))
 	}
 
