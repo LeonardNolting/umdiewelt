@@ -1,6 +1,6 @@
 import NeueSaisonKontrolle from "./kontrollen/neue-saison";
 import SaisonstartKontrolle from "./kontrollen/zeit/start";
-import NeueKlasseKontrolle from "./kontrollen/neue-klasse";
+import NeueKlassenKontrolle from "./kontrollen/neue-klassen";
 import NeueSchuleKontrolle from "./kontrollen/neue-schule";
 import SaisonendeKontrolle from "./kontrollen/zeit/ende";
 import SaisonLoeschenKontrolle from "./kontrollen/saison-loeschen";
@@ -13,13 +13,18 @@ import {auth, authentifizieren} from "../firebase/authentifizierung";
 import Popup from "../popup";
 import global from "../global";
 import {adminEmail} from "../konfiguration";
+import {getFunctions, httpsCallable} from "firebase/functions";
+import {getApp} from "firebase/app";
+import benachrichtigung from "../benachrichtigungen/benachrichtigung";
+import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
+import {download} from "../verschieden";
 
 const popup = document.getElementById("popup-anmelden-admin") as HTMLFormElement
 const submit = popup["submit"]
 
 const kontrollen = [
 	new NeueSaisonKontrolle(),
-	new NeueKlasseKontrolle(),
+	new NeueKlassenKontrolle(),
 	new NeueSchuleKontrolle(),
 	new SaisonstartKontrolle(),
 	new SaisonendeKontrolle(),
@@ -31,6 +36,20 @@ const kontrollen = [
 const aktivieren = async () => {
 	document.body.classList.add("admin")
 	await Promise.all(kontrollen.map(kontrolle => kontrolle.initialisieren()))
+	Kontrolle.knopf("statistiken").addEventListener("click", () => {
+		const functions = getFunctions(getApp(), "europe-west1");
+		const statistikenBekommen = httpsCallable(functions, 'statistiken');
+		return load(statistikenBekommen()
+			.then(result => {
+				const {csv} = result.data;
+				download("Statistiken " + new Date().toLocaleDateString() + ".csv", csv);
+				benachrichtigung("Statistiken stehen zum Download bereit.", BenachrichtigungsLevel.ERFOLG)
+			})
+			.catch(reason => {
+				console.error(reason)
+				benachrichtigung("Fehler beim Anfordern der Statistiken: " + reason, BenachrichtigungsLevel.ALARM)
+			}));
+	});
 	Kontrolle.fieldset.disabled = false
 }
 
@@ -78,6 +97,7 @@ const vorbereiten = () => {
 				popup["passwort"].value = ""
 				aktivieren()
 			})
+			.catch(() => (popup["passwort"] as HTMLInputElement).focus())
 			.finally(() => submit.disabled = false))
 	}
 

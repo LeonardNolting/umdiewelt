@@ -31,3 +31,15 @@ import {umfang} from "./konfiguration";
 
 export const prozent: {[faktor: number]: number} = {}
 for (let i = 1; i < 100; i++) prozent[i] = umfang * i/100
+
+export function download(filename: string, data: string) {
+	const blob = new Blob([data], {type: 'text/csv'})
+	const element = document.createElement('a');
+	element.href = URL.createObjectURL(blob);
+	element.download = filename;
+
+	element.style.display = 'none';
+	document.body.appendChild(element);
+	element.click();
+	document.body.removeChild(element);
+}

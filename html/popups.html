@@ -7,7 +7,7 @@
 	<include src="html/popups/admin/saisonstart.html"></include>
 	<include src="html/popups/admin/saisonende.html"></include>
 	<include src="html/popups/admin/neue-schule.html"></include>
-	<include src="html/popups/admin/neue-klasse.html"></include>
+	<include src="html/popups/admin/neue-klassen.html"></include>
 	<include src="html/popups/admin/neue-saison.html"></include>
 	<include src="html/popups/admin/anmeldung.html"></include>
 
@@ -89,7 +89,6 @@
 					       id="eintragen-suche-a"
 					       type="text"
 					       placeholder="Startpunkt"
-					       autofocus
 					       autocomplete="street-address" />
 					<p class="warnung">Deine Eingabe wird nicht erkannt.</p>
 				</div>
@@ -99,6 +98,7 @@
 					       type="text"
 					       placeholder="Ankunftspunkt"
 					       value="Gymnasium Höchstadt a. d. Aisch"
+					       autofocus
 					       autocomplete="street-address" />
 					<p class="warnung">Deine Eingabe wird nicht erkannt.</p>
 				</div>
@@ -206,9 +206,6 @@
 				<output id="eintragen-berechnen-gespart" for="eintragen-suche-a eintragen-suche-b">0g</output>
 				CO<sub>2</sub> gespart und uns geholfen, ein Stück näher an unser Ziel zu kommen! 💪
 			</p>
-			<h4>Hilf uns weiter!</h4>
-			<p>Falls ... Mögliches weiteres Interesse des Lesers etwas nutzen ... Wie weiter helfen? Spenden?
-				Teilen (Twitter/Facebook...)? Mehr Leute einladen können? ... 📣</p>
 		</div>
 		<fieldset class="buttons">
 			<input type="submit" value="Schließen" name="schliessen" autofocus />

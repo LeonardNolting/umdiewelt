@@ -89,11 +89,15 @@
 				td + td
 					padding-left: 1rem
 				td
-					text-align: center
-					&:first-child
-						text-align: left
-					&:last-child
-						text-align: right
+					max-width: 100px
+					overflow: hidden
+					text-overflow: ellipsis
+					white-space: nowrap
+					//text-align: center
+					//&:first-child
+					//	text-align: left
+					//&:last-child
+					//	text-align: right
 			&[data-schule="Gymnasium Höchstadt"]
 				background-position: bottom
 				background-repeat: no-repeat

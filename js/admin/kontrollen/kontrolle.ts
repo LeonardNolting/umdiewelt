@@ -1,6 +1,7 @@
 import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
 import Popup from "../../popup";
 import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
+import load from "../../load";
 
 export default abstract class Kontrolle {
 	_erlaubt: boolean = false
@@ -76,7 +77,7 @@ export default abstract class Kontrolle {
 		this.popup.onsubmit = event => {
 			event.preventDefault()
 			if (!this.erlaubt) return // normalerweise schon vorher Popup geschlossen (s. set erlaubt)
-			this.submit()
+			load(this.submit()
 				.then(value => {
 					if (value === false) return
 					Popup.schliessen(this.popup)
@@ -86,7 +87,7 @@ export default abstract class Kontrolle {
 				.catch(reason => {
 					console.error(reason)
 					benachrichtigung("Konnte Aktion nicht ausführen: " + reason, BenachrichtigungsLevel.ALARM)
-				})
+				}))
 		}
 		Popup.oeffnen(this.popup)
 	}
