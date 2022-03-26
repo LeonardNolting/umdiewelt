@@ -32,7 +32,7 @@ export const neueKlassen = functions.region(region).https.onCall(async (daten: N
 			updates["spezifisch/klassen/details/" + daten.schule + "/" + klasse] = {
 				email: klassenDaten.email,
 				uid,
-				potAnzahlFahrer: klassenDaten.groesse
+				potAnzahlFahrer: parseInt(klassenDaten.groesse)
 			};
 			updates["spezifisch/klassen/liste/" + daten.schule + "/" + klasse] = true;
 			erstellteUser.push(uid);
