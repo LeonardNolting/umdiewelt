@@ -324,8 +324,8 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 							const probieren = () => {
 								if (anzahlFahrer === undefined || potAnzahlFahrer === undefined) return
 								if (potAnzahlFahrer < anzahlFahrer) return console.error("In Klasse " + klasse + " der Schule " + schule + " gibt es mehr Fahrer als möglich sind. (" + anzahlFahrer + "/" + potAnzahlFahrer + ")")
-								const wert = potAnzahlFahrer === 0 ? 0 : (anzahlFahrer / potAnzahlFahrer)
-								td.textContent = Math.round(wert * 100) + "%"
+								let wert = potAnzahlFahrer === 0 ? 0 : (anzahlFahrer / potAnzahlFahrer)
+								td.textContent = Math.round(Math.min(wert, 1) * 100) + "%"
 							}
 							onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/anzahlFahrer"), snap => {
 								anzahlFahrer = snap.val() || 0
