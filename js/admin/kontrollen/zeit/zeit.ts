@@ -44,12 +44,12 @@ export default abstract class ZeitKontrolle extends Kontrolle {
 		return this._countdown
 	}
 
-	private min = new Date(Date.now() + 3600 * 1000)
+	private min = new Date(Date.now() + 60 * 1000)
 	private max = new Date(Date.now() + 3600 * 1000 * 24 * 29)
 
 	protected async vorbereiten() {
-		this.input.step = "1800" // halbe Stunde
-		this.input.min = this.min.toISOString() // min eine Stunde später
+		this.input.step = "60" // eine Minute
+		this.input.min = this.min.toISOString() // min eine Minute später
 		this.input.max = this.max.toISOString() // höchstens 29 Tage in der Zukunft
 	}
 
@@ -57,7 +57,7 @@ export default abstract class ZeitKontrolle extends Kontrolle {
 		const inputValue = this.inputValue
 
 		if (inputValue < this.min.getTime())
-			throw new Error("Datum muss mindestens eine Stunde in der Zukunft liegen.")
+			throw new Error("Datum muss mindestens eine Minute in der Zukunft liegen.")
 		if (inputValue > this.max.getTime())
 			throw new Error("Datum darf nicht mehr als 29 Tage in der Zukunft liegen.")
 
