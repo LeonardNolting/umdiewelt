@@ -51,9 +51,9 @@ export const statistiken = functions.region(region).https.onCall(async (daten, c
 				fahrer: { [name: string]: string } | undefined | null
 			}
 		});
-		const strecke = klassen.reduce((acc, entry) => acc + entry[1].strecke, 0)
-		const anzahlFahrer = klassen.reduce((acc, entry) => acc + entry[1].anzahlFahrer, 0)
-		const potAnzahlFahrer = klassen.reduce((acc, entry) => acc + entry[1].potAnzahlFahrer, 0) || 1
+		const strecke = klassen.reduce((acc, entry) => acc + (entry[1].strecke || 0), 0)
+		const anzahlFahrer = klassen.reduce((acc, entry) => acc + (entry[1].anzahlFahrer || 0), 0)
+		const potAnzahlFahrer = klassen.reduce((acc, entry) => acc + (entry[1].potAnzahlFahrer || 0), 0) || 1
 		schulen.push({
 			name: schule,
 			strecke,
