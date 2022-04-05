@@ -57,11 +57,11 @@ export const statistiken = functions.region(region).https.onCall(async (daten, c
 		schulen.push({
 			name: schule,
 			strecke,
-			beteiligung: (anzahlFahrer / potAnzahlFahrer) || 0,
+			beteiligung: Math.min((anzahlFahrer / potAnzahlFahrer) || 0, 1),
 			klassen: klassen.map(([klasse, klasseDaten]) => ({
 				name: klasse,
 				strecke: klasseDaten.strecke,
-				beteiligung: (klasseDaten.anzahlFahrer / klasseDaten.potAnzahlFahrer) || 0,
+				beteiligung: Math.min((klasseDaten.anzahlFahrer / klasseDaten.potAnzahlFahrer) || 0, 1),
 				fahrer: Object.values(klasseDaten.fahrer ? klasseDaten.fahrer : {}).map(fahrerId => fahrer![fahrerId])
 			}))
 		})
