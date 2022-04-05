@@ -7,6 +7,8 @@ export const statistiken = functions.region(region).https.onCall(async (daten, c
 	// * Lege Schema fest
 	const schulen: {
 		name: string,
+		strecke: number,
+		beteiligung: number,
 		klassen: {
 			name: string,
 			strecke: number,
@@ -49,8 +51,13 @@ export const statistiken = functions.region(region).https.onCall(async (daten, c
 				fahrer: { [name: string]: string } | undefined | null
 			}
 		});
+		const strecke = klassen.reduce((acc, entry) => acc + entry[1].strecke, 0)
+		const anzahlFahrer = klassen.reduce((acc, entry) => acc + entry[1].anzahlFahrer, 0)
+		const potAnzahlFahrer = klassen.reduce((acc, entry) => acc + entry[1].potAnzahlFahrer, 0) || 1
 		schulen.push({
 			name: schule,
+			strecke,
+			beteiligung: (anzahlFahrer / potAnzahlFahrer) || 0,
 			klassen: klassen.map(([klasse, klasseDaten]) => ({
 				name: klasse,
 				strecke: klasseDaten.strecke,
@@ -65,10 +72,10 @@ export const statistiken = functions.region(region).https.onCall(async (daten, c
 
 	return {
 		csv: schulen.map(schule => {
-			let abschnitt = zeile([schule.name]);
+			let abschnitt = zeile([schule.name, schule.strecke, Math.round(schule.beteiligung * 100) + "%"]);
 			abschnitt += "\n\n\n";
 			abschnitt += schule.klassen.map(klasse => {
-				let abschnitt = zeile([klasse.name, klasse.strecke || 0, klasse.beteiligung]);
+				let abschnitt = zeile([klasse.name, klasse.strecke || 0, Math.round(klasse.beteiligung * 100) + "%"]);
 				if (klasse.fahrer.length !== 0) {
 					abschnitt += "\n";
 					abschnitt += klasse.fahrer.map(fahrer => {
