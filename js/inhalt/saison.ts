@@ -277,15 +277,24 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 				if (status.laufend) {
 					const table = document.createElement("table"),
 						head = table.createTHead(),
-					headRow = head.insertRow()
+						body = table.createTBody(),
+						headRow = head.insertRow()
 					table.classList.add("klassen");
+
+					type HTMLTableRowElementKlasse = HTMLTableRowElement & {
+						dataset: {
+							klasse: string
+							strecke: number | undefined
+						}
+					}
+
 					["Klasse", "Strecke", "Beteiligung"].forEach(label => {
 						const cell = headRow.insertCell();
 						cell.textContent = label
 					})
 
 					onChildAdded(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), ({key: klasse}) => {
-						const tr = table.insertRow()
+						const tr = body.insertRow() as HTMLTableRowElementKlasse
 						tr.dataset.klasse = klasse
 						{
 							const td = tr.insertCell()
@@ -296,8 +305,16 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 							const td = tr.insertCell()
 							onValue(ref(Datenbank.datenbank, "spezifisch/klassen/details/" + schule + "/" + klasse + "/strecke"), snap => {
 								const wert = snap.val() || 0
+								tr.dataset.strecke = wert
 								const meter = m(wert);
 								td.textContent = zahl(meter.wert, 0) + meter.einheit
+
+								// * Sortieren
+								let before = null
+								Array.from(body.rows).reverse().forEach((row: HTMLTableRowElementKlasse) => {
+									if (!row.dataset.strecke || wert > row.dataset.strecke) before = row
+								})
+								tr.parentElement.insertBefore(tr, before)
 							})
 						}
 						// * Beteiligung
@@ -321,7 +338,7 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 						}
 					})
 					onChildRemoved(ref(Datenbank.datenbank, "spezifisch/klassen/liste/" + schule), ({key: klasse}) =>
-						Array.from(table.rows).find(row => row.dataset.klasse === klasse).remove())
+						Array.from(body.rows).find(row => row.dataset.klasse === klasse).remove())
 
 					schuleContainer.append(table)
 				}
