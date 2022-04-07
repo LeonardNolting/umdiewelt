@@ -8,6 +8,8 @@
 		text-align: center
 		flex-basis: 0
 		flex-grow: 1
+		span
+			white-space: unset
 		&::before
 			position: relative
 			transform: none
@@ -25,6 +27,8 @@
 		display: flex
 		flex-direction: row
 		align-items: center
+		span
+			white-space: nowrap
 		&::before
 			--schriftgröße: 1.6em
 			content: attr(value) attr(data-einheit)
