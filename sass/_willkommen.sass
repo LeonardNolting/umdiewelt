@@ -83,12 +83,20 @@ section#willkommen
 		z-index: 2
 		position: relative
 		color: #fff
-		P
+		p, button
 			font-size: 1.6rem
 			font-weight: bold
-			color: #ddd
-			+ p
+			+ p, + button
 				margin-top: 1rem
+		P
+			color: #ddd
+		button
+			background-color: #777
+			color: white
+			margin-right: auto
+			font-size: 125%
+			padding: 1rem 2rem
+			border-radius: 1.2rem
 		h1
 			font-size: 4rem
 			font-weight: 900
@@ -159,6 +167,11 @@ section#willkommen
 			h1
 				text-align: center
 				margin-top: 0
+			button
+				border-radius: 1rem
+				padding: .8rem 1.6rem
+				text-transform: uppercase
+				margin-left: auto
 		#welt
 			flex-direction: column
 			width: 100%
