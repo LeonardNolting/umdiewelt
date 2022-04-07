@@ -472,6 +472,7 @@ export class Eintragung {
 	}
 
 	static async eintragen(): Promise<Eintragung> {
+		await load(Eintragung.vorbereiten())
 		const eintragung = new Eintragung()
 		await load(eintragung.oeffnen())
 		return eintragung
@@ -484,12 +485,19 @@ export class Eintragung {
 		return Storage.get<string>("fahrer", false)
 	}
 
-	static async vorbereiten() {
+	private static vorbereitenPromise: Promise<void> | undefined
+
+	private static async vorbereitenAsync() {
 		const fahrerAusCookie = this.fahrerAusCookie;
 		if (fahrerAusCookie) {
 			const {name} = await datenVonFahrerBekommen(fahrerAusCookie)
 			eintragenTextSetzen(name)
 		}
+	}
+
+	static async vorbereiten() {
+		if (!this.vorbereitenPromise) this.vorbereitenPromise = this.vorbereitenAsync()
+		return this.vorbereitenPromise
 	}
 
 	static berechnenPlace(element: HTMLInputElement, place: PlaceResult) {

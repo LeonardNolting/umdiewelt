@@ -8,13 +8,15 @@
 		text-align: center
 		flex-basis: 0
 		flex-grow: 1
+		span
+			white-space: unset
 		&::before
 			position: relative
 			transform: none
 			margin-left: 0
-		.fakt + .fakt
+		+ .fakt
 			margin-top: 0
-			margin-left: 1rem
+			margin-left: .6rem
 
 .fakten
 	font-size: 1rem
@@ -25,6 +27,8 @@
 		display: flex
 		flex-direction: row
 		align-items: center
+		span
+			white-space: nowrap
 		&::before
 			--schriftgröße: 1.6em
 			content: attr(value) attr(data-einheit)
@@ -43,7 +47,7 @@
 			@include emoji-cursor(👍)
 		&:nth-child(3)::before
 			@include emoji-cursor(😍)
-		.fakt + .fakt
-			margin-top: 1rem
+		+ .fakt
+			margin-top: .6rem
 	&.horizontal
 		@include fakten-horizontal

@@ -45,6 +45,11 @@
 		<link rel="stylesheet" href="sass/main.sass">
 		<!--		<link rel="stylesheet" href="css/main.css">-->
 
+		<link rel="preload" href="sass/metaballs.sass" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript>
+			<link rel="stylesheet" href="sass/metaballs.sass">
+		</noscript>
+
 		<meta name="theme-color" content="#C2DC62FF">
 
 		<script src="js/vendor/modernizr-3.11.2.min.js" type="module"></script>
@@ -61,6 +66,7 @@
 					<h1>Hallo Fahrrad&shy;fahrer!</h1>
 					<p>Wir sind ein Se&shy;minar am Gym&shy;nasium Höch&shy;stadt.</p>
 					<p class="um-die-welt">Mit der ganzen Schule möchten wir digital auf dem Rad die Welt um&shy;run&shy;den!</p>
+					<button id="eintragen-shortcut">Teilnehmen</button>
 				</div>
 				<div id="welt">
 					<div id="anzeige"></div>

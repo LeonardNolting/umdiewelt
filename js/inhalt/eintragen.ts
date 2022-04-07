@@ -3,6 +3,7 @@ import {Eintragung} from "../eintragen";
 const element = document.getElementById("eintragen") as HTMLDivElement & { dataset: { text: string } }
 
 export default () => {
+	document.getElementById("eintragen-shortcut").addEventListener("click", () => Eintragung.eintragen())
 	element.addEventListener("click", () => Eintragung.eintragen())
 }
 
