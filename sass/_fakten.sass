@@ -14,9 +14,9 @@
 			position: relative
 			transform: none
 			margin-left: 0
-		.fakt + .fakt
+		+ .fakt
 			margin-top: 0
-			margin-left: 1rem
+			margin-left: .6rem
 
 .fakten
 	font-size: 1rem
@@ -47,7 +47,7 @@
 			@include emoji-cursor(👍)
 		&:nth-child(3)::before
 			@include emoji-cursor(😍)
-		.fakt + .fakt
-			margin-top: 1rem
+		+ .fakt
+			margin-top: .6rem
 	&.horizontal
 		@include fakten-horizontal
