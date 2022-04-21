@@ -3,7 +3,8 @@
 	"transformers": {
 		"*.html": [
 			"...",
-			"parcel-transformer-ogimage"
+			"parcel-transformer-ogimage",
+			"parcel-transformer-html-datasrc"
 		],
 		"*.{ts,tsx}": [
 			"@parcel/transformer-typescript-tsc"

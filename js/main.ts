@@ -8,10 +8,19 @@ import wait from "./wait";
 import load from "./load";
 import {Eintragung} from "./eintragen";
 import welt from "./welt/welt";
+import * as lazySizes from "lazysizes";
 
 const anzeigen = welt()
 
 document.addEventListener("DOMContentLoaded", async () => {
+	lazySizes.init()
+	document.addEventListener('lazybeforeunveil', function (e) {
+		const bg = (e.target as HTMLElement).dataset["bg"];
+		if (bg) {
+			(e.target as HTMLElement).style.backgroundImage = 'url(' + bg + ')';
+		}
+	});
+
 	wait()
 	await anzeigen()
 	browserAktualisierung()
