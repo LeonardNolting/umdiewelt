@@ -3,6 +3,7 @@ import step from "../step";
 import cookies from "./cookies";
 import admin from "./admin";
 import eintragen from "./eintragen";
+import streckenbeschreibungen from "./streckenbeschreibungen";
 
 export const observer = new IntersectionObserver(((eintraege, observer) => {
 	eintraege.filter(eintrag => eintrag.isIntersecting).forEach(eintrag => {
@@ -27,5 +28,6 @@ export default async () => {
 	cookies()
 	quellen()
 	eintragen()
+	streckenbeschreibungen()
 	admin()
 }
