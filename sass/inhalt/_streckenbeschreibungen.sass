@@ -1,17 +1,22 @@
 #streckenbeschreibungen
 	display: flex
 	align-items: center
-	padding: 1.6rem
+	justify-content: center
+	--padding: 1.6rem
+	padding: var(--padding)
 	background-color: #eee
 	overflow: hidden
 	flex-wrap: wrap
+	column-gap: var(--padding)
 	h3
 		margin: 0
+		padding: 0
 	ul#streckenbeschreibungen-anzeige
 		display: flex
 		margin: 0
 		padding: 0
 		flex-wrap: wrap
+		justify-content: center
+		column-gap: var(--padding)
 		li
 			list-style: none
-			margin-left: 1.6rem
