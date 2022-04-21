@@ -10,15 +10,18 @@ export const beendeSaison = functions.region(region).https.onRequest(async (requ
 	const ende = (await datenbank.ref("/allgemein/saisons/countdowns/ende").get()).val()
 	if (ende === null || ende > Date.now()) return response.sendStatus(409).end()
 
-	const laufend = (await datenbank.ref("/allgemein/saisons/laufend").get()).val()
+	// const laufend = (await datenbank.ref("/allgemein/saisons/laufend").get()).val()
 	const updates: { [ref: string]: any } = {}
 	// Saison ist nicht mehr aktuell und läuft nicht mehr
 	updates["allgemein/saisons/aktuell"] = null
 	updates["allgemein/saisons/laufend"] = null
 	// Countdown entfernen
 	updates["allgemein/saisons/countdowns/ende"] = null
+
 	// Ende einfügen
-	updates["allgemein/saisons/details/" + laufend + "/zeit/ende"] = ende
+	// updates["allgemein/saisons/details/" + laufend + "/zeit/ende"] = ende
+	// wurde schon beim Erstellen des tasks gemacht!
+
 	// Anzahl historisch erhöhen
 	updates["allgemein/saisons/anzahlHistorisch"] = admin.database.ServerValue.increment(1)
 	await datenbank.ref().update(updates)
@@ -27,4 +30,8 @@ export const beendeSaison = functions.region(region).https.onRequest(async (requ
 })
 
 export const erstelleTaskZumBeendenDerSaison = functions.region(region).database.ref("/allgemein/saisons/countdowns/ende")
-	.onWrite(change => setTask(change, "saisonende-beendeSaison"))
+	.onWrite(async change => {
+		const aktuell = (await datenbank.ref("/allgemein/saisons/aktuell").get()).val();
+		await datenbank.ref("allgemein/saisons/details/" + aktuell + "/zeit/ende").set(change.after.val());
+		return setTask(change, "saisonende-beendeSaison");
+	})

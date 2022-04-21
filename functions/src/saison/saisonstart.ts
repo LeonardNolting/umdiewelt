@@ -15,8 +15,11 @@ export const starteSaison = functions.region(region).https.onRequest(async (requ
 	updates["allgemein/saisons/laufend"] = aktuell
 	// Countdown entfernen
 	updates["allgemein/saisons/countdowns/start"] = null
+
 	// Start einfügen
-	updates["allgemein/saisons/details/" + aktuell + "/zeit/start"] = start
+	// updates["allgemein/saisons/details/" + aktuell + "/zeit/start"] = start
+	// wurde schon beim Erstellen des tasks gemacht!
+
 	await datenbank.ref().update(updates)
 
 	response.sendStatus(200).end()
@@ -24,9 +27,13 @@ export const starteSaison = functions.region(region).https.onRequest(async (requ
 
 export const erstelleTaskZumStartenDerSaison = functions.region(region).database.ref("/allgemein/saisons/countdowns/start")
 	.onWrite(async (change) => {
+		const aktuell = (await datenbank.ref("/allgemein/saisons/aktuell").get()).val();
+
 		// Aktive Saison auf aktuelle Saison setzen
 		if (!change.before.exists()) await datenbank.ref("/allgemein/saisons/aktiv")
-			.set((await datenbank.ref("/allgemein/saisons/aktuell").get()).val());
+			.set(aktuell);
+
+		await datenbank.ref("allgemein/saisons/details/" + aktuell + "/zeit/start").set(change.after.val());
 
 		await setTask(change, "saisonstart-starteSaison")
 	})
