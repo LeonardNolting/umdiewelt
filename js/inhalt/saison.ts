@@ -195,7 +195,8 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 					minuten = minuten < 10 ? "0" + minuten : minuten
 					sekunden = sekunden < 10 ? "0" + sekunden : sekunden
 
-					p.textContent = `${stunden}:${minuten}:${sekunden}`
+					const toFormattedNumber = (number: number) => Math.round(number).toString().padStart(2, "0")
+					p.textContent = `${toFormattedNumber(stunden)}:${toFormattedNumber(minuten)}:${toFormattedNumber(sekunden)}`
 
 					if (timer === 0) clearInterval(interval)
 					timer--
