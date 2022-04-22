@@ -183,6 +183,7 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 			p.classList.add("countdown", typ)
 			p.dataset.typ = typ
 			const differenz = Math.floor((zeit[typ] - jetzt) / 1000)
+			const formatieren = (number: number) => Math.round(number).toString().padStart(2, "0")
 			if (60 * 60 * 24 > differenz) {
 				let timer = differenz, stunden, minuten, sekunden
 				const interval = setInterval(function () {
@@ -195,15 +196,14 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 					minuten = minuten < 10 ? "0" + minuten : minuten
 					sekunden = sekunden < 10 ? "0" + sekunden : sekunden
 
-					const toFormattedNumber = (number: number) => Math.round(number).toString().padStart(2, "0")
-					p.textContent = `${toFormattedNumber(stunden)}:${toFormattedNumber(minuten)}:${toFormattedNumber(sekunden)}`
+					p.textContent = `${formatieren(stunden)}:${formatieren(minuten)}:${formatieren(sekunden)}`
 
 					if (timer === 0) clearInterval(interval)
 					timer--
 				}, 1000);
 				p.classList.add("monospace")
 			} else {
-				p.textContent = `${typ.charAt(0).toUpperCase() + typ.substr(1)} in ${differenz / 3600 / 24} Tagen`
+				p.textContent = `${typ.charAt(0).toUpperCase() + typ.substr(1)} in ${formatieren(differenz / 3600 / 24)} Tagen`
 			}
 			container.append(p)
 		}
