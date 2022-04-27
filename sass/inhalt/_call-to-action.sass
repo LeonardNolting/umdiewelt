@@ -28,9 +28,28 @@
 			font-size: 2rem
 		p + p
 			margin-top: 1.3rem
-		svg, img
-			max-width: 16rem
-			margin: 2rem auto 0
+		.logos
+			display: grid
+			grid-template-areas: "martinbauer martinbauer martinbauer frankenbrunnen frankenbrunnen" "sparkasse sparkasse sparkasse frankenbrunnen frankenbrunnen"
+			margin-top: 2rem
+			gap: 1rem
+			.logo
+				margin: 2rem auto 0
+				img, svg
+					max-width: 100%
+					object-fit: contain
+				&.sparkasse
+					grid-area: sparkasse
+					img
+						aspect-ratio: 800/179
+				&.frankenbrunnen
+					grid-area: frankenbrunnen
+					img
+						aspect-ratio: 283/283
+				&.martinbauer
+					grid-area: martinbauer
+					img
+						aspect-ratio: 6174/1402
 		&:not(:nth-child(2))
 			z-index: 1
 			//color: #ccc
