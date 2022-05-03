@@ -18,6 +18,7 @@ import {getApp} from "firebase/app";
 import benachrichtigung from "../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../benachrichtigungen/benachrichtigungsLevel";
 import {download} from "../verschieden";
+import FahrerLoeschenKontrolle from "./kontrollen/fahrer-loeschen";
 
 const popup = document.getElementById("popup-anmelden-admin") as HTMLFormElement
 const submit = popup["submit"]
@@ -30,7 +31,8 @@ const kontrollen = [
 	new SaisonendeKontrolle(),
 	new SaisonLoeschenKontrolle(),
 	new TestnachrichtKontrolle(),
-	new StreckeLoeschenKontrolle()
+	new StreckeLoeschenKontrolle(),
+	new FahrerLoeschenKontrolle(),
 ]
 
 const aktivieren = async () => {
