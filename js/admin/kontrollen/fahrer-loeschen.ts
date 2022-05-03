@@ -23,7 +23,8 @@ export default class FahrerLoeschenKontrolle extends Kontrolle {
 		const fahrerRef = ref(Datenbank.datenbank, "spezifisch/fahrer/" + id);
 		const fahrer = await get(fahrerRef)
 		if (!fahrer.exists()) return benachrichtigung("Der angegebene Fahrer konnte nicht gefunden werden. Bitte leiten Sie die E-Mail-Meldung an leonolting@gmail.com weiter.", BenachrichtigungsLevel.ALARM)
-		await remove(query(ref(Datenbank.datenbank, "spezifisch/strecken/"), orderByChild("fahrer"), equalTo(id)).ref)
+		const streckenIds = await get(query(ref(Datenbank.datenbank, "spezifisch/strecken/"), orderByChild("fahrer"), equalTo(id))).then(result => Object.keys(result.val()))
+		await Promise.all(streckenIds.map(id => remove(ref(Datenbank.datenbank, "spezifisch/strecken/" + id))))
 		await remove(fahrerRef)
 		return "Fahrer gelöscht."
 	}
