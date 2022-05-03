@@ -204,6 +204,7 @@ const popups = {
 		weiter: async (eintragung) => {
 			const meter = await eintragung.berechnen()
 			if (meter === null) return benachrichtigung("Kann Strecke nicht berechnen. Bitte überprüfe deine Eingaben.")
+			if (meter > 200_000) return benachrichtigung("Die Entfernung zwischen diesen zwei Punkten beträgt über 200km. Bitte überprüfe deine Eingaben.")
 			eintragung.meterSetzen(meter)
 		}
 	}, async () => {
