@@ -17,7 +17,7 @@ export const meldeStrecke = functions.region(region).database.ref("spezifisch/st
 				to: "hip@gy-ho.de",
 				message: {
 					subject: "Um Die Welt: Verdächtige Strecke eingetragen",
-					text: `Name: ${name}\nSchule: ${schule}\nKlasse: ${klasse}\nLänge: ${streckeKmFormatiert}km\nID: ${id}\n\nUm die Strecke zurückzunehmen, öffnen Sie bitte die Website und melden sich als Admin an. Klicken Sie auf 'Strecke löschen' und geben Sie die ID ein. Die Strecke wird nun gelöscht.`,
+					text: `Name: ${name}\nSchule: ${schule}\nKlasse: ${klasse}\nLänge: ${streckeKmFormatiert}km\nStrecken-ID: ${id}\nFahrer-ID: ${fahrerId}\n\nUm die Strecke zurückzunehmen, öffnen Sie bitte die Website und melden sich als Admin an. Klicken Sie auf 'Strecke löschen' und geben Sie die ID ein. Die Strecke wird nun gelöscht.`,
 				},
 			})
 		}
