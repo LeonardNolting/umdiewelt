@@ -531,7 +531,8 @@ export class Eintragung {
 
 	static berechnenPlace(element: HTMLInputElement, place: PlaceResult) {
 		if (!element.value) return null
-		element.classList[place && place.geometry ? "remove" : "add"]("invalid")
+		// Obwohl distance matrix die Entfernung zwischen den meisten Orten errechnen kann, beschwert sich autocomplete bei viel mehr Werten - für den Nutzer dann kurz als Fehler sichtbar trotz darauffolgender Erfolgsnachricht -> deswegen diese autocomplete-Warnungen ausgesetzt
+		// element.classList[place && place.geometry ? "remove" : "add"]("invalid")
 		if (!place || !place.geometry) return null
 		return place.place_id
 	}
