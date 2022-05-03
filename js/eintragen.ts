@@ -1,6 +1,18 @@
 import Popup from "./popup.ts";
 import Datenbank from "./firebase/datenbank";
-import {get, onChildAdded, onValue, push, ref, serverTimestamp, set, Unsubscribe} from "firebase/database";
+import {
+	equalTo,
+	get,
+	onChildAdded,
+	onValue,
+	orderByChild,
+	push,
+	query,
+	ref,
+	serverTimestamp,
+	set,
+	Unsubscribe
+} from "firebase/database";
 import Route from "./model/route";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import benachrichtigung from "./benachrichtigungen/benachrichtigung";
@@ -145,11 +157,11 @@ const popups = {
 		abbrechen: true,
 		direkt: async (eintragung, element) => {
 			await eintragung.nameSetzen((element["name"] as HTMLInputElement).value)
-			eintragung.optionSetzen("direkt")
+			await eintragung.optionSetzen("direkt")
 		},
 		berechnen: async (eintragung, element) => {
 			await eintragung.nameSetzen((element["name"] as HTMLInputElement).value)
-			eintragung.optionSetzen("berechnen")
+			await eintragung.optionSetzen("berechnen")
 		}
 	}, (eintragung, element) => {
 		const input = element["name"] as HTMLInputElement
@@ -187,7 +199,7 @@ const popups = {
 		abbrechen: true,
 		zurueck: async eintragung => {
 			await eintragung.nameSetzen(undefined)
-			eintragung.optionSetzen(undefined)
+			await eintragung.optionSetzen(undefined)
 		},
 		weiter: async (eintragung) => {
 			const meter = await eintragung.berechnen()
@@ -233,7 +245,7 @@ const popups = {
 		abbrechen: true,
 		zurueck: async eintragung => {
 			await eintragung.nameSetzen(undefined)
-			eintragung.optionSetzen(undefined)
+			await eintragung.optionSetzen(undefined)
 		},
 		weiter: (eintragung, element) =>
 			eintragung.meterSetzen(parseInt((element["kilometer"] as HTMLInputElement).value) * 1000)
@@ -412,9 +424,25 @@ export class Eintragung {
 		eintragenTextSetzen(this.name)
 	}
 
-	optionSetzen(option: "direkt" | "berechnen" | undefined) {
+	async optionSetzen(option: "direkt" | "berechnen" | undefined) {
+		if (option !== undefined) {
+			if (!this.schule || !this.klasse) throw new Error("Noch nicht angemeldet.")
+			if (!global.user) throw new Error("Authentifizierung abgelaufen.")
+			if (!this.name) throw new Error("Name noch nicht eingetragen.")
+
+			if (this.fahrer) {
+				const zeitpunkte: number[] = await get(query(ref(Datenbank.datenbank, "spezifisch/strecken/"), orderByChild("fahrer"), equalTo(this.fahrer)))
+					.then(snap => Object.values(snap.val()).map(strecke => strecke.zeitpunkt))
+				const letzterEintragungsZeitpunkt = Math.max(...zeitpunkte)
+				if (letzterEintragungsZeitpunkt + 60 * 60 * 1000 > Date.now()) {
+					this.schliessen()
+					return benachrichtigung("Bitte warte eine Stunde, bevor du eine neue Strecke einträgst.")
+				}
+			}
+		}
+
 		this.option = option
-		this.popupOeffnen(popups[option] || popups.name)
+		await this.popupOeffnen(popups[option] || popups.name)
 	}
 
 	meterSetzen(wert: number) {
