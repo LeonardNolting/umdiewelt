@@ -21,11 +21,11 @@ export const saisonLoeschen = functions.region(region).database.ref("allgemein/s
 		}))
 
 		// * Teilnehmende Schulen
-		const teilnehmendeSchulen = Object.keys((await datenbank.ref("allgemein/saisons/details/" + saison + "/schulen/liste").get()).val())
+		const teilnehmendeSchulen = Object.keys((await datenbank.ref("allgemein/saisons/details/" + saison + "/schulen/liste").get()).val() || {})
 		teilnehmendeSchulen.map(schule => updates["allgemein/schulen/details/" + schule + "/saisons/liste/" + saison] = null)
 
 		// * Klassen (Accounts)
-		await datenbank.ref("spezifisch/klassen/details").get().then(schulenSnap => schulenSnap.forEach(schuleSnap => {
+		await datenbank.ref("spezifisch/klassen/details").get().then(schulenSnap => (schulenSnap || []).forEach(schuleSnap => {
 			schuleSnap.forEach(klasseSnap => {
 				updates[`spezifisch/klassen/details/${(schuleSnap.key)}/${(klasseSnap.key)}`] = null
 			})
