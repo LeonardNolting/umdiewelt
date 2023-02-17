@@ -1,4 +1,4 @@
-import {limitToLast, onChildAdded, onValue, orderByKey, query, ref, Unsubscribe, update} from "firebase/database";
+import {get, limitToLast, onChildAdded, onValue, orderByKey, query, ref, Unsubscribe, update} from "firebase/database";
 import Datenbank from "../../firebase/datenbank";
 import benachrichtigung from "../../benachrichtigungen/benachrichtigung";
 import BenachrichtigungsLevel from "../../benachrichtigungen/benachrichtigungsLevel";
@@ -30,7 +30,7 @@ export default class NeueSaisonKontrolle extends Kontrolle {
 
 	protected async vorbereiten() {
 		let jahr = new Date().getFullYear()
-		// * Wenn noch in demselben Jahr, in dem eine Saison beendet wurde, eine Neue gestartet wird, soll diese für das nächste Jahr sein.
+		/*// * Wenn noch in demselben Jahr, in dem eine Saison beendet wurde, eine Neue gestartet wird, soll diese für das nächste Jahr sein.
 		let jahrGesetzt = false
 		onValue(query(ref(Datenbank.datenbank, "allgemein/saisons/liste"), orderByKey(), limitToLast(1)), snap => {
 			if (jahrGesetzt) {
@@ -39,7 +39,11 @@ export default class NeueSaisonKontrolle extends Kontrolle {
 			}
 			if (snap.val()) jahr = snap.val()
 			jahrGesetzt = true
-		})
+		})*/
+		try {
+			const bisherigesJahr = parseInt((await get(ref(Datenbank.datenbank, "allgemein/saisons/aktiv"))).val());
+			if (bisherigesJahr === jahr) jahr++;
+		} catch(e) {}
 		this.nameInput.value = jahr.toString()
 
 		this.schulenUl.innerHTML = ""
