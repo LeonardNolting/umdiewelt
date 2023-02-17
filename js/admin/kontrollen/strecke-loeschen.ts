@@ -29,8 +29,8 @@ export default class StreckeLoeschenKontrolle extends Kontrolle {
 		const fahrerRef = ref(Datenbank.datenbank, "spezifisch/fahrer/" + fahrerId);
 
 		// Wenn keine Strecken bei diesem Fahrer verbleiben, Fahrer auch löschen
-		const streckenIds = await get(query(ref(Datenbank.datenbank, "spezifisch/strecken/"), orderByChild("fahrer"), equalTo(id))).then(result => Object.keys(result.val() || {}))
-		if (streckenIds.length === 0) await remove(fahrerRef)
+		// const streckenIds = await get(query(ref(Datenbank.datenbank, "spezifisch/strecken/"), orderByChild("fahrer"), equalTo(id))).then(result => Object.keys(result.val() || {}))
+		// if (streckenIds.length === 0) await remove(fahrerRef)
 
 		return await remove(streckeRef).then(() => "Strecke gelöscht.")
 	}
