@@ -15,6 +15,8 @@ async function passeStreckeUndAnzahlStreckenAn(data: { strecke: number, fahrer: 
 	const anzahlStreckenIncrement = admin.database.ServerValue.increment(1 * richtung)
 	const {schule, klasse} = (await datenbank.ref("spezifisch/fahrer/" + fahrer).get()).val()
 	const updates: { [ref: string]: any } = {}
+	updates["spezifisch/fahrer/" + fahrer + "/strecke"] = streckeIncrement
+	updates["spezifisch/fahrer/" + fahrer + "/anzahlStrecken"] = anzahlStreckenIncrement
 	updates["spezifisch/klassen/details/" + schule + "/" + klasse + "/strecke"] = streckeIncrement
 	updates["spezifisch/klassen/details/" + schule + "/" + klasse + "/anzahlStrecken"] = anzahlStreckenIncrement
 	updates["allgemein/saisons/details/" + laufend + "/strecke"] = streckeIncrement
@@ -23,12 +25,6 @@ async function passeStreckeUndAnzahlStreckenAn(data: { strecke: number, fahrer: 
 	updates["allgemein/saisons/details/" + laufend + "/schulen/details/" + schule + "/anzahlStrecken"] = anzahlStreckenIncrement
 	updates["allgemein/strecke"] = streckeIncrement
 	updates["allgemein/anzahlStrecken"] = anzahlStreckenIncrement
-	const streckenVonFahrer = Object.values((await datenbank.ref("spezifisch/strecken/").get()).val() || {}).filter(((strecke) => (strecke as {fahrer: string})["fahrer"] == fahrer));
-	if (streckenVonFahrer.length == 0) updates["spezifisch/fahrer/" + fahrer] = null;
-	else {
-		updates["spezifisch/fahrer/" + fahrer + "/strecke"] = streckeIncrement
-		updates["spezifisch/fahrer/" + fahrer + "/anzahlStrecken"] = anzahlStreckenIncrement
-	}
 	await datenbank.ref().update(updates)
 }
 
