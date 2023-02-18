@@ -16,3 +16,14 @@
 [Koordinator](mailto:hip@gy-ho.de?subject=Um%20Die%20Welt:%20) / [Entwickler](mailto:leonard.nolting@gymhoes.de?subject=Um%20Die%20Welt:%20)
 
 #### [Wiki](https://github.com/LeonardNolting/umdiewelt/wiki)
+
+## Quellcode bearbeiten
+Wenn du Änderungen an der Seite vorschlagen möchtest, ist das ganz einfach.
+Der Ablauf sieht so aus:
+- du erstellst einen Fork[^1] dieses Repositories (oben rechts neben "Star")
+- dieses neu entstandene Fork-Repository kannst du lokal auf deinen Rechner klonen und dort bearbeiten[^2]
+- sobald du alle Änderungen committet und gepusht hast, erstellst du einen pull request für deinen fork
+- ich werde darüber benachrichtigt, schaue ob alle Änderungen passen und merge dann den pull request nach master, von wo die neue Version automatisch hochgeladen wird
+
+[^1]: eine Kopie unter deinem Namen
+[^2]: alternativ kannst du auf der github-Seite deines repositories auch einfach "." tippen (nützlich für kleine Änderungen)
