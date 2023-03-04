@@ -405,6 +405,7 @@ export class Eintragung {
 	}
 
 	async nameSetzen(name: string | undefined, fahrer: string | undefined = undefined) {
+		if (typeof name === "string") name = name.trim();
 		this.name = name
 		// Wenn der Fahrer schon existiert, ruhig jetzt schon speichern - aber sonst erst beim wirklichen Eintragen der Strecke auch den Fahrer erstellen, damit nicht ungenutzte Fahrer erstellt werden
 		this.fahrer = fahrer || (name === undefined ? undefined : await fahrerBekommen(this.schule, this.klasse, name))
