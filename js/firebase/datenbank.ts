@@ -8,6 +8,7 @@ import kg from "../formatierung/einheit/kg";
 import co2 from "../co2";
 import bestenliste from "../inhalt/bestenliste";
 import {aktualisieren, daten} from "../welt/welt";
+import erfolg from "../inhalt/erfolg";
 
 export namespace Datenbank {
 	export let datenbank: Database
@@ -43,6 +44,7 @@ export namespace Datenbank {
 				ladeFakt("strecke", m(daten.strecke), true, 0)
 				ladeFakt("gespart", kg(co2(daten.strecke)), true, 2)
 				aktualisieren()
+				erfolg(daten.strecke)
 			})
 		}
 
