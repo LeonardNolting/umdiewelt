@@ -22,6 +22,9 @@ Wenn du Änderungen an der Seite vorschlagen möchtest, ist das ganz einfach.
 Der Ablauf sieht so aus:
 - du erstellst einen Fork[^1] dieses Repositories (oben rechts neben "Star")
 - dieses neu entstandene Fork-Repository kannst du lokal auf deinen Rechner klonen und dort bearbeiten[^2]
+	- du benötigst node in **Version 15** (wichtig; neuere Versionen funktionieren nicht)
+    - um die dependencies zu installieren, führe `npm install` aus
+    - um den code zu laufen, benutze entweder die intellij run configuration `start` oder führe `npm run start` aus
 - sobald du alle Änderungen committet und gepusht hast, erstellst du einen pull request für deinen fork
 - ich werde darüber benachrichtigt, schaue ob alle Änderungen passen und merge dann den pull request nach master, von wo die neue Version automatisch hochgeladen wird
 
