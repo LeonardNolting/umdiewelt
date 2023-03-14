@@ -40,16 +40,17 @@ export default class NeueKlassenKontrolle extends Kontrolle {
 					const text = event.target.result as string;
 					const zeilen = text.match(/[^\r\n]+/g);
 					for (let zeile of zeilen) {
-						const [klasse, lehrer, groesse, email, passwort] = zeile.split(";");
-						if (klasse in klassen) throw "Klasse " + klasse + " kam mehrmals vor!";
+						const [klasse, groesse] = zeile.split(";");
 						klassen[klasse] = {
-							lehrer,
+							// Konvertiere Umlaute richtig (Ã¤ -> ä, ...)
+							// (escape ist seit 2014 deprecated, d.h. falls irgendwann nicht mehr vorhanden, kann nicht mehr konvertiert werden)
+							// (für Alternativen: https://stackoverflow.com/questions/26342123/replacement-for-javascript-escape)
+							// KORREKTUR escape funktioniert nicht mit ÃŸ -> ß; da lehrer nie gebraucht wird, wird lehrer fortan nicht mehr gespeichert
+							// lehrer: "escape" in window ? decodeURIComponent(escape(lehrer)) : lehrer,
 							groesse,
-							email: email ? email : NeueKlassenKontrolle.einzigartigeEmailVonLehrer(
-								lehrer,
-								["hip@gy-ho.de", ...Object.values(klassen).map(klasse => klasse["email"] as string)]
-							),
-							passwort: passwort ? passwort : NeueKlassenKontrolle.passwortGenerieren()
+							// Es spielt keine Rolle, was für E-Mail-Adressen benutzt werden (werden nur für Firebase Accounts benutzt, aber es werden nie E-Mails gesendet)
+							email: klasse.replace(/[^a-zA-Z0-9]/gi, '').toLowerCase() + "@gy-ho.de",
+							passwort: NeueKlassenKontrolle.passwortGenerieren()
 						};
 					}
 					resolve()
@@ -92,38 +93,5 @@ export default class NeueKlassenKontrolle extends Kontrolle {
 
 	private static passwortGenerieren(): string {
 		return "UDW-" + this.zifferGenerieren() + this.zifferGenerieren() + "-" + this.zifferGenerieren() + this.zifferGenerieren() + "-" + this.zifferGenerieren()
-	}
-
-	/**
-	 * Eigentlich sollten die E-Mail-Adressen den Tatsächlichen der Lehrer entsprechen, aber hier tun wir nur so, da es momentan keine Rolle spielt. Die Ergebnisse imitieren also nur die echten Adressen.
-	 * @param lehrer
-	 * @param existierendeEmails
-	 * @private
-	 */
-	private static einzigartigeEmailVonLehrer(lehrer: string, existierendeEmails: string[]): string {
-		let suffix: number | null = null
-		let email: string
-		do {
-			email = this.emailVonLehrer(lehrer, suffix?.toString() ?? "")
-			suffix = suffix == null ? 2 : suffix + 1
-		} while (existierendeEmails.includes(email))
-		return email
-	}
-
-	private static emailVonLehrer(lehrer: string, suffix: string): string {
-		/*const woerter = lehrer.split(" ")
-		let name = woerter[woerter.length - 1]
-
-		name = name.replace(/\u00dc/g, "Ue") // Ü
-		name = name.replace(/\u00fc/g, "ue") // ü
-		name = name.replace(/\u00c4/g, "Ae") // Ä
-		name = name.replace(/\u00e4/g, "ae") // ä
-		name = name.replace(/\u00d6/g, "Oe") // Ö
-		name = name.replace(/\u00f6/g, "oe") // ö
-		name = name.replace(/\u00df/g, "ss") // ß
-
-		return name.substr(0, 3).toLowerCase() + suffix + "@gy-ho.de"*/
-
-		return lehrer.replace(/[^a-zA-Z0-9]/gi, '').toLowerCase() + suffix + "@gy-ho.de";
 	}
 }
