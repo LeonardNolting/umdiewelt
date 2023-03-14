@@ -111,7 +111,7 @@ export default class NeueKlassenKontrolle extends Kontrolle {
 	}
 
 	private static emailVonLehrer(lehrer: string, suffix: string): string {
-		const woerter = lehrer.split(" ")
+		/*const woerter = lehrer.split(" ")
 		let name = woerter[woerter.length - 1]
 
 		name = name.replace(/\u00dc/g, "Ue") // Ü
@@ -122,6 +122,8 @@ export default class NeueKlassenKontrolle extends Kontrolle {
 		name = name.replace(/\u00f6/g, "oe") // ö
 		name = name.replace(/\u00df/g, "ss") // ß
 
-		return name.substr(0, 3).toLowerCase() + suffix + "@gy-ho.de"
+		return name.substr(0, 3).toLowerCase() + suffix + "@gy-ho.de"*/
+
+		return lehrer.replace(/[^a-zA-Z0-9]/gi, '').toLowerCase();
 	}
 }
