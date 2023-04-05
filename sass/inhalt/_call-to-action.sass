@@ -29,25 +29,34 @@
 		p + p
 			margin-top: 1.3rem
 		.logos
-			display: grid
-			grid-template-areas: "martinbauer martinbauer martinbauer frankenbrunnen frankenbrunnen" "sparkasse sparkasse sparkasse frankenbrunnen frankenbrunnen"
-			margin-top: 2rem
+			//display: grid
+			//grid-template-areas: "martinbauer martinbauer martinbauer" "sparkasse sparkasse sparkasse"
+			display: inline-flex
+			flex-direction: row
+			flex-wrap: wrap
+			//margin-top: 1rem
 			gap: 1rem
 			.logo
 				margin: 2rem auto 0
+				//flex-basis: 0
+				//flex-grow: 1
+				//max-width: 24rem
+				width: 20rem
+				max-width: 100%
 				img, svg
 					max-width: 100%
 					object-fit: contain
 				&.sparkasse
-					grid-area: sparkasse
+					//grid-area: sparkasse
 					img
 						aspect-ratio: 800/179
-				&.frankenbrunnen
-					grid-area: frankenbrunnen
-					img
-						aspect-ratio: 283/283
+				//&.frankenbrunnen
+				//	grid-area: frankenbrunnen
+				//	img
+				//		aspect-ratio: 283/283
 				&.martinbauer
-					grid-area: martinbauer
+					//grid-area: martinbauer
+					//margin-left: 1rem
 					img
 						aspect-ratio: 6174/1402
 		&:not(:nth-child(2))
@@ -75,7 +84,7 @@
 		&#call-andere-projekte
 			> a:last-of-type
 				display: inline-flex
-				flex-grow: 1
+				//flex-grow: 1
 			svg, img
 				max-width: 16rem
 				margin: 2rem auto 0
