@@ -14,6 +14,7 @@ export const statistiken = functions.region(region).https.onCall(async (daten, c
 			strecke: number,
 			beteiligung: number,
 			fahrer: {
+				id: string
 				name: string,
 				strecke: number
 			}[]
@@ -62,7 +63,7 @@ export const statistiken = functions.region(region).https.onCall(async (daten, c
 				name: klasse,
 				strecke: klasseDaten.strecke,
 				beteiligung: Math.min((klasseDaten.anzahlFahrer / klasseDaten.potAnzahlFahrer) || 0, 1),
-				fahrer: Object.values(klasseDaten.fahrer ? klasseDaten.fahrer : {}).map(fahrerId => fahrer![fahrerId])
+				fahrer: Object.values(klasseDaten.fahrer ? klasseDaten.fahrer : {}).map(fahrerId => Object.assign(fahrer![fahrerId], {id: fahrerId}))
 			}))
 		})
 	});
@@ -79,7 +80,7 @@ export const statistiken = functions.region(region).https.onCall(async (daten, c
 				if (klasse.fahrer.length !== 0) {
 					abschnitt += "\n";
 					abschnitt += klasse.fahrer.map(fahrer => {
-						return zeile([fahrer.name, fahrer.strecke]);
+						return zeile([fahrer.name, fahrer.strecke, fahrer.id]);
 					}).join("\n");
 				}
 				return abschnitt;
