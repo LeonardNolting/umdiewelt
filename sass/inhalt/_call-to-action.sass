@@ -22,10 +22,17 @@
 		font-size: 1.3rem
 		//font-weight: 700
 		h3
-			width: 100%
+			//width: 100%
 			font-weight: 900
-			margin: 0 0 1.6rem
+			margin: 0 auto 1.6rem 0
 			font-size: 2rem
+			position: relative
+			&:after
+				content: ""
+				display: flex
+				height: .6rem
+				width: 100%
+				background: var(--farbe-primär)
 		p + p
 			margin-top: 1.3rem
 		.logos
@@ -64,14 +71,17 @@
 		&:not(:nth-child(2))
 			z-index: 1
 			//color: #ccc
-			h3
-				margin-top: 1.4rem
+			//h3
+			//	margin-top: 1.4rem
 		&:nth-child(1)
-			text-align: right
-			h3
-				padding-right: 1rem
+			//text-align: right
+			text-align: left
+			//h3
+			//	padding-right: 1rem
 		&:nth-child(2)
-			text-align: justify
+			//text-align: justify
+			text-align: left
+			flex: 2
 			//background-color: var(--farbe-glow)
 			//box-shadow: 0 0 6rem 6rem var(--farbe-glow), 0 0 8rem 7rem var(--farbe-glow-2), 0 0 10rem 10rem var(--farbe-glow-3)
 			//h3
@@ -86,6 +96,8 @@
 		&#call-unterstützung a
 			font-weight: bold
 		&#call-andere-projekte
+			display: none
+
 			> a:last-of-type
 				display: inline-flex
 				//flex-grow: 1
