@@ -92,6 +92,29 @@
 			</section>
 		</header>
 		<main>
+			<section id="nachricht2">
+				<p>Neu: Verlosung</p>
+				<p>Damit das Mitmachen noch attraktiver wird, konnten wir neben unseren beiden Großsponsoren auch <b>Fahrrad
+					Dresel</b> in Höchstadt für unser Projekt gewinnen. Unter allen Teilnehmerinnen und Teilnehmern werden am Ende der Saison
+					<b>Sachpreise</b> verlost, die uns Fahrrad Dresel spendet.</p>
+				<p><u>Und ganz neu:</u> auch <b>Adidas</b> ist mit von der Partie und spendet für unsere Verlsoung eine große Zahl Wertgutscheine!</p>
+				<div class="logos">
+					<a class="logo adidas"
+					   href="https://www.adidas.de/"><img data-src="img/Sponsoren/Adidas.webp"
+																   alt=""
+																   class="lazyload" /></a>
+					<a class="logo dresel"
+					   href="https://www.fahrrad-dresel.com/"><img data-src="img/Sponsoren/Fahrrad%20Dresel.webp"
+																   alt=""
+																   class="lazyload" /></a>
+				</div>
+			</section>
+			<script>
+				const ersterTag = new Date("2023/05/26");
+				const einMonatDanach = new Date(ersterTag.getTime() + 30 * 24 * 60 * 60 * 1000);
+				if (Date.now() <= einMonatDanach) document.getElementById("nachricht2").classList.add("sichtbar");
+			</script>
+
 			<!-- Um keinen Hinweis zu zeigen: einfach Inhalt komplett löschen (auch whitespace) -->
 			<section id="nachricht">
 				<p>Es ist geschafft!</p>
@@ -101,22 +124,6 @@
 					href="#teilnahme">mach mit</a>!</p>
 
 			</section>
-
-			<section id="nachricht2">
-				<p>Neu: Verlosung</p>
-				<p>Damit das Mitmachen noch attraktiver wird, konnten wir neben unseren beiden Großsponsoren auch <b>Fahrrad
-					Dresel</b> in Höchstadt für unser Projekt gewinnen. Unter allen Teilnehmerinnen und Teilnehmern werden am Ende der Saison
-					<b>Sachpreise</b> verlost, die uns Fahrrad Dresel spendet.</p>
-				<a class="logo dresel"
-				   href="https://www.fahrrad-dresel.com/"><img data-src="img/Sponsoren/Fahrrad%20Dresel.webp"
-															 alt=""
-															 class="lazyload" /></a>
-			</section>
-			<script>
-				const ersterTag = new Date("2023/05/26");
-				const einMonatDanach = new Date(ersterTag.getTime() + 30 * 24 * 60 * 60 * 1000);
-				if (Date.now() <= einMonatDanach) document.getElementById("nachricht2").classList.add("sichtbar");
-			</script>
 
 			<section id="inhalt">
 
