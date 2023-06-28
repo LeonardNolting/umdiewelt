@@ -112,7 +112,7 @@
 		background: linear-gradient(45deg, white 50%, #ffffff99 80%, white)
 		// box-shadow: 0 0 2rem 1rem white
 		padding-bottom: 2rem
-		z-index: 2
+		z-index: 1
 		&::before
 			content: ""
 			position: absolute
@@ -155,9 +155,8 @@
 			p + p
 				padding-top: .6rem
 
-		.linie, .linie::before, .linie-unten
-			--correction: .3rem
 		.linie, .linie::before
+			--correction: .3rem
 			content: ""
 			position: absolute
 			height: 100%
@@ -173,14 +172,6 @@
 			background: white
 			border-top-right-radius: calc(var(--border-radius) - var(--width))
 			width: calc(100% - var(--width))
-		.linie-unten
-			background: linear-gradient(180deg, var(--farbe-sekundär) 50%, transparent)
-			width: var(--width)
-			margin-left: calc(var(--correction) * 2)
-			height: 6rem
-			position: absolute
-			bottom: 0
-			transform: translateY(50%)
 		.linie
 			//margin-top: calc(-.5 * var(--width))
 			//margin-right: calc(-1 * var(--width))
@@ -224,7 +215,7 @@
 		justify-content: center
 		background: white
 		position: relative
-		overflow: hidden
+		// overflow: hidden
 		margin: 0
 		z-index: 1
 		> picture
@@ -238,6 +229,8 @@
 			overflow: hidden
 			// margin-top: -14vw
 			width: 100%
+
+			box-shadow: 0 0 0.7rem rgba(40, 40, 40, .8)
 			&::after
 				content: ""
 				position: absolute
