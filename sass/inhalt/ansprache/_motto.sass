@@ -110,9 +110,18 @@
 		--width: 2rem
 		--border-radius: 3.2rem
 		background: linear-gradient(45deg, white 50%, #ffffff99 80%, white)
-		box-shadow: 0 0 2rem 1rem white
+		// box-shadow: 0 0 2rem 1rem white
 		padding-bottom: 2rem
 		z-index: 1
+		&::before
+			content: ""
+			position: absolute
+			left: 0
+			width: 100%
+			top: 0
+			height: 2rem
+			transform: translateY(-100%)
+			background: linear-gradient(0deg, #ffffff99, transparent)
 		.text, .beschreibung
 			background: white
 			display: flex
