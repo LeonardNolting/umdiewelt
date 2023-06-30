@@ -26,8 +26,8 @@ export default async () => {
 	document.querySelectorAll("#inhalt .verspaetet").forEach(element => observer.observe(element))
 
 	document.addEventListener('mousemove', e => {
-		document.documentElement.style.setProperty("--mouse-x", (e.clientX / window.innerWidth).toFixed(2));
-		document.documentElement.style.setProperty("--mouse-y", (e.clientY / window.innerHeight).toFixed(2));
+		document.documentElement.style.setProperty("--mouse-x", (e.clientX / window.innerWidth).toFixed(3));
+		document.documentElement.style.setProperty("--mouse-y", (e.clientY / window.innerHeight).toFixed(3));
 	})
 
 	cookies()

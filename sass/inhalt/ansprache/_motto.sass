@@ -102,6 +102,7 @@
 	em
 		font-weight: bold
 		font-style: normal
+	--one-car-less-sternfahrten-overlap: 1rem
 	#one-car-less
 		display: flex
 		flex-direction: column
@@ -112,7 +113,7 @@
 		--border-radius: 3.2rem
 		background: linear-gradient(45deg, white 50%, #ffffff99 80%, white)
 		// box-shadow: 0 0 2rem 1rem white
-		padding-bottom: 2rem
+		padding-bottom: calc(2rem + var(--one-car-less-sternfahrten-overlap))
 		z-index: 1
 		&::before
 			content: ""
@@ -170,7 +171,6 @@
 			border-top-right-radius: var(--border-radius)
 			//transform: translateX(calc(-50% + .3rem))
 			left: 0
-			--correction: .3rem
 		.linie::before
 			margin-top: calc(1 * var(--width))
 			//margin-right: calc(1 * var(--width))
@@ -239,6 +239,9 @@
 			justify-content: center
 			align-items: center
 			width: 100%
+			perspective: 1000px
+			//noinspection CssInvalidFunction
+			transform: translateY(calc(-1 * var(--one-car-less-sternfahrten-overlap)))
 			// use absolute unit which is the same for media queries (see below)
 			// use SASS variable so it can be used in media queries (CSS variables aren't supported in media queries)
 			$max-width: 1000px
@@ -274,8 +277,13 @@
 				z-index: 2
 				--box-shadow: 0 0 1.2rem .2rem rgba(20, 20, 20, 1)
 				--box-shadow-inset: inset 0 0 2rem .2rem rgba(20, 20, 20, .7)
-				// use SASS variable so it can be overwritten easily
+				// use CSS variable so it can be overwritten easily
 				--border-radius: 2rem
+
+				--intensity: 6deg
+				--rotate-x: calc(-1 * var(--intensity) * (var(--mouse-y) - .5))
+				--rotate-y: calc(var(--intensity) * (var(--mouse-x) - .5))
+				transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y))
 				// box-shadow inset doesn't work on img elements
 				&::after
 					content: ""
@@ -298,20 +306,36 @@
 				max-width: max(#{$max-width}, 60vw)
 				max-height: 70vh
 				filter: brightness(1.4)
+				aspect-ratio: 1153 / 609
 				img
-					width: 100%
-					height: 100%
+					top: 0
+					left: 0
+					--intensity: 2.4
+
+					width: calc(100% + var(--intensity) * 1vw)
+					height: calc(100% + var(--intensity) * 1vh)
+					--transform-x: calc(var(--intensity) * -1vw * var(--mouse-x))
+					--transform-y: calc(var(--intensity) * -1vh * var(--mouse-y))
+					transform: translate(var(--transform-x), var(--transform-y))
+					transition: transform .1s ease-out
+					will-change: transform
 					aspect-ratio: 1153 / 609
 			@media(max-width: $max-width)
 				>picture
 					--border-radius: 0
+					transform: none
+					img
+						width: 100%
+						height: 100%
+						transform: none
+						will-change: initial
 			@media(min-width: $max-width) and (max-width: calc(#{$max-width} + 8rem))
 				>picture
 					max-width: calc(#{$max-width} - 2 * var(--border-radius))
 
 		figcaption
 			// margin-top: -4vw
-			margin-top: 1.2rem
+			margin-top: calc(1.2rem - var(--one-car-less-sternfahrten-overlap))
 			position: relative
 			z-index: 3
 			font-size: 120%
