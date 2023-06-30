@@ -3,8 +3,8 @@
 	flex-direction: column
 	contain: paint
 	overflow: hidden
-	background-size: 6vmin 6vmin
-	background-image: linear-gradient(to right, grey 1px, transparent 1px), linear-gradient(to bottom, grey 1px, transparent 1px)
+	position: relative
+	z-index: 2
 	#autos, #fahrraeder
 		display: flex
 		align-items: center
@@ -218,7 +218,17 @@
 		flex-direction: column
 		align-items: center
 		justify-content: center
-		background: white
+		background: linear-gradient(0deg, transparent, rgba(255, 255, 255, .8) 50%)
+		&::before
+			content: ""
+			position: absolute
+			top: 0
+			left: 0
+			align-self: flex-start
+			justify-self: flex-start
+			width: 50%
+			height: 50%
+			background: white
 		position: relative
 		// overflow: hidden
 		margin: 0

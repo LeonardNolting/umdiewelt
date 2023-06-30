@@ -7,9 +7,28 @@
 	position: relative
 	max-width: 800px
 	justify-content: center
+	&::before, &::after
+		content: ""
+		position: absolute
+		width: 240%
+		height: 240%
+		justify-self: flex-start
+		align-self: flex-start
+		transform: translate(-50%, -50%)
+		z-index: 0
+		background: radial-gradient(closest-side, white 60%, transparent)
+	&::before
+		top: 10%
+		left: 40%
+		width: 280%
+	&::after
+		top: 70%
+		left: 70%
+
 	.linie
 		content: ""
 		position: absolute
+		z-index: 1
 		height: 100%
 		--correction: .3rem
 		margin-left: calc(var(--correction) * 2)
