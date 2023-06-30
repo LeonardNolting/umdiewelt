@@ -222,45 +222,81 @@
 		// overflow: hidden
 		margin: 0
 		z-index: 1
-		> picture
+		>.bild
 			position: relative
-
-			// Keep after element in center, even with scale(1.1)
 			display: flex
 			justify-content: center
 			align-items: center
-
-			overflow: hidden
-			// margin-top: -14vw
 			width: 100%
-
-			box-shadow: 0 0 0.7rem rgba(40, 40, 40, .8)
-			&::after
-				content: ""
+			// use absolute unit which is the same for media queries (see below)
+			// use SASS variable so it can be used in media queries (CSS variables aren't supported in media queries)
+			$max-width: 1000px
+			>.hintergrund
 				position: absolute
-				height: 100%
+				height: 80%
 				width: 100%
-				// Blurred background heller oder dunkler machen?
-				background-image: linear-gradient(0deg, rgba(100, 100, 100, .5), rgba(100, 100, 100, .5)), url("../img/Sternfahrten zugeschnitten.png?as=webp&quality=30&width=1153")
-				filter: blur(8px)
-				// https://stackoverflow.com/a/42963980/11485145
-				transform: scale(1.1)
-			//noinspection CssOverwrittenProperties
-			img
+				overflow: hidden
+				--box-shadow: 0 0 0.7rem rgba(40, 40, 40, .8)
+				--box-shadow-inset: inset 0 0 2rem .2rem rgba(40, 40, 40, .8)
+				box-shadow: var(--box-shadow)
+				&::before
+					content: ""
+					position: absolute
+					height: 100%
+					width: 100%
+					z-index: 1
+					box-shadow: var(--box-shadow-inset)
+					transform: scaleX(1.1) // shadow only at top and bottom
+				&::after
+					content: ""
+					position: absolute
+					height: 100%
+					width: 100%
+					// Blurred background heller oder dunkler machen?
+					background-image: linear-gradient(0deg, rgba(80, 80, 80, .4), rgba(80, 80, 80, .4)), url("../img/Sternfahrten zugeschnitten.png?as=webp&quality=30&width=1153")
+					filter: blur(8px)
+					// https://stackoverflow.com/a/42963980/11485145
+					transform: scale(1.1)
+			>picture
 				width: 100%
-				// Fallback property, in case max() is not supported
-				max-width: 72rem
-				max-width: max(72rem, 60vw)
-				max-height: 70vh
 				position: relative
-				z-index: 1
+				z-index: 2
+				--box-shadow: 0 0 1.2rem .2rem rgba(20, 20, 20, 1)
+				--box-shadow-inset: inset 0 0 2rem .2rem rgba(20, 20, 20, .7)
+				// use SASS variable so it can be overwritten easily
+				--border-radius: 2rem
+				// box-shadow inset doesn't work on img elements
+				&::after
+					content: ""
+					position: absolute
+					z-index: 3
+					top: 0
+					left: 0
+					height: 100%
+					width: 100%
+					border-radius: var(--border-radius)
+					box-shadow: var(--box-shadow-inset)
+					border: 1px solid rgba(0, 0, 0, 0.6)
+				box-shadow: var(--box-shadow)
+				border-radius: var(--border-radius)
+				overflow: hidden
+				// Fallback property, in case max() is not supported
+				//noinspection CssOverwrittenProperties
+				max-width: $max-width
+				//noinspection CssOverwrittenProperties
+				max-width: max(#{$max-width}, 60vw)
+				max-height: 70vh
 				filter: brightness(1.4)
-			//&::before
-			//	content: ""
-			//	position: absolute
-			//	height: 100%
-			//	width: 100%
-			//	background: radial-gradient(closest-side at 50% 58%, rgba(255, 255, 255, 0) 50%, white 80%)
+				img
+					width: 100%
+					height: 100%
+			@media(max-width: $max-width)
+				>picture
+					--border-radius: 0
+			@media(min-width: $max-width) and (max-width: calc(#{$max-width} + 8rem))
+				>picture
+					max-width: calc(#{$max-width} - 2 * var(--border-radius))
+
 		figcaption
 			// margin-top: -4vw
 			margin-top: 1.2rem
