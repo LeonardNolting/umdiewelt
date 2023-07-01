@@ -63,3 +63,9 @@ section#willkommen
 						@include kastenKeyframes(80, 19)
 	#welt.geladen + .hintergrund .kasten
 		animation: infinite var(--keyframes) (random(60) + 80) * 1s linear both
+	&:not(.isVisible)
+		#welt.geladen + .hintergrund .kasten
+			animation-play-state: paused
+	&:not(.isVisibleMargin)
+		.hintergrund
+			transform: none

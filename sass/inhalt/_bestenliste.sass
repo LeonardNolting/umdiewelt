@@ -288,6 +288,9 @@
 			margin-right: .4rem
 		.schule
 			font-style: italic
+	&:not(.isVisible)
+		li .inhalt::after
+			animation-play-state: paused
 
 // * Unauffällig Bewegung reinbringen
 @keyframes shine
