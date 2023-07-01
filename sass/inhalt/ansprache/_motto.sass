@@ -52,9 +52,9 @@
 		.wolke
 			position: absolute
 			width: 0
-			margin-left: calc(0.965 * var(--width) + var(--hide))
+			margin-left: calc(0.963 * var(--width) + var(--hide))
 			left: 0
-			bottom: calc(var(--height) / 3.7 + var(--padding) + 100% - (2 * var(--padding)) * 2.7)
+			bottom: calc(var(--height) / 3.7 + var(--padding) + 100% - (2 * var(--padding)) * 2.67)
 			height: 0
 			border-radius: 50%
 			@for $i from 1 through 12
@@ -68,6 +68,7 @@
 					@keyframes wolke#{$i}
 						0%
 							$startSize: math.div(random(4), 100)
+							// TODO animation mit transform scale statt width und height ausführen können? besser für performance
 							width: calc(#{$startSize} * var(--height))
 							height: calc(#{$startSize} * var(--height))
 							background-color: rgba(50, 50, 50, random(1) / 2 + 0.1)
