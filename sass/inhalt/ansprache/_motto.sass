@@ -35,16 +35,41 @@
 		--width: calc(var(--aspect-ratio) * var(--height))
 		--hide: calc(var(--height) * -4 / 3)
 		picture
+			position: relative
+			z-index: 1
 			img
 				height: var(--height)
 				aspect-ratio: var(--aspect-ratio)
 			margin-left: var(--hide)
-		video
+		//video
+		//	position: absolute
+		//	width: 25%
+		//	margin-left: calc(0.965 * var(--width) + var(--hide))
+		//	bottom: calc(var(--height) / 3.7)
+		//	transform: translateY(25%)
+		.wolke
 			position: absolute
-			width: 25%
+			width: 4%
 			margin-left: calc(0.965 * var(--width) + var(--hide))
-			bottom: calc(var(--height) / 3.7)
-			transform: translateY(25%)
+			left: 0
+			bottom: calc(var(--height) / 3.7 + var(--padding) + 100% - (2 * var(--padding)) * 2.7)
+			height: 4%
+			border-radius: 50%
+			animation: wolke 4s infinite ease-out
+			@keyframes wolke
+				0%
+					width: calc(.02 * var(--height))
+					height: calc(.02 * var(--height))
+					background-color: rgba(50, 50, 50, .3)
+					transform: none
+				50%
+					background-color: rgba(100, 100, 100, .3)
+				100%
+					transform: translateY(-20%)
+					width: var(--height)
+					height: var(--height)
+					background-color: transparent
+
 		p
 			margin-left: var(--gap)
 			margin-top: calc(var(--height) / -4)
