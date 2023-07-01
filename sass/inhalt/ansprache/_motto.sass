@@ -57,7 +57,7 @@
 			bottom: calc(var(--height) / 3.7 + var(--padding) + 100% - (2 * var(--padding)) * 2.7)
 			height: 0
 			border-radius: 50%
-			@for $i from 1 through 8
+			@for $i from 1 through 12
 				&:nth-child(#{$i})
 					$animation-duration: (random(2) + 2) * 1s
 					animation: wolke#{$i} $animation-duration infinite cubic-bezier(0, 0, 0.7, 1)
