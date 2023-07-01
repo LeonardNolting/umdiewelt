@@ -20,10 +20,33 @@ export const observer = new IntersectionObserver(((eintraege, observer) => {
 	threshold: 0.3
 })
 
+export const observerCheckIfVisible = new IntersectionObserver((eintraege, observer) => {
+	eintraege.forEach(eintrag => {
+		eintrag.target.classList[eintrag.isIntersecting ? "add" : "remove"]("isVisible")
+	})
+}, {
+	root: null,
+	rootMargin: "0px",
+	threshold: [0]
+})
+
+export const observerCheckIfVisibleMargin = new IntersectionObserver((eintraege, observer) => {
+	eintraege.forEach(eintrag => {
+		eintrag.target.classList[eintrag.isIntersecting ? "add" : "remove"]("isVisibleMargin")
+	})
+}, {
+	root: null,
+	rootMargin: "50%",
+	threshold: [0]
+})
+
 export default async () => {
 	step("Lädt Inhalt")
 
 	document.querySelectorAll("#inhalt .verspaetet").forEach(element => observer.observe(element))
+
+	document.querySelectorAll(".checkIfVisible").forEach(element => observerCheckIfVisible.observe(element))
+	document.querySelectorAll(".checkIfVisibleMargin").forEach(element => observerCheckIfVisibleMargin.observe(element))
 
 	document.addEventListener('mousemove', e => {
 		document.documentElement.style.setProperty("--mouse-x", (e.clientX / window.innerWidth).toFixed(3));

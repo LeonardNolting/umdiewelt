@@ -71,7 +71,7 @@
 							// TODO animation mit transform scale statt width und height ausführen können? besser für performance
 							width: calc(#{$startSize} * var(--height))
 							height: calc(#{$startSize} * var(--height))
-							background-color: rgba(50, 50, 50, random(1) / 2 + 0.1)
+							background-color: rgba(50, 50, 50, math.div(random(1), 2) + 0.1)
 							transform: translate(random() * 30%, random() * 30%)
 						100%
 							$endSize: math.div(random() + .5, 3)
@@ -79,6 +79,9 @@
 							width: calc(#{$endSize} * var(--height))
 							height: calc(#{$endSize} * var(--height))
 							background-color: transparent
+		&:not(.isVisible)
+			.wolke
+				animation-play-state: paused !important
 
 			//animation: var(--keyframes) 4s infinite ease-out
 			//@keyframes wolke
@@ -367,7 +370,7 @@
 					--transform-x: calc(var(--intensity) * -1vw * var(--mouse-x))
 					--transform-y: calc(var(--intensity) * -1vh * var(--mouse-y))
 					transform: translate(var(--transform-x), var(--transform-y))
-					transition: transform .1s ease-out
+					// transition: transform .1s ease-out
 					will-change: transform
 					aspect-ratio: 1153 / 609
 			@media(max-width: $max-width)
@@ -382,6 +385,11 @@
 			@media(min-width: $max-width) and (max-width: calc(#{$max-width} + 8rem))
 				>picture
 					max-width: calc(#{$max-width} - 2 * var(--border-radius))
+			&:not(.isVisibleMargin)
+				>picture
+					transform: none
+					img
+						transform: none
 
 		figcaption
 			// margin-top: -4vw
