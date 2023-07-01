@@ -1,3 +1,5 @@
+@use "sass:math"
+
 #motto
 	display: flex
 	flex-direction: column
@@ -49,26 +51,48 @@
 		//	transform: translateY(25%)
 		.wolke
 			position: absolute
-			width: 4%
+			width: 0
 			margin-left: calc(0.965 * var(--width) + var(--hide))
 			left: 0
 			bottom: calc(var(--height) / 3.7 + var(--padding) + 100% - (2 * var(--padding)) * 2.7)
-			height: 4%
+			height: 0
 			border-radius: 50%
-			animation: wolke 4s infinite ease-out
-			@keyframes wolke
-				0%
-					width: calc(.02 * var(--height))
-					height: calc(.02 * var(--height))
-					background-color: rgba(50, 50, 50, .3)
-					transform: none
-				50%
-					background-color: rgba(100, 100, 100, .3)
-				100%
-					transform: translateY(-20%)
-					width: var(--height)
-					height: var(--height)
-					background-color: transparent
+			@for $i from 1 through 8
+				&:nth-child(#{$i})
+					$animation-duration: (random(2) + 2) * 1s
+					animation: wolke#{$i} $animation-duration infinite cubic-bezier(0, 0, 0.7, 1)
+					//animation-delay: random(2) * 1s
+					//animation-delay: $animation-duration
+					//animation-delay: math.div($i, 4) * 1s
+					animation-delay: math.div($i, 2) * 1s
+					@keyframes wolke#{$i}
+						0%
+							$startSize: math.div(random(4), 100)
+							width: calc(#{$startSize} * var(--height))
+							height: calc(#{$startSize} * var(--height))
+							background-color: rgba(50, 50, 50, random(1) / 2 + 0.1)
+							transform: translate(random() * 30%, random() * 30%)
+						100%
+							$endSize: math.div(random() + .5, 3)
+							transform: translate(random() * 30%, random() * 30% - 30%)
+							width: calc(#{$endSize} * var(--height))
+							height: calc(#{$endSize} * var(--height))
+							background-color: transparent
+
+			//animation: var(--keyframes) 4s infinite ease-out
+			//@keyframes wolke
+			//	0%
+			//		width: calc(.02 * var(--height))
+			//		height: calc(.02 * var(--height))
+			//		background-color: rgba(50, 50, 50, .3)
+			//		transform: none
+			//	50%
+			//		background-color: rgba(100, 100, 100, .3)
+			//	100%
+			//		transform: translateY(-20%)
+			//		width: var(--height)
+			//		height: var(--height)
+			//		background-color: transparent
 
 		p
 			margin-left: var(--gap)
