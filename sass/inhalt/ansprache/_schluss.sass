@@ -8,6 +8,7 @@
 	align-items: center
 	text-align: center
 	padding: .4rem var(--padding) 0
+	--crop-image-bottom: 5.2vw
 	&::before, &::after
 		content: ""
 		position: absolute
@@ -29,7 +30,7 @@
 	&::after
 		--offset: 30vw
 		width: 95%
-		bottom: calc(-1 * var(--offset))
+		bottom: calc(-1 * var(--offset) - var(--crop-image-bottom))
 		//height: calc(34vw + var(--offset))
 		height: calc(33vw + var(--offset))
 		//background-color: #11203b
@@ -53,7 +54,7 @@
 		height: unset
 		contain: strict
 		aspect-ratio: 3200 / 1260
-		margin-bottom: -.4vw
+		margin-bottom: calc(-.4vw - var(--crop-image-bottom))
 		filter: saturate(1.2) brightness(1.2)
 	@media (max-width: 800px)
 		img, svg
