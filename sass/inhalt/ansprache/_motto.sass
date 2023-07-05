@@ -317,13 +317,14 @@
 				&::after
 					content: ""
 					position: absolute
-					height: 100%
-					width: 100%
 					// Blurred background heller oder dunkler machen?
 					background-image: linear-gradient(0deg, rgba(80, 80, 80, .4), rgba(80, 80, 80, .4)), url("../img/Sternfahrten zugeschnitten.png?as=webp&quality=30&width=1153")
 					filter: blur(8px)
 					// https://stackoverflow.com/a/42963980/11485145
-					transform: scale(1.1)
+					//transform: scale(1.1)
+					--intensity: 1.2 !important
+					//transition: transform .2s ease-out
+					transform: var(--transform) scale(1.1)
 			>picture
 				width: 100%
 				position: relative
@@ -363,16 +364,17 @@
 				img
 					top: 0
 					left: 0
-					--intensity: 2.4
-
-					width: calc(100% + var(--intensity) * 1vw)
-					height: calc(100% + var(--intensity) * 1vh)
-					--transform-x: calc(var(--intensity) * -1vw * var(--mouse-x))
-					--transform-y: calc(var(--intensity) * -1vh * var(--mouse-y))
-					transform: translate(var(--transform-x), var(--transform-y))
-					// transition: transform .1s ease-out
-					will-change: transform
 					aspect-ratio: 1153 / 609
+					transform: var(--transform)
+					//transition: transform .2s ease-out
+			>.hintergrund::after, >picture img
+				--intensity: 2.4
+				width: calc(100% + var(--intensity) * 1vw)
+				height: calc(100% + var(--intensity) * 1vh)
+				--transform-x: calc(var(--intensity) * -1vw * var(--mouse-x))
+				--transform-y: calc(var(--intensity) * -1vh * var(--mouse-y))
+				--transform: translate(var(--transform-x), var(--transform-y))
+				will-change: transform
 			@media(max-width: $max-width)
 				>picture
 					--border-radius: 0
@@ -386,10 +388,8 @@
 				>picture
 					max-width: calc(#{$max-width} - 2 * var(--border-radius))
 			&:not(.isVisibleMargin)
-				>picture
+				>picture, >picture img, >.hintergrund::after
 					transform: none
-					img
-						transform: none
 
 		figcaption
 			// margin-top: -4vw
