@@ -1,4 +1,4 @@
-#nachricht, #nachricht2, #nachricht3
+#nachricht, #nachricht2, #nachricht3, #nachricht4
 	&:not(.sichtbar)
 		display: none
 	font-size: 1.4rem
@@ -44,8 +44,6 @@
 #nachricht2
 	p
 		text-align: justify
-		&:first-child
-			color: var(--farbe-primär)
 	.logos
 		display: flex
 		flex-direction: row
@@ -59,3 +57,14 @@
 				aspect-ratio: 1214/320
 			&.adidas img
 				aspect-ratio: 1200/843
+
+#nachricht4, #nachricht2
+	p:first-child
+		color: var(--farbe-primär)
+
+#nachricht4
+	#nachricht4-zeit
+		font-weight: bold
+
+	&.sichtbar + #nachricht3
+		display: none

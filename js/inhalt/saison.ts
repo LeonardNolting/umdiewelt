@@ -209,7 +209,15 @@ const maleSaison = async (saison: string, saisonRef: DatabaseReference, containe
 		}
 		// Countdowns...
 		if (zeit.start && zeit.start > jetzt) countdown("start")
-		if (zeit.ende && zeit.ende > jetzt) countdown("ende")
+		if (zeit.ende && zeit.ende > jetzt) {
+			countdown("ende")
+
+			const differenz = Math.floor((zeit.ende - jetzt) / 1000)
+			if (60 * 60 * 24 * 7 > differenz) {
+				document.getElementById("nachricht4").classList.add("sichtbar")
+				document.getElementById("nachricht4-zeit").textContent = (new Date(zeit.ende)).toLocaleString("de-DE", {weekday: "long"}) + " " + (new Date(zeit.ende)).toLocaleTimeString("de-DE", {hour: "2-digit", minute: "2-digit"}) + " Uhr"
+			}
+		}
 
 		// Schulen...
 		{
