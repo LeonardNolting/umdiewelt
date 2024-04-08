@@ -38,11 +38,18 @@
 		.logos
 			//display: grid
 			//grid-template-areas: "martinbauer martinbauer martinbauer" "sparkasse sparkasse sparkasse"
-			display: inline-flex
-			flex-direction: row
-			flex-wrap: wrap
-			justify-content: space-evenly
+
+			//display: inline-flex
+			//flex-direction: row
+			//flex-wrap: wrap
+			//justify-content: space-evenly
+			//align-items: center
+
+			display: grid
+			grid-template-areas: "martinbauer sparkasse frankenbrunnen" "dresel adidas frankenbrunnen"
 			align-items: center
+			justify-content: start
+
 			margin-top: 1rem
 			gap: 1rem
 			.logo
@@ -54,15 +61,23 @@
 				//width: 20rem
 				//max-width: 100%
 
-				flex-basis: 40%
-				flex-grow: 1
-				flex-wrap: wrap
-				max-width: 20rem
+				//flex-basis: 40%
+				//flex-grow: 1
+				//flex-wrap: wrap
+				//max-width: 20rem
+
+				//display: flex
+				//align-items: center
+				//justify-content: center
+
+				max-width: 15rem
+
 				img, svg
 					max-width: 100%
 					object-fit: contain
 				&.sparkasse
 					//grid-area: sparkasse
+					grid-area: sparkasse
 					img
 						aspect-ratio: 3757/1183
 				//&.frankenbrunnen
@@ -71,14 +86,24 @@
 				//		aspect-ratio: 283/283
 				&.martinbauer
 					//grid-area: martinbauer
+					grid-area: martinbauer
 					//margin-left: 1rem
 					img
 						aspect-ratio: 6174/1402
-				&.dresel img
-					aspect-ratio: 1214/320
-				&.adidas img
-					aspect-ratio: 1200/843
-					width: 50%
+				&.dresel
+					grid-area: dresel
+					img
+						aspect-ratio: 1214/320
+				&.adidas
+					grid-area: adidas
+					img
+						aspect-ratio: 1200/843
+					//width: 50%
+				&.frankenbrunnen
+					grid-area: frankenbrunnen
+					img
+						aspect-ratio: 1771/2125
+					//width: 50%
 		&:not(:nth-child(2))
 			z-index: 1
 			//color: #ccc
@@ -117,10 +142,6 @@
 				margin: 2rem auto 0
 	section + section
 		border-left: var(--border)
-
-	a.logo
-		display: flex
-		justify-content: center
 
 @media (max-width: 1000px)
 	#call-to-action
