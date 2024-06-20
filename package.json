@@ -4,7 +4,6 @@
 	"description": "",
 	"keywords": [],
 	"license": "",
-	"author": "Leonard Nolting",
 	"scripts": {
 		"build": "parcel build index.html --public-url .",
 		"dev": "parcel index.html --open",
