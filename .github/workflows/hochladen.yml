@@ -42,12 +42,12 @@ jobs:
                     echo "Lade in Ordner ${{ steps.remote.outputs.value }} hoch"
 
             -   name: Hochladen
-                uses: appleboy/scp-action@v0.1.7
+                uses: garygrossgarten/github-action-scp@release
                 with:
-                    source: "dist"
-                    target: ${{ steps.remote.outputs.value }}
+                    local: "dist"
+                    remote: ${{ steps.remote.outputs.value }}
                     host: ${{ secrets.HOST }}
                     port: ${{ secrets.PORT }}
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
-                    rm: true
+                    rmRemote: true
