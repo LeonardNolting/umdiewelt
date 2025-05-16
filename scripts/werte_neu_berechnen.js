@@ -1,6 +1,8 @@
 // Export aus Datenbank
 const data = {
 	"allgemein": {
+		"anzahlFahrer": 832,
+		"anzahlStrecken": 8077,
 		"saisons": {
 			"aktiv": "2025",
 			"aktuell": "2025",
@@ -74,18 +76,24 @@ const data = {
 					}
 				},
 				"2025": {
+					"anzahlFahrer": 146,
+					"anzahlStrecken": 461,
 					"runden": 1,
 					"schulen": {
 						"details": {
 							"Gymnasium Höchstadt": {
-								"angefeuert": 344,
-								"potAnzahlFahrer": 1400
+								"angefeuert": 359,
+								"anzahlFahrer": 146,
+								"anzahlStrecken": 461,
+								"potAnzahlFahrer": 1400,
+								"strecke": 14429231
 							}
 						},
 						"liste": {
 							"Gymnasium Höchstadt": true
 						}
-					}
+					},
+					"strecke": 14429231
 				}
 			},
 			"laufend": "2025",
@@ -100,6 +108,8 @@ const data = {
 			"details": {
 				"Gymnasium Höchstadt": {
 					"adresse": "Bergstraße 4, Höchstadt",
+					"anzahlFahrer": 145,
+					"anzahlStrecken": 450,
 					"saisons": {
 						"liste": {
 							"2022": true,
@@ -107,1210 +117,1697 @@ const data = {
 							"2024": true,
 							"2025": true
 						}
-					}
+					},
+					"strecke": 13456231
 				}
 			},
 			"liste": {
 				"Gymnasium Höchstadt": true
 			}
-		}
+		},
+		"strecke": 318361140
 	},
 	"spezifisch": {
 		"fahrer": {
 			"-ONPErT2_pydjX-lMcMu": {
+				"anzahlStrecken": 11,
 				"klasse": "Lehrer",
 				"name": "Michael Hipp",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 700000
 			},
 			"-ONPQlHxhBoLZcHXcJrB": {
+				"anzahlStrecken": 6,
 				"klasse": "5E",
 				"name": "Julian Herrmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 150000
 			},
 			"-ONP_sv0-bhEvLq3fDr6": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Wolfgang Cayé",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 52000
 			},
 			"-ONPcPw2VePvhwXo1_Y6": {
+				"anzahlStrecken": 5,
 				"klasse": "12K",
 				"name": "Wolf Besel",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 73000
 			},
 			"-ONPzAm2Epg0Oj3VdZaB": {
+				"anzahlStrecken": 9,
 				"klasse": "12K",
 				"name": "Maria Lauf",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 300000
 			},
 			"-ONQJ1b6w-aIgtg31WdX": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Laura Beyer",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-ONQdjvf_AhVoGad_IJP": {
+				"anzahlStrecken": 7,
 				"klasse": "11E",
 				"name": "Valentino Müller",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 292000
 			},
 			"-ONT9h8TdYdyCn7LTZQE": {
+				"anzahlStrecken": 14,
 				"klasse": "8F",
 				"name": "Aaron Blumenthal",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 272000
 			},
 			"-ONTEwSkE8FqCCU9rSeM": {
+				"anzahlStrecken": 6,
 				"klasse": "Lehrer",
 				"name": "Philipp Kampf",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 510000
 			},
 			"-ONU3KsqLIdO7uAMLtMY": {
+				"anzahlStrecken": 1,
 				"klasse": "11B",
 				"name": "Philipp Wöhner",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-ONUE1_SGuXJzoI_-WSo": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Luca Auinger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 2000
 			},
 			"-ONUE8vjH01usqgsttB7": {
+				"anzahlStrecken": 2,
 				"klasse": "10B",
 				"name": "Lena Menzel",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 9000
 			},
 			"-ONUEFzTOD_wZPZknDZa": {
+				"anzahlStrecken": 2,
 				"klasse": "10B",
 				"name": "Clemens Döring",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 42000
 			},
 			"-ONUEIR3kz5WG1kvlNn2": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Hannes Neu",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3000
 			},
 			"-ONUEOEzr8IxDF1xQ3Wv": {
+				"anzahlStrecken": 2,
 				"klasse": "10B",
 				"name": "Paul Krautblatter",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 55000
 			},
 			"-ONUbvEc4V2vVW16gS9W": {
+				"anzahlStrecken": 2,
 				"klasse": "8A",
 				"name": "Rahel Blumenthal",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 18000
 			},
 			"-ONUgODgnxfABeOh0tvC": {
+				"anzahlStrecken": 6,
 				"klasse": "11D",
 				"name": "Phil Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 84000
 			},
 			"-ONUlZDwHGRFYnbElyqx": {
+				"anzahlStrecken": 2,
 				"klasse": "10C",
 				"name": "Jannis Rückel",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 18690
 			},
 			"-ONUw3pUFqicOxFbWgzq": {
+				"anzahlStrecken": 5,
 				"klasse": "7B",
 				"name": "Eva Philipp",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 97892
 			},
 			"-ONV-GUAMC1ptAZXQfq_": {
+				"anzahlStrecken": 1,
 				"klasse": "7A",
 				"name": "Philipp  Heizmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 12000
 			},
 			"-ONV-NDyxjFYsF7gFAdT": {
+				"anzahlStrecken": 6,
 				"klasse": "7A",
 				"name": "Anouk Élodie Triemer",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 109000
 			},
 			"-ONV5xO2TYrTnsY8h985": {
+				"anzahlStrecken": 3,
 				"klasse": "8A",
 				"name": "Marlene Hammer",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 32000
 			},
 			"-ONVB-A4vHfKnBm8CVlQ": {
+				"anzahlStrecken": 3,
 				"klasse": "6C",
 				"name": "Edward Friedel",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 14000
 			},
 			"-ONVHF1Az1hlwRcTRiLg": {
+				"anzahlStrecken": 6,
 				"klasse": "6A",
 				"name": "Emil Glück",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 502000
 			},
 			"-ONVPwa_m8kK16bxj9Yp": {
+				"anzahlStrecken": 2,
 				"klasse": "12K",
 				"name": "Andrei Bolbot",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 53144
 			},
 			"-ONVYNIVOPBBsBnKJNoD": {
+				"anzahlStrecken": 1,
 				"klasse": "8E",
 				"name": "Katharina Litz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 40000
 			},
 			"-ONVmEAbhWuBNouqdE2y": {
+				"anzahlStrecken": 3,
 				"klasse": "11D",
 				"name": "Matthias Dresel",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 171000
 			},
 			"-ONVwPiLljPdydy2snkO": {
+				"anzahlStrecken": 1,
 				"klasse": "8D",
 				"name": "Johannes Laubinger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 8000
 			},
 			"-ONYI0k7HFNi-4aYTrc3": {
+				"anzahlStrecken": 6,
 				"klasse": "8E",
 				"name": "Sophie Bliesner",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 76000
 			},
 			"-ONYaFf23OPuHr5hKT1x": {
+				"anzahlStrecken": 1,
 				"klasse": "6D",
 				"name": "Emma Eckstein ❤",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 2000
 			},
 			"-ONYaTnuTSCas4SnV31-": {
+				"anzahlStrecken": 1,
 				"klasse": "6D",
 				"name": "Noe Nwabo Fotso",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-ONYd589DGVmGFIKAjJe": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Maurice Ziajski",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 60000
 			},
 			"-ONYjjc6O1jtdLILVu5z": {
+				"anzahlStrecken": 1,
 				"klasse": "6G",
 				"name": "Lenny Fuchs",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 13961
 			},
 			"-ONYjjhpEaRQl36kt8k8": {
+				"anzahlStrecken": 6,
 				"klasse": "6G",
 				"name": "Jakob  Kallies",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35879
 			},
 			"-ONYjy3Jl-3VADXc05ll": {
+				"anzahlStrecken": 2,
 				"klasse": "6G",
 				"name": "Emir Künc",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 28817
 			},
 			"-ONYk3aanbEa5EhrbyJp": {
+				"anzahlStrecken": 6,
 				"klasse": "6G",
 				"name": "Felgner Jonas",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 78000
 			},
 			"-ONYka4Lpcx6p7uTkNI0": {
+				"anzahlStrecken": 1,
 				"klasse": "7F",
 				"name": "Paul Schildhauer",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 20000
 			},
 			"-ONYkbNAQsLjW5mTfKiU": {
+				"anzahlStrecken": 1,
 				"klasse": "7F",
 				"name": "Vinzent Baigger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 67
 			},
 			"-ONYkhoJFxNPyoS8dJG8": {
+				"anzahlStrecken": 1,
 				"klasse": "7F",
 				"name": "noah moritz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-ONYkmd8Z_0IB0LuAP6y": {
+				"anzahlStrecken": 1,
 				"klasse": "7F",
 				"name": "Arthur Peters",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 2000
 			},
 			"-ONYkmr7J8y9j8U2za22": {
+				"anzahlStrecken": 1,
 				"klasse": "7F",
 				"name": "David Geringer",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 2000
 			},
 			"-ONYr0_QaTUb8GcMZlJF": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Rahel Lang",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 2711
 			},
 			"-ONYtAE6qNl8ieeFVUgS": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Hannes Kirsche",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-ONZJPFgiR4symSW08nZ": {
+				"anzahlStrecken": 1,
 				"klasse": "5A",
 				"name": "Leano Oehrl",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3000
 			},
 			"-ONZK7XxtvT9Ixqyts1i": {
+				"anzahlStrecken": 1,
 				"klasse": "5A",
 				"name": "Antonia Krafka",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 1147
 			},
 			"-ONZa31Mnh49wX_TCDjq": {
+				"anzahlStrecken": 2,
 				"klasse": "11D",
 				"name": "Jonas Hoffmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 54000
 			},
 			"-ONZdk9TTyaUZ3qGU5HT": {
+				"anzahlStrecken": 10,
 				"klasse": "5A",
 				"name": "Simon Schleupner",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 101264
 			},
 			"-ONZtrYNIvnpCO6rtVRJ": {
+				"anzahlStrecken": 3,
 				"klasse": "9E",
 				"name": "Raphael Heizmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 48000
 			},
 			"-ON_7ZoiwpfzeNdSLEcD": {
+				"anzahlStrecken": 4,
 				"klasse": "8C",
 				"name": "Marie Seubert",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 50000
 			},
 			"-ON_hHbhNh4REP8VHncO": {
+				"anzahlStrecken": 2,
 				"klasse": "5A",
 				"name": "Sophia bacarisan",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3573
 			},
 			"-ON_ms9NNhrKGqcKcREl": {
+				"anzahlStrecken": 5,
 				"klasse": "9B",
 				"name": "Emilia Stranak",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 100000
 			},
 			"-ONa0qq5D78-PPlvukeH": {
+				"anzahlStrecken": 3,
 				"klasse": "12K",
 				"name": "Erik Sander",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 310000
 			},
 			"-ONaLQLxW6Lcti2ZrgZo": {
+				"anzahlStrecken": 3,
 				"klasse": "6G",
 				"name": "Emilian Lay",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 9000
 			},
 			"-ONd_gPtKJU8bDeM2l_t": {
+				"anzahlStrecken": 1,
 				"klasse": "6A",
 				"name": "Emanuela Mendes Vigliotti",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 1086
 			},
 			"-ONdhxAZmH7_I8iB2n9K": {
+				"anzahlStrecken": 2,
 				"klasse": "7A",
 				"name": "Lene Stranak",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 11000
 			},
 			"-ONdmCJ8RZgJ65UoOvJe": {
+				"anzahlStrecken": 4,
 				"klasse": "8F",
 				"name": "Yannik Ramspeck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 115000
 			},
 			"-ONdmeBkDulkpbvxiE1l": {
+				"anzahlStrecken": 1,
 				"klasse": "8F",
 				"name": "Max kaiser",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 30000
 			},
 			"-ONdn9i1WDSuWHiwyLJ-": {
+				"anzahlStrecken": 2,
 				"klasse": "12K",
 				"name": "Theodor Wulff",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 121000
 			},
 			"-ONeAkKklsBJYJuS4sgX": {
+				"anzahlStrecken": 3,
 				"klasse": "8E",
 				"name": "Alyssa Workman",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 93000
 			},
 			"-ONeI4x-fNPK7wB7n46L": {
+				"anzahlStrecken": 2,
 				"klasse": "5A",
 				"name": "Noß Maja",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 8000
 			},
 			"-ONeIG2auqSMD1IfVQTf": {
+				"anzahlStrecken": 5,
 				"klasse": "5A",
 				"name": "Händel Klara",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 28000
 			},
 			"-ONeWbIrSFEP9PQsV-nC": {
+				"anzahlStrecken": 2,
 				"klasse": "12K",
 				"name": "Yasin Bahar",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 92000
 			},
 			"-ONel8YeHQ4BkJdcKYZx": {
+				"anzahlStrecken": 3,
 				"klasse": "11A",
 				"name": "Frederike Rodewald",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 40000
 			},
 			"-ONeldzEt0gaTBXb9BO5": {
+				"anzahlStrecken": 3,
 				"klasse": "8F",
 				"name": "Ferdinand Rodewald",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 69000
 			},
 			"-ONfVoIYbdpyPRlDkRcb": {
+				"anzahlStrecken": 1,
 				"klasse": "7B",
 				"name": "Svea Südema",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3000
 			},
 			"-ONfWWFW2Cov3Vkfx9Hl": {
+				"anzahlStrecken": 1,
 				"klasse": "7B",
 				"name": "Svea Südema",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3000
 			},
 			"-ONfXN5Sf53MMXKBaXCj": {
+				"anzahlStrecken": 1,
 				"klasse": "7B",
 				"name": "Svea Südema",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 4000
 			},
 			"-ONgfXps0WVyx70qCDla": {
+				"anzahlStrecken": 6,
 				"klasse": "11E",
 				"name": "Jonathan Rittmaier",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 870000
 			},
 			"-ONiJBaWyssKBGyjB3V7": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Georg Schlee",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 119000
 			},
 			"-ONiJcFaMU1ybNfPSDsr": {
+				"anzahlStrecken": 3,
 				"klasse": "Lehrer",
 				"name": "Georg Schlee",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 357000
 			},
 			"-ONiJtYS-tvAyYxI9NkZ": {
+				"anzahlStrecken": 2,
 				"klasse": "Lehrer",
 				"name": "Georg Schlee",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 238000
 			},
 			"-ONi_ui3BFLC0zK9LEQZ": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Georg Schlee",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 119000
 			},
 			"-ONiaWmHjQcOaapAidkv": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Louis Berier",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 24000
 			},
 			"-ONinqNuMJO2IzlWDuVH": {
+				"anzahlStrecken": 6,
 				"klasse": "5E",
 				"name": "Höchstadt süd",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 38000
 			},
 			"-ONisrzuVD7qSUSpRSKy": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3000
 			},
 			"-ONjx1P57bs7fep0xocz": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 33000
 			},
 			"-ONjy0eWUQwPpWhHQYgm": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 33000
 			},
 			"-ONk1c14VZ0gkuMi_zG5": {
+				"anzahlStrecken": 6,
 				"klasse": "6G",
 				"name": "Helena Albert",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 63000
 			},
 			"-ONkOy6kJLhk1CM2K3I3": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 8000
 			},
 			"-ONl66ngCs9vgG3UTXKQ": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Timm Becker",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 88000
 			},
 			"-ONmVCOtED15swYsNMxS": {
+				"anzahlStrecken": 3,
 				"klasse": "6B",
 				"name": "Leopold Grill",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 138000
 			},
 			"-ONnXeZ_KNdkIyFfLo4Z": {
+				"anzahlStrecken": 2,
 				"klasse": "10B",
 				"name": "Jannes Dellermann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 40000
 			},
 			"-ONnmKVN_zstbeAbC-4e": {
+				"anzahlStrecken": 1,
 				"klasse": "6G",
 				"name": "Fiona süß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-ONnoA9UFwFi3uCyV_jB": {
+				"anzahlStrecken": 1,
 				"klasse": "6G",
 				"name": "Fiona süß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3000
 			},
 			"-ONoSGV3KlX8-V6qVEJk": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Timm Becker",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 88000
 			},
 			"-ONogb_fj6hd9P96B37X": {
+				"anzahlStrecken": 2,
 				"klasse": "Lehrer",
 				"name": "Markus Böckl",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 301000
 			},
 			"-ONohDCtN0REt644EsPu": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Markus Böckl",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 101000
 			},
 			"-ONohXMaVZriOcr6BYMV": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Caroline Böckl",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-ONoiL8nCbklSZNxplCJ": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Caroline Böckl",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-ONppcYQGiEP0KaijyzG": {
+				"anzahlStrecken": 1,
 				"klasse": "6C",
 				"name": "Arshia Gupta",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-ONppoNwi4Y2cH4EogXL": {
+				"anzahlStrecken": 3,
 				"klasse": "6C",
 				"name": "Arshia Gupta",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 115000
 			},
 			"-ONs93rQ3VDqkQXzAole": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Maximilian Süß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35000
 			},
 			"-ONs9OpbbiPcUxcYOAeU": {
+				"anzahlStrecken": 3,
 				"klasse": "12K",
 				"name": "Maximilian Süß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 265000
 			},
 			"-ONsl7a-z51BN0Jnvo8O": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Timm Becker",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 88000
 			},
 			"-ONtlNlWCn0ca1wQbZQM": {
+				"anzahlStrecken": 1,
 				"klasse": "8B",
 				"name": "Philipp Beck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-ONuMbQw-gh__aPU0U7w": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35000
 			},
 			"-ONuNGxRhQdizG3HQ479": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35000
 			},
 			"-ONxAluV5g_L-Q4w7m4t": {
+				"anzahlStrecken": 2,
 				"klasse": "Lehrer",
 				"name": "Georg Schlee",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 298000
 			},
 			"-ONxjkkAtWvQtGdp4Zb2": {
+				"anzahlStrecken": 1,
 				"klasse": "10C",
 				"name": "Franziska Wulf",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 16000
 			},
 			"-ONxk-bCTvqE2A47qyLa": {
+				"anzahlStrecken": 1,
 				"klasse": "5A",
 				"name": "Vincent Teufel",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 28000
 			},
 			"-ONxkNAkrnEXEYHwA_qP": {
+				"anzahlStrecken": 1,
 				"klasse": "5A",
 				"name": "Vincent Teufel",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 28000
 			},
 			"-ONxkrPGk83u0z5WlhRg": {
+				"anzahlStrecken": 1,
 				"klasse": "10C",
 				"name": "Franziska Wulf",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 16000
 			},
 			"-ONyGjS3rFSMs7bKvP4P": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35000
 			},
 			"-ONyhDbVso6kCDtUolo9": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Maximilian Süß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 156000
 			},
 			"-ONyheehJvhFSZhjl8Xq": {
+				"anzahlStrecken": 1,
 				"klasse": "9E",
 				"name": "Annalena Süß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 37000
 			},
 			"-ONyiQ2Tw1POv-aeB7Fg": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Andreas Süß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 37000
 			},
 			"-ONzYPbucMbzBfAFpE2N": {
+				"anzahlStrecken": 1,
 				"klasse": "5A",
 				"name": "Jakob Younes",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 25000
 			},
 			"-ONzYZTH1R_MAg3z343_": {
+				"anzahlStrecken": 1,
 				"klasse": "5A",
 				"name": "Jakob Younes",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 25000
 			},
 			"-ONzZcI5LebQVPfvET0S": {
+				"anzahlStrecken": 2,
 				"klasse": "6G",
 				"name": "Max Groß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 61000
 			},
 			"-ONzbAgSt9ysZmprhODz": {
+				"anzahlStrecken": 1,
 				"klasse": "7C",
 				"name": "Eileen Beck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-ONzbNWj3DTKaub0DJ51": {
+				"anzahlStrecken": 1,
 				"klasse": "8B",
 				"name": "Philipp Beck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 29000
 			},
 			"-ONzbp-l1g2Zp_FaOMip": {
+				"anzahlStrecken": 1,
 				"klasse": "8B",
 				"name": "Philipp Beck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 20000
 			},
 			"-ONzy3o-qcqU0m6N_F_S": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 13000
 			},
 			"-OO2cV3LyoN6qdibVg7C": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Andreas Wohlleber",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 130000
 			},
 			"-OO2cbWv9gaLVw8IAKTB": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Andreas Wohlleber",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 110000
 			},
 			"-OO3W28xmud2uV5KaoVg": {
+				"anzahlStrecken": 1,
 				"klasse": "6G",
 				"name": "Danyal Hadzajlic",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 6000
 			},
 			"-OO3azu40R5FuMqv-o1Z": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35000
 			},
 			"-OO7ykhtRT-3VxNf5v8C": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 13000
 			},
 			"-OO9F3UzIQvatb0j24Sv": {
+				"anzahlStrecken": 1,
 				"klasse": "9C",
 				"name": "Anna Dreßel",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3000
 			},
 			"-OOA5hdCur76-G3hxPka": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Henning von Kaehne",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 20000
 			},
 			"-OOBjyKDRJZZmEXjzdZP": {
+				"anzahlStrecken": 1,
 				"klasse": "10C",
 				"name": "Max Rudolph",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 90000
 			},
 			"-OOCn8XEQ4FWj5PD6yzS": {
+				"anzahlStrecken": 1,
 				"klasse": "8D",
 				"name": "Fabian Kocker",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 11000
 			},
 			"-OODlDM3fyH5CoIDmh5u": {
+				"anzahlStrecken": 1,
 				"klasse": "7C",
 				"name": "Elija Berger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 4000
 			},
 			"-OOE2XXyADKNlN1HwMm6": {
+				"anzahlStrecken": 2,
 				"klasse": "11C",
 				"name": "Daniel Marzec",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 67000
 			},
 			"-OOIQhI3lASKN7vx2cUZ": {
+				"anzahlStrecken": 1,
 				"klasse": "6F",
 				"name": "Stella",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 19000
 			},
 			"-OOIQtTWiAx9C1JGM6_K": {
+				"anzahlStrecken": 1,
 				"klasse": "6F",
 				"name": "Stella",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 19000
 			},
 			"-OOImj3B8pp2mdiIdLrj": {
+				"anzahlStrecken": 1,
 				"klasse": "8F",
 				"name": "Jolina Dommann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 12000
 			},
 			"-OOJWhXD68817aXtlich": {
+				"anzahlStrecken": 2,
 				"klasse": "6C",
 				"name": "Arshia Gupta",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 180000
 			},
 			"-OOMPkeXwNEG5OYU1rhj": {
+				"anzahlStrecken": 1,
 				"klasse": "6A",
 				"name": "Tim Hoffmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 11000
 			},
 			"-OOMPszcT6FgMtGM0NoV": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Carmen Hoffmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 11000
 			},
 			"-OOOAduM4xEtT0qxEtxK": {
+				"anzahlStrecken": 1,
 				"klasse": "11C",
 				"name": "Daniel Marzec",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 22000
 			},
 			"-OOOaLaOF37ZK81lHPDe": {
+				"anzahlStrecken": 1,
 				"klasse": "11A",
 				"name": "Annelie Dommann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 16000
 			},
 			"-OORIpLW0D_iv83E0ZH4": {
+				"anzahlStrecken": 1,
 				"klasse": "11A",
 				"name": "Annelie Dommann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 16000
 			},
 			"-OORZiahAbfXN_z0y8XL": {
+				"anzahlStrecken": 2,
 				"klasse": "8C",
 				"name": "Michael Hagen",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 88000
 			},
 			"-OOSFtjkwlCKdi7c-AV0": {
+				"anzahlStrecken": 1,
 				"klasse": "8A",
 				"name": "Johanna Fehm",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 14000
 			},
 			"-OOSGwRAeT8GwRZmJMSp": {
+				"anzahlStrecken": 1,
 				"klasse": "8A",
 				"name": "Johanna Fehm",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 14000
 			},
 			"-OOSzjHwuhmVgzVpsgTk": {
+				"anzahlStrecken": 1,
 				"klasse": "11A",
 				"name": "Annelie Dommann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 16000
 			},
 			"-OOTQZI1tRxkX3LNSoVV": {
+				"anzahlStrecken": 1,
 				"klasse": "5C",
 				"name": "Celina Heubeck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 21000
 			},
 			"-OOTRGV_qUz2ow_eyMAX": {
+				"anzahlStrecken": 4,
 				"klasse": "6D",
 				"name": "Emma Eckstein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 149000
 			},
 			"-OOTq-Ep0Lq0Q8wgFvg0": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 15000
 			},
 			"-OOaJdh6CmQha4i1Cdr2": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Michaela Fröhlich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 28000
 			},
 			"-OOaR8A1y-xWM64Bqxft": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Michaela Fröhlich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 28000
 			},
 			"-OOaRa2pgK7BjyGr6UD7": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Michaela Fröhlich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 28000
 			},
 			"-OOcDjAqwlC72w6FHaua": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 16000
 			},
 			"-OOcFS9gMUo3BANMAiKw": {
+				"anzahlStrecken": 1,
 				"klasse": "5C",
 				"name": "Celina Heubeck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 11000
 			},
 			"-OOcdO0ED7GcaG2ul2RA": {
+				"anzahlStrecken": 1,
 				"klasse": "6D",
 				"name": "Verena Grau",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 7000
 			},
 			"-OOgALkhlICMmEzqXxJh": {
+				"anzahlStrecken": 1,
 				"klasse": "7C",
 				"name": "Eileen Beck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 25000
 			},
 			"-OOgBWHQHk5e_EYJcZhb": {
+				"anzahlStrecken": 1,
 				"klasse": "7C",
 				"name": "Eileen Beck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 25000
 			},
 			"-OOgWcnVwrVF_qP5itgW": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Michael hagen",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-OOgYu7XeazGJAy1IHug": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Michael Hagen",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 16000
 			},
 			"-OOh4rgTdqIbV5k8WTip": {
+				"anzahlStrecken": 1,
 				"klasse": "11A",
 				"name": "Annelie Dommann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 34000
 			},
 			"-OOhZa22G4ZuZn4RMRx8": {
+				"anzahlStrecken": 3,
 				"klasse": "11D",
 				"name": "Julian Fix",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 419000
 			},
 			"-OOhfEMF7yzmF8OazMbw": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-OOiah-VzjyTVvbsJjke": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Vincent Bek",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-OOib6Rw9J2tOVWrsmKX": {
+				"anzahlStrecken": 1,
 				"klasse": "12K",
 				"name": "Vincent Bek",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-OOld4aulJb7ony8NOr2": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 33000
 			},
 			"-OOm-P3zBiPq6UhkSNkA": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35000
 			},
 			"-OOmcDO5kZfTD_v6g53D": {
+				"anzahlStrecken": 1,
 				"klasse": "9E",
 				"name": "Annalena Süß",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 54000
 			},
 			"-OOmeBGei2uRaniyVdLJ": {
+				"anzahlStrecken": 5,
 				"klasse": "8A",
 				"name": "Stefania Popescu",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 80000
 			},
 			"-OOpfEkxNJwrL_CtOoVY": {
+				"anzahlStrecken": 1,
 				"klasse": "10C",
 				"name": "Domenico Crivello",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 38000
 			},
 			"-OOptctYdUU5MQ9n-YoO": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Johanna Götz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 20000
 			},
 			"-OOqAHkZpCE9UgxesHsx": {
+				"anzahlStrecken": 1,
 				"klasse": "11D",
 				"name": "Julian Fix",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 173000
 			},
 			"-OOrDct201iwW_L1Zepd": {
+				"anzahlStrecken": 1,
 				"klasse": "11D",
 				"name": "Marie Kirsch",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 63000
 			},
 			"-OOrF3FX913uWjhp-4zx": {
+				"anzahlStrecken": 1,
 				"klasse": "7C",
 				"name": "Eileen Beck",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 37000
 			},
 			"-OOrjDwWCfbIZxlzSkPW": {
+				"anzahlStrecken": 1,
 				"klasse": "11D",
 				"name": "Julian Fix",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 173000
 			},
 			"-OOrsf7dSR0KHpLVzwqt": {
+				"anzahlStrecken": 2,
 				"klasse": "8B",
 				"name": "Jakob Großkopf",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 140000
 			},
 			"-OOs-9GgSW_MnRpfnDPj": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Johanna Götz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 23000
 			},
 			"-OOs-aMS586wgmOJPeMG": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Johanna Götz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 23000
 			},
 			"-OOsZGOR0_MpNH-Un2ND": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 8000
 			},
 			"-OOt7Ny_I8cahFfOZg94": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Andrea Fröhlich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 30000
 			},
 			"-OOt7YAw5r_Wnt7e8lhw": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Andrea Fröhlich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 30000
 			},
 			"-OOt8jhpAyxxcTWZgFTH": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Andrea Fröhlich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 9000
 			},
 			"-OOunD8-8g3RHwwIAW8L": {
+				"anzahlStrecken": 1,
 				"klasse": "8A",
 				"name": "Johanna Fehm",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 14000
 			},
 			"-OOuxlTcgSoaS6mrH04n": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Stefan Litz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 13000
 			},
 			"-OOv3jfRmfCS5hpkBeDu": {
+				"anzahlStrecken": 4,
 				"klasse": "9D",
 				"name": "Lars Welz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 34000
 			},
 			"-OOvHfnoti6iwXFjuOFQ": {
+				"anzahlStrecken": 1,
 				"klasse": "8A",
 				"name": "Stefania Popescu",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 4000
 			},
 			"-OOvYOG01TTwZQGE1Cxc": {
+				"anzahlStrecken": 1,
 				"klasse": "8A",
 				"name": "Johanna Fehm",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 16000
 			},
 			"-OOvj11en2BrWadjTjHj": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Andreas Wohlleber",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 47000
 			},
 			"-OOvj4Z_JKvqRU5SvTHy": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Andreas Wohlleber",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 45000
 			},
 			"-OOvwXcvcJf64CgICTh5": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Annika Laumann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-OOwLvCzp3ODnbpaOgbs": {
+				"anzahlStrecken": 1,
 				"klasse": "6C",
 				"name": "Mahii Marotkar",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 25000
 			},
 			"-OOwX4N1qdKAeU_nj9vl": {
+				"anzahlStrecken": 11,
 				"klasse": "5E",
 				"name": "Tom Schlappa",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 139000
 			},
 			"-OOxMB724zv2lfwCYl24": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35000
 			},
 			"-OOyCB3d4R_Xoo9SIBU8": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Annika Laumann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-OOyCcJQPsl3TJiIYsYJ": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Annika Laumann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-OOyDGkXPZdT7LdeZlTn": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Annika Laumann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-OP1LZCsG7FDOp-sFmxA": {
+				"anzahlStrecken": 2,
 				"klasse": "5A",
 				"name": "Mia Reil",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-OP1tvk2lgDv2V6jkDab": {
+				"anzahlStrecken": 7,
 				"klasse": "6C",
 				"name": "Mahii Marotkar",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 248000
 			},
 			"-OP6jeFS0W4mHT8svV5I": {
+				"anzahlStrecken": 1,
 				"klasse": "8C",
 				"name": "Joshua Nüßlein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 35000
 			},
 			"-OPArfV-C5CpA27Ugq5E": {
+				"anzahlStrecken": 1,
 				"klasse": "5A",
 				"name": "Jakob Younes",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 25000
 			},
 			"-OPBsZvCJxrvkGDfAsEF": {
+				"anzahlStrecken": 1,
 				"klasse": "8E",
 				"name": "Belana Berger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 13000
 			},
 			"-OPBslzhY-xUeMv_PGHz": {
+				"anzahlStrecken": 1,
 				"klasse": "8E",
 				"name": "Belana Berger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 19000
 			},
 			"-OPC7kYLvsG3TTbqQjsF": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Johanna Götz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 8000
 			},
 			"-OPCGYbsAgfTDpjQWGns": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Sarah Lohberger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 150000
 			},
 			"-OPCLsCN7VhOPF8IeEvF": {
+				"anzahlStrecken": 1,
 				"klasse": "11C",
 				"name": "Daniel Marzec",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 17000
 			},
 			"-OPEba8HSyq8AJ3DFlo0": {
+				"anzahlStrecken": 2,
 				"klasse": "11E",
 				"name": "Sarah Lebok",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 11000
 			},
 			"-OPEbx0v3vJP51gy6DGu": {
+				"anzahlStrecken": 1,
 				"klasse": "11E",
 				"name": "Maximilian Tietz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 30000
 			},
 			"-OPHFQP_VaimJB2yJ-vS": {
+				"anzahlStrecken": 1,
 				"klasse": "5B",
 				"name": "Iman Kelifa",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 13000
 			},
 			"-OPJUsafkGrtB0QQZt25": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Michaela Fröhlich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 50000
 			},
 			"-OPLNrKhpe-ElzQHZkXa": {
+				"anzahlStrecken": 1,
 				"klasse": "11A",
 				"name": "Annelie Dommann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 86000
 			},
 			"-OPMxqrd4S1aFnVjpLtP": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Annika Laumann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-OPP_bLyyKWBiOoNbrch": {
+				"anzahlStrecken": 1,
 				"klasse": "11B",
 				"name": "Raphael Heger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 100000
 			},
 			"-OPPnGE0Cj4BAEQd1Jhr": {
+				"anzahlStrecken": 1,
 				"klasse": "5B",
 				"name": "Marie-Luise Kanger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 18000
 			},
 			"-OPPnQsx0nsvKhhj6pFu": {
+				"anzahlStrecken": 1,
 				"klasse": "5B",
 				"name": "Marie-Luise Langer",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 18000
 			},
 			"-OPQDnNG2BT7-FULX5bH": {
+				"anzahlStrecken": 1,
 				"klasse": "8E",
 				"name": "Belana Berger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 6000
 			},
 			"-OPQE4vifOroCdaL0-vq": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 8000
 			},
 			"-OPQEEkMaqNvEYl7ar0k": {
+				"anzahlStrecken": 1,
 				"klasse": "8E",
 				"name": "Belana Berger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 4000
 			},
 			"-OPQglGyKDVLJwShs6T6": {
+				"anzahlStrecken": 1,
 				"klasse": "6G",
 				"name": "Johanna Groh",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 25000
 			},
 			"-OPQxOA2urAw9zt8RqxD": {
+				"anzahlStrecken": 1,
 				"klasse": "6G",
 				"name": "Johanna Groh",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 7000
 			},
 			"-OPRBD03ARA2VxnobBbO": {
+				"anzahlStrecken": 1,
 				"klasse": "11C",
 				"name": "Daniel Marzec",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 36000
 			},
 			"-OPU2DVrKVt-eQikFBie": {
+				"anzahlStrecken": 1,
 				"klasse": "9C",
 				"name": "Simon Stegmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-OPVqs-rQLei-aurBqWa": {
+				"anzahlStrecken": 10,
 				"klasse": "5D",
 				"name": "Maximilian Schuler",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 141000
 			},
 			"-OPVu3OU6e7xIBoTcH5c": {
+				"anzahlStrecken": 1,
 				"klasse": "Lehrer",
 				"name": "Tanja Wulff",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 125000
 			},
 			"-OPW7b-WX28RsOHKDVJq": {
+				"anzahlStrecken": 1,
 				"klasse": "8A",
 				"name": "Theresa Först",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 36000
 			},
 			"-OPW_w3Jo7d0YiWJi-2B": {
+				"anzahlStrecken": 2,
 				"klasse": "8A",
 				"name": "Mariella Barukcic",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 36000
 			},
 			"-OPWs1LM6ywmFpoKpDxh": {
+				"anzahlStrecken": 1,
 				"klasse": "8A",
 				"name": "Mariella Barukcic",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-OPax6lIqWJhdTlRkngc": {
+				"anzahlStrecken": 1,
 				"klasse": "8A",
 				"name": "Theresa Först",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 4000
 			},
 			"-OPf1admYsltaSvD8vp2": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 8000
 			},
 			"-OPf3fb9ze4Ew3zRdtz_": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-OPf42hk3DmbUESYqP6h": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 2000
 			},
 			"-OPfdPpkdttW1Jkmi39d": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 2000
 			},
 			"-OPk6YpSKuLrslhpMG-G": {
+				"anzahlStrecken": 1,
 				"klasse": "7C",
 				"name": "Elija Berger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 15000
 			},
 			"-OPkMOvCZVjMPtHv5U-W": {
+				"anzahlStrecken": 1,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 9000
 			},
 			"-OPki74B8VHZybfCkJsR": {
+				"anzahlStrecken": 8,
 				"klasse": "7D",
 				"name": "Fynn Böhme",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 186000
 			},
 			"-OPl6uZcfhvcsWndbvTm": {
+				"anzahlStrecken": 1,
 				"klasse": "9C",
 				"name": "Paul Seeliger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 47000
 			},
 			"-OPnRuvY5rdT_7e-WVBt": {
+				"anzahlStrecken": 3,
 				"klasse": "7C",
 				"name": "Max Wellein",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 39000
 			},
 			"-OPniR67Hz3x_dhUHdi4": {
+				"anzahlStrecken": 1,
 				"klasse": "11E",
 				"name": "Nils Nockmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 30000
 			},
 			"-OPniVLKtn1v8gw5Wss4": {
+				"anzahlStrecken": 1,
 				"klasse": "11E",
 				"name": "Nico Schwarzmann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 6000
 			},
 			"-OPnicNDvgBypkBZk4uu": {
+				"anzahlStrecken": 1,
 				"klasse": "11E",
 				"name": "Julian Götz",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 3000
 			},
 			"-OPnifyQzUw1D_fnaX1K": {
+				"anzahlStrecken": 1,
 				"klasse": "11E",
 				"name": "Sarah Lebok",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 5000
 			},
 			"-OPnijHKqpV1Q2isbX6Z": {
+				"anzahlStrecken": 2,
 				"klasse": "11E",
 				"name": "Sarah Lebok",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 45000
 			},
 			"-OPnilmXVtda2ZdEaJOB": {
+				"anzahlStrecken": 1,
 				"klasse": "11E",
 				"name": "Carmen Berier",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 40000
 			},
 			"-OPnj0aTrz0BMr9xx1zT": {
+				"anzahlStrecken": 1,
 				"klasse": "11E",
 				"name": "Carmen Berier",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 10000
 			},
 			"-OPpiFRhW3jtswo6YYMk": {
+				"anzahlStrecken": 1,
 				"klasse": "7B",
 				"name": "Leni Nürnberger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 18000
 			},
 			"-OPpioqF_sdx5ct7G9hV": {
+				"anzahlStrecken": 1,
 				"klasse": "7B",
 				"name": "Leni Nürnberger",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 18000
 			},
 			"-OQ-5et_ZJohjf4ABY_8": {
+				"anzahlStrecken": 1,
 				"klasse": "11C",
 				"name": "Leo Enderle",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 12000
 			},
 			"-OQ85nk5vX7CgYVy9IUE": {
+				"anzahlStrecken": 1,
 				"klasse": "10B",
 				"name": "Jannes Dellermann",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 15000
 			},
 			"-OQDwaHsUJS1KV5v49S6": {
+				"anzahlStrecken": 1,
 				"klasse": "8D",
 				"name": "Xaver Pich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 20000
 			},
 			"-OQDwzC037aa3gNZ7cUW": {
+				"anzahlStrecken": 1,
 				"klasse": "8D",
 				"name": "Xaver Pich",
-				"schule": "Gymnasium Höchstadt"
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 20000
+			},
+			"-OQMYlD79AhCUWZrmtPz": {
+				"anzahlStrecken": 1,
+				"klasse": "Lehrer",
+				"name": "Niklas Dürr",
+				"schule": "Gymnasium Höchstadt",
+				"strecke": 50000
 			}
 		},
 		"klassen": {
@@ -1322,13 +1819,35 @@ const data = {
 						"uid": "yc9pZLKos8cOL9JreNOfweUOeTp1"
 					},
 					"10B": {
+						"anzahlFahrer": 8,
+						"anzahlStrecken": 17,
 						"email": "10b@gy-ho.de",
+						"fahrer": {
+							"Annika Laumann": "-OOvwXcvcJf64CgICTh5",
+							"Clemens Döring": "-ONUEFzTOD_wZPZknDZa",
+							"Hannes Kirsche": "-ONYtAE6qNl8ieeFVUgS",
+							"Hannes Neu": "-ONUEIR3kz5WG1kvlNn2",
+							"Jannes Dellermann": "-ONnXeZ_KNdkIyFfLo4Z",
+							"Lena Menzel": "-ONUE8vjH01usqgsttB7",
+							"Luca Auinger": "-ONUE1_SGuXJzoI_-WSo",
+							"Paul Krautblatter": "-ONUEOEzr8IxDF1xQ3Wv"
+						},
 						"potAnzahlFahrer": 25,
+						"strecke": 196000,
 						"uid": "xe7ZRxk5gbXI3KdXeJt7HW7b3J03"
 					},
 					"10C": {
+						"anzahlFahrer": 4,
+						"anzahlStrecken": 6,
 						"email": "10c@gy-ho.de",
+						"fahrer": {
+							"Domenico Crivello": "-OOpfEkxNJwrL_CtOoVY",
+							"Franziska Wulf": "-ONxjkkAtWvQtGdp4Zb2",
+							"Jannis Rückel": "-ONUlZDwHGRFYnbElyqx",
+							"Max Rudolph": "-OOBjyKDRJZZmEXjzdZP"
+						},
 						"potAnzahlFahrer": 29,
+						"strecke": 178690,
 						"uid": "wBEqhgXICDVzL8WAHZn7UsJYiy33"
 					},
 					"10D": {
@@ -1337,33 +1856,96 @@ const data = {
 						"uid": "xaqjDwgImkaEcpRYIx6fLxxx8rd2"
 					},
 					"11A": {
+						"anzahlFahrer": 2,
+						"anzahlStrecken": 8,
 						"email": "11a@gy-ho.de",
+						"fahrer": {
+							"Annelie Dommann": "-OOOaLaOF37ZK81lHPDe",
+							"Frederike Rodewald": "-ONel8YeHQ4BkJdcKYZx"
+						},
 						"potAnzahlFahrer": 23,
+						"strecke": 208000,
 						"uid": "GoHJYOQJgkgb1UKYc9XDNUIrOBM2"
 					},
 					"11B": {
+						"anzahlFahrer": 2,
+						"anzahlStrecken": 2,
 						"email": "11b@gy-ho.de",
+						"fahrer": {
+							"Philipp Wöhner": "-ONU3KsqLIdO7uAMLtMY",
+							"Raphael Heger": "-OPP_bLyyKWBiOoNbrch"
+						},
 						"potAnzahlFahrer": 24,
+						"strecke": 105000,
 						"uid": "SD3xXEX7NOenxqoowJlIso1TpJA2"
 					},
 					"11C": {
+						"anzahlFahrer": 2,
+						"anzahlStrecken": 6,
 						"email": "11c@gy-ho.de",
+						"fahrer": {
+							"Daniel Marzec": "-OOE2XXyADKNlN1HwMm6",
+							"Leo Enderle": "-OQ-5et_ZJohjf4ABY_8"
+						},
 						"potAnzahlFahrer": 25,
+						"strecke": 154000,
 						"uid": "OgNTZkfCwMekM7asmGCj9RhgmXz2"
 					},
 					"11D": {
+						"anzahlFahrer": 5,
+						"anzahlStrecken": 17,
 						"email": "11d@gy-ho.de",
+						"fahrer": {
+							"Jonas Hoffmann": "-ONZa31Mnh49wX_TCDjq",
+							"Julian Fix": "-OOhZa22G4ZuZn4RMRx8",
+							"Marie Kirsch": "-OOrDct201iwW_L1Zepd",
+							"Matthias Dresel": "-ONVmEAbhWuBNouqdE2y",
+							"Phil Nüßlein": "-ONUgODgnxfABeOh0tvC"
+						},
 						"potAnzahlFahrer": 21,
+						"strecke": 1137000,
 						"uid": "kSb9WjlJE1PKtfdOR3q4SBxtiCD3"
 					},
 					"11E": {
+						"anzahlFahrer": 8,
+						"anzahlStrecken": 24,
 						"email": "11e@gy-ho.de",
+						"fahrer": {
+							"Carmen Berier": "-OPnilmXVtda2ZdEaJOB",
+							"Jonathan Rittmaier": "-ONgfXps0WVyx70qCDla",
+							"Julian Götz": "-OPnicNDvgBypkBZk4uu",
+							"Maximilian Tietz": "-OPEbx0v3vJP51gy6DGu",
+							"Nico Schwarzmann": "-OPniVLKtn1v8gw5Wss4",
+							"Nils Nockmann": "-OPniR67Hz3x_dhUHdi4",
+							"Sarah Lebok": "-OPEba8HSyq8AJ3DFlo0",
+							"Valentino Müller": "-ONQdjvf_AhVoGad_IJP"
+						},
 						"potAnzahlFahrer": 26,
+						"strecke": 1342000,
 						"uid": "4NwEWMRx9YOZjL60Lpp3Bw9ton22"
 					},
 					"12K": {
+						"anzahlFahrer": 14,
+						"anzahlStrecken": 38,
 						"email": "12k@gy-ho.de",
+						"fahrer": {
+							"Andrei Bolbot": "-ONVPwa_m8kK16bxj9Yp",
+							"Erik Sander": "-ONa0qq5D78-PPlvukeH",
+							"Henning von Kaehne": "-OOA5hdCur76-G3hxPka",
+							"Laura Beyer": "-ONQJ1b6w-aIgtg31WdX",
+							"Louis Berier": "-ONiaWmHjQcOaapAidkv",
+							"Maria Lauf": "-ONPzAm2Epg0Oj3VdZaB",
+							"Maurice Ziajski": "-ONYd589DGVmGFIKAjJe",
+							"Maximilian Süß": "-ONs93rQ3VDqkQXzAole",
+							"Rahel Lang": "-ONYr0_QaTUb8GcMZlJF",
+							"Theodor Wulff": "-ONdn9i1WDSuWHiwyLJ-",
+							"Timm Becker": "-ONl66ngCs9vgG3UTXKQ",
+							"Vincent Bek": "-OOiah-VzjyTVvbsJjke",
+							"Wolf Besel": "-ONPcPw2VePvhwXo1_Y6",
+							"Yasin Bahar": "-ONeWbIrSFEP9PQsV-nC"
+						},
 						"potAnzahlFahrer": 118,
+						"strecke": 1805855,
 						"uid": "5eD1FmMVdLMa1acTko1LkK6dG983"
 					},
 					"12Q": {
@@ -1372,28 +1954,70 @@ const data = {
 						"uid": "urEuNM2RwtYadDp1b1DUcVFSHuz1"
 					},
 					"5A": {
+						"anzahlFahrer": 9,
+						"anzahlStrecken": 28,
 						"email": "5a@gy-ho.de",
+						"fahrer": {
+							"Antonia Krafka": "-ONZK7XxtvT9Ixqyts1i",
+							"Händel Klara": "-ONeIG2auqSMD1IfVQTf",
+							"Jakob Younes": "-ONzYPbucMbzBfAFpE2N",
+							"Leano Oehrl": "-ONZJPFgiR4symSW08nZ",
+							"Mia Reil": "-OP1LZCsG7FDOp-sFmxA",
+							"Noß Maja": "-ONeI4x-fNPK7wB7n46L",
+							"Simon Schleupner": "-ONZdk9TTyaUZ3qGU5HT",
+							"Sophia bacarisan": "-ON_hHbhNh4REP8VHncO",
+							"Vincent Teufel": "-ONxk-bCTvqE2A47qyLa"
+						},
 						"potAnzahlFahrer": 26,
+						"strecke": 285984,
 						"uid": "VN6xuKnwT1dKi8z85ugzAUdnmcg1"
 					},
 					"5B": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 3,
 						"email": "5b@gy-ho.de",
+						"fahrer": {
+							"Iman Kelifa": "-OPHFQP_VaimJB2yJ-vS",
+							"Marie-Luise Kanger": "-OPPnGE0Cj4BAEQd1Jhr",
+							"Marie-Luise Langer": "-OPPnQsx0nsvKhhj6pFu"
+						},
 						"potAnzahlFahrer": 25,
+						"strecke": 49000,
 						"uid": "2Hu6LWyxJ4WR0Eq2wizqvwzWplJ2"
 					},
 					"5C": {
+						"anzahlFahrer": 1,
+						"anzahlStrecken": 2,
 						"email": "5c@gy-ho.de",
+						"fahrer": {
+							"Celina Heubeck": "-OOTQZI1tRxkX3LNSoVV"
+						},
 						"potAnzahlFahrer": 25,
+						"strecke": 32000,
 						"uid": "wkGZiHK49PaaTxMKC59ghknsFOH2"
 					},
 					"5D": {
+						"anzahlFahrer": 1,
+						"anzahlStrecken": 10,
 						"email": "5d@gy-ho.de",
+						"fahrer": {
+							"Maximilian Schuler": "-OPVqs-rQLei-aurBqWa"
+						},
 						"potAnzahlFahrer": 29,
+						"strecke": 141000,
 						"uid": "BtuGQBIkJeRi48nv6Kxt12XBv712"
 					},
 					"5E": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 23,
 						"email": "5e@gy-ho.de",
+						"fahrer": {
+							"Höchstadt süd": "-ONinqNuMJO2IzlWDuVH",
+							"Julian Herrmann": "-ONPQlHxhBoLZcHXcJrB",
+							"Tom Schlappa": "-OOwX4N1qdKAeU_nj9vl"
+						},
 						"potAnzahlFahrer": 29,
+						"strecke": 327000,
 						"uid": "cjlnHn9444gXJvTindUVcumW3yB2"
 					},
 					"5F": {
@@ -1407,23 +2031,54 @@ const data = {
 						"uid": "JLJmZ2gRqDY6so6WcpYUvEDb22o2"
 					},
 					"6A": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 8,
 						"email": "6a@gy-ho.de",
+						"fahrer": {
+							"Emanuela Mendes Vigliotti": "-ONd_gPtKJU8bDeM2l_t",
+							"Emil Glück": "-ONVHF1Az1hlwRcTRiLg",
+							"Tim Hoffmann": "-OOMPkeXwNEG5OYU1rhj"
+						},
 						"potAnzahlFahrer": 26,
+						"strecke": 514086,
 						"uid": "pMR09by8LLhZdxgrnmwAhAhFBBR2"
 					},
 					"6B": {
+						"anzahlFahrer": 1,
+						"anzahlStrecken": 3,
 						"email": "6b@gy-ho.de",
+						"fahrer": {
+							"Leopold Grill": "-ONmVCOtED15swYsNMxS"
+						},
 						"potAnzahlFahrer": 27,
+						"strecke": 138000,
 						"uid": "HB8WJosdPJfg1jJ8UfQkteetO4d2"
 					},
 					"6C": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 17,
 						"email": "6c@gy-ho.de",
+						"fahrer": {
+							"Arshia Gupta": "-ONppcYQGiEP0KaijyzG",
+							"Edward Friedel": "-ONVB-A4vHfKnBm8CVlQ",
+							"Mahii Marotkar": "-OOwLvCzp3ODnbpaOgbs"
+						},
 						"potAnzahlFahrer": 29,
+						"strecke": 587000,
 						"uid": "wg3jP8BT61QKiRlqzH8bH3Wv1H53"
 					},
 					"6D": {
+						"anzahlFahrer": 4,
+						"anzahlStrecken": 7,
 						"email": "6d@gy-ho.de",
+						"fahrer": {
+							"Emma Eckstein": "-OOTRGV_qUz2ow_eyMAX",
+							"Emma Eckstein ❤": "-ONYaFf23OPuHr5hKT1x",
+							"Noe Nwabo Fotso": "-ONYaTnuTSCas4SnV31-",
+							"Verena Grau": "-OOcdO0ED7GcaG2ul2RA"
+						},
 						"potAnzahlFahrer": 28,
+						"strecke": 163000,
 						"uid": "ZN2gZzpiQ7Z2igCDvS8TH0PIpzH3"
 					},
 					"6E": {
@@ -1432,33 +2087,84 @@ const data = {
 						"uid": "9BEJOLiDgrdYEVnvF4HTeYQMMjA3"
 					},
 					"6F": {
+						"anzahlFahrer": 1,
+						"anzahlStrecken": 2,
 						"email": "6f@gy-ho.de",
+						"fahrer": {
+							"Stella": "-OOIQhI3lASKN7vx2cUZ"
+						},
 						"potAnzahlFahrer": 29,
+						"strecke": 38000,
 						"uid": "WTUrPeNWAbf8YUvVIgxSWYgBawI3"
 					},
 					"6G": {
+						"anzahlFahrer": 10,
+						"anzahlStrecken": 31,
 						"email": "6g@gy-ho.de",
+						"fahrer": {
+							"Danyal Hadzajlic": "-OO3W28xmud2uV5KaoVg",
+							"Emilian Lay": "-ONaLQLxW6Lcti2ZrgZo",
+							"Emir Künc": "-ONYjy3Jl-3VADXc05ll",
+							"Felgner Jonas": "-ONYk3aanbEa5EhrbyJp",
+							"Fiona süß": "-ONnmKVN_zstbeAbC-4e",
+							"Helena Albert": "-ONk1c14VZ0gkuMi_zG5",
+							"Jakob  Kallies": "-ONYjjhpEaRQl36kt8k8",
+							"Johanna Groh": "-OPQglGyKDVLJwShs6T6",
+							"Lenny Fuchs": "-ONYjjc6O1jtdLILVu5z",
+							"Max Groß": "-ONzZcI5LebQVPfvET0S"
+						},
 						"potAnzahlFahrer": 29,
+						"strecke": 340657,
 						"uid": "RC1hNjSgHGQcKmbAiPkt4OasPsw1"
 					},
 					"7A": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 9,
 						"email": "7a@gy-ho.de",
+						"fahrer": {
+							"Anouk Élodie Triemer": "-ONV-NDyxjFYsF7gFAdT",
+							"Lene Stranak": "-ONdhxAZmH7_I8iB2n9K",
+							"Philipp  Heizmann": "-ONV-GUAMC1ptAZXQfq_"
+						},
 						"potAnzahlFahrer": 23,
+						"strecke": 132000,
 						"uid": "KmHddftmJOSrO7vcxFpVqP6T8dt1"
 					},
 					"7B": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 10,
 						"email": "7b@gy-ho.de",
+						"fahrer": {
+							"Eva Philipp": "-ONUw3pUFqicOxFbWgzq",
+							"Leni Nürnberger": "-OPpiFRhW3jtswo6YYMk",
+							"Svea Südema": "-ONfVoIYbdpyPRlDkRcb"
+						},
 						"potAnzahlFahrer": 29,
+						"strecke": 143892,
 						"uid": "CFsrN4ON72dvCuc05DKFpVeQ1Lp2"
 					},
 					"7C": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 9,
 						"email": "7c@gy-ho.de",
+						"fahrer": {
+							"Eileen Beck": "-ONzbAgSt9ysZmprhODz",
+							"Elija Berger": "-OODlDM3fyH5CoIDmh5u",
+							"Max Wellein": "-OPnRuvY5rdT_7e-WVBt"
+						},
 						"potAnzahlFahrer": 27,
+						"strecke": 150000,
 						"uid": "3DoWsZ8u1yfPkeWt7UYKcpxeDWj1"
 					},
 					"7D": {
+						"anzahlFahrer": 1,
+						"anzahlStrecken": 22,
 						"email": "7d@gy-ho.de",
+						"fahrer": {
+							"Fynn Böhme": "-ONisrzuVD7qSUSpRSKy"
+						},
 						"potAnzahlFahrer": 26,
+						"strecke": 306000,
 						"uid": "uhWBxKyULgRZ0QYRYe79dJ23dF13"
 					},
 					"7E": {
@@ -1467,38 +2173,102 @@ const data = {
 						"uid": "WiH28MfGcLTkr0Ohq0pkuktTiNE3"
 					},
 					"7F": {
+						"anzahlFahrer": 5,
+						"anzahlStrecken": 5,
 						"email": "7f@gy-ho.de",
+						"fahrer": {
+							"Arthur Peters": "-ONYkmd8Z_0IB0LuAP6y",
+							"David Geringer": "-ONYkmr7J8y9j8U2za22",
+							"Paul Schildhauer": "-ONYka4Lpcx6p7uTkNI0",
+							"Vinzent Baigger": "-ONYkbNAQsLjW5mTfKiU",
+							"noah moritz": "-ONYkhoJFxNPyoS8dJG8"
+						},
 						"potAnzahlFahrer": 24,
+						"strecke": 29067,
 						"uid": "kUPijUHiNZXWO2fujxonmLVZo9B2"
 					},
 					"8A": {
+						"anzahlFahrer": 6,
+						"anzahlStrecken": 20,
 						"email": "8a@gy-ho.de",
+						"fahrer": {
+							"Johanna Fehm": "-OOSFtjkwlCKdi7c-AV0",
+							"Mariella Barukcic": "-OPW_w3Jo7d0YiWJi-2B",
+							"Marlene Hammer": "-ONV5xO2TYrTnsY8h985",
+							"Rahel Blumenthal": "-ONUbvEc4V2vVW16gS9W",
+							"Stefania Popescu": "-OOmeBGei2uRaniyVdLJ",
+							"Theresa Först": "-OPW7b-WX28RsOHKDVJq"
+						},
 						"potAnzahlFahrer": 24,
+						"strecke": 278000,
 						"uid": "qiGJ3IdUDOfOiDmGBcMrutHMEcg1"
 					},
 					"8B": {
+						"anzahlFahrer": 2,
+						"anzahlStrecken": 5,
 						"email": "8b@gy-ho.de",
+						"fahrer": {
+							"Jakob Großkopf": "-OOrsf7dSR0KHpLVzwqt",
+							"Philipp Beck": "-ONtlNlWCn0ca1wQbZQM"
+						},
 						"potAnzahlFahrer": 22,
+						"strecke": 199000,
 						"uid": "VcZQJVsKhhZwjumEa33A9d4IE1A3"
 					},
 					"8C": {
+						"anzahlFahrer": 4,
+						"anzahlStrecken": 18,
 						"email": "8c@gy-ho.de",
+						"fahrer": {
+							"Joshua Nüßlein": "-ONjx1P57bs7fep0xocz",
+							"Marie Seubert": "-ON_7ZoiwpfzeNdSLEcD",
+							"Michael Hagen": "-OORZiahAbfXN_z0y8XL",
+							"Michael hagen": "-OOgWcnVwrVF_qP5itgW"
+						},
 						"potAnzahlFahrer": 22,
+						"strecke": 508000,
 						"uid": "0w5yV6sqj3beoVnvCFSHFyQW9nP2"
 					},
 					"8D": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 4,
 						"email": "8d@gy-ho.de",
+						"fahrer": {
+							"Fabian Kocker": "-OOCn8XEQ4FWj5PD6yzS",
+							"Johannes Laubinger": "-ONVwPiLljPdydy2snkO",
+							"Xaver Pich": "-OQDwaHsUJS1KV5v49S6"
+						},
 						"potAnzahlFahrer": 18,
+						"strecke": 59000,
 						"uid": "jki5qBHIeePXw7cHDdSq22X4u5W2"
 					},
 					"8E": {
+						"anzahlFahrer": 4,
+						"anzahlStrecken": 14,
 						"email": "8e@gy-ho.de",
+						"fahrer": {
+							"Alyssa Workman": "-ONeAkKklsBJYJuS4sgX",
+							"Belana Berger": "-OPBsZvCJxrvkGDfAsEF",
+							"Katharina Litz": "-ONVYNIVOPBBsBnKJNoD",
+							"Sophie Bliesner": "-ONYI0k7HFNi-4aYTrc3"
+						},
 						"potAnzahlFahrer": 26,
+						"strecke": 251000,
 						"uid": "Z6GrgqERglQYGEVkItKC2YWc5PJ2"
 					},
 					"8F": {
+						"anzahlFahrer": 5,
+						"anzahlStrecken": 23,
 						"email": "8f@gy-ho.de",
+						"fahrer": {
+							"Aaron Blumenthal": "-ONT9h8TdYdyCn7LTZQE",
+							"Ferdinand Rodewald": "-ONeldzEt0gaTBXb9BO5",
+							"Jolina Dommann": "-OOImj3B8pp2mdiIdLrj",
+							"Max kaiser": "-ONdmeBkDulkpbvxiE1l",
+							"Yannik Ramspeck": "-ONdmCJ8RZgJ65UoOvJe"
+						},
 						"potAnzahlFahrer": 28,
+						"strecke": 498000,
 						"uid": "kKVJa00N2DRxUVvKTcq9GbqIyM33"
 					},
 					"9A": {
@@ -1507,28 +2277,76 @@ const data = {
 						"uid": "eGX7oGCqGySC1FlrLNxMYlibUVI2"
 					},
 					"9B": {
+						"anzahlFahrer": 1,
+						"anzahlStrecken": 5,
 						"email": "9b@gy-ho.de",
+						"fahrer": {
+							"Emilia Stranak": "-ON_ms9NNhrKGqcKcREl"
+						},
 						"potAnzahlFahrer": 28,
+						"strecke": 100000,
 						"uid": "LyPlDYRdBFglSkE2J4Fo4RjzEWL2"
 					},
 					"9C": {
+						"anzahlFahrer": 3,
+						"anzahlStrecken": 3,
 						"email": "9c@gy-ho.de",
+						"fahrer": {
+							"Anna Dreßel": "-OO9F3UzIQvatb0j24Sv",
+							"Paul Seeliger": "-OPl6uZcfhvcsWndbvTm",
+							"Simon Stegmann": "-OPU2DVrKVt-eQikFBie"
+						},
 						"potAnzahlFahrer": 26,
+						"strecke": 60000,
 						"uid": "NlB8jOzPhWb78SpLy0JxJgvZsW72"
 					},
 					"9D": {
+						"anzahlFahrer": 1,
+						"anzahlStrecken": 4,
 						"email": "9d@gy-ho.de",
+						"fahrer": {
+							"Lars Welz": "-OOv3jfRmfCS5hpkBeDu"
+						},
 						"potAnzahlFahrer": 27,
+						"strecke": 34000,
 						"uid": "ZP9mca3wlsPdjEoyGxax4x2EoDE2"
 					},
 					"9E": {
+						"anzahlFahrer": 2,
+						"anzahlStrecken": 5,
 						"email": "9e@gy-ho.de",
+						"fahrer": {
+							"Annalena Süß": "-ONyheehJvhFSZhjl8Xq",
+							"Raphael Heizmann": "-ONZtrYNIvnpCO6rtVRJ"
+						},
 						"potAnzahlFahrer": 24,
+						"strecke": 139000,
 						"uid": "bEqflgatFwRPr3nbO8My2WCHNuW2"
 					},
 					"Lehrer": {
+						"anzahlFahrer": 16,
+						"anzahlStrecken": 53,
 						"email": "lehrer@gy-ho.de",
+						"fahrer": {
+							"Andrea Fröhlich": "-OOt7Ny_I8cahFfOZg94",
+							"Andreas Süß": "-ONyiQ2Tw1POv-aeB7Fg",
+							"Andreas Wohlleber": "-OO2cV3LyoN6qdibVg7C",
+							"Carmen Hoffmann": "-OOMPszcT6FgMtGM0NoV",
+							"Caroline Böckl": "-ONohXMaVZriOcr6BYMV",
+							"Georg Schlee": "-ONiJBaWyssKBGyjB3V7",
+							"Johanna Götz": "-OOptctYdUU5MQ9n-YoO",
+							"Markus Böckl": "-ONogb_fj6hd9P96B37X",
+							"Michael Hipp": "-ONPErT2_pydjX-lMcMu",
+							"Michaela Fröhlich": "-OOaJdh6CmQha4i1Cdr2",
+							"Niklas Dürr": "-OQMYlD79AhCUWZrmtPz",
+							"Philipp Kampf": "-ONTEwSkE8FqCCU9rSeM",
+							"Sarah Lohberger": "-OPCGYbsAgfTDpjQWGns",
+							"Stefan Litz": "-OOuxlTcgSoaS6mrH04n",
+							"Tanja Wulff": "-OPVu3OU6e7xIBoTcH5c",
+							"Wolfgang Cayé": "-ONP_sv0-bhEvLq3fDr6"
+						},
 						"potAnzahlFahrer": 130,
+						"strecke": 3800000,
 						"uid": "p7OWABcqDxMwOlyd3C8QA9HvfGF3"
 					}
 				}
@@ -3832,12 +4650,67 @@ const data = {
 				"fahrer": "-OQDwzC037aa3gNZ7cUW",
 				"strecke": 20000,
 				"zeitpunkt": 1747228816369
+			},
+			"-OQMKSkNuZVG5FdWavZV": {
+				"fahrer": "-OOwX4N1qdKAeU_nj9vl",
+				"strecke": 22000,
+				"zeitpunkt": 1747369450564
+			},
+			"-OQMTS1KKZd945YIZdLU": {
+				"fahrer": "-ONPErT2_pydjX-lMcMu",
+				"strecke": 200000,
+				"zeitpunkt": 1747371806964
+			},
+			"-OQMXPcjbILdU8sfIwkv": {
+				"fahrer": "-OPnRuvY5rdT_7e-WVBt",
+				"strecke": 14000,
+				"zeitpunkt": 1747372845712
+			},
+			"-OQMXrhQYh2XBQr75NGy": {
+				"fahrer": "-ONogb_fj6hd9P96B37X",
+				"strecke": 200000,
+				"zeitpunkt": 1747372964777
+			},
+			"-OQMYlE8ptC3z9OjtWIV": {
+				"fahrer": "-OQMYlD79AhCUWZrmtPz",
+				"strecke": 50000,
+				"zeitpunkt": 1747373200364
+			},
+			"-OQMc_AfYOphyvVv54_i": {
+				"fahrer": "-OPVqs-rQLei-aurBqWa",
+				"strecke": 50000,
+				"zeitpunkt": 1747374461772
+			},
+			"-OQMjfjf_1-vzTywoTRw": {
+				"fahrer": "-OPnijHKqpV1Q2isbX6Z",
+				"strecke": 40000,
+				"zeitpunkt": 1747376324076
+			},
+			"-OQN4b9lCMEcz5bmGwTr": {
+				"fahrer": "-ONTEwSkE8FqCCU9rSeM",
+				"strecke": 200000,
+				"zeitpunkt": 1747382072073
+			},
+			"-OQNAK156jFOZPB8_i7o": {
+				"fahrer": "-OOv3jfRmfCS5hpkBeDu",
+				"strecke": 12000,
+				"zeitpunkt": 1747383570636
+			},
+			"-OQNbcxDoQTXAWoX8lci": {
+				"fahrer": "-ONTEwSkE8FqCCU9rSeM",
+				"strecke": 140000,
+				"zeitpunkt": 1747390992292
+			},
+			"-OQNwP8pddafw1Z6I_bP": {
+				"fahrer": "-ONPzAm2Epg0Oj3VdZaB",
+				"strecke": 45000,
+				"zeitpunkt": 1747396436657
 			}
 		}
 	}
 }
 
-function removeKeys(obj, keys) {
+function removeKeys(obj, keys, deep = true) {
 	if (typeof obj !== 'object' || obj === null) return;
 
 	for (const key in obj) {
@@ -3845,15 +4718,20 @@ function removeKeys(obj, keys) {
 			if (keys.includes(key)) {
 				delete obj[key];
 			} else {
-				removeKeys(obj[key]);
+				if (deep) removeKeys(obj[key], keys, deep);
 			}
 		}
 	}
 }
 
-removeKeys(data.allgemein, ['anzahlStrecken', 'anzahlFahrer', 'strecke', 'fahrer']);
+// Hier Saison setzen (ggf. hardcoden)
+const saison = data.allgemein.saisons.aktuell;
+removeKeys(data.allgemein, ['anzahlStrecken', 'anzahlFahrer', 'strecke'], false);
+removeKeys(data.allgemein.saisons.details[saison], ['anzahlStrecken', 'anzahlFahrer', 'strecke']);
 removeKeys(data.spezifisch.fahrer, ['anzahlStrecken', 'anzahlFahrer', 'strecke']);
-removeKeys(data.spezifisch.klassen, ['anzahlStrecken', 'anzahlFahrer', 'strecke']);
+removeKeys(data.spezifisch.klassen, ['anzahlStrecken', 'anzahlFahrer', 'strecke', 'fahrer']);
+
+console.log(JSON.stringify(data.spezifisch.klassen, null, 2));
 
 function incAnzahlFahrer(obj, x = 1) {
 	if (isNaN(obj.anzahlFahrer)) obj.anzahlFahrer = 0;
@@ -3877,21 +4755,38 @@ Object.entries(data.spezifisch.strecken).forEach(([id, strecke]) => {
 	addStrecke(data.spezifisch.fahrer[fahrer], strecke.strecke);
 });
 
-Object.entries(data.spezifisch.klassen.details["Gymnasium Höchstadt"]).forEach(([id, klasse]) => {
-	console.log("Klasse " + id + " hat anzahlFahrer: " + klasse.anzahlFahrer);
-})
+/*Object.entries(data.spezifisch.klassen.details["Gymnasium Höchstadt"]).forEach(([id, klasse]) => {
+    console.log("Klasse " + id + " hat anzahlFahrer: " + klasse.anzahlFahrer);
+});*/
+
+Object.entries(data.spezifisch.fahrer).forEach(([id, fahrer]) => {
+	const klasse = data.spezifisch.klassen.details[fahrer.schule][fahrer.klasse];
+	// console.log(JSON.stringify(klasse, null, 2));
+	if (!klasse.fahrer) klasse.fahrer = {};
+	if (Object.keys(klasse.fahrer).includes(fahrer.name)) {
+		const bestehendeFahrerId = klasse.fahrer[fahrer.name];
+		const bestehenderFahrer = data.spezifisch.fahrer[bestehendeFahrerId];
+		incAnzahlStrecken(bestehenderFahrer, fahrer.anzahlStrecken);
+		addStrecke(bestehenderFahrer, fahrer.strecke);
+		delete data.spezifisch.fahrer[id];
+		console.log("Merged " + bestehendeFahrerId + " with " + id);
+	} else {
+		klasse.fahrer[fahrer.name] = id;
+	}
+});
 
 var i = 0;
 Object.entries(data.spezifisch.fahrer).forEach(([id, fahrer]) => {
 	const klasse = data.spezifisch.klassen.details[fahrer.schule][fahrer.klasse];
 	if (!klasse.fahrer) klasse.fahrer = {};
-	// if (Object.keys(klasse.fahrer).includes(fahrer.name)) console.error("Klasse " + fahrer.klasse + " hatte schon den Fahrer " + fahrer.name + " (" + id + ")");
-	if (!Object.keys(klasse.fahrer).includes(fahrer.name)) {
-		klasse.fahrer[fahrer.name] = id;
-		incAnzahlFahrer(klasse);
-		i++;
-		console.log("i: " + i + ", anzahlFahrer in klasse " + id + ": " + klasse.anzahlFahrer);
-	}
+	/*if (Object.keys(klasse.fahrer).includes(fahrer.name)) {
+        console.error("Klasse " + fahrer.klasse + " hatte schon den Fahrer " + fahrer.name + " (" + id + ")");
+    } else {*/
+	// klasse.fahrer[fahrer.name] = id;
+	incAnzahlFahrer(klasse);
+	i++;
+	console.log("i: " + i + ", anzahlFahrer in klasse " + id + ": " + klasse.anzahlFahrer);
+	/*}*/
 	incAnzahlStrecken(klasse, fahrer.anzahlStrecken);
 	addStrecke(klasse, fahrer.strecke);
 });
