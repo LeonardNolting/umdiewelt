@@ -9,12 +9,16 @@ async function passeAnzahlFahrerAn(data: { schule: string, klasse: string, name:
 	// Eintragen neuer Saison löscht allerhand Fahrer - aber soll nicht Statistiken wieder runterzählen
 	if (laufend === null) return
 
+	const existed: boolean = (await datenbank.ref("spezifisch/klassen/details/" + data.schule + "/" + data.klasse + "/fahrer/" + data.name).get()).val();
+
 	const updates: { [ref: string]: any } = {}
-	updates["spezifisch/klassen/details/" + data.schule + "/" + data.klasse + "/anzahlFahrer"] = increment
-	updates["spezifisch/klassen/details/" + data.schule + "/" + data.klasse + "/fahrer/" + data.name] = negativ ? null : fahrer
-	updates["allgemein/saisons/details/" + laufend + "/anzahlFahrer"] = increment
-	updates["allgemein/saisons/details/" + laufend + "/schulen/details/" + data.schule + "/anzahlFahrer"] = increment
-	updates["allgemein/anzahlFahrer"] = increment
+	if ((existed && negativ) || (!existed && !negativ)) {
+		updates["spezifisch/klassen/details/" + data.schule + "/" + data.klasse + "/anzahlFahrer"] = increment
+		updates["spezifisch/klassen/details/" + data.schule + "/" + data.klasse + "/fahrer/" + data.name] = negativ ? null : fahrer
+		updates["allgemein/saisons/details/" + laufend + "/anzahlFahrer"] = increment
+		updates["allgemein/saisons/details/" + laufend + "/schulen/details/" + data.schule + "/anzahlFahrer"] = increment
+		updates["allgemein/anzahlFahrer"] = increment
+	}
 	await datenbank.ref().update(updates)
 }
 
