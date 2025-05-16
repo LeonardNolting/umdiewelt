@@ -9,7 +9,7 @@ async function passeAnzahlFahrerAn(data: { schule: string, klasse: string, name:
 	// Eintragen neuer Saison löscht allerhand Fahrer - aber soll nicht Statistiken wieder runterzählen
 	if (laufend === null) return
 
-	const existed: boolean = (await datenbank.ref("spezifisch/klassen/details/" + data.schule + "/" + data.klasse + "/fahrer/" + data.name).get()).val();
+	const existed = !!(await datenbank.ref("spezifisch/klassen/details/" + data.schule + "/" + data.klasse + "/fahrer/" + data.name).get()).val();
 
 	const updates: { [ref: string]: any } = {}
 	if ((existed && negativ) || (!existed && !negativ)) {
