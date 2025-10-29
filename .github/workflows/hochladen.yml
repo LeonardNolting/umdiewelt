@@ -46,13 +46,14 @@ jobs:
                     echo "Lade in Ordner ${{ steps.remote.outputs.value }} hoch"
 
             -   name: Hochladen
-                uses: appleboy/scp-action@v0.1.7
+                uses: wlixcc/SFTP-Deploy-Action@v1.2.6
                 with:
-                    source: "./dist"
-                    target: ~/
-                    host: ssh.strato.de
+                    local_path: "./dist"
+                    remote_path: "./"
+                    sftp_only: true
+                    server: ssh.strato.de
                     port: 22
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
-                    rm: true
+                    delete_remote_files: true
 
