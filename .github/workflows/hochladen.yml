@@ -12,10 +12,10 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v4
-            -   name: Node.js
-                uses: actions/setup-node@v1
-                with:
-                    node-version: '15.x'
+#            -   name: Node.js
+#                uses: actions/setup-node@v1
+#                with:
+#                    node-version: '15.x'
 #            -   name: Abhängigkeiten installieren
 #                run: npm ci
 #            -   name: Bauen
@@ -50,10 +50,10 @@ jobs:
                 with:
                     local_path: "./dist"
                     remote_path: "./"
-                    sftp_only: true
+                    # sftp_only: true
                     server: ssh.strato.de
                     port: 22
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
-                    # delete_remote_files: true
+                    delete_remote_files: true
 
