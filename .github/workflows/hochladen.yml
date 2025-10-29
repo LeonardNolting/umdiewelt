@@ -48,9 +48,9 @@ jobs:
             -   name: Hochladen
                 uses: appleboy/scp-action@v0.1.7
                 with:
-                    source: "dist"
-                    target: ${{ steps.remote.outputs.value }}
-                    host: sftp://ssh.strato.de
+                    source: "./dist"
+                    target: ~/
+                    host: ssh.strato.de
                     port: 22
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
