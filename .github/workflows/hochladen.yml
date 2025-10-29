@@ -16,12 +16,12 @@ jobs:
                 uses: actions/setup-node@v1
                 with:
                     node-version: '15.x'
-            -   name: Abhängigkeiten installieren
-                run: npm ci
-            -   name: Bauen
-                run: npm run build --if-present
-            -   name: .htaccess übernehmen
-                run: cp .htaccess dist
+#            -   name: Abhängigkeiten installieren
+#                run: npm ci
+#            -   name: Bauen
+#                run: npm run build --if-present
+#            -   name: .htaccess übernehmen
+#                run: cp .htaccess dist
 
             -   name: Branch-Namen herausfinden (vorschau/master)
                 shell: bash
@@ -46,8 +46,8 @@ jobs:
                 with:
                     source: "dist"
                     target: ${{ steps.remote.outputs.value }}
-                    host: ${{ secrets.HOST }}
-                    port: ${{ secrets.PORT }}
+                    host: ssh.strato.de
+                    port: 22
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
                     rm: true
