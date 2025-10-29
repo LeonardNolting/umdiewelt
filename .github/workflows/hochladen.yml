@@ -23,10 +23,6 @@ jobs:
             -   name: .htaccess übernehmen
                 run: cp .htaccess dist
 
-            -   name: Create test dist file
-                shell: bash
-                run: mkdir ./dist && touch ./dist/a.txt
-
             -   name: Branch-Namen herausfinden (vorschau/master)
                 shell: bash
                 run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
