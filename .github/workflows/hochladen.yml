@@ -46,15 +46,14 @@ jobs:
                     echo "Lade in Ordner ${{ steps.remote.outputs.value }} hoch"
 
             -   name: Hochladen
-                uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+                uses: wangyucode/sftp-upload-action@v2.0.4
                 with:
-                    local-dir: "./dist/"
-                    server-dir: "./"
+                    localDir: "./dist/"
+                    remoteDir: "./"
                     # sftp_only: true
-                    server: ssh.strato.de
+                    host: ssh.strato.de
                     port: 22
-                    protocol: ftps
                     username: ${{ secrets.USER }}
                     password: ${{ secrets.PASSWORD }}
-                    dangerous-clean-slate: true
+                    removeExtraFilesOnServer: true
 
