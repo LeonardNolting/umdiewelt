@@ -32,6 +32,27 @@ async function passeStreckeUndAnzahlStreckenAn(data: { strecke: number, fahrer: 
 	await datenbank.ref().update(updates)
 }
 
-const passeStreckeUndAnzahlStreckenAnRef = functions.region(region).database.ref("/spezifisch/strecken/{strecke}")
-export const increment = passeStreckeUndAnzahlStreckenAnRef.onCreate(snap => passeStreckeUndAnzahlStreckenAn(snap.val()))
-export const decrement = passeStreckeUndAnzahlStreckenAnRef.onDelete(snap => passeStreckeUndAnzahlStreckenAn(snap.val(), true))
+export const onStreckenChange = functions.region(region).database.ref("/spezifisch/strecken")
+	.onWrite(async (change) => {
+		if (!change.after.exists()) return null; // Bulk delete skip
+
+		const before = change.before.val() || {};
+		const after = change.after.val() || {};
+
+		const beforeKeys = Object.keys(before);
+		const afterKeys = Object.keys(after);
+
+		const addedKeys = afterKeys.filter(key => !before[key]);
+		const deletedKeys = beforeKeys.filter(key => !after[key]);
+
+		const promises = [];
+		for (const key of addedKeys) {
+			promises.push(passeStreckeUndAnzahlStreckenAn(after[key]));
+		}
+		for (const key of deletedKeys) {
+			promises.push(passeStreckeUndAnzahlStreckenAn(before[key], true));
+		}
+
+		return Promise.all(promises);
+	});
+

@@ -22,6 +22,27 @@ async function passeAnzahlFahrerAn(data: { schule: string, klasse: string, name:
 	await datenbank.ref().update(updates)
 }
 
-const passeAnzahlFahrerAnRef = functions.region(region).database.ref("/spezifisch/fahrer/{fahrer}")
-export const increment = passeAnzahlFahrerAnRef.onCreate((snap, context) => passeAnzahlFahrerAn(snap.val(), context.params.fahrer))
-export const decrement = passeAnzahlFahrerAnRef.onDelete((snap, context) => passeAnzahlFahrerAn(snap.val(), context.params.fahrer, true))
+export const onFahrerChange = functions.region(region).database.ref("/spezifisch/fahrer")
+	.onWrite(async (change) => {
+		if (!change.after.exists()) return null; // Bulk delete skip
+
+		const before = change.before.val() || {};
+		const after = change.after.val() || {};
+
+		const beforeKeys = Object.keys(before);
+		const afterKeys = Object.keys(after);
+
+		const addedKeys = afterKeys.filter(key => !before[key]);
+		const deletedKeys = beforeKeys.filter(key => !after[key]);
+
+		const promises = [];
+		for (const key of addedKeys) {
+			promises.push(passeAnzahlFahrerAn(after[key], key));
+		}
+		for (const key of deletedKeys) {
+			promises.push(passeAnzahlFahrerAn(before[key], key, true));
+		}
+
+		return Promise.all(promises);
+	});
+
