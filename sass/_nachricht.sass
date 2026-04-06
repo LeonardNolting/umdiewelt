@@ -1,25 +1,44 @@
-#nachricht, #nachricht2, #nachricht3, #nachricht4, #nachricht5
+.nachricht
+	&.sichtbar + .nachricht
+		> div
+			clip-path: none
 	&:not(.sichtbar)
 		display: none
+	//&#nachricht
+	//	display: flex !important
 	font-size: 1.4rem
 	display: flex
 	flex-direction: column
 	align-items: center
-	padding: 0 var(--padding) 2.4rem
 	text-align: center
-	p
-		max-width: 900px
-		line-height: 1.6
-		+ p
-			margin-top: 1rem
-		&:first-child
-			--font-size: calc(1vmin + 3rem)
+	position: relative
+	z-index: 1
+	> div
+		width: 100%
+		display: flex
+		padding: 0 var(--padding) 2.4rem
+		background: white
 
-			line-height: 1
-			margin-top: calc(var(--font-size) * -1/2 - .2rem)
-			font-size: var(--font-size)
-			font-weight: 900
-			text-shadow: -2px -2px 0 #111, 2px -2px 0 #111, -2px 2px 0 #111, 2px 2px 0 #111, 0 0 48px rgba(255, 255, 255, .5)
+		flex-direction: column
+		align-items: center
+		clip-path: var(--clip)
+		> div
+			margin-top: 3rem
+			p
+				max-width: 900px
+				line-height: 1.6
+				+ p
+					margin-top: 1rem
+	> p:first-child
+		position: absolute
+		z-index: 1
+		--font-size: calc(1vmin + 3rem)
+
+		line-height: 1
+		margin-top: calc(var(--font-size) * -1/2 - .2rem)
+		font-size: var(--font-size)
+		font-weight: 900
+		text-shadow: -2px -2px 0 #111, 2px -2px 0 #111, -2px 2px 0 #111, 2px 2px 0 #111, 0 0 48px rgba(255, 255, 255, .5)
 	.logo
 		margin: 2rem auto 0
 		//flex-basis: 0
@@ -35,9 +54,10 @@
 				aspect-ratio: 1214/320
 
 #nachricht, #nachricht3, #nachricht5
-	background: linear-gradient(to bottom, white 0%, transparent 33%), center bottom/120% 200% no-repeat radial-gradient(closest-side, transparent 70%, rgba(255, 195, 0, 0.25) 120%), center/cover no-repeat url(../img/Hintergrund/schluss/4844434.jpg?as=webp&quality=90&width=1920)
+	> div
+		background: linear-gradient(to bottom, white 0%, transparent 33%), center bottom/120% 200% no-repeat radial-gradient(closest-side, transparent 70%, rgba(255, 195, 0, 0.25) 120%), center/cover no-repeat url(../img/Hintergrund/schluss/4844434.jpg?as=webp&quality=90&width=1920)
 	//filter: contrast(0.5) brightness(1.3)
-	p:first-child
+	> p:first-child
 		// color: var(--farbe-primär)
 		color: #6dbf00
 
@@ -59,7 +79,7 @@
 				aspect-ratio: 1200/843
 
 #nachricht4, #nachricht2
-	p:first-child
+	> p:first-child
 		color: var(--farbe-primär)
 
 #nachricht4

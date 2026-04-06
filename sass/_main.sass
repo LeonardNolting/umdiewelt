@@ -1,9 +1,16 @@
 main
 	position: relative
 	z-index: 1
-	background: white
 	box-shadow: 0 24px 36px -14px rgba(0, 0, 0, .4)
 	font-size: 1.2rem
+	margin-top: calc(-1 * var(--header-main-overlap))
+	--clip: shape(from 0 1rem, curve to 100% 1rem with 50% -1rem, line to 100% 100%, line to 0 100%)
+
+	> #inhalt
+		background: white
+		clip-path: var(--clip)
+	> .nachricht.sichtbar + #inhalt
+		clip-path: none
 
 @import "inhalt/bestenliste"
 @import "inhalt/danksagung"
