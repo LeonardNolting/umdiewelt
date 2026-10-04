@@ -113,7 +113,7 @@ const kreis = (
 export function aktualisieren() {
 	if (daten.beteiligte === null || daten.strecke === null || !wegAngezeigt) return
 
-	const fortschrittEndWinkel = fortschrittStartWinkel - (daten.strecke / umfang * 360) / 360 * (2 * Math.PI)
+	const fortschrittEndWinkel = fortschrittStartWinkel - ((daten.strecke + 6000000) / umfang * 360) / 360 * (2 * Math.PI)
 
 	fortschritt = positions(fortschrittAbstand, fortschrittStartWinkel, fortschrittEndWinkel);
 	fortschrittKreis = kreis(fortschrittFarbe, fortschrittBreite)
@@ -159,7 +159,7 @@ export default function welt() {
 	// region Welt
 	// let welt
 	const texture = new Promise<Texture>(resolve => new TextureLoader().load(new URL(
-		"../../img/Erde/Erde vereinfacht.jpg?as=webp&height=675&quality=20",
+		"../../img/Erde/Erde gross.jpg?height=10800&quality=100",
 		import.meta.url
 	).toString(), texture => {
 		const welt = new Mesh(
@@ -184,10 +184,10 @@ export default function welt() {
 		// noinspection TypeScriptUnresolvedVariable
 		const type = connection?.type;
 		const url = (type === "cellular" ? new URL(
-			"../../img/Erde/Erde.jpg?as=webp&height=1350&quality=50",
+			"../../img/Erde/Erde gross.jpg?height=10800&quality=100",
 			import.meta.url
 		) : new URL(
-			"../../img/Erde/Erde.jpg?as=webp&height=1510&quality=40",
+			"../../img/Erde/Erde gross.jpg?height=10800&quality=100",
 			import.meta.url
 		)).toString()
 		new TextureLoader().load(url, texture => {
